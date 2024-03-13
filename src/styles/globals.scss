@@ -1,0 +1,18 @@
+:root{
+  --ascent-color:green;
+  --bg-color:rgb(27, 25, 25);
+  --primary-1:black;
+  --primary-2:white;
+  --primary-3:rgb(87, 107, 135);
+  --primary-4:rgb(164, 179, 201);
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+a{
+  text-decoration: none;
+  color: var(--primary-3);
+}

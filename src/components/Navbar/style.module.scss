@@ -1,0 +1,31 @@
+.navbar{
+  border-radius: 0.5rem;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  left: 0.5rem;
+  font-size: 1.5rem;
+  padding: 1rem;
+  background: var(--primary-1);
+  gap: 1rem;
+}
+
+.inactive{
+  fill:var(--primary-3);
+}
+
+.active{
+  fill: var(--ascent-color) !important;
+}
+
+@media (max-width: 769px) {
+  .navbar {
+    padding: 1rem 1.5rem;
+    width: 100%;
+    left: unset;
+    bottom: 0;
+    flex-direction: row;
+    justify-content:space-between;
+  }
+}
