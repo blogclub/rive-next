@@ -27,7 +27,7 @@ const HomeHero = () => {
       try {
         const response = await axiosFetch({ requestID: "trending" });
         setData(response.results);
-        let arr = [];
+        let arr: any = [];
         response.results.map((ele: any) => {
           arr.push(process.env.NEXT_PUBLIC_TMBD_IMAGE_URL + ele.backdrop_path);
         });

@@ -13,6 +13,18 @@
     flex-direction: row;
     gap: 1rem;
     margin-top: 1rem;
+    .filter{
+      position: absolute;
+      right: 0;
+      margin-right: clamp(0.5rem,  7%, 5rem);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      svg{
+        font-size: 1.3rem;
+      }
+    }
   }
   .movieList{
     padding: 3rem;
@@ -43,21 +55,40 @@
     justify-content: center;
     align-items: center;
   }
+  svg{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    color: var(--primary-2);
+  }
 }
 
 .inactive{
   cursor: pointer;
   color:var(--primary-2);
+  fill:var(--primary-2);
 }
 
 .active{
   cursor: pointer;
   color: var(--ascent-color) !important;
+  fill: var(--ascent-color) !important;
 }
 
 .paginateActive {
   background-color: var(--ascent-color);
   border-radius: 0.5rem;
+  color: var(--primary-1);
+  a{
+    color: var(--primary-1);
+  }
+}
+.disabled{
+  svg{
+    opacity: 0.5 !important;
+    fill: var(--ascent-color);
+  }
 }
 
 @media (max-width: 769px) {

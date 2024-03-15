@@ -5,11 +5,12 @@ interface Fetch {
   id?: number,
   language?: string,
   page?: number,
-  genreKeywords?: Array<number>,
+  genreKeywords?: string,
   sortBy?: string,
   year?: number,
+  country?: string,
 }
-export default async function axiosFetch({ requestID, id, language = "en-US", page = 1, genreKeywords, sortBy, year }: Fetch) {
+export default async function axiosFetch({ requestID, id, language = "en-US", page = 1, genreKeywords, sortBy, year, country }: Fetch) {
   const request = requestID;
   const API_KEY = process.env.NEXT_PUBLIC_TMDB_API_KEY;
   const baseURL = "https://api.themoviedb.org/3";
@@ -20,16 +21,16 @@ export default async function axiosFetch({ requestID, id, language = "en-US", pa
     popularTv: `${baseURL}/tv/popular?language=${language}&page=${page}&sort_by=${sortBy}`,
     topRatedMovie: `${baseURL}/movie/top_rated?language=${language}&page=${page}`,
     topRatedTv: `${baseURL}/tv/top_rated?language=${language}&page=${page}`,
-    genreMovie: `${baseURL}/discover/movie?with_keywords=${genreKeywords}&language=${language}&sort_by=${sortBy}&year=${year}`,
-    genreTv: `${baseURL}/discover/tv?with_keywords=${genreKeywords}&language=${language}&sort_by=${sortBy}&year=${year}`,
+    filterMovie: `${baseURL}/discover/movie?with_genres=${genreKeywords}&language=${language}&sort_by=${sortBy}${year != undefined ? "&year=" + year : ""}${country != undefined ? "&with_origin_country=" + country : ""}&page=${page}`,
+    filterTv: `${baseURL}/discover/tv?with_genres=${genreKeywords}&language=${language}&sort_by=${sortBy}${year != undefined ? "&year=" + year : ""}${country != undefined ? "&with_origin_country=" + country : ""}&page=${page}`,
     onTheAirTv: `${baseURL}/tv/on_the_air?language=${language}&page=${page}`,
     trending: `${baseURL}/trending/all/week?language=${language}`,
     trendingMovie: `${baseURL}/trending/movie/week?language=${language}&page=${page}`,
     trendingTv: `${baseURL}/trending/tv/week?language=${language}&page=${page}`,
 
     // filters
-    genresOfMovie: `${baseURL}/genre/movie/list?language=${language}`,
-    genresOfTv: `${baseURL}/genre/tv/list?language=${language}`,
+    genresMovie: `${baseURL}/genre/movie/list?language=${language}`,
+    genresTv: `${baseURL}/genre/tv/list?language=${language}`,
     countries: `${baseURL}/configuration/countries?language=${language}`,
     languages: `${baseURL}/configuration/languages`,
   };

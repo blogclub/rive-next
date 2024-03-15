@@ -1,0 +1,92 @@
+.Filter{
+  height: 80vh;
+  width: 25rem;
+  position: absolute;
+  right: 0;
+  margin-right: clamp(0.5rem,  7%, 5rem);
+  background: var(--primary-1);
+  padding: 1rem;
+  border-radius: 1.5rem;
+  z-index: 5;
+  overflow-x: hidden;
+  overflow-y: auto;
+  h1{
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  h2{
+    font-size: 1.2rem;
+    color: var(--primary-3);
+    margin: 1rem 0;
+  }
+  input[type="text"]{
+    color: var(--ascent-color);
+    background: var(--bg-color);
+    border-radius: 0.5rem;
+    outline: none;
+    border: none;
+    padding: 0.5rem 1rem;
+    caret-color: var(--primary-2);
+  }
+  input[type="checkbox"]{
+    color: var(--primary-3);
+    margin: 0.2rem;
+    accent-color:var(--ascent-color);
+    cursor: pointer;
+  }
+  .close{
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+
+  .checkboxDiv{
+    display: inline-block;
+    color: var(--primary-2);
+    gap: 0.2rem;
+    margin: 0.5rem 0.5rem;
+    cursor: pointer;
+  }
+  .filterSubmit{
+    display: inline-block;
+    background: var(--ascent-color);
+    padding: 0.5rem;
+    color: var(--primary-1);
+    border-radius: 0.3rem;
+    cursor: pointer;
+    width: 40%;
+    text-align: center;
+  }
+  .filterButtons{
+    background: var(--bg-color);
+    padding: 1rem;
+    width: 100%;
+    border-radius: 0.5rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: sticky;
+    bottom: -1rem;
+    margin-top: 1.5rem;
+  }
+}
+
+.inactive{
+  fill:var(--primary-2);
+}
+
+.active{
+  fill: var(--ascent-color) !important;
+  color: var(--ascent-color) !important;
+}
+
+@media (max-width: 769px) {
+  .Filter{
+    width: 100vw;
+    height: 100vh;
+    margin-right: 0;
+    top: 0;
+  }
+}

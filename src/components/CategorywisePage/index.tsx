@@ -4,7 +4,8 @@ import styles from "./style.module.scss";
 import MovieCardSmall from '@/components/MovieCardSmall';
 import ReactPaginate from "react-paginate"; // for pagination
 import { AiFillLeftCircle, AiFillRightCircle } from "react-icons/ai";
-import { IconContext } from "react-icons";
+import { MdFilterAlt, MdFilterAltOff } from "react-icons/md";
+import Filter from '../Filter';
 // import MoviePoster from '@/components/MoviePoster';
 
 function capitalizeFirstLetter(string: string) {
@@ -17,11 +18,21 @@ const CategorywisePage = ({ categoryType }: any) => {
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalpages, setTotalpages] = useState(1);
+  const [showFilter, setShowFilter] = useState(false);
+  const [filterGenreList, setFilterGenreList] = useState("");
+  const [filterCountry, setFiltercountry] = useState();
+  const [filterYear, setFilterYear] = useState();
+  const [trigger, setTrigger] = useState(false);
   console.log(capitalizeFirstLetter(categoryType));
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await axiosFetch({ requestID: `${category}${CapitalCategoryType}`, page: currentPage });
+        let data;
+        if (category === "filter") {
+          data = await axiosFetch({ requestID: `${category}${CapitalCategoryType}`, page: currentPage, genreKeywords: filterGenreList, country: filterCountry, year: filterYear, sortBy: "vote_average.desc" });
+        } else {
+          data = await axiosFetch({ requestID: `${category}${CapitalCategoryType}`, page: currentPage });
+        }
         // console.log();
         if (data.page > data.total_pages) {
           setCurrentPage(data.total_pages);
@@ -33,16 +44,26 @@ const CategorywisePage = ({ categoryType }: any) => {
       }
     };
     fetchData();
-  }, [category, currentPage]);
+  }, [category, currentPage, trigger]);
+
+  const handleFilterClick = () => {
+    setCurrentPage(1);
+    setCategory("filter");
+    setShowFilter(!showFilter);
+  }
   return (
     <div className={styles.MoviePage}>
-      <h1>Movies</h1>
+      <h1>{CapitalCategoryType}</h1>
       <div className={styles.category}>
         <p className={`${category === "latest" ? styles.active : styles.inactive}`} onClick={() => setCategory("latest")}>Latest</p>
         <p className={`${category === "trending" ? styles.active : styles.inactive}`} onClick={() => setCategory("trending")}>Trending</p>
         <p className={`${category === "topRated" ? styles.active : styles.inactive}`} onClick={() => setCategory("topRated")}>Top Rated</p>
-        {/* <Filter/> */}
+        <p className={`${category === "filter" ? styles.active : styles.inactive} ${styles.filter}`} onClick={handleFilterClick}>Filter {category === "filter" ? <MdFilterAlt className={styles.active} /> : <MdFilterAltOff />}</p>
       </div>
+
+      {/* <Filter/> */}
+      {showFilter && <Filter categoryType={categoryType} setShowFilter={setShowFilter} setFilterYear={setFilterYear} setFiltercountry={setFiltercountry} setFilterGenreList={setFilterGenreList} filterGenreList={filterGenreList} filterCountry={filterCountry} filterYear={filterYear} setCategory={setCategory} setTrigger={setTrigger} trigger={trigger} />}
+
       <div className={styles.movieList}>
         {
           data.map((ele) => {

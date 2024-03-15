@@ -8,7 +8,7 @@ import Skeleton from 'react-loading-skeleton';
 const MovieCardSmall = ({ data, media_type }: any) => {
   const [imageLoading, setImageLoading] = useState(true);
   return (
-    <Link href={`/detail?type=${media_type}&id=${data.id}`} className={styles.MovieCardSmall}>
+    <Link key={data.id} href={`/detail?type=${media_type}&id=${data.id}`} className={styles.MovieCardSmall}>
       {/* <img src={process.env.NEXT_PUBLIC_TMBD_IMAGE_URL + data.poster_path} alt="" /> */}
       <div className={`${styles.img} skeleton`}>
         <motion.img
