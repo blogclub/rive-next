@@ -24,7 +24,7 @@ const MovieCardSmall = ({ data, media_type }: any) => {
           className={`${styles.img} skeleton`}
           onLoad={() => { setImageLoading(false); }}
           loading="lazy"
-        // style={imageLoaded ? { opacity: 1 } : { opacity: 0 }}
+          style={!imageLoading ? { opacity: 1 } : { opacity: 0 }}
         />
       </div>
       <p>{data?.title || data?.name || <Skeleton />}</p>

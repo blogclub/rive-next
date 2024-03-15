@@ -76,7 +76,7 @@ const Carousel = ({ images, setIndex }: any) => {
             className={`skeleton`}
             onLoad={() => { setImageLoaded(true); }}
             loading="lazy"
-          // style={imageLoaded ? { opacity: 1 } : { opacity: 0 }}
+            style={imageLoaded ? { opacity: 1 } : { opacity: 0 }}
           />
         </AnimatePresence>
         <div className={styles.slide_direction}>
