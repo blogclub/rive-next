@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styles from "./style.module.scss";
 import Link from "next/link";
 import { AiFillHome, AiOutlineHome, AiFillPlayCircle, AiOutlinePlayCircle } from "react-icons/ai";
-import { IoLibrary, IoLibraryOutline, IoSettings, IoSettingsOutline } from "react-icons/io5";
+import { IoLibrary, IoLibraryOutline, IoSettings, IoSettingsOutline, IoSearchOutline, IoSearch } from "react-icons/io5";
 import { PiTelevisionFill, PiTelevisionLight } from "react-icons/pi";
 import { usePathname } from "next/navigation";
 
@@ -21,6 +21,9 @@ const Navbar = ({ children }: any) => {
     <div className={styles.navbar} >
       <Link href="/">
         {pathname === "/" ? <AiFillHome className={styles.active} /> : <AiOutlineHome className={styles.inactive} />}
+      </Link>
+      <Link href="/search">
+        {pathname === "/search" ? <IoSearch className={styles.active} /> : <IoSearchOutline className={styles.inactive} />}
       </Link>
       <Link href="/movie">
         {pathname === "/movie" ? <AiFillPlayCircle className={styles.active} /> : <AiOutlinePlayCircle className={styles.inactive} />}

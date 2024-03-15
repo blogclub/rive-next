@@ -1,0 +1,37 @@
+.MoviePage{
+  width: 100vw;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 1rem 0.5rem;
+  padding-left: 5rem;
+  .category{
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  .movieList{
+    padding: 3rem;
+    width: 100vw;
+    min-height:100vh ;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem 1rem;
+  }
+}
+
+.inactive{
+  cursor: pointer;
+  color:var(--primary-2);
+}
+
+.active{
+  cursor: pointer;
+  color: var(--ascent-color) !important;
+}

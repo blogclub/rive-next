@@ -2,7 +2,7 @@
   height: 90vh;
   width: 100vw;
   overflow: hidden;
-  padding-left: 5rem;
+  // padding-left: 4rem;
   position: relative;
   // display: flex;
 
@@ -15,7 +15,7 @@
     background: var(--primary-1);
     padding: 1rem;
     text-align: center;
-    width: 22rem;
+    width: 20rem;
     text-overflow: ellipsis;
     overflow: hidden;
     display: flex;
@@ -31,7 +31,8 @@
       height: 1lh;
       text-overflow: ellipsis;
       overflow: hidden;
-      // padding-left: 1.5rem;
+      margin-left: 0.5rem;
+      // padding-left: 5rem;
     }
     .HomeHeroMetaRow2{
       display: flex;
@@ -68,10 +69,12 @@
 @media (max-width: 769px) {
   .HomeHero{
     padding-left: unset;
-    padding:0 1rem;
+    // padding:0 1rem;
     height: 70vh;
     .HomeHeroMeta{
-    margin-left: clamp(0rem, 0%, 50vw);
+      width: unset;
+      max-width: 20rem;
+      margin-left: clamp(0rem, 0%, 10vw);
     }
   }
 }

@@ -5,7 +5,7 @@ import styles from "@/styles/Movie.module.scss";
 import MoviePoster from '@/components/MoviePoster';
 import MovieCardSmall from '@/components/MovieCardSmall';
 
-const Movie = () => {
+const CategorywisePage = ({ type }: any) => {
   const [category, setCategory] = useState("latest"); // latest, trending, topRated
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -45,4 +45,4 @@ const Movie = () => {
   )
 }
 
-export default Movie;
+export default CategorywisePage;

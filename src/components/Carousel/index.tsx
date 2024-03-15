@@ -6,7 +6,7 @@ import { BsCaretLeftFill, BsCaretRightFill } from "react-icons/bs";
 const Carousel = ({ images, setIndex }: any) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState("");
-  const [imageLoad, setImageLoad] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
   useEffect(() => {
     return () => {
       setInterval(() => {
@@ -26,7 +26,7 @@ const Carousel = ({ images, setIndex }: any) => {
     },
     visible: {
       x: "0",
-      opacity: 1,
+      opacity: imageLoaded ? 1 : 0,
       transition: {
         duration: 1,
       },
@@ -65,7 +65,7 @@ const Carousel = ({ images, setIndex }: any) => {
   return (
     <div className={styles.carousel}>
       <div className={styles.carousel_images}>
-        <AnimatePresence>
+        <AnimatePresence mode="wait">
           <motion.img
             key={currentIndex}
             src={images[currentIndex]}
@@ -73,9 +73,10 @@ const Carousel = ({ images, setIndex }: any) => {
             animate="visible"
             exit="exit"
             variants={slideVariants}
-            className="skeleton"
-            onLoad={() => setImageLoad(true)}
+            className={`skeleton`}
+            onLoad={() => { setImageLoaded(true); }}
             loading="lazy"
+          // style={imageLoaded ? { opacity: 1 } : { opacity: 0 }}
           />
         </AnimatePresence>
         <div className={styles.slide_direction}>
@@ -87,7 +88,7 @@ const Carousel = ({ images, setIndex }: any) => {
             onClick={handleNext} />
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 export default Carousel;

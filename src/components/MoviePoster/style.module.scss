@@ -1,0 +1,20 @@
+.MovieCardSmall{
+  .img{
+    height: 15rem;
+    width: 10rem;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    border: none;
+    outline: none;
+    margin-bottom: 0.3rem;
+  }
+}
+
+@media (max-width: 769px) {
+  .MovieCardSmall{
+    .img{
+      height: 10rem;
+      width: 7rem;
+    }
+  }
+}

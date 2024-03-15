@@ -19,7 +19,8 @@ a{
   color: var(--primary-2);
 }
 .react-loading-skeleton{
-  background:red;
+  background:var(--primary-1);
+  --base-color:var(var(--primary-1)) !important;
 }
 
 .skeleton{
@@ -36,15 +37,29 @@ a{
     background:var(--bg-color);
   }
   100%{
-    background:var(--primary-2);
+    background:var(--primary-1);
+    // opacity: 0.1;
   }
 }
 
 h1{
   font-family: sans-serif;
-  color: var(--primary-4);
+  color: var(--primary-3);
 }
 
 :not(h1){
   letter-spacing: -1.5px;
+}
+
+::-webkit-scrollbar{
+  display: none;
+}
+
+@media (max-width: 769px) {
+  *{
+    font-size: 0.9rem;
+  }
+  h1{
+    font-size: 1.2rem;
+  }
 }

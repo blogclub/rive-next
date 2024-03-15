@@ -13,6 +13,8 @@
   object-position: top;
   object-fit: cover;
   border-radius: 0  0 2rem 2rem;
+  transition: opacity 2s ease;
+  border: none;
 }
 .slide_direction {
   display: flex;
@@ -29,6 +31,13 @@
 }
 .right {
   right: 0;
+}
+
+.loading{
+  opacity: 0 !important;
+}
+.loaded{
+  opacity: 1 !important;
 }
 
 @media (max-width: 769px) {
