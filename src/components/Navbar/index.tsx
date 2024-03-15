@@ -10,7 +10,12 @@ const Navbar = ({ children }: any) => {
   const path = usePathname();
   const [pathname, setPathname] = useState(path);
   useEffect(() => {
-    setPathname(path);
+    const arr = path.split("/");
+    if (arr.length > 2)
+      setPathname("/" + arr[2]);
+    else
+      setPathname(path);
+    console.log({ arr });
   }, [path])
   return (
     <div className={styles.navbar} >

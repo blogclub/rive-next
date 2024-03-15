@@ -9,10 +9,11 @@
   padding: 1rem;
   background: var(--primary-1);
   gap: 1rem;
+  z-index: 5;
 }
 
 .inactive{
-  fill:var(--primary-3);
+  fill:var(--primary-2);
 }
 
 .active{
