@@ -4,18 +4,18 @@ import Link from "next/link";
 import { AiFillHome, AiOutlineHome, AiFillPlayCircle, AiOutlinePlayCircle } from "react-icons/ai";
 import { IoLibrary, IoLibraryOutline, IoSettings, IoSettingsOutline, IoSearchOutline, IoSearch } from "react-icons/io5";
 import { PiTelevisionFill, PiTelevisionLight } from "react-icons/pi";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 
 const Navbar = ({ children }: any) => {
   const path = usePathname();
+  const params = useSearchParams();
+  // const query=
   const [pathname, setPathname] = useState(path);
   useEffect(() => {
-    const arr = path.split("/");
-    if (arr.length > 2)
-      setPathname("/" + arr[2]);
+    if (params.get("type") !== null) setPathname("/" + params.get("type"));
     else
       setPathname(path);
-    console.log({ arr });
+    console.log(params.get("type"));
   }, [path])
   return (
     <div className={styles.navbar} >

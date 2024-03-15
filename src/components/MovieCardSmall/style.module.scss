@@ -1,4 +1,6 @@
 .MovieCardSmall{
+  min-height: 15rem;
+  width: 10rem;
   .img{
     height: 15rem;
     width: 10rem;
@@ -10,17 +12,25 @@
   }
   p{
     color: var(--primary-2);
+    width: 100%;
+    margin-left: 0.2rem;
+    height: 4ch;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
 }
 
 @media (max-width: 769px) {
   .MovieCardSmall{
+    min-height: 10rem;
+    width: 7rem;
     .img{
       height: 10rem;
       width: 7rem;
     }
     p{
       color: var(--primary-2);
+      width: 80%;
     }
   }
 }

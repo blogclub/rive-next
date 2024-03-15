@@ -1,0 +1,74 @@
+.MoviePage{
+  width: 100vw;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 1rem 0.5rem;
+  padding-left: 5rem;
+  .category{
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  .movieList{
+    padding: 3rem;
+    width: 100vw;
+    min-height:100vh ;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 2rem 1rem;
+  }
+  .pagination {
+    list-style: none;
+    // height: 31.5px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2px;
+    cursor: pointer;
+    gap: 0.5rem;
+    font-size: 1.2rem;
+  }
+  .page_item {
+    list-style: none;
+    padding: 2px 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.inactive{
+  cursor: pointer;
+  color:var(--primary-2);
+}
+
+.active{
+  cursor: pointer;
+  color: var(--ascent-color) !important;
+}
+
+.paginateActive {
+  background-color: var(--ascent-color);
+  border-radius: 0.5rem;
+}
+
+@media (max-width: 769px) {
+  .MoviePage{
+    padding-left: unset;
+    padding:1.5rem 1rem;
+    padding-bottom: 5rem;
+    .movieList{
+      padding: 1rem;
+      gap: 1rem 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+  }
+}
