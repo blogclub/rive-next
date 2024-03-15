@@ -1,0 +1,70 @@
+import { useState, useEffect } from 'react';
+import axiosFetch from '@/Utils/fetch';
+import styles from "@/styles/Search.module.scss";
+import ReactPaginate from "react-paginate"; // for pagination
+import { AiFillLeftCircle, AiFillRightCircle } from "react-icons/ai";
+import MovieCardLarge from '@/components/MovieCardLarge';
+// import MoviePoster from '@/components/MoviePoster';
+
+
+const SearchPage = ({ categoryType }: any) => {
+  const [query, setQuery] = useState("");
+  const [data, setData] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalpages, setTotalpages] = useState(1);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await axiosFetch({ requestID: `searchMulti`, page: currentPage, query: query });
+        // console.log();
+        if (data.page > data.total_pages) {
+          setCurrentPage(data.total_pages);
+        }
+        setData(data.results);
+        setTotalpages(data.total_pages > 500 ? 500 : data.total_pages);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    if (query.length > 2) fetchData();
+  }, [query, currentPage]);
+
+  return (
+    <div className={styles.MoviePage}>
+      {/* <h1>Search</h1> */}
+      <div className={styles.InputWrapper}>
+        <input type="text" className={styles.searchInput} value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Please enter at least 3 characters to search..." />
+      </div>
+      {query.length > 2 ? <h1>showing result for <span>{query}</span></h1>:null}
+      <div className={styles.movieList}>
+        {
+          data.map((ele) => {
+            return (
+              <MovieCardLarge data={ele} media_type={categoryType} />
+            )
+          })
+        }
+      </div>
+      <ReactPaginate
+        containerClassName={styles.pagination}
+        pageClassName={styles.page_item}
+        activeClassName={styles.paginateActive}
+        onPageChange={(event) => {
+          setCurrentPage(event.selected + 1);
+          console.log({ event });
+          if (currentPage > totalpages) { setCurrentPage(totalpages) }
+        }}
+        pageCount={totalpages}
+        breakLabel=" ... "
+        previousLabel={
+          <AiFillLeftCircle className={styles.paginationIcons} />
+        }
+        nextLabel={
+          <AiFillRightCircle className={styles.paginationIcons} />
+        }
+      />;
+    </div>
+  )
+}
+
+export default SearchPage;

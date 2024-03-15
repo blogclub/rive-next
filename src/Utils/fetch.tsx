@@ -9,8 +9,9 @@ interface Fetch {
   sortBy?: string,
   year?: number,
   country?: string,
+  query?: string,
 }
-export default async function axiosFetch({ requestID, id, language = "en-US", page = 1, genreKeywords, sortBy, year, country }: Fetch) {
+export default async function axiosFetch({ requestID, id, language = "en-US", page = 1, genreKeywords, sortBy, year, country, query }: Fetch) {
   const request = requestID;
   const API_KEY = process.env.NEXT_PUBLIC_TMDB_API_KEY;
   const baseURL = "https://api.themoviedb.org/3";
@@ -27,6 +28,10 @@ export default async function axiosFetch({ requestID, id, language = "en-US", pa
     trending: `${baseURL}/trending/all/week?language=${language}`,
     trendingMovie: `${baseURL}/trending/movie/week?language=${language}&page=${page}`,
     trendingTv: `${baseURL}/trending/tv/week?language=${language}&page=${page}`,
+    searchMulti: `${baseURL}/search/multi?query=${query}&language=${language}&page=${page}`,
+    searchKeyword: `${baseURL}/search/keyword?query=${query}&language=${language}&page=${page}`,
+    searchMovie: `${baseURL}/search/movie?query=${query}&language=${language}&page=${page}`,
+    searchTv: `${baseURL}/search/tv?query=${query}&language=${language}&page=${page}`,
 
     // filters
     genresMovie: `${baseURL}/genre/movie/list?language=${language}`,

@@ -125,7 +125,7 @@ const Filter = ({ categoryType, setShowFilter, setFilterYear, setFiltercountry, 
         })
       }
       <h2>year</h2>
-      <input type="text" id="input" name="input" value={filterYear} onChange={(e: any) => { setFilterYear(e.target.value); }} />
+      <input type="text" id="input" name="input" value={filterYear} onChange={(e: any) => { setFilterYear(e.target.value); }} placeholder="Enter Year" />
 
       <div className={styles.filterButtons}>
         <div className={styles.filterSubmit} onClick={handleFilterSubmit}>
