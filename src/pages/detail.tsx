@@ -31,7 +31,6 @@ const DetailPage = () => {
     setEpisode(params.get("episode"));
     const fetchData = async () => {
       try {
-
         const data = await axiosFetch({ requestID: `${type}Data`, id: id });
         setData(data);
         const Videos = await axiosFetch({ requestID: `${type}Videos`, id: id });

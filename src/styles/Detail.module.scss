@@ -16,7 +16,7 @@
     overflow: hidden;
   }
   .biggerDetail{
-    flex: 1.5;
+    flex: 1;
   }
   .biggerDetail:hover{
     flex: 2;
@@ -89,7 +89,7 @@
         align-items: center;
         gap: 0.7rem;
         color: var(--primary-2);
-        font-size: 1.1rem;
+        font-size: 1rem;
         cursor: pointer;
         padding-right: 1rem;
   
@@ -114,6 +114,15 @@
       }
     }
   }
+  
+}
+
+.PersonPage{
+    .HomeHeroMeta{
+        width: 15rem !important;
+        position: relative;
+        left: -1rem !important;
+    }
 }
 
 @media (max-width: 769px) {
@@ -129,6 +138,7 @@
       flex: 3;
       width: 100%;
       border-radius: unset;
+      margin-bottom: 1rem;
     }
     .biggerDetail{
       flex: 2;

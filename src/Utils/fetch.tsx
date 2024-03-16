@@ -10,8 +10,9 @@ interface Fetch {
   year?: number,
   country?: string,
   query?: string,
+  season?: number,
 }
-export default async function axiosFetch({ requestID, id, language = "en-US", page = 1, genreKeywords, sortBy, year, country, query }: Fetch) {
+export default async function axiosFetch({ requestID, id, language = "en-US", page = 1, genreKeywords, sortBy, year, country, query, season }: Fetch) {
   const request = requestID;
   const API_KEY = process.env.NEXT_PUBLIC_TMDB_API_KEY;
   const baseURL = "https://api.themoviedb.org/3";
@@ -35,15 +36,24 @@ export default async function axiosFetch({ requestID, id, language = "en-US", pa
 
     // for a ID 
     movieData: `${baseURL}/movie/${id}?language=${language}`,
-    movieVideos: `${baseURL}/movie/${id}/videos?language=${language}`,
     tvData: `${baseURL}/tv/${id}?language=${language}`,
+    personData: `${baseURL}/person/${id}?language=${language}`,
+    movieVideos: `${baseURL}/movie/${id}/videos?language=${language}`,
     tvVideos: `${baseURL}/tv/${id}/videos?language=${language}`,
     movieImages: `${baseURL}/movie/${id}/images`,
     tvImages: `${baseURL}/tv/${id}/images`,
-    movieCredits: `${baseURL}/movie/${id}/credits`,
-    tvCredits: `${baseURL}/tv/${id}/credits`,
-    movieReviews: `${baseURL}/movie/${id}/reviews`,
-    tvReviews: `${baseURL}/tv/${id}/reviews`,
+    personImages: `${baseURL}/person/${id}/images`,
+    movieCasts: `${baseURL}/movie/${id}/credits?language=${language}`,
+    tvCasts: `${baseURL}/tv/${id}/credits?language=${language}`,
+    movieReviews: `${baseURL}/movie/${id}/reviews?language=${language}`,
+    tvReviews: `${baseURL}/tv/${id}/reviews?language=${language}`,
+    movieRelated: `${baseURL}/movie/${id}/recommendations?language=${language}&page=${page}`,
+    tvRelated: `${baseURL}/tv/${id}/recommendations?language=${language}&page=${page}`,
+    tvEpisodes: `${baseURL}/tv/series_id/season/${season}?language=${language}`,
+
+    // person 
+    personMovie: `${baseURL}/person/${id}/movie_credits?language=${language}&page=${page}`,
+    personTv: `${baseURL}/person/${id}/tv_credits?language=${language}&page=${page}`,
 
     // filters
     genresMovie: `${baseURL}/genre/movie/list?language=${language}`,

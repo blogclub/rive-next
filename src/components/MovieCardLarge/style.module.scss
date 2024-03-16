@@ -1,14 +1,14 @@
 .MovieCardSmall{
-  min-height: 15rem;
-  width: 25rem;
+  min-height: 12rem;
+  width: 23rem;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   // border: 1px solid var(--primary-2);
   .img{
-    height: 15rem;
-    width: 10rem;
+    height: 12rem;
+    width: 8rem;
     border-radius: 0.5rem;
     overflow: hidden;
     border: none;
@@ -27,7 +27,7 @@
       color: var(--primary-3);
       width: 100%;
       margin-left: 0.2rem;
-      height: 4ch;
+      max-height: 4ch;
       text-overflow: ellipsis;
       overflow: hidden;
       font-size: 1.2rem;
@@ -37,11 +37,11 @@
 
 @media (max-width: 769px) {
   .MovieCardSmall{
-    min-height: 10rem;
-    width: 17rem;
+    min-height: 8rem;
+    width: 15rem;
     .img{
-      height: 10rem;
-      width: 7rem;
+      height: 8rem;
+      width: 8rem;
     }
     h1{
       color: var(--primary-2);

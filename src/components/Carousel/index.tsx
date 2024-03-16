@@ -70,18 +70,18 @@ const Carousel = ({ imageArr, setIndex, mobileHeight, desktopHeight }: any) => {
     <div className={styles.carousel}>
       <div className={styles.carousel_images}>
         {/* <AnimatePresence mode="wait"> */}
-          <motion.img
-            key={currentIndex}
-            src={images[currentIndex]}
-            initial={direction === "right" ? "hiddenRight" : "hiddenLeft"}
-            animate="visible"
-            exit="exit"
-            variants={slideVariants}
-            className={`skeleton`}
-            onLoad={() => { setImageLoaded(true); }}
-            loading="lazy"
-            style={imageLoaded ? { opacity: 1 } : { opacity: 0 }}
-          />
+        <motion.img
+          key={currentIndex}
+          src={images[currentIndex]}
+          initial={direction === "right" ? "hiddenRight" : "hiddenLeft"}
+          animate="visible"
+          exit="exit"
+          variants={slideVariants}
+          className={`${imageLoaded ? "skeleton" : null}`}
+          onLoad={() => { setImageLoaded(true); }}
+          loading="lazy"
+          style={imageLoaded ? { opacity: 1 } : { opacity: 0 }}
+        />
         {/* </AnimatePresence> */}
         <div className={styles.slide_direction}>
           <BsCaretLeftFill

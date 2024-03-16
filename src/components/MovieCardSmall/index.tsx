@@ -10,7 +10,7 @@ const MovieCardSmall = ({ data, media_type }: any) => {
   return (
     <Link key={data.id} href={`/detail?type=${media_type}&id=${data.id}`} className={styles.MovieCardSmall}>
       {/* <img src={process.env.NEXT_PUBLIC_TMBD_IMAGE_URL + data.poster_path} alt="" /> */}
-      <div className={`${styles.img} skeleton`}>
+      <div className={`${styles.img} ${imageLoading ? "skeleton" : null}`}>
         <motion.img
           key={data.id}
           src={process.env.NEXT_PUBLIC_TMBD_IMAGE_URL + data.poster_path}
@@ -21,7 +21,7 @@ const MovieCardSmall = ({ data, media_type }: any) => {
           height="100%"
           width="100%"
           exit="exit"
-          className={`${styles.img} skeleton`}
+          className={`${styles.img} ${imageLoading ? "skeleton" : null}`}
           onLoad={() => { setImageLoading(false); }}
           loading="lazy"
           style={!imageLoading ? { opacity: 1 } : { opacity: 0 }}
