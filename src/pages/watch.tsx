@@ -12,7 +12,7 @@ const Watch = () => {
     setId(params.get("id"));
     setSeason(params.get("season"));
     setEpisode(params.get("episode"));
-  });
+  },[]);
   // useEffect(() => {
   //   // Override window.open to prevent opening new tabs
   //   window.open = function (url, target, features, replace) {

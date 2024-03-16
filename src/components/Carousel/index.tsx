@@ -3,17 +3,19 @@ import { motion, AnimatePresence } from "framer-motion";
 import styles from "./style.module.scss";
 import { BsCaretLeftFill, BsCaretRightFill } from "react-icons/bs";
 
-const Carousel = ({ images, setIndex, mobileHeight, desktopHeight }: any) => {
+const Carousel = ({ imageArr, setIndex, mobileHeight, desktopHeight }: any) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState("");
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [images, setImages] = useState(imageArr);
   useEffect(() => {
     document.documentElement.style.setProperty("--carousel-desktop-height", desktopHeight);
     document.documentElement.style.setProperty("--carousel-mobile-height", mobileHeight);
     return () => {
       setInterval(() => {
+        setImages(imageArr);
         handleNext();
-      }, 10000);
+      }, 15000);
     }
   }, []);
 
@@ -67,7 +69,7 @@ const Carousel = ({ images, setIndex, mobileHeight, desktopHeight }: any) => {
   return (
     <div className={styles.carousel}>
       <div className={styles.carousel_images}>
-        <AnimatePresence mode="wait">
+        {/* <AnimatePresence mode="wait"> */}
           <motion.img
             key={currentIndex}
             src={images[currentIndex]}
@@ -80,7 +82,7 @@ const Carousel = ({ images, setIndex, mobileHeight, desktopHeight }: any) => {
             loading="lazy"
             style={imageLoaded ? { opacity: 1 } : { opacity: 0 }}
           />
-        </AnimatePresence>
+        {/* </AnimatePresence> */}
         <div className={styles.slide_direction}>
           <BsCaretLeftFill
             className={styles.left}

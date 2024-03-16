@@ -55,12 +55,7 @@ const HomeHero = () => {
     setBookmarked(!bookmarked);
   }
   const handleShare = () => {
-    let url;
-    if (data[index].media_type === "movie") {
-      url = `detail/movie/${data[index].id}`
-    } else {
-      url = `detail/tv/${data[index].id}`
-    }
+    const url = `/detail?type=${data[index].media_type}&id=${data[index].id}`;
     navigatorShare({ text: data[index].title, url: url });
   }
 
@@ -73,7 +68,7 @@ const HomeHero = () => {
   } else
     return (
       <div className={styles.HomeHero} >
-        <Carousel images={images} setIndex={setIndex} mobileHeight="60vh" desktopHeight="80vh" />
+        <Carousel imageArr={images} setIndex={setIndex} mobileHeight="60vh" desktopHeight="80vh" />
         <div className={styles.HomeHeroMeta} key={data[index]?.id}>
           <h1>{data[index]?.title || data[index]?.name || <Skeleton />}</h1>
           <div className={styles.HomeHeroMetaRow2} >

@@ -33,6 +33,18 @@ export default async function axiosFetch({ requestID, id, language = "en-US", pa
     searchMovie: `${baseURL}/search/movie?query=${query}&language=${language}&page=${page}`,
     searchTv: `${baseURL}/search/tv?query=${query}&language=${language}&page=${page}`,
 
+    // for a ID 
+    movieData: `${baseURL}/movie/${id}?language=${language}`,
+    movieVideos: `${baseURL}/movie/${id}/videos?language=${language}`,
+    tvData: `${baseURL}/tv/${id}?language=${language}`,
+    tvVideos: `${baseURL}/tv/${id}/videos?language=${language}`,
+    movieImages: `${baseURL}/movie/${id}/images`,
+    tvImages: `${baseURL}/tv/${id}/images`,
+    movieCredits: `${baseURL}/movie/${id}/credits`,
+    tvCredits: `${baseURL}/tv/${id}/credits`,
+    movieReviews: `${baseURL}/movie/${id}/reviews`,
+    tvReviews: `${baseURL}/tv/${id}/reviews`,
+
     // filters
     genresMovie: `${baseURL}/genre/movie/list?language=${language}`,
     genresTv: `${baseURL}/genre/tv/list?language=${language}`,
@@ -48,6 +60,6 @@ export default async function axiosFetch({ requestID, id, language = "en-US", pa
   } catch (error) {
     console.error("Error fetching data:", error);
     // Handle errors appropriately (e.g., throw a custom error or return null)
-    throw new Error("Failed to fetch data"); // Example error handling
+    // throw new Error("Failed to fetch data"); // Example error handling
   }
 }

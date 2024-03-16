@@ -1,0 +1,17 @@
+.MetaDetails{
+  height: 100vh;
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: var(--primary-1);
+}
+
+@media (max-width: 769px) {
+  .MetaDetails{
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background: var(--primary-1);
+  }
+}
