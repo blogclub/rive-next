@@ -35,7 +35,7 @@ const SearchPage = ({ categoryType }: any) => {
       <div className={styles.InputWrapper}>
         <input type="text" className={styles.searchInput} value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Please enter at least 3 characters to search..." />
       </div>
-      {query.length > 2 ? <h1>showing result for <span>{query}</span></h1>:null}
+      {query.length > 2 ? <h1>showing result for <span>{query}</span></h1> : null}
       <div className={styles.movieList}>
         {
           data.map((ele) => {
@@ -53,6 +53,7 @@ const SearchPage = ({ categoryType }: any) => {
           setCurrentPage(event.selected + 1);
           console.log({ event });
           if (currentPage > totalpages) { setCurrentPage(totalpages) }
+          window.scrollTo(0, 0);
         }}
         pageCount={totalpages}
         breakLabel=" ... "

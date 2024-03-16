@@ -80,7 +80,7 @@ const HomeHero = () => {
             <p className={styles.type}>{data[index] ? (data[index].media_type == "movie" ? "MOVIE" : "SHOW") : <Skeleton />}</p>
             {data[index] ?
               <>
-                <Link className={styles.links} href={data[index]?.media_type === "movie" ? `/watch?type=${data[index]?.media_type}&id=${data[index]?.id}` : `/watch?type=${data[index]?.media_type}&id=${data[index]?.id}&season=1&episode=1`}>watch <FaPlay /></Link>
+                <Link className={styles.links} href={`/watch?type=${data[index]?.media_type}&id=${data[index]?.id}`}>watch <FaPlay /></Link>
                 <Link className={styles.links} href={`/detail?type=${data[index]?.media_type}&id=${data[index]?.id}`}> detail  < FaInfo /> </Link>
 
                 {

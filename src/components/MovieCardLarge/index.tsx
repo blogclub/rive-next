@@ -46,7 +46,7 @@ const MovieCardLarge = ({ data, media_type }: any) => {
     fetchData();
   }, []);
   return (
-    <Link key={data.id} href={`/detail?type=${data.media_type}&id=${data.id}`} className={styles.MovieCardSmall}>
+    <Link key={data.id} href={`${data.media_type === "person" ? "/person?id=" + data.id : "/detail?type=" + data.media_type + "&id=" + data.id}`} className={styles.MovieCardSmall}>
       <div className={`${styles.img} skeleton`}>
         <motion.img
           key={data.id}

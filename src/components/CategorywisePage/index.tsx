@@ -81,6 +81,7 @@ const CategorywisePage = ({ categoryType }: any) => {
           setCurrentPage(event.selected + 1);
           console.log({ event });
           if (currentPage > totalpages) { setCurrentPage(totalpages) }
+          window.scrollTo(0, 0);
         }}
         pageCount={totalpages}
         breakLabel=" ... "

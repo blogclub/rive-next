@@ -1,10 +1,11 @@
 .navbar{
   border-radius: 0.5rem;
-  position: absolute;
+  position: fixed;
   display: flex;
   flex-direction: column;
   align-items: center;
   left: 0.5rem;
+  top: calc(50% - 150px);
   font-size: 1.5rem;
   padding: 1rem;
   background: var(--primary-1);
@@ -29,6 +30,10 @@
     flex-direction: row;
     justify-content:space-between;
     font-size: 2.5rem !important;
+    top: unset;
+    left: 0;
+    bottom: 0;
+    right: unset;
     svg{
       font-size: 1.4rem;
     }

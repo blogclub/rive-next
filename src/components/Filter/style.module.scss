@@ -1,8 +1,9 @@
 .Filter{
   height: 80vh;
   width: 25rem;
-  position: absolute;
+  position: fixed;
   right: 0;
+  top: clamp(5rem,10vh,30rem);
   margin-right: clamp(0.5rem,  7%, 5rem);
   background: var(--primary-1);
   padding: 1rem;
@@ -88,5 +89,6 @@
     height: 100vh;
     margin-right: 0;
     top: 0;
+    left: 0;
   }
 }

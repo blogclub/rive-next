@@ -16,7 +16,7 @@ const Navbar = ({ children }: any) => {
     else
       setPathname(path);
     console.log(params.get("type"));
-  }, [path])
+  }, [path,params])
   return (
     <div className={styles.navbar} >
       <Link href="/">
