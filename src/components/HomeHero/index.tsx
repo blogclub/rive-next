@@ -73,7 +73,7 @@ const HomeHero = () => {
   } else
     return (
       <div className={styles.HomeHero} >
-        <Carousel images={images} setIndex={setIndex} />
+        <Carousel images={images} setIndex={setIndex} mobileHeight="60vh" desktopHeight="80vh" />
         <div className={styles.HomeHeroMeta} key={data[index]?.id}>
           <h1>{data[index]?.title || data[index]?.name || <Skeleton />}</h1>
           <div className={styles.HomeHeroMetaRow2} >

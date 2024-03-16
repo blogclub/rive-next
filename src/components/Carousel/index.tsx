@@ -3,11 +3,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import styles from "./style.module.scss";
 import { BsCaretLeftFill, BsCaretRightFill } from "react-icons/bs";
 
-const Carousel = ({ images, setIndex }: any) => {
+const Carousel = ({ images, setIndex, mobileHeight, desktopHeight }: any) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState("");
   const [imageLoaded, setImageLoaded] = useState(false);
   useEffect(() => {
+    document.documentElement.style.setProperty("--carousel-desktop-height", desktopHeight);
+    document.documentElement.style.setProperty("--carousel-mobile-height", mobileHeight);
     return () => {
       setInterval(() => {
         handleNext();
