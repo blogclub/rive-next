@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import styles from "@/styles/Watch.module.scss"
+import { setContinueWatching } from "@/Utils/continueWatching";
 const Watch = () => {
   const params = useSearchParams();
   const [type, setType] = useState<string | null>("");
@@ -12,7 +13,8 @@ const Watch = () => {
     setId(params.get("id"));
     setSeason(params.get("season"));
     setEpisode(params.get("episode"));
-  },[]);
+    setContinueWatching({ type: params.get("type"), id: params.get("id") });
+  }, []);
   // useEffect(() => {
   //   // Override window.open to prevent opening new tabs
   //   window.open = function (url, target, features, replace) {

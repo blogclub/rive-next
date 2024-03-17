@@ -60,16 +60,18 @@ const DetailPage = () => {
   }, [params, id]);
 
   useEffect(() => {
-    setBookmarked(checkBookmarks({ id: data?.id }));
-    console.log({ index });
-  }, []);
+    if (data !== undefined && data !== null) {
+      setBookmarked(checkBookmarks({ type: type, id: data.id }));
+      console.log(checkBookmarks({ type: type, id: data.id }));
+    }
+  }, [index, data]);
 
   const handleBookmarkAdd = () => {
-    setBookmarks({ id: data.id });
+    setBookmarks({ type: type, id: data.id });
     setBookmarked(!bookmarked);
   }
   const handleBookmarkRemove = () => {
-    removeBookmarks({ id: data.id });
+    removeBookmarks({ type: type, id: data.id });
     setBookmarked(!bookmarked);
   }
   const handleShare = () => {
@@ -82,7 +84,7 @@ const DetailPage = () => {
     // detail
     <div className={styles.DetailPage} >
       <div className={styles.biggerPic}>
-        {images?.length > 0 ? <Carousel imageArr={images} setIndex={setIndex} mobileHeight="60vh" desktopHeight="95vh" objectFit={"cover"}/> : null // if no images array, then use backdrop poster
+        {images?.length > 0 ? <Carousel imageArr={images} setIndex={setIndex} mobileHeight="60vh" desktopHeight="95vh" objectFit={"cover"} /> : null // if no images array, then use backdrop poster
         }
         <div className={styles.DetailBanner}>
           <div className={styles.poster}>

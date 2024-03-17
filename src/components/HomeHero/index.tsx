@@ -42,16 +42,18 @@ const HomeHero = () => {
   }, []);
 
   useEffect(() => {
-    setBookmarked(checkBookmarks({ id: data[index]?.id }));
-    console.log({ index });
-  }, [index]);
+    if (data[index] !== undefined && data[index] !== null) {
+      setBookmarked(checkBookmarks({ type: data[index].media_type, id: data[index].id }));
+      console.log(checkBookmarks({ type: data[index].media_type, id: data[index].id }));
+    }
+  }, [index, data]);
 
   const handleBookmarkAdd = () => {
-    setBookmarks({ id: data[index].id });
+    setBookmarks({ type: data[index]?.media_type, id: data[index].id });
     setBookmarked(!bookmarked);
   }
   const handleBookmarkRemove = () => {
-    removeBookmarks({ id: data[index].id });
+    removeBookmarks({ type: data[index]?.media_type, id: data[index].id });
     setBookmarked(!bookmarked);
   }
   const handleShare = () => {
