@@ -41,6 +41,12 @@ const DetailPage = () => {
         response.backdrops.map((ele: any, i) => {
           if (i < 10) arr.push(process.env.NEXT_PUBLIC_TMBD_IMAGE_URL + ele.file_path);
         });
+        // if (arr.length === 0) {
+        //   response.posters.map((ele: any, i) => {
+        //     if (i < 10) arr.push(process.env.NEXT_PUBLIC_TMBD_IMAGE_URL + ele.file_path);
+        //   });
+        // }
+        if (arr.length === 0) arr.push("/images/logo.svg");
         setImages(arr);
       } catch (error) {
         // console.error("Error fetching data:", error);
@@ -67,7 +73,7 @@ const DetailPage = () => {
     setBookmarked(!bookmarked);
   }
   const handleShare = () => {
-    const url=`/detail?type=${type}&id=${id}`;
+    const url = `/detail?type=${type}&id=${id}`;
     navigatorShare({ text: data.title, url: url });
   }
 
@@ -76,7 +82,7 @@ const DetailPage = () => {
     // detail
     <div className={styles.DetailPage} >
       <div className={styles.biggerPic}>
-        {images?.length > 0 ? <Carousel imageArr={images} setIndex={setIndex} mobileHeight="60vh" desktopHeight="95vh" /> : null // if no images array, then use backdrop poster
+        {images?.length > 0 ? <Carousel imageArr={images} setIndex={setIndex} mobileHeight="60vh" desktopHeight="95vh" objectFit={"cover"}/> : null // if no images array, then use backdrop poster
         }
         <div className={styles.DetailBanner}>
           <div className={styles.poster}>

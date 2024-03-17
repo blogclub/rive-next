@@ -44,6 +44,11 @@ const SearchPage = ({ categoryType }: any) => {
             )
           })
         }
+        {
+          (query.length > 2 && data?.length) === 0 ?
+            <h1>No Data Found</h1>
+            : null
+        }
       </div>
       <ReactPaginate
         containerClassName={styles.pagination}

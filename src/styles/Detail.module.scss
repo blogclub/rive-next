@@ -14,6 +14,7 @@
     border-radius: 1rem;
     overflow: hidden;
     transition: all 1s ease;
+    // background: url("/images/logo.svg");
   }
   .biggerDetail{
     flex: 1;
@@ -132,13 +133,15 @@
     min-height: 100vh;
     overflow-y: auto;
     padding-left: unset;
-    padding:0 1rem;
+    // padding: 1rem;
     padding-bottom: 2.7rem;
     flex-direction: column;
     .biggerPic{
       flex: 3;
-      width: 100%;
-      border-radius: unset;
+      max-width: 100%;
+      min-width: 70%;
+      margin: 1rem;
+      // border-radius: unset;
       margin-bottom: 1rem;
     }
     .biggerDetail{

@@ -15,7 +15,7 @@ const MetaDetails = ({ id, type, data }: any) => {
   const [categoryData, setCategoryData] = useState();
   const [imageLoading, setImageLoading] = useState(true);
   const [reviewDetail, setReviewDetail] = useState("");
-  const [selectedSeason, setSelectedSeason] = useState();
+  const [selectedSeason, setSelectedSeason] = useState(1);
 
   const genres: Array<string> = [];
   data?.genres?.map((ele: any) => {
@@ -28,6 +28,10 @@ const MetaDetails = ({ id, type, data }: any) => {
   const production_countries: Array<string> = [];
   data?.production_countries?.map((ele: any) => {
     production_countries.push(ele.name);
+  })
+  const production_companies: Array<string> = [];
+  data?.production_companies?.map((ele: any) => {
+    production_companies.push(ele.name);
   })
   const release_date = new Date(data?.release_date);
   const birthday = new Date(data?.birthday);
@@ -79,9 +83,11 @@ const MetaDetails = ({ id, type, data }: any) => {
         {type === "tv" && category === "episodes" ?
           <div className={styles.EpisodeList}>
             <select name="season" id="season" value={selectedSeason} onChange={(e: any) => setSelectedSeason(e.target.value)}>
-              {data?.seasons?.map((ele: any, i: number) => (
-                <option key={ele.id} value={ele.season_number} selected={i === 0}>{ele.name}</option>
-              ))}
+              {data?.seasons?.map((ele: any, i: number) => {
+                console.log({ i }); return (
+                  <option key={ele.id} value={ele?.season_number} selected={i == 0}>{ele.name} {` (${ele.episode_count})`}</option>
+                )
+              })}
             </select>
             {
               category === "episodes" && categoryData?.episodes?.map((ele) => {
@@ -136,6 +142,8 @@ const MetaDetails = ({ id, type, data }: any) => {
                   <p>{spoken_languages?.join(", ")}</p></> : null}
                 {production_countries?.length > 0 ? <><h3>Production Countries</h3>
                   <p>{production_countries?.join(", ")}</p></> : null}
+                {production_companies?.length > 0 ? <><h3>Production Companies</h3>
+                  <p>{production_companies?.join(", ")}</p></> : null}
               </>
             )
           }
@@ -208,6 +216,9 @@ const MetaDetails = ({ id, type, data }: any) => {
                   </div>
                 )
               })
+            }
+            {
+              (category === "reviews" && categoryData?.results?.length === 0) ? <div className={styles.Review}><p>No Reviews Found</p></div> : null
             }
           </div>
           <div className={styles.MovieList}>

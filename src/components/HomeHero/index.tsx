@@ -31,6 +31,7 @@ const HomeHero = () => {
         response.results.map((ele: any) => {
           arr.push(process.env.NEXT_PUBLIC_TMBD_IMAGE_URL + ele.backdrop_path);
         });
+        if (arr.length === 0) arr.push("/images/logo.svg")
         setImages(arr);
         setLoading(false);
       } catch (error) {
@@ -58,37 +59,29 @@ const HomeHero = () => {
     const url = `/detail?type=${data[index].media_type}&id=${data[index].id}`;
     navigatorShare({ text: data[index].title, url: url });
   }
+  return (
+    <div className={styles.HomeHero} >
+      {images.length > 0 ? <Carousel imageArr={images} setIndex={setIndex} mobileHeight="60vh" desktopHeight="80vh" objectFit={"cover"} /> : null}
+      <div className={styles.HomeHeroMeta} key={data[index]?.id}>
+        <h1>{data[index]?.title || data[index]?.name || <Skeleton />}</h1>
+        <div className={styles.HomeHeroMetaRow2} >
+          <p className={styles.type}>{data[index] ? (data[index].media_type == "movie" ? "MOVIE" : "SHOW") : <Skeleton />}</p>
+          {data[index] ?
+            <>
+              <Link className={styles.links} href={`/watch?type=${data[index]?.media_type}&id=${data[index]?.id}`}>watch <FaPlay /></Link>
+              <Link className={styles.links} href={`/detail?type=${data[index]?.media_type}&id=${data[index]?.id}`}> detail  < FaInfo /> </Link>
 
-  if (loading) {
-    return (
-      <div className={styles.HomeHero} >
-        loading..
-      </div >
-    )
-  } else
-    return (
-      <div className={styles.HomeHero} >
-        <Carousel imageArr={images} setIndex={setIndex} mobileHeight="60vh" desktopHeight="80vh" />
-        <div className={styles.HomeHeroMeta} key={data[index]?.id}>
-          <h1>{data[index]?.title || data[index]?.name || <Skeleton />}</h1>
-          <div className={styles.HomeHeroMetaRow2} >
-            <p className={styles.type}>{data[index] ? (data[index].media_type == "movie" ? "MOVIE" : "SHOW") : <Skeleton />}</p>
-            {data[index] ?
-              <>
-                <Link className={styles.links} href={`/watch?type=${data[index]?.media_type}&id=${data[index]?.id}`}>watch <FaPlay /></Link>
-                <Link className={styles.links} href={`/detail?type=${data[index]?.media_type}&id=${data[index]?.id}`}> detail  < FaInfo /> </Link>
-
-                {
-                  bookmarked ? <BsFillBookmarkCheckFill onClick={handleBookmarkRemove} /> : <BsBookmarkPlus onClick={handleBookmarkAdd} />
-                }
-                <BsShare onClick={handleShare} />
-              </>
-              : <div ><Skeleton width={200} count={1} /></div>
-            }
-          </div>
+              {
+                bookmarked ? <BsFillBookmarkCheckFill onClick={handleBookmarkRemove} /> : <BsBookmarkPlus onClick={handleBookmarkAdd} />
+              }
+              <BsShare onClick={handleShare} />
+            </>
+            : <div ><Skeleton width={200} count={1} /></div>
+          }
         </div>
-      </div >
-    );
+      </div>
+    </div >
+  );
 };
 
 export default HomeHero;

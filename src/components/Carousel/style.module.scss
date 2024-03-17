@@ -12,7 +12,8 @@
   width: 100%;
   height: 100%;
   object-position: top;
-  object-fit: cover;
+  // object-fit: cover;
+  object-fit: var((--carousel-object-fit));
   border-radius: 0  0 2rem 2rem;
   transition: opacity 2s ease;
   border: none;

@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import styles from "./style.module.scss";
 import { BsCaretLeftFill, BsCaretRightFill } from "react-icons/bs";
 
-const Carousel = ({ imageArr, setIndex, mobileHeight, desktopHeight }: any) => {
+const Carousel = ({ imageArr, setIndex, mobileHeight, desktopHeight, objectFit }: any) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState("");
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -11,13 +11,25 @@ const Carousel = ({ imageArr, setIndex, mobileHeight, desktopHeight }: any) => {
   useEffect(() => {
     document.documentElement.style.setProperty("--carousel-desktop-height", desktopHeight);
     document.documentElement.style.setProperty("--carousel-mobile-height", mobileHeight);
+    document.documentElement.style.setProperty("--carousel-object-fit", objectFit);
+    // if (imageArr.length === 0) {
+    //   setImages(["/images/logo.svg"]);
+    // }
     return () => {
       setInterval(() => {
-        setImages(imageArr);
+        // setImages(imageArr);
         handleNext();
       }, 15000);
     }
   }, []);
+  useEffect(() => {
+    if (imageArr.length === 0) {
+      setImages(["/images/logo.svg"]);
+    } else {
+      setImages(imageArr);
+    }
+    // console.log({ len: imageArr.length });
+  }, [imageArr])
 
   const slideVariants = {
     hiddenRight: {
@@ -68,20 +80,20 @@ const Carousel = ({ imageArr, setIndex, mobileHeight, desktopHeight }: any) => {
 
   return (
     <div className={styles.carousel}>
-      <div className={styles.carousel_images}>
+      <div className={`${styles.carousel_images} ${imageLoaded ? "skeleton" : null}`}>
         <AnimatePresence mode="sync">
-        <motion.img
-          key={currentIndex}
-          src={images[currentIndex]}
-          initial={direction === "right" ? "hiddenRight" : "hiddenLeft"}
-          animate="visible"
-          exit="exit"
-          variants={slideVariants}
-          className={`${imageLoaded ? "skeleton" : null}`}
-          onLoad={() => { setImageLoaded(true); }}
-          loading="lazy"
+          <motion.img
+            key={currentIndex}
+            src={images[currentIndex]}
+            initial={direction === "right" ? "hiddenRight" : "hiddenLeft"}
+            animate="visible"
+            exit="exit"
+            variants={slideVariants}
+            className={`${imageLoaded ? "skeleton" : null}`}
+            onLoad={() => { setImageLoaded(true); }}
+            loading="lazy"
           // style={imageLoaded ? { opacity: 1 } : { opacity: 0 }}
-        />
+          />
         </AnimatePresence>
         <div className={styles.slide_direction}>
           <BsCaretLeftFill

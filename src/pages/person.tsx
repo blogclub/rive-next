@@ -24,6 +24,8 @@ const PersonPage = () => {
 
     const fetchData = async () => {
       try {
+        const data = await axiosFetch({ requestID: `${type}Data`, id: id });
+        setData(data);
         const res = await axiosFetch({ requestID: `${type}Data`, id: id });
         setData(res);
         console.log({ res });
@@ -34,6 +36,7 @@ const PersonPage = () => {
         response.profiles.map((ele: any, i) => {
           if (i < 10) arr.push(process.env.NEXT_PUBLIC_TMBD_IMAGE_URL + ele.file_path);
         });
+        if (arr.length === 0) arr.push("/images/logo.svg")
         setImages(arr);
       } catch (error) {
         // console.error("Error fetching data:", error);
@@ -54,8 +57,7 @@ const PersonPage = () => {
     // detail
     <div className={`${styles.DetailPage} ${styles.PersonPage}`} >
       <div className={styles.biggerPic}>
-        {images?.length > 0 ? <Carousel imageArr={images} setIndex={setIndex} mobileHeight="60vh" desktopHeight="95vh" /> : null // if no images array, then use backdrop poster
-        }
+        {images.length > 0 ? <Carousel imageArr={images} setIndex={setIndex} mobileHeight="60vh" desktopHeight="95vh" objectFit={"contain"} /> : null}
         <div className={styles.DetailBanner}>
           <div className={styles.HomeHeroMeta} key={data?.id}>
             <h1>{data?.name || <Skeleton />}</h1>
