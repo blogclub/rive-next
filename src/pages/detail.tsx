@@ -102,9 +102,9 @@ const DetailPage = () => {
                     trailer && <Link className={styles.links} href={`https://youtube.com/watch?v=${trailer.key}`} target="_blank">trailer <FaYoutube /></Link>
                   }
                   {
-                    bookmarked ? <BsFillBookmarkCheckFill onClick={handleBookmarkRemove} /> : <BsBookmarkPlus onClick={handleBookmarkAdd} />
+                    bookmarked ? <BsFillBookmarkCheckFill className={styles.HomeHeroIcons} onClick={handleBookmarkRemove} /> : <BsBookmarkPlus className={styles.HomeHeroIcons} onClick={handleBookmarkAdd} />
                   }
-                  <BsShare onClick={handleShare} />
+                  <BsShare className={styles.HomeHeroIcons} onClick={handleShare} />
                 </>
                 : <div ><Skeleton width={200} count={1} /></div>
               }

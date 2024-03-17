@@ -116,7 +116,8 @@ const MetaDetails = ({ id, type, data }: any) => {
                     </Link>
                     <div className={styles.details}>
                       <h4>{`EP ${ele.episode_number}`}{`${ele?.name ? " : " + ele?.name : null}`}</h4>
-                      <p>{`${ele?.vote_average ? "• " + ele?.vote_average.toFixed(1) : null}`}</p>
+                      <p>{`${ele?.vote_average ? "• " + ele?.vote_average.toFixed(1) : null}`} {ele?.runtime >= 60 ? `• ${Math.floor((ele?.runtime) / 60)}hr ${((ele?.runtime) % 60).toFixed(0)}min` : null}
+                        {ele?.runtime < 60 ? `• ${((ele?.runtime) % 60).toFixed(0)}min` : null}</p>
                       <Link className={`${styles.links} btn`} href={`/watch?type=tv&id=${ele?.id}`}>watch <FaPlay /></Link>
                       <p>{ele?.overview}</p>
                     </div>
@@ -135,7 +136,8 @@ const MetaDetails = ({ id, type, data }: any) => {
                 {release_date.getDate() ? <><h3>Release</h3>
                   <p>{`${release_date.getDate()} ${monthNames[release_date.getMonth()]} ${release_date.getFullYear()}`}</p></> : null}
                 {data?.runtime ? <><h3>Runtime</h3>
-                  <p>{`${Math.floor((data?.runtime) / 60)}hr ${((data?.runtime) % 60).toFixed(0)}min`}</p></> : null}
+                  <p>{data?.runtime >= 60 ? `${Math.floor((data?.runtime) / 60)}hr ${((data?.runtime) % 60).toFixed(0)}min` : null}
+                    {data?.runtime < 60 ? `${((data?.runtime) % 60).toFixed(0)} min` : null}</p></> : null}
                 {genres?.length > 0 ? <><h3>Genre</h3>
                   <p>{genres?.join(", ")}</p></> : null}
                 {spoken_languages?.length > 0 ? <><h3>Spoken Languages</h3>
@@ -241,7 +243,7 @@ const MetaDetails = ({ id, type, data }: any) => {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   )
 }
 

@@ -70,12 +70,12 @@ const HomeHero = () => {
           {data[index] ?
             <>
               <Link className={styles.links} href={`/watch?type=${data[index]?.media_type}&id=${data[index]?.id}`}>watch <FaPlay /></Link>
-              <Link className={styles.links} href={`/detail?type=${data[index]?.media_type}&id=${data[index]?.id}`}> detail  < FaInfo /> </Link>
+              <Link className={styles.links} href={`/detail?type=${data[index]?.media_type}&id=${data[index]?.id}`}> detail  </Link>
 
               {
-                bookmarked ? <BsFillBookmarkCheckFill onClick={handleBookmarkRemove} /> : <BsBookmarkPlus onClick={handleBookmarkAdd} />
+                bookmarked ? <BsFillBookmarkCheckFill className={styles.HomeHeroIcons} onClick={handleBookmarkRemove} /> : <BsBookmarkPlus className={styles.HomeHeroIcons} onClick={handleBookmarkAdd} />
               }
-              <BsShare onClick={handleShare} />
+              <BsShare className={styles.HomeHeroIcons} onClick={handleShare} />
             </>
             : <div ><Skeleton width={200} count={1} /></div>
           }
