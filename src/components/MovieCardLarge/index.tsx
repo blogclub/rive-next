@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import styles from "./style.module.scss";
 import Link from 'next/link';
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Skeleton from 'react-loading-skeleton';
 import axiosFetch from '@/Utils/fetch';
 
@@ -49,23 +49,25 @@ const MovieCardLarge = ({ data, media_type }: any) => {
     fetchData();
   }, [data]);
   return (
-    <Link key={data.id} href={`${data.media_type === "person" ? "/person?id=" + data.id : "/detail?type=" + data.media_type + "&id=" + data.id}`} className={styles.MovieCardSmall}>
+    <Link key={data.id} href={`${data.media_type === "person" ? "/person?id=" + data.id : "/detail?type=" + (data?.media_type || media_type) + "&id=" + data.id}`} className={styles.MovieCardSmall}>
       <div className={`${styles.img} ${imageLoading ? "skeleton" : null}`}>
-        <motion.img
-          key={data.id}
-          src={process.env.NEXT_PUBLIC_TMBD_IMAGE_URL + (data?.poster_path || data.profile_path)}
-          initial={{ opacity: 0 }}
-          animate={{
-            opacity: imageLoading ? 0 : 1
-          }}
-          height="100%"
-          width="100%"
-          exit="exit"
-          className={`${styles.img} ${imageLoading ? "skeleton" : null}`}
-          onLoad={() => { setImageLoading(false); }}
-          loading="lazy"
-          style={!imageLoading ? { opacity: 1 } : { opacity: 0 }}
-        />
+        <AnimatePresence mode="sync">
+          <motion.img
+            key={data.id}
+            src={`${((data?.poster_path !== null && data?.poster_path !== undefined) || (data?.profile_path !== null && data?.profile_path !== undefined) || (data?.still_path !== null && data?.still_path !== undefined)) ? process.env.NEXT_PUBLIC_TMBD_IMAGE_URL + (data?.poster_path || data.profile_path || data?.still_path) : "/images/logo.svg"}`}
+            initial={{ opacity: 0 }}
+            animate={{
+              opacity: imageLoading ? 0 : 1
+            }}
+            height="100%"
+            width="100%"
+            exit="exit"
+            className={`${styles.img} ${imageLoading ? "skeleton" : null}`}
+            onLoad={() => { setImageLoading(false); }}
+            loading="lazy"
+          // style={!imageLoading ? { opacity: 1 } : { opacity: 0 }}
+          />
+        </AnimatePresence>
       </div>
       <div className={`${styles.metaData}`}>
         <h1>{data?.title || data?.name || <Skeleton />}</h1>

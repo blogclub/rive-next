@@ -7,16 +7,17 @@
   justify-content: center;
   align-items: center;
   flex-direction: row;
-  transition: all 1s ease;
   // gap: 1rem;
   .biggerPic{
     flex: 3;
     position: relative;
     border-radius: 1rem;
     overflow: hidden;
+    transition: all 1s ease;
   }
   .biggerDetail{
     flex: 1;
+    transition: all 1s ease;
   }
   .biggerDetail:hover{
     flex: 2;
@@ -108,7 +109,7 @@
           justify-content: center;
           align-items: center;
           border-radius: 0.3rem;
-          padding: 0.3rem;
+          padding: 0.3rem 0.5rem;
           gap: 0.3rem;
         }
       }

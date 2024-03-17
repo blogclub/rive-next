@@ -56,6 +56,18 @@ h1{
   display: none;
 }
 
+.btn{
+  background: var(--ascent-color);
+  color: var(--primary-1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.3rem;
+  padding: 0.3rem 0.5rem;
+  gap: 0.3rem;
+  // max-width: 15rem;
+}
+
 @media (max-width: 769px) {
   *{
     font-size: 0.9rem;

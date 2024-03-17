@@ -49,7 +49,7 @@ export default async function axiosFetch({ requestID, id, language = "en-US", pa
     tvReviews: `${baseURL}/tv/${id}/reviews?language=${language}`,
     movieRelated: `${baseURL}/movie/${id}/recommendations?language=${language}&page=${page}`,
     tvRelated: `${baseURL}/tv/${id}/recommendations?language=${language}&page=${page}`,
-    tvEpisodes: `${baseURL}/tv/series_id/season/${season}?language=${language}`,
+    tvEpisodes: `${baseURL}/tv/${id}/season/${season}?language=${language}`,
 
     // person 
     personMovie: `${baseURL}/person/${id}/movie_credits?language=${language}&page=${page}`,

@@ -69,7 +69,7 @@ const Carousel = ({ imageArr, setIndex, mobileHeight, desktopHeight }: any) => {
   return (
     <div className={styles.carousel}>
       <div className={styles.carousel_images}>
-        {/* <AnimatePresence mode="wait"> */}
+        <AnimatePresence mode="sync">
         <motion.img
           key={currentIndex}
           src={images[currentIndex]}
@@ -80,9 +80,9 @@ const Carousel = ({ imageArr, setIndex, mobileHeight, desktopHeight }: any) => {
           className={`${imageLoaded ? "skeleton" : null}`}
           onLoad={() => { setImageLoaded(true); }}
           loading="lazy"
-          style={imageLoaded ? { opacity: 1 } : { opacity: 0 }}
+          // style={imageLoaded ? { opacity: 1 } : { opacity: 0 }}
         />
-        {/* </AnimatePresence> */}
+        </AnimatePresence>
         <div className={styles.slide_direction}>
           <BsCaretLeftFill
             className={styles.left}
