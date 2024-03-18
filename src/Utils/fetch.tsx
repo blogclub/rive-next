@@ -2,7 +2,7 @@ import axios from "axios";
 
 interface Fetch {
   requestID: any,
-  id?: number,
+  id?: string | null,
   language?: string,
   page?: number,
   genreKeywords?: string,
@@ -16,7 +16,7 @@ export default async function axiosFetch({ requestID, id, language = "en-US", pa
   const request = requestID;
   const API_KEY = process.env.NEXT_PUBLIC_TMDB_API_KEY;
   const baseURL = "https://api.themoviedb.org/3";
-  const requests = {
+  const requests:any = {
     latestMovie: `${baseURL}/movie/now_playing?language=${language}&page=${page}`, //nowPlayingMovie
     latestTv: `${baseURL}/tv/airing_today?language=${language}&page=${page}`,  // airingTodayTv
     popularMovie: `${baseURL}/movie/popular?language=${language}&page=${page}&sort_by=${sortBy}`,  // current popular, so similar to latestMovie data 

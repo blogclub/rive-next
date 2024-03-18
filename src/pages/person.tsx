@@ -16,8 +16,8 @@ const PersonPage = () => {
   const [type, setType] = useState<string | null>("person");
   const [id, setId] = useState<string | null>(params.get("id"));
   const [index, setIndex] = useState(0);
-  const [images, setImages] = useState([]);
-  const [data, setData] = useState();
+  const [images, setImages] = useState<any>([]);
+  const [data, setData] = useState<any>();
 
   useEffect(() => {
     setId(params.get("id"));
@@ -33,7 +33,7 @@ const PersonPage = () => {
         const response = await axiosFetch({ requestID: `${type}Images`, id: id });
         // setImages(response.results);
         let arr: any = [];
-        response.profiles.map((ele: any, i) => {
+        response.profiles.map((ele: any, i:any) => {
           if (i < 10) arr.push(process.env.NEXT_PUBLIC_TMBD_IMAGE_URL + ele.file_path);
         });
         if (arr.length === 0) arr.push("/images/logo.svg")

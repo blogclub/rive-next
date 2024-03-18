@@ -11,11 +11,11 @@ function capitalizeFirstLetter(string: string) {
 }
 
 const MetaDetails = ({ id, type, data }: any) => {
-  const [category, setCategory] = useState("overview"); // latest, trending, topRated
-  const [categoryData, setCategoryData] = useState();
-  const [imageLoading, setImageLoading] = useState(true);
-  const [reviewDetail, setReviewDetail] = useState("");
-  const [selectedSeason, setSelectedSeason] = useState(1);
+  const [category, setCategory] = useState<any>("overview"); // latest, trending, topRated
+  const [categoryData, setCategoryData] = useState<any>();
+  const [imageLoading, setImageLoading] = useState<any>(true);
+  const [reviewDetail, setReviewDetail] = useState<any>("");
+  const [selectedSeason, setSelectedSeason] = useState<any>(1);
 
   const genres: Array<string> = [];
   data?.genres?.map((ele: any) => {
@@ -90,9 +90,9 @@ const MetaDetails = ({ id, type, data }: any) => {
               })}
             </select>
             {
-              category === "episodes" && categoryData?.episodes?.map((ele) => {
+              category === "episodes" && categoryData?.episodes?.map((ele:any) => {
                 return (
-                  <div className={`${styles.episode} ${reviewDetail === ele?.id ? styles.ReviewDetail : null}`} onClick={() => setReviewDetail((prev) => prev !== ele?.id ? ele?.id : "")}>
+                  <div className={`${styles.episode} ${reviewDetail === ele?.id ? styles.ReviewDetail : null}`} onClick={() => setReviewDetail((prev:any) => prev !== ele?.id ? ele?.id : "")}>
                     <Link href={`/watch?type=tv&id=${ele?.id}`} className={styles.CardSmall}>
                       <div className={`${styles.img} ${imageLoading ? "skeleton" : null}`}>
                         <AnimatePresence mode="sync">
@@ -198,7 +198,7 @@ const MetaDetails = ({ id, type, data }: any) => {
 
           <div className={styles.MovieList}>
             {
-              category === "related" && categoryData?.results?.map((ele) => {
+              category === "related" && categoryData?.results?.map((ele:any) => {
                 return (
                   <MovieCardLarge data={ele} media_type={type} />
                 )
@@ -207,10 +207,10 @@ const MetaDetails = ({ id, type, data }: any) => {
           </div>
           <div className={styles.ReviewList}>
             {
-              category === "reviews" && categoryData?.results?.map((ele) => {
+              category === "reviews" && categoryData?.results?.map((ele:any) => {
                 const review_date = new Date(ele?.created_at);
                 return (
-                  <div className={`${styles.Review} ${reviewDetail === ele?.id ? styles.ReviewDetail : null}`} onClick={() => setReviewDetail((prev) => prev !== ele?.id ? ele?.id : "")}>
+                  <div className={`${styles.Review} ${reviewDetail === ele?.id ? styles.ReviewDetail : null}`} onClick={() => setReviewDetail((prev:any) => prev !== ele?.id ? ele?.id : "")}>
                     <h4>{ele?.author}</h4>
                     <p>{`${review_date.getDate()} ${monthNames[review_date.getMonth()]} ${review_date.getFullYear()}`}</p>
                     <p className={styles.rating}><FaStar /> {ele?.author_details?.rating}</p>
@@ -225,7 +225,7 @@ const MetaDetails = ({ id, type, data }: any) => {
           </div>
           <div className={styles.MovieList}>
             {
-              category === "movie" && categoryData?.cast?.map((ele) => {
+              category === "movie" && categoryData?.cast?.map((ele:any) => {
                 return (
                   <MovieCardLarge data={ele} media_type="movie" />
                 )
@@ -234,7 +234,7 @@ const MetaDetails = ({ id, type, data }: any) => {
           </div>
           <div className={styles.MovieList}>
             {
-              category === "tv" && categoryData?.cast?.map((ele) => {
+              category === "tv" && categoryData?.cast?.map((ele:any) => {
                 return (
                   <MovieCardLarge data={ele} media_type="tv" />
                 )

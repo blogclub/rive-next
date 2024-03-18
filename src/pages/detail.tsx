@@ -20,9 +20,9 @@ const DetailPage = () => {
   const [episode, setEpisode] = useState<string | null>();
   const [index, setIndex] = useState(0);
   const [images, setImages] = useState([]);
-  const [data, setData] = useState({});
+  const [data, setData] = useState<any>({});
   const [bookmarked, setBookmarked] = useState(false);
-  const [trailer, setTrailer] = useState("");
+  const [trailer, setTrailer] = useState<any>("");
 
   useEffect(() => {
     setType(params.get("type"));
@@ -38,7 +38,7 @@ const DetailPage = () => {
         const response = await axiosFetch({ requestID: `${type}Images`, id: id });
         // setImages(response.results);
         let arr: any = [];
-        response.backdrops.map((ele: any, i) => {
+        response.backdrops.map((ele: any, i:number) => {
           if (i < 10) arr.push(process.env.NEXT_PUBLIC_TMBD_IMAGE_URL + ele.file_path);
         });
         // if (arr.length === 0) {
