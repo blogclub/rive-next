@@ -13,18 +13,18 @@
     flex-direction: row;
     gap: 1rem;
     margin-top: 1rem;
-    .filter{
-      position: absolute;
-      right: 0;
-      margin-right: clamp(0.5rem,  7%, 5rem);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 0.5rem;
-      svg{
-        font-size: 1.3rem;
-      }
-    }
+    // .filter{
+    //   position: absolute;
+    //   right: 0;
+    //   margin-right: clamp(0.5rem,  7%, 5rem);
+    //   display: flex;
+    //   justify-content: center;
+    //   align-items: center;
+    //   gap: 0.5rem;
+    //   svg{
+    //     font-size: 1.3rem;
+    //   }
+    // }
   }
   .movieList{
     padding: 3rem;

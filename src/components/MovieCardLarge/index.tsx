@@ -50,7 +50,7 @@ const MovieCardLarge = ({ data, media_type }: any) => {
   }, [data]);
   return (
     <Link key={data.id} href={`${data.media_type === "person" ? "/person?id=" + data.id : "/detail?type=" + (data?.media_type || media_type) + "&id=" + data.id}`} className={styles.MovieCardSmall}>
-      <div className={`${styles.img} ${imageLoading ? "skeleton" : null}`}>
+      <div className={` ${imageLoading ? "skeleton" : null}`}>
         <AnimatePresence mode="sync">
           <motion.img
             key={data.id}

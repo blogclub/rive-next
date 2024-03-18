@@ -233,6 +233,10 @@ const MetaDetails = ({ id, type, data }: any) => {
               })
             }
             {
+              category === "related" && (categoryData?.results?.length === 0) &&
+              <p>No Recommendations</p>
+            }
+            {
               category === "related" && (categoryData === undefined) && dummyList.map((ele) => (
                 <div className={styles.MovieList}>
                   <Skeleton height={150} width={100} />

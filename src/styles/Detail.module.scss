@@ -153,7 +153,7 @@
       min-height: 60vh;    
       .CarouselLoading{
         height: 60vh;
-        width: 100%;
+        width: calc(100vw - 2rem);
       }
     }
     .biggerDetail{

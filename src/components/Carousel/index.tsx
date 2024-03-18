@@ -15,13 +15,14 @@ const Carousel = ({ imageArr, setIndex, mobileHeight, desktopHeight, objectFit }
     // if (imageArr.length === 0) {
     //   setImages(["/images/logo.svg"]);
     // }
+    const Interval = setInterval(() => {
+      // setImages(imageArr);
+      handleNext();
+    }, 15000);
     return () => {
-      setInterval(() => {
-        // setImages(imageArr);
-        handleNext();
-      }, 15000);
+      clearInterval(Interval);
     }
-  }, []);
+  });
   useEffect(() => {
     if (imageArr.length === 0) {
       setImages(["/images/logo.svg"]);
