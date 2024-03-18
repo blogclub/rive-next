@@ -23,8 +23,10 @@ const DetailPage = () => {
   const [data, setData] = useState<any>({});
   const [bookmarked, setBookmarked] = useState(false);
   const [trailer, setTrailer] = useState<any>("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     setType(params.get("type"));
     setId(params.get("id"));
     setSeason(params.get("season"));
@@ -38,7 +40,7 @@ const DetailPage = () => {
         const response = await axiosFetch({ requestID: `${type}Images`, id: id });
         // setImages(response.results);
         let arr: any = [];
-        response.backdrops.map((ele: any, i:number) => {
+        response.backdrops.map((ele: any, i: number) => {
           if (i < 10) arr.push(process.env.NEXT_PUBLIC_TMBD_IMAGE_URL + ele.file_path);
         });
         // if (arr.length === 0) {
@@ -48,6 +50,7 @@ const DetailPage = () => {
         // }
         if (arr.length === 0) arr.push("/images/logo.svg");
         setImages(arr);
+        setLoading(false);
       } catch (error) {
         // console.error("Error fetching data:", error);
       }
@@ -84,22 +87,22 @@ const DetailPage = () => {
     // detail
     <div className={styles.DetailPage} >
       <div className={styles.biggerPic}>
-        {images?.length > 0 ? <Carousel imageArr={images} setIndex={setIndex} mobileHeight="60vh" desktopHeight="95vh" objectFit={"cover"} /> : null // if no images array, then use backdrop poster
+        {images?.length > 0 ? <Carousel imageArr={images} setIndex={setIndex} mobileHeight="60vh" desktopHeight="95vh" objectFit={"cover"} /> : <Skeleton className={styles.CarouselLoading} /> // if no images array, then use backdrop poster
         }
         <div className={styles.DetailBanner}>
           <div className={styles.poster}>
             <div className={styles.rating}>{data?.vote_average?.toFixed(1)}</div>
             <MoviePoster data={data} />
           </div>
-          <div className={styles.HomeHeroMeta} key={data?.id}>
+          <div className={styles.HomeHeroMeta}>
             <h1>{data?.title || data?.name || <Skeleton />}</h1>
             <div className={styles.HomeHeroMetaRow2} >
               <p className={styles.type}>{data ? (type == "movie" ? "MOVIE" : "SHOW") : <Skeleton />}</p>
               {data ?
                 <>
-                  <Link className={styles.links} href={`/watch?type=${type}&id=${data?.id}`}>watch <FaPlay /></Link>
+                  <Link className={styles.links} href={`/watch?type=${type}&id=${data?.id}`}>watch <FaPlay className={styles.IconsMobileNone} /></Link>
                   {
-                    trailer && <Link className={styles.links} href={`https://youtube.com/watch?v=${trailer.key}`} target="_blank">trailer <FaYoutube /></Link>
+                    trailer && <Link className={styles.links} href={`https://youtube.com/watch?v=${trailer.key}`} target="_blank">trailer <FaYoutube className={styles.IconsMobileNone} /></Link>
                   }
                   {
                     bookmarked ? <BsFillBookmarkCheckFill className={styles.HomeHeroIcons} onClick={handleBookmarkRemove} /> : <BsBookmarkPlus className={styles.HomeHeroIcons} onClick={handleBookmarkAdd} />

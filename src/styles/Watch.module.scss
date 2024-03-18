@@ -8,3 +8,17 @@
     outline: none;
   }
 }
+
+@media (max-width: 769px) {
+  .watch{
+    padding-left: unset;
+    padding:1.5rem 1rem;
+    padding-bottom: 5rem;
+    .iframe{
+      height: 100%;
+      width: 100%;
+      border: none;
+      outline: none;
+    }
+  }
+}

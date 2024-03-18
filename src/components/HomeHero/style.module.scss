@@ -5,7 +5,16 @@
   // padding-left: 4rem;
   position: relative;
   // display: flex;
-
+  .HomeCarousel{
+    max-width: calc(100vw - 5rem);
+    margin: 1rem 0 0 0;
+    overflow: hidden;
+    border-radius: 2rem;
+    .CarouselLoading{
+      height: 80vh;
+      width: 100%;
+    }
+  }
   .HomeHeroMeta{
     position: absolute;
     bottom: 0;
@@ -72,8 +81,19 @@
 @media (max-width: 769px) {
   .HomeHero{
     padding-left: unset;
+    // margin-top: 1rem;
     // padding:0 1rem;
     height: 70vh;
+    .HomeCarousel{
+      max-width: calc(100vw - 2rem);
+      margin: 1rem 0 0 0;
+      overflow: hidden;
+      border-radius: 2rem;
+      .CarouselLoading{
+        height: 60vh;
+        width: 100%;
+      }
+    }
     .HomeHeroMeta{
       width: unset;
       max-width: 20rem;

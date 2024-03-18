@@ -48,7 +48,7 @@ const HomeListAll = () => {
           })
         }{
           latestMovie?.length === 0 && dummyList.map((ele) => (
-            <Skeleton height={"15rem"} count={1} width={"10rem"} />
+            <Skeleton className={styles.loading} />
           ))
         }
       </div>
@@ -62,7 +62,7 @@ const HomeListAll = () => {
           })
         }{
           latestTv?.length === 0 && dummyList.map((ele) => (
-            <Skeleton height={"15rem"} count={1} width={"10rem"} />
+            <Skeleton className={styles.loading} />
           ))
         }
       </div>
@@ -76,7 +76,7 @@ const HomeListAll = () => {
           })
         }{
           popularMovie?.length === 0 && dummyList.map((ele) => (
-            <Skeleton height={"15rem"} count={1} width={"10rem"} />
+            <Skeleton className={styles.loading} />
           ))
         }
       </div>
@@ -90,7 +90,7 @@ const HomeListAll = () => {
           })
         }{
           popularTv?.length === 0 && dummyList.map((ele) => (
-            <Skeleton height={"15rem"} count={1} width={"10rem"} />
+            <Skeleton className={styles.loading} />
           ))
         }
       </div>

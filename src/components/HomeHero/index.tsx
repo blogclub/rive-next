@@ -31,7 +31,7 @@ const HomeHero = () => {
         response.results.map((ele: any) => {
           arr.push(process.env.NEXT_PUBLIC_TMBD_IMAGE_URL + ele.backdrop_path);
         });
-        if (arr.length === 0) arr.push("/images/logo.svg")
+        if (arr.length === 0) arr.push("/images/logo.svg");
         setImages(arr);
         setLoading(false);
       } catch (error) {
@@ -62,7 +62,9 @@ const HomeHero = () => {
   }
   return (
     <div className={styles.HomeHero} >
-      {images.length > 0 ? <Carousel imageArr={images} setIndex={setIndex} mobileHeight="60vh" desktopHeight="80vh" objectFit={"cover"} /> : null}
+      <div className={styles.HomeCarousel} >
+        {images.length > 0 ? <Carousel imageArr={images} setIndex={setIndex} mobileHeight="60vh" desktopHeight="80vh" objectFit={"cover"} /> : <Skeleton className={styles.CarouselLoading} />}
+      </div>
       <div className={styles.HomeHeroMeta} key={data[index]?.id}>
         <h1>{data[index]?.title || data[index]?.name || <Skeleton />}</h1>
         <div className={styles.HomeHeroMetaRow2} >

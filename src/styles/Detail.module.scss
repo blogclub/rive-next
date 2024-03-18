@@ -15,6 +15,10 @@
     overflow: hidden;
     transition: all 1s ease;
     // background: url("/images/logo.svg");
+    .CarouselLoading{
+      height: 95vh;
+      width: 100%;
+    }
   }
   .biggerDetail{
     flex: 1;
@@ -146,6 +150,11 @@
       margin: 1rem;
       // border-radius: unset;
       margin-bottom: 1rem;
+      min-height: 60vh;    
+      .CarouselLoading{
+        height: 60vh;
+        width: 100%;
+      }
     }
     .biggerDetail{
       flex: 2;
@@ -173,8 +182,29 @@
         bottom: -2.5rem;
         left: 0.2rem;
         width: unset;
+        min-width: 10rem;
         max-width: 20rem;
+        letter-spacing: -1.5px !important;
         // margin-left: clamp(0rem, 0%, 10vw);
+        .HomeHeroMetaRow2{
+          .type{
+            // display: inline-block;
+            transform: rotateZ(90deg);
+            position: absolute;
+            right: 0;
+            top: 40%;
+            // background: red;
+          }
+          .links{
+            letter-spacing: -1.5px;
+          }
+          .HomeHeroIcons{
+            font-size: 1.2rem;
+          }
+          .IconsMobileNone{
+            display: none;
+          }
+        }
       }
     }
   }

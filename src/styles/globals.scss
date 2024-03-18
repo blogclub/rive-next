@@ -29,6 +29,9 @@ a{
   color: var(--primary-2);
 }
 .react-loading-skeleton {
+  --base-color:var(--primary-1) !important;
+  --highlight-color: var(--bg-color) !important;
+  display: block;
   background-color: var(--primary-1) !important;
   background-image: linear-gradient(
     90deg,
@@ -89,5 +92,8 @@ h1{
   }
   h1{
     font-size: 1.2rem;
+  }
+  :not(h1){
+    letter-spacing: -0.5px;
   }
 }

@@ -20,7 +20,7 @@
     .category{
       display: flex;
       width: 100%;
-      justify-content: center;
+      justify-content: space-around;
       align-items: center;
       flex-wrap: wrap;
       gap: 1rem;
@@ -31,6 +31,7 @@
       background: var(--primary-1);
       padding: 1rem 0;
       margin-bottom: 1rem;
+      border-bottom: 1px solid var(--primary-2);
     }
     h3,h4{
       color: var(--primary-3);
@@ -162,12 +163,13 @@
     background: var(--primary-1);
     .MetaDetails{
       position: relative;
-      padding-top: 3.5rem;
+      padding-top: 4rem;
       min-height: 50vh;
       .category{
         position: absolute;
-        top: 0;
+        top: -0.5rem;
         left: 0;
+        justify-content: space-around;
       }
       .img{
         width: 3rem !important;

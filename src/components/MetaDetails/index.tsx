@@ -5,17 +5,20 @@ import Link from 'next/link';
 import { motion, AnimatePresence } from "framer-motion";
 import MovieCardLarge from '../MovieCardLarge';
 import { FaPlay, FaStar } from "react-icons/fa";
+import Skeleton from 'react-loading-skeleton';
 
 function capitalizeFirstLetter(string: string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
+const dummyList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 const MetaDetails = ({ id, type, data }: any) => {
   const [category, setCategory] = useState<any>("overview"); // latest, trending, topRated
   const [categoryData, setCategoryData] = useState<any>();
   const [imageLoading, setImageLoading] = useState<any>(true);
   const [reviewDetail, setReviewDetail] = useState<any>("");
   const [selectedSeason, setSelectedSeason] = useState<any>(1);
+  const [loading, setLoading] = useState(true);
 
   const genres: Array<string> = [];
   data?.genres?.map((ele: any) => {
@@ -39,6 +42,7 @@ const MetaDetails = ({ id, type, data }: any) => {
     "July", "August", "September", "October", "November", "December"];
 
   useEffect(() => {
+    setLoading(true);
     const fetchData = async () => {
       const CapitalCategoryType = capitalizeFirstLetter(category);
       if (category !== "overview") {
@@ -50,6 +54,7 @@ const MetaDetails = ({ id, type, data }: any) => {
             res = await axiosFetch({ requestID: `${type}${CapitalCategoryType}`, id: id });
           }
           setCategoryData(res);
+          setLoading(false);
         } catch (error) {
           console.error("Error fetching data:", error);
         }
@@ -90,9 +95,9 @@ const MetaDetails = ({ id, type, data }: any) => {
               })}
             </select>
             {
-              category === "episodes" && categoryData?.episodes?.map((ele:any) => {
+              category === "episodes" && categoryData?.episodes?.map((ele: any) => {
                 return (
-                  <div className={`${styles.episode} ${reviewDetail === ele?.id ? styles.ReviewDetail : null}`} onClick={() => setReviewDetail((prev:any) => prev !== ele?.id ? ele?.id : "")}>
+                  <div className={`${styles.episode} ${reviewDetail === ele?.id ? styles.ReviewDetail : null}`} onClick={() => setReviewDetail((prev: any) => prev !== ele?.id ? ele?.id : "")}>
                     <Link href={`/watch?type=tv&id=${ele?.id}`} className={styles.CardSmall}>
                       <div className={`${styles.img} ${imageLoading ? "skeleton" : null}`}>
                         <AnimatePresence mode="sync">
@@ -128,6 +133,18 @@ const MetaDetails = ({ id, type, data }: any) => {
           </div>
           : null}
 
+        {type === "tv" && category === "episodes" && categoryData?.episodes?.length === 0 ?
+          <p>No Episodes Found</p>
+          : null
+        }
+
+        {type === "tv" && category === "episodes" && categoryData === undefined ? dummyList.map((ele) => (
+          <div className={styles.episode}>
+            <Skeleton height={100} className={styles.CardSmall} />
+          </div>
+        ))
+          : null
+        }
         <div className={styles.categoryDetails}>
           {
             category === "overview" && type !== "person" && (
@@ -162,6 +179,10 @@ const MetaDetails = ({ id, type, data }: any) => {
               </>
             )
           }
+          {
+            category === "overview" && (data == undefined || data === null) &&
+            <Skeleton count={5} />
+          }
           <div className={styles.casts}>
             {
               category === "casts" && categoryData?.cast?.map((ele: any) => (
@@ -194,23 +215,42 @@ const MetaDetails = ({ id, type, data }: any) => {
                 </div>
               ))
             }
+            {
+              category === "casts" && (categoryData === undefined) && dummyList.map((ele) => (
+                <div className={styles.cast}>
+                  <Skeleton height={100} width={100} />
+                  <Skeleton height={20} width={50} />
+                </div>
+              ))
+            }
           </div>
-
           <div className={styles.MovieList}>
             {
-              category === "related" && categoryData?.results?.map((ele:any) => {
+              category === "related" && categoryData?.results?.map((ele: any) => {
                 return (
                   <MovieCardLarge data={ele} media_type={type} />
                 )
               })
             }
+            {
+              category === "related" && (categoryData === undefined) && dummyList.map((ele) => (
+                <div className={styles.MovieList}>
+                  <Skeleton height={150} width={100} />
+                  <div>
+                    <Skeleton height={20} width={150} />
+                    <Skeleton height={20} width={150} />
+                    <Skeleton height={20} width={150} />
+                  </div>
+                </div>
+              ))
+            }
           </div>
           <div className={styles.ReviewList}>
             {
-              category === "reviews" && categoryData?.results?.map((ele:any) => {
+              category === "reviews" && categoryData?.results?.map((ele: any) => {
                 const review_date = new Date(ele?.created_at);
                 return (
-                  <div className={`${styles.Review} ${reviewDetail === ele?.id ? styles.ReviewDetail : null}`} onClick={() => setReviewDetail((prev:any) => prev !== ele?.id ? ele?.id : "")}>
+                  <div className={`${styles.Review} ${reviewDetail === ele?.id ? styles.ReviewDetail : null}`} onClick={() => setReviewDetail((prev: any) => prev !== ele?.id ? ele?.id : "")}>
                     <h4>{ele?.author}</h4>
                     <p>{`${review_date.getDate()} ${monthNames[review_date.getMonth()]} ${review_date.getFullYear()}`}</p>
                     <p className={styles.rating}><FaStar /> {ele?.author_details?.rating}</p>
@@ -222,23 +262,43 @@ const MetaDetails = ({ id, type, data }: any) => {
             {
               (category === "reviews" && categoryData?.results?.length === 0) ? <div className={styles.Review}><p>No Reviews Found</p></div> : null
             }
-          </div>
-          <div className={styles.MovieList}>
             {
-              category === "movie" && categoryData?.cast?.map((ele:any) => {
-                return (
-                  <MovieCardLarge data={ele} media_type="movie" />
-                )
-              })
+              category === "reviews" && (categoryData === undefined) && dummyList.map((ele) => (
+                <Skeleton height={200} width={250} />
+              ))
             }
           </div>
           <div className={styles.MovieList}>
             {
-              category === "tv" && categoryData?.cast?.map((ele:any) => {
+              category === "movie" && categoryData?.cast?.map((ele: any) => {
+                return (
+                  <MovieCardLarge data={ele} media_type="movie" />
+                )
+              })
+            }{
+              category === "movie" && (categoryData === undefined) && dummyList.map((ele) => (
+                <div className={styles.MovieList}>
+                  <Skeleton height={150} width={100} />
+                  <Skeleton height={50} width={150} />
+                </div>
+              ))
+            }
+          </div>
+          <div className={styles.MovieList}>
+            {
+              category === "tv" && categoryData?.cast?.map((ele: any) => {
                 return (
                   <MovieCardLarge data={ele} media_type="tv" />
                 )
               })
+            }
+            {
+              category === "tv" && (categoryData === undefined) && dummyList.map((ele) => (
+                <div className={styles.MovieList}>
+                  <Skeleton height={150} width={100} />
+                  <Skeleton height={50} width={150} />
+                </div>
+              ))
             }
           </div>
         </div>

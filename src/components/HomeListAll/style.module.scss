@@ -9,5 +9,20 @@
     width: 100%;
     overflow: auto;
     gap: 1.2rem;
+    .loading{
+      height: 15rem;
+      width: 10rem;
+    }
+  }
+}
+
+@media (max-width: 769px) {
+  .HomeListAll{
+    .HomeListSection{
+      .loading{
+        height: 10rem;
+        width: 7rem;
+      }
+    }
   }
 }

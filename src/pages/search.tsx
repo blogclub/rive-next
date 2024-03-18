@@ -4,16 +4,20 @@ import styles from "@/styles/Search.module.scss";
 import ReactPaginate from "react-paginate"; // for pagination
 import { AiFillLeftCircle, AiFillRightCircle } from "react-icons/ai";
 import MovieCardLarge from '@/components/MovieCardLarge';
+import Skeleton from 'react-loading-skeleton';
 // import MoviePoster from '@/components/MoviePoster';
 
 
+const dummyList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 const SearchPage = ({ categoryType }: any) => {
   const [query, setQuery] = useState("");
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalpages, setTotalpages] = useState(1);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       try {
         const data = await axiosFetch({ requestID: `searchMulti`, page: currentPage, query: query });
         // console.log();
@@ -22,6 +26,7 @@ const SearchPage = ({ categoryType }: any) => {
         }
         setData(data.results);
         setTotalpages(data.total_pages > 500 ? 500 : data.total_pages);
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -45,8 +50,15 @@ const SearchPage = ({ categoryType }: any) => {
           })
         }
         {
-          (query.length > 2 && data?.length) === 0 ?
+          (query.length > 2 && data?.length === 0) ?
             <h1>No Data Found</h1>
+            : null
+        }
+        {
+          (query.length > 2 && data === undefined) ?
+            dummyList.map((ele) => (
+              <Skeleton className={styles.loading} />
+            ))
             : null
         }
       </div>

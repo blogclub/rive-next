@@ -33,7 +33,7 @@ const PersonPage = () => {
         const response = await axiosFetch({ requestID: `${type}Images`, id: id });
         // setImages(response.results);
         let arr: any = [];
-        response.profiles.map((ele: any, i:any) => {
+        response.profiles.map((ele: any, i: any) => {
           if (i < 10) arr.push(process.env.NEXT_PUBLIC_TMBD_IMAGE_URL + ele.file_path);
         });
         if (arr.length === 0) arr.push("/images/logo.svg")
@@ -57,7 +57,7 @@ const PersonPage = () => {
     // detail
     <div className={`${styles.DetailPage} ${styles.PersonPage}`} >
       <div className={styles.biggerPic}>
-        {images.length > 0 ? <Carousel imageArr={images} setIndex={setIndex} mobileHeight="60vh" desktopHeight="95vh" objectFit={"contain"} /> : null}
+        {images.length > 0 ? <Carousel imageArr={images} setIndex={setIndex} mobileHeight="60vh" desktopHeight="95vh" objectFit={"contain"} /> : <Skeleton className={styles.CarouselLoading} />}
         <div className={styles.DetailBanner}>
           <div className={styles.HomeHeroMeta} key={data?.id}>
             <h1>{data?.name || <Skeleton />}</h1>

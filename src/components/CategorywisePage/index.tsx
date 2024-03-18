@@ -6,12 +6,14 @@ import ReactPaginate from "react-paginate"; // for pagination
 import { AiFillLeftCircle, AiFillRightCircle } from "react-icons/ai";
 import { MdFilterAlt, MdFilterAltOff } from "react-icons/md";
 import Filter from '../Filter';
+import Skeleton from 'react-loading-skeleton';
 // import MoviePoster from '@/components/MoviePoster';
 
 function capitalizeFirstLetter(string: string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
+const dummyList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 const CategorywisePage = ({ categoryType }: any) => {
   const CapitalCategoryType = capitalizeFirstLetter(categoryType);
   const [category, setCategory] = useState("latest"); // latest, trending, topRated
@@ -23,8 +25,10 @@ const CategorywisePage = ({ categoryType }: any) => {
   const [filterCountry, setFiltercountry] = useState();
   const [filterYear, setFilterYear] = useState();
   const [trigger, setTrigger] = useState(false);
+  const [loading, setLoading] = useState(true);
   console.log(capitalizeFirstLetter(categoryType));
   useEffect(() => {
+    setLoading(true);
     const fetchData = async () => {
       try {
         let data;
@@ -39,6 +43,7 @@ const CategorywisePage = ({ categoryType }: any) => {
         }
         setData(data.results);
         setTotalpages(data.total_pages > 500 ? 500 : data.total_pages);
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -71,6 +76,11 @@ const CategorywisePage = ({ categoryType }: any) => {
               <MovieCardSmall data={ele} media_type={categoryType} />
             )
           })
+        }
+        {
+          data?.length === 0 && dummyList.map((ele) => (
+            <Skeleton className={styles.loading} />
+          ))
         }
       </div>
       <ReactPaginate

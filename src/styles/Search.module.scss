@@ -35,6 +35,10 @@
     flex-direction: row;
     flex-wrap: wrap;
     gap: 2rem 1rem;
+    .loading{
+      height: 15rem;
+      width: 10rem;
+    }
   }
   .pagination {
     list-style: none;
@@ -130,6 +134,15 @@
       padding: 1rem;
       gap: 1rem 0.5rem;
       margin-bottom: 1.5rem;
+      .loading{
+        height: 10rem;
+        width: 7rem;
+      }
+    }
+    .pagination{
+      max-width: 85vw;
+      margin: 0 auto;
+      flex-wrap: wrap;
     }
   }
 }
