@@ -16,7 +16,7 @@ export default async function axiosFetch({ requestID, id, language = "en-US", pa
   const request = requestID;
   const API_KEY = process.env.NEXT_PUBLIC_TMDB_API_KEY;
   const baseURL = "https://api.themoviedb.org/3";
-  const requests:any = {
+  const requests: any = {
     latestMovie: `${baseURL}/movie/now_playing?language=${language}&page=${page}`, //nowPlayingMovie
     latestTv: `${baseURL}/tv/airing_today?language=${language}&page=${page}`,  // airingTodayTv
     popularMovie: `${baseURL}/movie/popular?language=${language}&page=${page}&sort_by=${sortBy}`,  // current popular, so similar to latestMovie data 
@@ -26,9 +26,11 @@ export default async function axiosFetch({ requestID, id, language = "en-US", pa
     filterMovie: `${baseURL}/discover/movie?with_genres=${genreKeywords}&language=${language}&sort_by=${sortBy}${year != undefined ? "&year=" + year : ""}${country != undefined ? "&with_origin_country=" + country : ""}&page=${page}`,
     filterTv: `${baseURL}/discover/tv?with_genres=${genreKeywords}&language=${language}&sort_by=${sortBy}${year != undefined ? "&year=" + year : ""}${country != undefined ? "&with_origin_country=" + country : ""}&page=${page}`,
     onTheAirTv: `${baseURL}/tv/on_the_air?language=${language}&page=${page}`,
-    trending: `${baseURL}/trending/all/week?language=${language}`,
+    trending: `${baseURL}/trending/all/day?language=${language}`,
     trendingMovie: `${baseURL}/trending/movie/week?language=${language}&page=${page}`,
     trendingTv: `${baseURL}/trending/tv/week?language=${language}&page=${page}`,
+    trendingMovieDay: `${baseURL}/trending/movie/day?language=${language}&page=${page}`,
+    trendingTvDay: `${baseURL}/trending/tv/day?language=${language}&page=${page}`,
     searchMulti: `${baseURL}/search/multi?query=${query}&language=${language}&page=${page}`,
     searchKeyword: `${baseURL}/search/keyword?query=${query}&language=${language}&page=${page}`,
     searchMovie: `${baseURL}/search/movie?query=${query}&language=${language}&page=${page}`,

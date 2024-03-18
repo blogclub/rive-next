@@ -25,7 +25,12 @@ const Watch = () => {
   const STREAM_URL = process.env.NEXT_PUBLIC_STREAM_URL;
   return (
     <div className={styles.watch}>
-      <iframe src={type === "movie" ? `${STREAM_URL}/embed/${id}` : (season === null || season === undefined ? `${STREAM_URL}/embed/${id}` : `${STREAM_URL}/embed/${id}/${season}/${episode}`)} className={styles.iframe} allowFullScreen></iframe>
+
+      {/* <iframe src={type === "movie" ? `${STREAM_URL}/embed/${id}` : (season === null || season === undefined ? `${STREAM_URL}/embed/${id}` : `${STREAM_URL}/embed/${id}/${season}/${episode}`)} className={styles.iframe} allowFullScreen></iframe> */}
+
+      {/* <iframe src={type === "movie" ? `${STREAM_URL}/embed/${type}/${id}` : (season === null || season === undefined ? `${STREAM_URL}/embed/${type}/${id}` : `${STREAM_URL}/embed/${type}/${id}/${season}/${episode}`)} className={styles.iframe} allowFullScreen></iframe> */}
+
+      <iframe src={type === "movie" ? `${STREAM_URL}?video_id=${id}&tmdb=1` : (season === null || season === undefined ? `${STREAM_URL}?video_id=${id}&tmdb=1` : `${STREAM_URL}?video_id=${id}&tmdb=1&s=${season}&e=${episode}`)} className={styles.iframe} allowFullScreen></iframe>
     </div>
   )
 };

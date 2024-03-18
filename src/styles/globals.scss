@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100..700&display=swap');
 :root{
   --ascent-color:gold;
   --bg-color:rgb(27, 25, 25);
@@ -22,7 +23,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: serif;
+  font-family: "Roboto Mono",serif;
   user-select: none;
 }
 a{

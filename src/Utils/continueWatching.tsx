@@ -1,6 +1,6 @@
 // continueWatching :{
 //   movie:[],
-//   tv:["this is going to be episode id not the series id, so we can call this episode"],
+//   tv:["this is going to be episode id not the series id, so we can call this episode. Now this contains the showid"],
 // }
 
 export const getContinueWatching = () => {

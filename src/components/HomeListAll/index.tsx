@@ -20,10 +20,10 @@ const HomeListAll = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const lM = await axiosFetch({ requestID: "latestMovie" });
-        const lT = await axiosFetch({ requestID: "latestTv" });
+        const lM = await axiosFetch({ requestID: "trendingMovie" });
+        const lT = await axiosFetch({ requestID: "trendingTvDay" });
         const pM = await axiosFetch({ requestID: "popularMovie", sortBy: "vote_average.asc" });
-        const pT = await axiosFetch({ requestID: "popularTv", sortBy: "vote_average.asc" });
+        const pT = await axiosFetch({ requestID: "trendingTv", sortBy: "vote_average.asc" });
         setLatestMovie(lM.results);
         setLatestTv(lT.results)
         setPopularMovie(pM.results);

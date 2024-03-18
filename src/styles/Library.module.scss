@@ -1,0 +1,120 @@
+.MoviePage{
+  width: 100vw;
+  min-height: 100vh;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  padding: 1rem 0.5rem;
+  padding-left: 5rem;
+  .category{
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    gap: 1rem;
+    margin-top: 1rem;
+    .filter{
+      position: absolute;
+      right: 0;
+      margin-right: clamp(0.5rem,  7%, 5rem);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      svg{
+        font-size: 1.3rem;
+      }
+    }
+  }
+  .movieList{
+    padding: 3rem;
+    width: 100vw;
+    min-height:100vh ;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 2rem 1rem;
+
+    .loading{
+      height: 15rem;
+      width: 10rem;
+    }
+  }
+  .pagination {
+    list-style: none;
+    // height: 31.5px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2px;
+    cursor: pointer;
+    gap: 0.5rem;
+    font-size: 1.2rem;
+  }
+  .page_item {
+    list-style: none;
+    padding: 2px 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  svg{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    color: var(--primary-2);
+  }
+}
+
+.inactive{
+  cursor: pointer;
+  color:var(--primary-2);
+  fill:var(--primary-2);
+}
+
+.active{
+  cursor: pointer;
+  color: var(--ascent-color) !important;
+  fill: var(--ascent-color) !important;
+}
+
+.paginateActive {
+  background-color: var(--ascent-color);
+  border-radius: 0.5rem;
+  color: var(--primary-1);
+  a{
+    color: var(--primary-1);
+  }
+}
+.disabled{
+  svg{
+    opacity: 0.5 !important;
+    fill: var(--ascent-color);
+  }
+}
+
+@media (max-width: 769px) {
+  .MoviePage{
+    padding-left: unset;
+    padding:1.5rem 1rem;
+    padding-bottom: 5rem;
+    .movieList{
+      padding: 1rem;
+      padding-left: 0.5rem;
+      gap: 1rem 0.5rem;
+      margin-bottom: 1.5rem;
+      .loading{
+        height: 10rem;
+        width: 7rem;
+      }
+    }
+    .pagination{
+      max-width: 85vw;
+      margin: 0 auto;
+      flex-wrap: wrap;
+    }
+  }
+}

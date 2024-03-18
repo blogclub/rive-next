@@ -98,7 +98,7 @@ const MetaDetails = ({ id, type, data }: any) => {
               category === "episodes" && categoryData?.episodes?.map((ele: any) => {
                 return (
                   <div className={`${styles.episode} ${reviewDetail === ele?.id ? styles.ReviewDetail : null}`} onClick={() => setReviewDetail((prev: any) => prev !== ele?.id ? ele?.id : "")}>
-                    <Link href={`/watch?type=tv&id=${ele?.id}`} className={styles.CardSmall}>
+                    <Link href={`/watch?type=tv&id=${ele?.show_id}&season=${ele?.season_number}&episode=${ele?.episode_number}`} className={styles.CardSmall}>
                       <div className={`${styles.img} ${imageLoading ? "skeleton" : null}`}>
                         <AnimatePresence mode="sync">
                           <motion.img
@@ -123,7 +123,7 @@ const MetaDetails = ({ id, type, data }: any) => {
                       <h4>{`EP ${ele.episode_number}`}{`${ele?.name ? " : " + ele?.name : null}`}</h4>
                       <p>{`${ele?.vote_average ? "• " + ele?.vote_average.toFixed(1) : null}`} {ele?.runtime >= 60 ? `• ${Math.floor((ele?.runtime) / 60)}hr ${((ele?.runtime) % 60).toFixed(0)}min` : null}
                         {ele?.runtime < 60 ? `• ${((ele?.runtime) % 60).toFixed(0)}min` : null}</p>
-                      <Link className={`${styles.links} btn`} href={`/watch?type=tv&id=${ele?.id}`}>watch <FaPlay /></Link>
+                      <Link className={`${styles.links} btn`} href={`/watch?type=tv&id=${ele?.show_id}&season=${ele?.season_number}&episode=${ele?.episode_number}`}>watch <FaPlay /></Link>
                       <p>{ele?.overview}</p>
                     </div>
                   </div>
