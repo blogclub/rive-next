@@ -9,7 +9,7 @@ export default function App({ Component, pageProps }: any) {
         <title>Rive Stream</title>
         <meta
           name="description"
-          content="A Movie and TV series streaming service"
+          content="Your Personal Streaming Oasis"
         />
         <meta
           name="keywords"
@@ -17,6 +17,8 @@ export default function App({ Component, pageProps }: any) {
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#000000" />
+        <link rel="icon" href="./images/logo.png" />
+        <link rel="apple-touch-icon" href="./images/logo.png" />
       </Head>
       <Layout>
         <Component {...pageProps} />
