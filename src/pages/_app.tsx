@@ -17,8 +17,8 @@ export default function App({ Component, pageProps }: any) {
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#1b1919" />
-        <link rel="icon" href="./images/logo.png" />
-        <link rel="apple-touch-icon" href="./images/logo.png" />
+        <link rel="icon" href="./images/logo512.png" />
+        <link rel="apple-touch-icon" href="./images/logo512.png" />
       </Head>
       <Layout>
         <Component {...pageProps} />

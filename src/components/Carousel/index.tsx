@@ -81,7 +81,7 @@ const Carousel = ({ imageArr, setIndex, mobileHeight, desktopHeight, objectFit }
 
   return (
     <div className={styles.carousel}>
-      <div className={`${styles.carousel_images} ${imageLoaded ? "skeleton" : null}`}>
+      <div className={`${styles.carousel_images} ${!imageLoaded ? "skeleton" : null}`}>
         <AnimatePresence mode="sync">
           <motion.img
             key={currentIndex}
