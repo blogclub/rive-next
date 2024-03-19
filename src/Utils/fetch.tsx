@@ -26,7 +26,7 @@ export default async function axiosFetch({ requestID, id, language = "en-US", pa
     filterMovie: `${baseURL}/discover/movie?with_genres=${genreKeywords}&language=${language}&sort_by=${sortBy}${year != undefined ? "&year=" + year : ""}${country != undefined ? "&with_origin_country=" + country : ""}&page=${page}`,
     filterTv: `${baseURL}/discover/tv?with_genres=${genreKeywords}&language=${language}&sort_by=${sortBy}${year != undefined ? "&year=" + year : ""}${country != undefined ? "&with_origin_country=" + country : ""}&page=${page}`,
     onTheAirTv: `${baseURL}/tv/on_the_air?language=${language}&page=${page}`,
-    trending: `${baseURL}/trending/all/day?language=${language}`,
+    trending: `${baseURL}/trending/all/day?language=${language}&page=${page}`,
     trendingMovie: `${baseURL}/trending/movie/week?language=${language}&page=${page}`,
     trendingTv: `${baseURL}/trending/tv/week?language=${language}&page=${page}`,
     trendingMovieDay: `${baseURL}/trending/movie/day?language=${language}&page=${page}`,

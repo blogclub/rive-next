@@ -11,27 +11,36 @@ import Skeleton from 'react-loading-skeleton';
 const dummyList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 const SearchPage = ({ categoryType }: any) => {
   const [query, setQuery] = useState("");
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<any>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalpages, setTotalpages] = useState(1);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchData = async (mode: any) => {
       setLoading(true);
+      setData([null, null, null, null, null, null, null, null, null, null])
       try {
-        const data = await axiosFetch({ requestID: `searchMulti`, page: currentPage, query: query });
-        // console.log();
-        if (data.page > data.total_pages) {
-          setCurrentPage(data.total_pages);
+        let data;
+        if (mode) {
+          data = await axiosFetch({ requestID: `searchMulti`, page: currentPage, query: query });
+          // console.log();
+          if (data.page > data.total_pages) {
+            setCurrentPage(data.total_pages);
+          }
+          setTotalpages(data.total_pages > 500 ? 500 : data.total_pages);
+        } else {
+          data = await axiosFetch({ requestID: `trending` });
+          setCurrentPage(1);
+          setTotalpages(1);
         }
         setData(data.results);
-        setTotalpages(data.total_pages > 500 ? 500 : data.total_pages);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
-    if (query.length > 2) fetchData();
+    if (query?.length > 2) fetchData(true);
+    if (query?.length === 0) fetchData(false);
   }, [query, currentPage]);
 
   return (

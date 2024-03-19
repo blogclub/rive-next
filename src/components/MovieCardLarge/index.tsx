@@ -13,6 +13,7 @@ const MovieCardLarge = ({ data, media_type }: any) => {
   const [imageLoading, setImageLoading] = useState(true);
   const [genreListMovie, setGenreListMovie] = useState([]);
   const [genreListTv, setGenreListTv] = useState([]);
+  const [loading, setLoading] = useState(true)
   const year = new Date(data?.release_date).getFullYear();
   const lang = data?.original_language;
   let Genres: Array<string> = [];
@@ -49,12 +50,12 @@ const MovieCardLarge = ({ data, media_type }: any) => {
     fetchData();
   }, [data]);
   return (
-    <Link key={data.id} href={`${data.media_type === "person" ? "/person?id=" + data.id : "/detail?type=" + (data?.media_type || media_type) + "&id=" + data.id}`} className={styles.MovieCardSmall}>
-      <div className={` ${imageLoading ? "skeleton" : null}`}>
+    <Link key={data?.id} href={`${data?.media_type === "person" ? "/person?id=" + data?.id : "/detail?type=" + (data?.media_type || media_type) + "&id=" + data?.id}`} className={styles.MovieCardSmall}>
+      <div className={`${styles.desktopOverflow} ${imageLoading ? "skeleton" : null}`}>
         <AnimatePresence mode="sync">
           <motion.img
-            key={data.id}
-            src={`${((data?.poster_path !== null && data?.poster_path !== undefined) || (data?.profile_path !== null && data?.profile_path !== undefined) || (data?.still_path !== null && data?.still_path !== undefined)) ? process.env.NEXT_PUBLIC_TMBD_IMAGE_URL + (data?.poster_path || data.profile_path || data?.still_path) : "/images/logo.svg"}`}
+            key={data?.id}
+            src={`${((data?.poster_path !== null && data?.poster_path !== undefined) || (data?.profile_path !== null && data?.profile_path !== undefined) || (data?.still_path !== null && data?.still_path !== undefined)) ? (process.env.NEXT_PUBLIC_TMBD_IMAGE_URL + (data?.poster_path || data.profile_path || data?.still_path)) || null : "/images/logo.svg"}`}
             initial={{ opacity: 0 }}
             animate={{
               opacity: imageLoading ? 0 : 1
@@ -63,17 +64,19 @@ const MovieCardLarge = ({ data, media_type }: any) => {
             width="100%"
             exit="exit"
             className={`${styles.img} ${imageLoading ? "skeleton" : null}`}
-            onLoad={() => { setImageLoading(false); }}
+            onLoad={() => { setImageLoading(false); setLoading(false); }}
             loading="lazy"
+            onError={(e) => console.log(e)}
+            alt={data?.id || "sm"}
           // style={!imageLoading ? { opacity: 1 } : { opacity: 0 }}
           />
         </AnimatePresence>
       </div>
       <div className={`${styles.metaData}`}>
-        <h1>{data?.title || data?.name || <Skeleton />}</h1>
-        <p>{capitalizeFirstLetter(data?.media_type || media_type)}{data.vote_average ? ` • ${data.vote_average.toFixed(1)}` : null}{!Number.isNaN(year) ? ` • ${year}` : null} {lang !== undefined ? ` • ${lang.toUpperCase()}` : null}</p>
+        <h1>{data?.title || data?.name || <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}><Skeleton className={`${styles.metaData}`} /><Skeleton className={`${styles.metaData}`} /></div>}</h1>
+        <p>{capitalizeFirstLetter(data?.media_type || media_type)}{data?.vote_average ? ` • ${data?.vote_average.toFixed(1)}` : null}{!Number.isNaN(year) ? ` • ${year}` : null} {lang !== undefined ? ` • ${lang.toUpperCase()}` : null}</p>
         {
-          Genres.join(", ") // || <Skeleton />
+          Genres?.join(", ") // || <Skeleton />
         }
       </div>
     </Link>

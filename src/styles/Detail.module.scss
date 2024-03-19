@@ -70,7 +70,9 @@
       background: var(--primary-1);
       padding: 1rem;
       text-align: center;
-      width: 20rem;
+      // width: 20rem;
+      min-width: 14rem;
+      max-width: 22rem;
       text-overflow: ellipsis;
       overflow: hidden;
       display: flex;
@@ -128,7 +130,7 @@
 
 .PersonPage{
     .HomeHeroMeta{
-        width: 15rem !important;
+        // width: 15rem !important;
         position: relative;
         left: -1rem !important;
     }
@@ -145,16 +147,20 @@
     flex-direction: column;
     .biggerPic{
       flex: 3;
-      max-width: 100%;
-      min-width: 70%;
       margin: 1rem;
       // border-radius: unset;
       margin-bottom: 1rem;
-      min-height: 60vh;    
+      min-height: 60vh;   
+      width: calc(100vw - 2rem); 
       .CarouselLoading{
         height: 60vh;
         width: calc(100vw - 2rem);
       }
+    }
+    .detailBiggerPic{
+      width: 70%;
+      // max-width: 100%;
+      // min-width: 70%;
     }
     .biggerDetail{
       flex: 2;

@@ -17,7 +17,7 @@ const dummyList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 const CategorywisePage = ({ categoryType }: any) => {
   const CapitalCategoryType = capitalizeFirstLetter(categoryType);
   const [category, setCategory] = useState("latest"); // latest, trending, topRated
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<any>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalpages, setTotalpages] = useState(1);
   const [showFilter, setShowFilter] = useState(false);
@@ -30,6 +30,7 @@ const CategorywisePage = ({ categoryType }: any) => {
   useEffect(() => {
     setLoading(true);
     const fetchData = async () => {
+      setData([0, 0, 0, 0, 0, 0, 0, 0, 0])
       try {
         let data;
         if (category === "filter") {
@@ -71,17 +72,17 @@ const CategorywisePage = ({ categoryType }: any) => {
 
       <div className={styles.movieList}>
         {
-          data.map((ele) => {
+          data.map((ele: any) => {
             return (
               <MovieCardSmall data={ele} media_type={categoryType} />
             )
           })
         }
-        {
+        {/* {
           data?.length === 0 && dummyList.map((ele) => (
             <Skeleton className={styles.loading} />
           ))
-        }
+        } */}
       </div>
       <ReactPaginate
         containerClassName={styles.pagination}

@@ -63,6 +63,7 @@
     }
     .img{
       width: 4rem !important;
+      height: 6rem;
       object-fit: cover;
       border-radius: 0.5rem;
     }
@@ -123,7 +124,7 @@
           margin-top: 0;
         }
         .img{
-          height: 10rem;
+          height: 10rem !important;
           width: 10rem !important;
           object-fit: cover;
         }
@@ -173,6 +174,7 @@
       }
       .img{
         width: 3rem !important;
+        height: 4.5rem !important;
       }
       .MovieList,.ReviewList{
         .Review{

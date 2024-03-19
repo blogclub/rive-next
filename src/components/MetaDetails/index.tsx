@@ -192,7 +192,7 @@ const MetaDetails = ({ id, type, data }: any) => {
                       <AnimatePresence mode="sync">
                         <motion.img
                           key={ele?.id}
-                          src={`${(ele?.profile_path !== null && ele?.profile_path !== undefined) ? process.env.NEXT_PUBLIC_TMBD_IMAGE_URL + ele?.profile_path : "/images/logo.svg"}`}
+                          src={`${(ele?.profile_path !== null && ele?.profile_path !== undefined) ? (process.env.NEXT_PUBLIC_TMBD_IMAGE_URL + ele?.profile_path) : "/images/logo.svg"}`}
                           initial={{ opacity: 0 }}
                           animate={{
                             opacity: imageLoading ? 0 : 1

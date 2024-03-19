@@ -14,7 +14,7 @@ const MovieCardSmall = ({ data, media_type }: any) => {
         <AnimatePresence mode="sync">
           <motion.img
             key={data?.id}
-            src={`${(data?.poster_path !== null && data?.poster_path !== undefined) ? process.env.NEXT_PUBLIC_TMBD_IMAGE_URL + data?.poster_path : "/images/logo.svg"}`}
+            src={process.env.NEXT_PUBLIC_TMBD_IMAGE_URL + data?.poster_path || null}
             initial={{ opacity: 0 }}
             animate={{
               opacity: imageLoading ? 0 : 1
@@ -25,11 +25,13 @@ const MovieCardSmall = ({ data, media_type }: any) => {
             className={`${styles.img} ${imageLoading ? "skeleton" : null}`}
             onLoad={() => { setImageLoading(false); }}
             loading="lazy"
+            onError={(e)=>console.log(e)}
+            alt={data?.id || "sm"}
           // style={!imageLoading ? { opacity: 1 } : { opacity: 0 }}
           />
         </AnimatePresence>
       </div>
-      <p>{data?.title || data?.name || <Skeleton />}</p>
+      <p>{data?.title || data?.name}</p>
     </Link>
   )
 }

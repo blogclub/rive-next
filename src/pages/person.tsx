@@ -56,13 +56,13 @@ const PersonPage = () => {
     // carousel
     // detail
     <div className={`${styles.DetailPage} ${styles.PersonPage}`} >
-      <div className={styles.biggerPic}>
+      <div className={`${styles.biggerPic} ${styles.detailBiggerPic}`}>
         {images.length > 0 ? <Carousel imageArr={images} setIndex={setIndex} mobileHeight="60vh" desktopHeight="95vh" objectFit={"contain"} /> : <Skeleton className={styles.CarouselLoading} />}
         <div className={styles.DetailBanner}>
           <div className={styles.HomeHeroMeta} key={data?.id}>
             <h1>{data?.name || <Skeleton />}</h1>
             <div className={styles.HomeHeroMetaRow2} >
-              <p className={styles.type}>{data?.known_for_department || <Skeleton />}</p>
+              <p className={styles.type}>{data?.known_for_department}</p>
               {data?.homepage !== null ? <Link href={data?.homepage || "#"} target="_blank"><CgWebsite /></Link> : null}
               {data ?
                 <>

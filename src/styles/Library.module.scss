@@ -13,18 +13,6 @@
     flex-direction: row;
     gap: 1rem;
     margin-top: 1rem;
-    .filter{
-      position: absolute;
-      right: 0;
-      margin-right: clamp(0.5rem,  7%, 5rem);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 0.5rem;
-      svg{
-        font-size: 1.3rem;
-      }
-    }
   }
   .movieList{
     padding: 3rem;
@@ -35,6 +23,10 @@
     flex-direction: row;
     flex-wrap: wrap;
     gap: 2rem 1rem;
+    color: var(--primary-2);
+    svg{
+      cursor: pointer;
+    }
 
     .loading{
       height: 15rem;
@@ -60,13 +52,13 @@
     justify-content: center;
     align-items: center;
   }
-  svg{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 2rem;
-    color: var(--primary-2);
-  }
+  // svg{
+  //   display: flex;
+  //   justify-content: center;
+  //   align-items: center;
+  //   font-size: 2rem;
+  //   color: var(--primary-2);
+  // }
 }
 
 .inactive{
@@ -106,6 +98,10 @@
       padding-left: 0.5rem;
       gap: 1rem 0.5rem;
       margin-bottom: 1.5rem;
+      svg{
+        margin-top: 0.5rem;
+        cursor: pointer;
+      }
       .loading{
         height: 10rem;
         width: 7rem;

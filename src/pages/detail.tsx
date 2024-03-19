@@ -97,7 +97,7 @@ const DetailPage = () => {
           <div className={styles.HomeHeroMeta}>
             <h1>{data?.title || data?.name || <Skeleton />}</h1>
             <div className={styles.HomeHeroMetaRow2} >
-              <p className={styles.type}>{data ? (type == "movie" ? "MOVIE" : "SHOW") : <Skeleton />}</p>
+              <p className={styles.type}>{data ? (type == "movie" ? "MOVIE" : "SHOW") :null}</p>
               {data ?
                 <>
                   <Link className={styles.links} href={`/watch?type=${type}&id=${data?.id}`}>watch <FaPlay className={styles.IconsMobileNone} /></Link>
