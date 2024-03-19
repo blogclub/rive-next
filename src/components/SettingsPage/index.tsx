@@ -80,7 +80,7 @@ const SettingsPage = ({ mode, theme, ascent_color, setMode, setTheme, setAscent_
         </div>
         <h1>Links</h1>
         <div className={styles.group}>
-          <Link href={"https://github.com/Devolopabile/rive-next"}>
+          <Link href={"https://github.com/Developabile/rive-next"}>
             <FaGithub /> Github
           </Link>
           <Link href={"/"}>

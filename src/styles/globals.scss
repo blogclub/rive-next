@@ -23,11 +23,11 @@
 @media (prefers-color-scheme: light) {
   :root{
     --ascent-color:gold;
-    --bg-color:rgb(209, 190, 190);
+    --bg-color:#f4f7fe;
     --bg-gradient:rgba(209, 190, 190, 0.7);
     --primary-1:rgb(255, 255, 255);
-    --primary-2:rgb(87, 107, 135);
-    --primary-3:rgb(164, 179, 201);
+    --primary-2:#64748b;
+    --primary-3:#52525b;
     --primary-4:black;
   }
 }
@@ -43,11 +43,11 @@
 }
 .light{
   // --ascent-color:gold;
-  --bg-color:rgb(209, 190, 190);
+  --bg-color:#f4f7fe;
   --bg-gradient:rgba(209, 190, 190, 0.7);
-  --primary-1:rgb(227, 227, 227);
-  --primary-2:rgb(47, 58, 73);
-  --primary-3:rgb(0, 0, 0);
+  --primary-1:rgb(255, 255, 255);
+  --primary-2:#64748b;
+  --primary-3:#52525b;
   --primary-4:black;
 }
 
