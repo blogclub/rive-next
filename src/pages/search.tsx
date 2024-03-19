@@ -52,7 +52,7 @@ const SearchPage = ({ categoryType }: any) => {
       {query.length > 2 ? <h1>showing result for <span>{query}</span></h1> : null}
       <div className={styles.movieList}>
         {
-          data.map((ele) => {
+          data.map((ele: any) => {
             return (
               <MovieCardLarge data={ele} media_type={categoryType} />
             )

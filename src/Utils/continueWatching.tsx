@@ -12,10 +12,10 @@ export const setContinueWatching = ({ type, id }: any) => {
   var values = getContinueWatching() || { movie: [], tv: [] };
   if (!values[type]?.includes(id)) {
     if (values[type]?.length >= 20) values[type]?.pop();
-    values[type] = values[type].reverse();
+    values[type] = values[type]?.reverse();
     values[type]?.push(id);
     // if (values[type]?.length > 20) values[type].shift();
-    values[type] = values[type].reverse();
+    values[type] = values[type]?.reverse();
     localStorage.setItem("RiveStreamContinueWatching", JSON.stringify(values));
   }
   // special for continue watching, elements already present are removed then added at the very begining of the list
