@@ -5,12 +5,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  .loader{
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    z-index: 0;
+  }
   .iframe{
     height: 100%;
     width: 100%;
     border: none;
     outline: none;
     overflow: hidden;
+    z-index: 1;
     ::-webkit-scrollbar{
       display: none !important;
     }
@@ -28,6 +35,7 @@
     border-radius: 0.5rem;
     margin: 1rem auto;
     line-height: 1rem;
+    z-index: 2;
     // &[selected="true"]{
     //   color: var(--ascent-color);
     // }

@@ -97,10 +97,10 @@ const DetailPage = () => {
           <div className={styles.HomeHeroMeta}>
             <h1>{data?.title || data?.name || <Skeleton />}</h1>
             <div className={styles.HomeHeroMetaRow2} >
-              <p className={styles.type}>{data ? (type == "movie" ? "MOVIE" : "SHOW") :null}</p>
+              <p className={styles.type}>{data ? (type == "movie" ? "MOVIE" : "SHOW") : null}</p>
               {data ?
                 <>
-                  <Link className={styles.links} href={`/watch?type=${type}&id=${data?.id}`}>watch <FaPlay className={styles.IconsMobileNone} /></Link>
+                  <Link className={styles.links} href={`${type === "movie" ? `/watch?type=${type}&id=${data?.id}` : `/watch?type=${type}&id=${data?.id}&season=1&episode=1`}`}>watch <FaPlay className={styles.IconsMobileNone} /></Link>
                   {
                     trailer && <Link className={styles.links} href={`https://youtube.com/watch?v=${trailer.key}`} target="_blank">trailer <FaYoutube className={styles.IconsMobileNone} /></Link>
                   }
