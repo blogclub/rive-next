@@ -7,9 +7,11 @@ import Carousel from "../Carousel";
 import Link from "next/link";
 import { BsBookmarkPlus, BsFillBookmarkCheckFill, BsShare } from "react-icons/bs";
 import { FaInfo, FaPlay } from "react-icons/fa";
-import { setBookmarks, checkBookmarks, removeBookmarks } from "@/Utils/bookmark";
+import { setBookmarks, checkBookmarks, removeBookmarks, getBookmarks } from "@/Utils/bookmark";
 import { navigatorShare } from "@/Utils/share";
 import Skeleton from "react-loading-skeleton";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "@/Utils/firebase";
 
 const externalImageLoader = ({ src }: { src: string }) =>
   `${process.env.NEXT_PUBLIC_TMBD_IMAGE_URL}${src}`;
@@ -19,7 +21,9 @@ const HomeHero = () => {
   const [images, setImages] = useState<any>([]);
   const [loading, setLoading] = useState<any>(true);
   const [index, setIndex] = useState(0);
-  const [bookmarked, setBookmarked] = useState(false);
+  const [bookmarked, setBookmarked] = useState<any>(false);
+  const [user, setUser] = useState<any>();
+  const [bookmarkList, setBookmarkList] = useState<any>();
   console.log({ index });
   useEffect(() => {
     setLoading(true);
@@ -39,21 +43,36 @@ const HomeHero = () => {
       }
     };
     fetchData();
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const userID = user.uid;
+        setUser(userID);
+        // setBookmarkList(await getBookmarks({ userId: userID }));
+        // setBookmarkList(getBookmarks(userID));
+        setLoading(false);
+      } else {
+        setLoading(true);
+      }
+    });
   }, []);
 
   useEffect(() => {
-    if (data[index] !== undefined && data[index] !== null) {
-      setBookmarked(checkBookmarks({ type: data[index].media_type, id: data[index].id }));
-      console.log(checkBookmarks({ type: data[index].media_type, id: data[index].id }));
+    const check = async () => {
+      if (data[index] !== undefined && data[index] !== null) {
+        setBookmarked(await checkBookmarks({ userId: user, type: data[index].media_type, id: data[index].id }));
+      }
     }
-  }, [index, data]);
+    check();
+  }, [index, data, user]);
 
   const handleBookmarkAdd = () => {
-    setBookmarks({ type: data[index]?.media_type, id: data[index].id });
+    console.log({ user });
+
+    setBookmarks({ userId: user, type: data[index]?.media_type, id: data[index].id });
     setBookmarked(!bookmarked);
   }
   const handleBookmarkRemove = () => {
-    removeBookmarks({ type: data[index]?.media_type, id: data[index].id });
+    removeBookmarks({ userId: user, type: data[index]?.media_type, id: data[index].id });
     setBookmarked(!bookmarked);
   }
   const handleShare = () => {

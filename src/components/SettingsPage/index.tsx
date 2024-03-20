@@ -4,21 +4,25 @@ import Link from 'next/link';
 import { FaGithub, FaGlobe } from 'react-icons/fa';
 import { getSettings, setSettings } from '@/Utils/settings';
 import { usePathname } from 'next/navigation';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from '@/Utils/firebase';
+import { logoutUser } from '@/Utils/firebaseUser';
 
 const SettingsPage = ({ mode, theme, ascent_color, setMode, setTheme, setAscent_color }: any) => {
-  // const [mode, setMode] = useState("system");
-  // const [theme, setTheme] = useState("liquidate");
-  // const [ascent_color, setAscent_color] = useState("gold");
-  // const [settingCurrent, setCurrentSetting] = useState({ mode: "system", theme: "liquidate", ascent_color: "gold" });
-  // useEffect(() => {
-  //   const values = getSettings();
-  //   console.log({ values });
-  //   if (values !== null) {
-  //     setMode(values?.mode);
-  //     setTheme(values?.theme);
-  //     setAscent_color(values?.ascent_color);
-  //   }
-  // }, []);
+  const [user, setUser] = useState<any>(false);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      // console.log({ user });
+      if (user) {
+        setUser(user);
+        setLoading(false);
+      } else {
+        setUser(false);
+        setLoading(false);
+      }
+    });
+  }, []);
   const handleSelect = ({ type, value }: any) => {
     const prevVal = { mode, theme, ascent_color };
     if (type === "mode") setSettings({ values: { ...prevVal, mode: value } });
@@ -34,13 +38,22 @@ const SettingsPage = ({ mode, theme, ascent_color, setMode, setTheme, setAscent_
       <div className={styles.settings}>
         <h1>Account</h1>
         {
-          <div className={styles.group}>
-            <>
-              <Link href="/login">Login</Link>
-              <Link href="/signup">Signup</Link>
-            </>
-            <h4 className={styles.profileCard}>Login to syc to cloud</h4>
-          </div>
+          user ?
+            <div className={styles.group}>
+              <>
+                <p className={styles.logout} onClick={() => logoutUser()}>Logout</p>
+                {/* <Link href="/signup">Signup</Link> */}
+              </>
+              <h4 className={styles.profileCard}>Hi There!</h4>
+            </div>
+            :
+            <div className={styles.group}>
+              <>
+                <Link href="/login">Login</Link>
+                <Link href="/signup">Signup</Link>
+              </>
+              <h4 className={styles.profileCard}>Login to syc to cloud</h4>
+            </div>
         }
         <h1>Appearence</h1>
         <div className={styles.group}>

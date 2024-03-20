@@ -5,6 +5,12 @@
   overflow-x: hidden;
   padding-left: 5rem;
   // font-size: 1.2rem;
+  h4{
+    color: var(--primary-2);
+  }
+  .highlight{
+    color: var(--primary-3);
+  }
   .logo{
     width: clamp(20rem, calc(100vw - 2rem),40rem);
     position: absolute;
@@ -23,7 +29,7 @@
     }
   }
   .settings{
-    // height: 100%;
+    max-height: 100%;
     width: clamp(20rem, calc(100vw - 2rem),35rem);
     // background: red; 
     display: flex;
@@ -53,7 +59,7 @@
           outline: none;
           border: 1px solid var(--primary-2);
           border-radius: 0.5rem;
-          margin: 1rem 0;
+          margin: 0rem 0;
           // span{
           //   height: 5rem !important;
           //   width: 5rem !important;
@@ -69,8 +75,26 @@
         justify-content: flex-start;
         align-items: center;
         gap: 1rem;
-        display: inline-block;
-        width: 3rem;
+        display: flex;
+        width: 7rem;
+      }
+      .logout{
+        color: var(--primary-2);
+        cursor: pointer;
+      }
+    }
+    .group2{
+      @extend .group;
+      color: var(--primary-2);
+      input,select,button{
+        padding: 0.5rem 1rem;
+        outline: none;
+        border: 1px solid var(--primary-2);
+        border-radius: 0.5rem;
+        width: clamp(15rem,50%,20rem) ;
+        background: var(--primary-1);
+        color: var(--primary-3);
+        cursor: pointer;
       }
     }
     .profileCard{
@@ -90,6 +114,13 @@
       }
     }
   }
+}
+
+.authPage{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .hide{

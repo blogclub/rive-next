@@ -11,6 +11,9 @@ import { BsBookmarkPlus, BsFillBookmarkCheckFill, BsShare } from "react-icons/bs
 import { FaPlay, FaYoutube } from "react-icons/fa";
 import { setBookmarks, checkBookmarks, removeBookmarks } from "@/Utils/bookmark";
 import { navigatorShare } from "@/Utils/share";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "@/Utils/firebase";
+import { toast } from "sonner";
 
 const DetailPage = () => {
   const params = useSearchParams();
@@ -24,6 +27,7 @@ const DetailPage = () => {
   const [bookmarked, setBookmarked] = useState(false);
   const [trailer, setTrailer] = useState<any>("");
   const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState<any>();
 
   useEffect(() => {
     setLoading(true);
@@ -63,18 +67,37 @@ const DetailPage = () => {
   }, [params, id]);
 
   useEffect(() => {
-    if (data !== undefined && data !== null) {
-      setBookmarked(checkBookmarks({ type: type, id: data.id }));
-      console.log(checkBookmarks({ type: type, id: data.id }));
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const userID = user.uid;
+        setUser(userID);
+        // setIds(await getBookmarks(userID)?.movie)
+        setLoading(false);
+      } else {
+        setLoading(true);
+      }
+    });
+  }, [])
+
+  useEffect(() => {
+    const fetch = async () => {
+      if (data !== undefined && data !== null) {
+        if (user !== undefined && user !== null)
+          setBookmarked(await checkBookmarks({ userId: user, type: type, id: data.id }));
+        else
+          setBookmarked(await checkBookmarks({ userId: null, type: type, id: data.id }));
+        // console.log(checkBookmarks({ userId: user, type: type, id: data.id }));
+      }
     }
-  }, [index, data]);
+    fetch();
+  }, [index, data, user]);
 
   const handleBookmarkAdd = () => {
-    setBookmarks({ type: type, id: data.id });
+    setBookmarks({ userId: user, type: type, id: data.id });
     setBookmarked(!bookmarked);
   }
   const handleBookmarkRemove = () => {
-    removeBookmarks({ type: type, id: data.id });
+    removeBookmarks({ userId: user, type: type, id: data.id });
     setBookmarked(!bookmarked);
   }
   const handleShare = () => {

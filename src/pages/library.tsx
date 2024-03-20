@@ -9,6 +9,8 @@ import Skeleton from 'react-loading-skeleton';
 import { getBookmarks, removeBookmarks } from '@/Utils/bookmark';
 import { getContinueWatching, removeContinueWatching } from '@/Utils/continueWatching';
 import { BsFillBookmarkXFill } from 'react-icons/bs';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from '@/Utils/firebase';
 // import MoviePoster from '@/components/MoviePoster';
 
 function capitalizeFirstLetter(string: string) {
@@ -23,6 +25,20 @@ const Library = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [trigger, setTrigger] = useState(true);
+  const [user, setUser] = useState<any>();
+
+  useEffect(() => {
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const userID = user.uid;
+        setUser(userID);
+        // setIds(await getBookmarks(userID)?.movie)
+        setLoading(false);
+      } else {
+        setLoading(true);
+      }
+    });
+  }, [])
   useEffect(() => {
     setLoading(true);
     const fetchData = async () => {
@@ -45,18 +61,29 @@ const Library = () => {
   useEffect(() => {
     // fetch bookmarks
     // console.log(getBookmarks());
-
-    if (category === "watchlist") {
-      subCategory === "movie" ? setIds(getBookmarks()?.movie) : setIds(getBookmarks()?.tv);
+    const fetch = async () => {
+      if (category === "watchlist") {
+        if (user !== null && user !== undefined)
+          getBookmarks(user).then((res: any) => {
+            subCategory === "movie" ? setIds(res?.movie) : setIds(res?.tv);
+          })
+        else {
+          subCategory === "movie" ? setIds(getBookmarks(null)?.movie) : setIds(getBookmarks(null)?.tv);
+        }
+      }
+      else if (category === "continueWatching") {
+        subCategory === "movie" ? setIds(getContinueWatching()?.movie) : setIds(getContinueWatching()?.tv);
+      }
     }
-    else if (category === "continueWatching") {
-      subCategory === "movie" ? setIds(getContinueWatching()?.movie) : setIds(getContinueWatching()?.tv);
-    }
-  }, [category, subCategory, trigger]);
+    if (user !== null) fetch();
+  }, [category, subCategory, trigger, user]);
 
-  const handleWatchlistremove = ({ type, id }: any) => {
-    removeBookmarks({ type: type, id: id });
-    setTrigger(!trigger);
+  const handleWatchlistremove = async ({ type, id }: any) => {
+    if (user !== null && user !== undefined) removeBookmarks({ userId: user, type: type, id: id })?.then((res) => setTrigger(!trigger));
+    else {
+      removeBookmarks({ userId: null, type: type, id: id })
+      setTrigger(!trigger);
+    }
   }
   return (
     <div className={styles.MoviePage}>
