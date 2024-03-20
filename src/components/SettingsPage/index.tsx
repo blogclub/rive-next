@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { FaGithub, FaGlobe } from 'react-icons/fa';
 import { getSettings, setSettings } from '@/Utils/settings';
 import { usePathname } from 'next/navigation';
+
 const SettingsPage = ({ mode, theme, ascent_color, setMode, setTheme, setAscent_color }: any) => {
   // const [mode, setMode] = useState("system");
   // const [theme, setTheme] = useState("liquidate");
@@ -32,10 +33,15 @@ const SettingsPage = ({ mode, theme, ascent_color, setMode, setTheme, setAscent_
       </div>
       <div className={styles.settings}>
         <h1>Account</h1>
-        <div className={styles.group}>
-          <Link href="/login">Login</Link>
-          <Link href="/signup">Signup</Link>
-        </div>
+        {
+          <div className={styles.group}>
+            <>
+              <Link href="/login">Login</Link>
+              <Link href="/signup">Signup</Link>
+            </>
+            <h4 className={styles.profileCard}>Login to syc to cloud</h4>
+          </div>
+        }
         <h1>Appearence</h1>
         <div className={styles.group}>
           <div>
@@ -57,18 +63,22 @@ const SettingsPage = ({ mode, theme, ascent_color, setMode, setTheme, setAscent_
             <label htmlFor="ascent">Ascent Color</label>
             <select name="ascent" id="ascent" value={ascent_color} onChange={(e) => { setAscent_color(e.target.value); handleSelect({ type: "ascent_color", value: e.target.value }) }}>
               <option value="gold" defaultChecked>Gold</option>
-              <option value="yellow">Yellow</option>
-              <option value="green">Green</option>
-              <option value="red">Red</option>
-              <option value="#0693E3">Blue</option>
-              <option value="#8ED1FC">Sky Blue</option>
-              <option value="black">Black</option>
-              <option value="pink">Pink</option>
-              <option value="hotpink">Hotpink</option>
-              <option value="wheat">Wheat</option>
-              <option value="orange">Orange</option>
-              <option value="#ABB8C3">Gray</option>
-              <option value="#9900EF">Purple</option>
+              <option value="#f44336">Red</option>
+              <option value="#e91e63">Pink</option>
+              <option value="#9c27b0">Purple</option>
+              <option value="#673ab7">Deep Purple</option>
+              <option value="#3f51b5">Indigo</option>
+              <option value="#2196f3">Blue</option>
+              <option value="#03a9f4">Light Blue</option>
+              <option value="#00bcd4">Cyan</option>
+              <option value="#009688">Teal</option>
+              <option value="#4caf50">Green</option>
+              <option value="#8bc34a">Light Green</option>
+              <option value="#ffeb3b">Yellow</option>
+              <option value="#ffc107">Amber</option>
+              <option value="#ff9800">Orange</option>
+              <option value="#ff5722">Deep Orange</option>
+              <option value="#795548">Brown</option>
             </select>
           </div>
         </div>
