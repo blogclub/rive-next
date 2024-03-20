@@ -16,7 +16,7 @@ const Navbar = ({ children }: any) => {
     else
       setPathname(path);
     console.log(params.get("type"));
-  }, [path,params])
+  }, [path, params])
   return (
     <div className={styles.navbar} >
       <Link href="/">
@@ -35,7 +35,7 @@ const Navbar = ({ children }: any) => {
         {pathname === "/library" ? <IoLibrary className={styles.active} /> : <IoLibraryOutline className={styles.inactive} />}
       </Link>
       <Link href="/settings">
-        {pathname === "/settings" ? <IoSettings className={styles.active} /> : <IoSettingsOutline className={styles.inactive} />}
+        {pathname === "/settings" || pathname === "/signup" || pathname === "/login" ? <IoSettings className={styles.active} /> : <IoSettingsOutline className={styles.inactive} />}
       </Link>
     </div>
   );
