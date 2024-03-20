@@ -1,6 +1,7 @@
 import "@/styles/globals.scss";
 import Layout from "@/components/Layout";
 import Head from "next/head";
+import { Toaster } from 'sonner';
 
 export default function App({ Component, pageProps }: any) {
   return (
@@ -21,6 +22,9 @@ export default function App({ Component, pageProps }: any) {
         <link rel="apple-touch-icon" href="./images/logo512.png" />
       </Head>
       <Layout>
+        <Toaster toastOptions={{
+          className: 'sooner-toast',
+        }} />
         <Component {...pageProps} />
       </Layout>
     </>
