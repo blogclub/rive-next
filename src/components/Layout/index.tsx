@@ -11,6 +11,7 @@ const Layout = ({ children }: any) => {
   const [theme, setTheme] = useState("system");
   const [mode, setMode] = useState("liquidate");
   const [ascent_color, setAscent_color] = useState("gold");
+  const [themeColor, setThemeColor] = useState<any>();
   useEffect(() => {
     const values = getSettings();
     if (values !== null) {
@@ -19,6 +20,12 @@ const Layout = ({ children }: any) => {
       setAscent_color(values?.ascent_color);
     }
     console.log({ values });
+    const prefersDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const themeColor = prefersDarkMode ? '#1b1919' : '#f4f7fe';
+    setThemeColor(themeColor);
+    console.log({ prefersDarkMode });
+    // const metaThemeColor = document.querySelector("meta[name=theme-color]");
+    // metaThemeColor?.setAttribute("content", themeColor);
   }, []);
   useEffect(() => {
     document.documentElement.style.setProperty("--ascent-color", ascent_color);
@@ -32,6 +39,9 @@ const Layout = ({ children }: any) => {
       </Head>}
       {mode === "light" && <Head>
         <meta name="theme-color" content="#f4f7fe" />
+      </Head>}
+      {mode === "system" && <Head>
+        <meta name="theme-color" content={`${themeColor}`} />
       </Head>}
       <div className={`${styles.background} ${mode === "dark" && "dark"} ${mode === "light" && "light"}`} >
         <Navbar />
