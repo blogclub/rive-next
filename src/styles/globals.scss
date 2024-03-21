@@ -137,6 +137,15 @@ h1 {
   color: var(--primary-3);
   border: 1px solid var(--primary-2);
 }
+.react-tooltip,
+.tooltip {
+  background-color: var(--bg-gradient) !important;
+  background: var(--bg-gradient) !important;
+  color: var(--primary-3);
+  border-radius: 0.3rem !important;
+  z-index: 5;
+  // border: 1px solid var(--bg-gradient);
+}
 
 @media (max-width: 769px) {
   * {

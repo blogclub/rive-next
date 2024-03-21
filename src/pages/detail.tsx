@@ -145,7 +145,11 @@ const DetailPage = () => {
         }
         <div className={styles.DetailBanner}>
           <div className={styles.poster}>
-            <div className={styles.rating}>
+            <div
+              className={styles.rating}
+              data-tooltip-id="tooltip"
+              data-tooltip-content="Rating"
+            >
               {data?.vote_average?.toFixed(1)}
             </div>
             <MoviePoster data={data} />
@@ -160,6 +164,8 @@ const DetailPage = () => {
                 <>
                   <Link
                     className={styles.links}
+                    data-tooltip-id="tooltip"
+                    data-tooltip-content="Watch Online"
                     href={`${type === "movie" ? `/watch?type=${type}&id=${data?.id}` : `/watch?type=${type}&id=${data?.id}&season=1&episode=1`}`}
                   >
                     watch <FaPlay className={styles.IconsMobileNone} />
@@ -167,6 +173,8 @@ const DetailPage = () => {
                   {trailer && (
                     <Link
                       className={styles.links}
+                      data-tooltip-id="tooltip"
+                      data-tooltip-content="Watch Trailer"
                       href={`https://youtube.com/watch?v=${trailer.key}`}
                       target="_blank"
                     >
@@ -177,16 +185,22 @@ const DetailPage = () => {
                     <BsFillBookmarkCheckFill
                       className={styles.HomeHeroIcons}
                       onClick={handleBookmarkRemove}
+                      data-tooltip-id="tooltip"
+                      data-tooltip-content="Remove from Watchlist"
                     />
                   ) : (
                     <BsBookmarkPlus
                       className={styles.HomeHeroIcons}
                       onClick={handleBookmarkAdd}
+                      data-tooltip-id="tooltip"
+                      data-tooltip-content="Add to Watchlist"
                     />
                   )}
                   <BsShare
                     className={styles.HomeHeroIcons}
                     onClick={handleShare}
+                    data-tooltip-id="tooltip"
+                    data-tooltip-content="Share"
                   />
                 </>
               ) : (

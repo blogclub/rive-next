@@ -140,7 +140,12 @@ const SettingsPage = ({
         </div>
         <h1>App Center</h1>
         <div className={styles.group}>
-          <p className={styles.logout} onClick={handleDownload}>
+          <p
+            className={styles.logout}
+            onClick={handleDownload}
+            data-tooltip-id="tooltip"
+            data-tooltip-content="Download PWA"
+          >
             Download
           </p>
           <Link href="mailto:kumarashishranjan4971@hotmail.com">

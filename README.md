@@ -35,7 +35,7 @@ Your Personal Streaming Oasis
 - Sync to cloud option
 - Login/ Signup for cloud syncing
 - Great Customization in settings
-- Lovely UI/UX
+- Great UI/UX
 
 ## Tech Stack
 

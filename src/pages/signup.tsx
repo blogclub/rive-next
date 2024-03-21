@@ -18,7 +18,12 @@ const SignupPage = () => {
   return (
     <div className={`${styles.settingsPage} ${styles.authPage}`}>
       <div className={styles.logo}>
-        <img src="/images/logo.svg" alt="logo" />
+        <img
+          src="/images/logo.svg"
+          alt="logo"
+          data-tooltip-id="tooltip"
+          data-tooltip-content="Rive"
+        />
         <p>Your Personal Streaming Oasis</p>
       </div>
       <div className={styles.settings}>

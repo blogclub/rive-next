@@ -30,42 +30,62 @@ const Navbar = ({ children }: any) => {
   }, [path, params]);
   return (
     <div className={styles.navbar}>
-      <Link href="/">
+      <Link href="/" data-tooltip-id="tooltip" data-tooltip-content="Home">
         {pathname === "/" ? (
           <AiFillHome className={styles.active} />
         ) : (
           <AiOutlineHome className={styles.inactive} />
         )}
       </Link>
-      <Link href="/search">
+      <Link
+        href="/search"
+        data-tooltip-id="tooltip"
+        data-tooltip-content="Search, use CRTL+K as shortcut"
+      >
         {pathname === "/search" ? (
           <IoSearch className={styles.active} />
         ) : (
           <IoSearchOutline className={styles.inactive} />
         )}
       </Link>
-      <Link href="/movie">
+      <Link
+        href="/movie"
+        data-tooltip-id="tooltip"
+        data-tooltip-content="Movies"
+      >
         {pathname === "/movie" ? (
           <AiFillPlayCircle className={styles.active} />
         ) : (
           <AiOutlinePlayCircle className={styles.inactive} />
         )}
       </Link>
-      <Link href="/tv">
+      <Link
+        href="/tv"
+        data-tooltip-id="tooltip"
+        data-tooltip-content="TV shows"
+      >
         {pathname === "/tv" ? (
           <PiTelevisionFill className={styles.active} />
         ) : (
           <PiTelevisionLight className={styles.inactive} />
         )}
       </Link>
-      <Link href="/library">
+      <Link
+        href="/library"
+        data-tooltip-id="tooltip"
+        data-tooltip-content="Library"
+      >
         {pathname === "/library" ? (
           <IoLibrary className={styles.active} />
         ) : (
           <IoLibraryOutline className={styles.inactive} />
         )}
       </Link>
-      <Link href="/settings">
+      <Link
+        href="/settings"
+        data-tooltip-id="tooltip"
+        data-tooltip-content="Settings"
+      >
         {pathname === "/settings" ||
         pathname === "/signup" ||
         pathname === "/login" ? (

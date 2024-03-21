@@ -136,12 +136,16 @@ const HomeHero = () => {
               <Link
                 className={styles.links}
                 href={`/watch?type=${data[index]?.media_type}&id=${data[index]?.id}`}
+                data-tooltip-id="tooltip"
+                data-tooltip-content="Watch Online"
               >
                 watch <FaPlay />
               </Link>
               <Link
                 className={styles.links}
                 href={`/detail?type=${data[index]?.media_type}&id=${data[index]?.id}`}
+                data-tooltip-id="tooltip"
+                data-tooltip-content="Know More"
               >
                 {" "}
                 detail{" "}
@@ -151,14 +155,23 @@ const HomeHero = () => {
                 <BsFillBookmarkCheckFill
                   className={styles.HomeHeroIcons}
                   onClick={handleBookmarkRemove}
+                  data-tooltip-id="tooltip"
+                  data-tooltip-content="Remove from Watchlist"
                 />
               ) : (
                 <BsBookmarkPlus
                   className={styles.HomeHeroIcons}
                   onClick={handleBookmarkAdd}
+                  data-tooltip-id="tooltip"
+                  data-tooltip-content="Add to Watchlist"
                 />
               )}
-              <BsShare className={styles.HomeHeroIcons} onClick={handleShare} />
+              <BsShare
+                className={styles.HomeHeroIcons}
+                onClick={handleShare}
+                data-tooltip-id="tooltip"
+                data-tooltip-content="Share"
+              />
             </>
           ) : (
             <div>

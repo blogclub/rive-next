@@ -3,6 +3,8 @@ import Layout from "@/components/Layout";
 import Head from "next/head";
 import { Toaster } from "sonner";
 import "@/styles/checkbox.scss";
+import "react-tooltip/dist/react-tooltip.css";
+import { Tooltip } from "react-tooltip";
 
 export default function App({ Component, pageProps }: any) {
   return (
@@ -33,6 +35,7 @@ export default function App({ Component, pageProps }: any) {
             className: "sooner-toast",
           }}
         />
+        <Tooltip id="tooltip" className="react-tooltip" />
         <Component {...pageProps} />
       </Layout>
     </>

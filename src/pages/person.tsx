@@ -78,13 +78,22 @@ const PersonPage = () => {
             <div className={styles.HomeHeroMetaRow2}>
               <p className={styles.type}>{data?.known_for_department}</p>
               {data?.homepage !== null ? (
-                <Link href={data?.homepage || "#"} target="_blank">
+                <Link
+                  href={data?.homepage || "#"}
+                  target="_blank"
+                  data-tooltip-id="tooltip"
+                  data-tooltip-content="Homepage"
+                >
                   <CgWebsite />
                 </Link>
               ) : null}
               {data ? (
                 <>
-                  <BsShare onClick={handleShare} />
+                  <BsShare
+                    onClick={handleShare}
+                    data-tooltip-id="tooltip"
+                    data-tooltip-content="Share"
+                  />
                 </>
               ) : (
                 <div>

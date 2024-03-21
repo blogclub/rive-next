@@ -145,6 +145,8 @@ const Library = () => {
                   <MovieCardSmall data={ele} media_type={subCategory} />
                   <BsFillBookmarkXFill
                     className={styles.bookmarkIcon}
+                    data-tooltip-id="tooltip"
+                    data-tooltip-content="Remove from Watchlist"
                     onClick={() =>
                       handleWatchlistremove({ type: subCategory, id: ele?.id })
                     }

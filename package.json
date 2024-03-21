@@ -21,6 +21,7 @@
     "react-icons": "^5.0.1",
     "react-loading-skeleton": "^3.4.0",
     "react-paginate": "^8.2.0",
+    "react-tooltip": "^5.26.3",
     "sass": "^1.71.1",
     "sonner": "^1.4.32"
   },
