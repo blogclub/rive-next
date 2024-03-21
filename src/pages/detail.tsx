@@ -45,7 +45,7 @@ const DetailPage = () => {
         // setImages(response.results);
         let arr: any = [];
         response.backdrops.map((ele: any, i: number) => {
-          if (i < 10) arr.push(process.env.NEXT_PUBLIC_TMBD_IMAGE_URL + ele.file_path);
+          if (i < 20) arr.push(process.env.NEXT_PUBLIC_TMBD_IMAGE_URL + ele.file_path);
         });
         // if (arr.length === 0) {
         //   response.posters.map((ele: any, i) => {

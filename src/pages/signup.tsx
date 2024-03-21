@@ -2,14 +2,18 @@ import React, { useState, useEffect } from 'react'
 import styles from '@/styles/Settings.module.scss';
 import Link from 'next/link';
 import { signupUserManual } from '@/Utils/firebaseUser';
+import { useRouter } from 'next/navigation';
 
 const SignupPage = () => {
   const [username, setUsername] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  const handleFormSubmission = (e: any) => {
+  const { push } = useRouter();
+  const handleFormSubmission = async (e: any) => {
     e.preventDefault();
-    signupUserManual({ username, email, password });
+    if (await signupUserManual({ username, email, password })) {
+      push("/settings");
+    }
   }
   return (
     <div className={`${styles.settingsPage} ${styles.authPage}`}>

@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import styles from '@/styles/Settings.module.scss';
 import Link from 'next/link';
-import { loginUserManual, resetPassword } from '@/Utils/firebaseUser';
-
+import { loginUserManual } from '@/Utils/firebaseUser';
+import { useRouter } from 'next/navigation';
 const LoginPage = () => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  const handleFormSubmission = (e: any) => {
+  const { push } = useRouter();
+  const handleFormSubmission = async (e: any) => {
     e.preventDefault();
-    loginUserManual({ email, password });
+    if (await loginUserManual({ email, password })) {
+      push("/settings");
+    }
   }
   return (
     <div className={`${styles.settingsPage} ${styles.authPage}`}>
@@ -28,7 +31,7 @@ const LoginPage = () => {
           </>
         </div>
         <h4>Become Rive member! <Link href="/signup" className={styles.highlight}>Signup</Link></h4>
-        <h4 onClick={()=>resetPassword(email)}>Forgot Password?</h4>
+        {/* <h4 onClick={() => resetPassword(email)} className={styles.highlight}>Forgot Password?</h4> */}
       </div>
     </div >
   )

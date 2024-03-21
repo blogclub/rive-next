@@ -47,8 +47,8 @@ const HomeListAll = () => {
             )
           })
         }{
-          latestMovie?.length === 0 && dummyList.map((ele) => (
-            <Skeleton className={styles.loading} />
+          latestMovie?.length === 0 && dummyList.map((ele, i) => (
+            <Skeleton className={styles.loading} key={i} />
           ))
         }
       </div>
@@ -61,8 +61,8 @@ const HomeListAll = () => {
             )
           })
         }{
-          latestTv?.length === 0 && dummyList.map((ele) => (
-            <Skeleton className={styles.loading} />
+          latestTv?.length === 0 && dummyList.map((ele, i) => (
+            <Skeleton className={styles.loading} key={i} />
           ))
         }
       </div>
@@ -75,8 +75,8 @@ const HomeListAll = () => {
             )
           })
         }{
-          popularMovie?.length === 0 && dummyList.map((ele) => (
-            <Skeleton className={styles.loading} />
+          popularMovie?.length === 0 && dummyList.map((ele, i) => (
+            <Skeleton className={styles.loading} key={i} />
           ))
         }
       </div>
@@ -89,8 +89,8 @@ const HomeListAll = () => {
             )
           })
         }{
-          popularTv?.length === 0 && dummyList.map((ele) => (
-            <Skeleton className={styles.loading} />
+          popularTv?.length === 0 && dummyList.map((ele, i) => (
+            <Skeleton className={styles.loading} key={i} />
           ))
         }
       </div>

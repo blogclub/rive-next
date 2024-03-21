@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { getSettings } from "@/Utils/settings";
 import SettingsPage from "../SettingsPage";
 import { usePathname } from "next/navigation";
+import Head from "next/head";
 const Layout = ({ children }: any) => {
   const [theme, setTheme] = useState("system");
   const [mode, setMode] = useState("liquidate");
@@ -26,6 +27,12 @@ const Layout = ({ children }: any) => {
   const path = usePathname();
   return (
     <>
+      {mode === "dark" && <Head>
+        <meta name="theme-color" content="#1b1919" />
+      </Head>}
+      {mode === "light" && <Head>
+        <meta name="theme-color" content="#f4f7fe" />
+      </Head>}
       <div className={`${styles.background} ${mode === "dark" && "dark"} ${mode === "light" && "light"}`} >
         <Navbar />
         <motion.div

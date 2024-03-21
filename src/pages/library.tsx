@@ -22,7 +22,7 @@ const Library = () => {
   const [category, setCategory] = useState("watchlist"); // latest, trending, topRated
   const [subCategory, setSubCategory] = useState("movie");
   const [ids, setIds] = useState([]);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<any>([]);
   const [loading, setLoading] = useState(true);
   const [trigger, setTrigger] = useState(true);
   const [user, setUser] = useState<any>();
@@ -41,6 +41,7 @@ const Library = () => {
   }, [])
   useEffect(() => {
     setLoading(true);
+    setData([0, 0, 0, 0, 0, 0, 0, 0, 0])
     const fetchData = async () => {
       try {
         let arr: any = [];
@@ -79,12 +80,14 @@ const Library = () => {
   }, [category, subCategory, trigger, user]);
 
   const handleWatchlistremove = async ({ type, id }: any) => {
-    if (user !== null && user !== undefined) removeBookmarks({ userId: user, type: type, id: id })?.then((res) => setTrigger(!trigger));
+    if (user !== null && user !== undefined) removeBookmarks({ userId: user, type: type, id: id })?.then((res): any => setTimeout(() => { setTrigger(!trigger) }, 500));
     else {
       removeBookmarks({ userId: null, type: type, id: id })
       setTrigger(!trigger);
     }
   }
+  // console.log({ ids});
+
   return (
     <div className={styles.MoviePage}>
       {/* if login, "hello username" */}
@@ -114,7 +117,7 @@ const Library = () => {
                 <MovieCardSmall data={ele} media_type={subCategory} />
               )
           })
-            : (ids?.length === 0 ? <p>List Is Empty</p> : dummyList.map((ele) => (
+            : ((ids?.length === 0 || ids === undefined) ? <p>List Is Empty</p> : dummyList.map((ele) => (
               <Skeleton className={styles.loading} />
             )))
         }

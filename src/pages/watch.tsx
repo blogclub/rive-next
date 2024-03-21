@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import styles from "@/styles/Watch.module.scss"
 import { setContinueWatching } from "@/Utils/continueWatching";
+import { toast } from "sonner";
 const Watch = () => {
   const params = useSearchParams();
   // console.log(params.get("id"));
@@ -22,6 +23,10 @@ const Watch = () => {
     setSeason(params.get("season"));
     setEpisode(params.get("episode"));
     setContinueWatching({ type: params.get("type"), id: params.get("id") });
+
+    toast.info(<div>Cloud: use AD - Block services for AD - free experience, like AD - Blocker extension or <a target="_blank" href="https://brave.com/">Brave Browser </a></div >);
+
+    toast.info(<div>Cloud: use video download extensions like <a target="_blank" href="https://fetchv.net/">FetchV </a> or <a target="_blank" href="https://www.hlsloader.com/">Stream Recorder </a>, to download movies/tv shows. Refer <a target="_blank" href="https://www.reddit.com/r/DataHoarder/comments/qgne3i/how_to_download_videos_from_vidsrcme/">Source Advice </a></div>);
   }, []);
   // useEffect(() => {
   //   setTimeout(() => {
