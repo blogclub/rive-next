@@ -7,11 +7,13 @@ import { getSettings } from "@/Utils/settings";
 import SettingsPage from "../SettingsPage";
 import { usePathname } from "next/navigation";
 import Head from "next/head";
+import { useRouter } from 'next/navigation';
 const Layout = ({ children }: any) => {
   const [theme, setTheme] = useState("system");
   const [mode, setMode] = useState("liquidate");
   const [ascent_color, setAscent_color] = useState("gold");
   const [themeColor, setThemeColor] = useState<any>();
+  const { push } = useRouter();
   useEffect(() => {
     const values = getSettings();
     if (values !== null) {
@@ -30,6 +32,13 @@ const Layout = ({ children }: any) => {
   useEffect(() => {
     document.documentElement.style.setProperty("--ascent-color", ascent_color);
     document.documentElement.style.setProperty("--mode", mode);
+    
+    window.addEventListener("keydown", (event) => {
+      if (event.ctrlKey && event.key === 'k') {
+        event.preventDefault();
+        push("/search");
+      }
+    })
   }, [mode, ascent_color])
   const path = usePathname();
   return (
