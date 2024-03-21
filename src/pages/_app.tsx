@@ -22,8 +22,8 @@ export default function App({ Component, pageProps }: any) {
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="Rive" />
-        <link rel="icon" href="./images/logo512.png" />
-        <link rel="apple-touch-icon" href="./images/logo512.png" />
+        <link rel="icon" href="/images/logo512.png" />
+        <link rel="apple-touch-icon" href="/images/logo512.png" />
         <link rel="mask-icon" href="/images/logo512.svg" color="#f4f7fe" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="msapplication-TileColor" content="#f4f7fe" />

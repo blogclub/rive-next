@@ -86,7 +86,7 @@ const Library = () => {
       setTrigger(!trigger);
     }
   }
-  // console.log({ ids});
+  console.log({ ids });
 
   return (
     <div className={styles.MoviePage}>
@@ -104,12 +104,12 @@ const Library = () => {
 
       <div className={styles.movieList}>
         {
-          (data?.length !== 0 && ids?.length !== 0) ? data?.map((ele: any) => {
+          (data?.length !== 0 && ids?.length !== 0 && ids !== undefined) ? data?.map((ele: any) => {
             if (category === "watchlist") {
               return (
                 <div className={styles.watchlistItems}>
                   <MovieCardSmall data={ele} media_type={subCategory} />
-                  <BsFillBookmarkXFill onClick={() => handleWatchlistremove({ type: subCategory, id: ele?.id })} />
+                  <BsFillBookmarkXFill className={styles.bookmarkIcon} onClick={() => handleWatchlistremove({ type: subCategory, id: ele?.id })} />
                 </div>
               )
             } else
