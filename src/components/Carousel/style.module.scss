@@ -5,7 +5,7 @@
   max-width: 100vw;
   margin: auto;
   overflow: hidden;
-  border-radius: 0  0 2rem 2rem;
+  border-radius: 0 0 2rem 2rem;
   // background-attachment: fixed;
 }
 .carousel_images img {
@@ -14,7 +14,7 @@
   object-position: top;
   // object-fit: cover;
   object-fit: var((--carousel-object-fit));
-  border-radius: 0  0 2rem 2rem;
+  border-radius: 0 0 2rem 2rem;
   transition: opacity 2s ease;
   border: none;
 }
@@ -35,15 +35,15 @@
   right: 0;
 }
 
-.loading{
+.loading {
   opacity: 0 !important;
 }
-.loaded{
+.loaded {
   opacity: 1 !important;
 }
 
 @media (max-width: 769px) {
-  .carousel_images{
+  .carousel_images {
     height: var(--carousel-mobile-height);
   }
 }

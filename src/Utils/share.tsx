@@ -10,4 +10,4 @@ export const navigatorShare = async ({ text, url }: any) => {
   } catch (e) {
     console.error(e);
   }
-}
+};

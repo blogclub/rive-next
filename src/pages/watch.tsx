@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
-import styles from "@/styles/Watch.module.scss"
+import styles from "@/styles/Watch.module.scss";
 import { setContinueWatching } from "@/Utils/continueWatching";
 import { toast } from "sonner";
 const Watch = () => {
@@ -14,8 +14,10 @@ const Watch = () => {
   const [source, setSource] = useState("SUP");
   if (type === null && params.get("id") !== null) setType(params.get("type"));
   if (id === null && params.get("id") !== null) setId(params.get("id"));
-  if (season === null && params.get("season") !== null) setSeason(params.get("season"));
-  if (episode === null && params.get("episode") !== null) setEpisode(params.get("episode"));
+  if (season === null && params.get("season") !== null)
+    setSeason(params.get("season"));
+  if (episode === null && params.get("episode") !== null)
+    setEpisode(params.get("episode"));
   useEffect(() => {
     setLoading(true);
     setType(params.get("type"));
@@ -24,9 +26,42 @@ const Watch = () => {
     setEpisode(params.get("episode"));
     setContinueWatching({ type: params.get("type"), id: params.get("id") });
 
-    toast.info(<div>Cloud: use AD-Block services for AD-free experience, like AD-Blocker extension or <a target="_blank" href="https://brave.com/">Brave Browser </a></div >);
+    toast.info(
+      <div>
+        Cloud: use AD-Block services for AD-free experience, like AD-Blocker
+        extension or{" "}
+        <a target="_blank" href="https://brave.com/">
+          Brave Browser{" "}
+        </a>
+      </div>,
+    );
 
-    toast.info(<div>Cloud: use video download extensions like <a target="_blank" href="https://fetchv.net/">FetchV </a> or <a target="_blank" href="https://www.hlsloader.com/">Stream Recorder </a> for PC and <a target="_blank" href="https://play.google.com/store/apps/details?id=videoplayer.videodownloader.downloader">AVDP </a> for Android, to download movies/tv shows. Refer <a target="_blank" href="https://www.reddit.com/r/DataHoarder/comments/qgne3i/how_to_download_videos_from_vidsrcme/">Source Advice </a></div>);
+    toast.info(
+      <div>
+        Cloud: use video download extensions like{" "}
+        <a target="_blank" href="https://fetchv.net/">
+          FetchV{" "}
+        </a>{" "}
+        or{" "}
+        <a target="_blank" href="https://www.hlsloader.com/">
+          Stream Recorder{" "}
+        </a>{" "}
+        for PC and{" "}
+        <a
+          target="_blank"
+          href="https://play.google.com/store/apps/details?id=videoplayer.videodownloader.downloader"
+        >
+          AVDP{" "}
+        </a>{" "}
+        for Android, to download movies/tv shows. Refer{" "}
+        <a
+          target="_blank"
+          href="https://www.reddit.com/r/DataHoarder/comments/qgne3i/how_to_download_videos_from_vidsrcme/"
+        >
+          Source Advice{" "}
+        </a>
+      </div>,
+    );
   }, []);
   // useEffect(() => {
   //   setTimeout(() => {
@@ -50,28 +85,89 @@ const Watch = () => {
 
   return (
     <div className={styles.watch}>
-      <select name="source" id="source" className={styles.source} value={source} onChange={(e) => setSource(e.target.value)}>
+      <select
+        name="source"
+        id="source"
+        className={styles.source}
+        value={source}
+        onChange={(e) => setSource(e.target.value)}
+      >
         <option value="AGG">Aggregator : 1 (Multi-Server)</option>
         <option value="VID">Aggregator : 2</option>
         <option value="EMB">Aggregator : 3</option>
         <option value="MULTI">Aggregator : 4 (Fast-Server)</option>
-        <option value="SUP" defaultChecked>Aggregator : 5 (Multi-Server)</option>
+        <option value="SUP" defaultChecked>
+          Aggregator : 5 (Multi-Server)
+        </option>
       </select>
       <div className={`${styles.loader} skeleton`}></div>
 
-      {source === "AGG" && id !== "" && id !== null ? <iframe scrolling="no" src={type === "movie" ? `${STREAM_URL_AGG}/embed/${id}` : `${STREAM_URL_AGG}/embed/${id}/${season}/${episode}`} className={styles.iframe} allowFullScreen></iframe> : null}
+      {source === "AGG" && id !== "" && id !== null ? (
+        <iframe
+          scrolling="no"
+          src={
+            type === "movie"
+              ? `${STREAM_URL_AGG}/embed/${id}`
+              : `${STREAM_URL_AGG}/embed/${id}/${season}/${episode}`
+          }
+          className={styles.iframe}
+          allowFullScreen
+        ></iframe>
+      ) : null}
 
-      {source === "VID" && id !== "" && id !== null ? <iframe scrolling="no" src={type === "movie" ? `${STREAM_URL_VID}/embed/${type}/${id}` : `${STREAM_URL_VID}/embed/${type}/${id}/${season}/${episode}`} className={styles.iframe} allowFullScreen></iframe> : null
-      }
+      {source === "VID" && id !== "" && id !== null ? (
+        <iframe
+          scrolling="no"
+          src={
+            type === "movie"
+              ? `${STREAM_URL_VID}/embed/${type}/${id}`
+              : `${STREAM_URL_VID}/embed/${type}/${id}/${season}/${episode}`
+          }
+          className={styles.iframe}
+          allowFullScreen
+        ></iframe>
+      ) : null}
 
-      {source === "EMB" && id !== "" && id !== null ? <iframe scrolling="no" src={type === "movie" ? `${STREAM_URL_EMB}/embed/${type}/${id}` : `${STREAM_URL_EMB}/embed/${type}/${id}/${season}/${episode}`} className={styles.iframe} allowFullScreen></iframe> : null
-      }
+      {source === "EMB" && id !== "" && id !== null ? (
+        <iframe
+          scrolling="no"
+          src={
+            type === "movie"
+              ? `${STREAM_URL_EMB}/embed/${type}/${id}`
+              : `${STREAM_URL_EMB}/embed/${type}/${id}/${season}/${episode}`
+          }
+          className={styles.iframe}
+          allowFullScreen
+        ></iframe>
+      ) : null}
 
-      {source === "MULTI" && id !== "" && id !== null ? (<iframe scrolling="no" src={type === "movie" ? `${STREAM_URL_MULTI}?video_id=${id}&tmdb=1` : `${STREAM_URL_MULTI}?video_id=${id}&tmdb=1&s=${season}&e=${episode}`} className={styles.iframe} allowFullScreen></iframe>) : null}
+      {source === "MULTI" && id !== "" && id !== null ? (
+        <iframe
+          scrolling="no"
+          src={
+            type === "movie"
+              ? `${STREAM_URL_MULTI}?video_id=${id}&tmdb=1`
+              : `${STREAM_URL_MULTI}?video_id=${id}&tmdb=1&s=${season}&e=${episode}`
+          }
+          className={styles.iframe}
+          allowFullScreen
+        ></iframe>
+      ) : null}
 
-      {source === "SUP" && id !== "" && id !== null ? (<iframe scrolling="no" src={type === "movie" ? `${STREAM_URL_SUP}/?video_id=${id}&tmdb=1` : `${STREAM_URL_SUP}/?video_id=${id}&tmdb=1&s=${season}&e=${episode}`} className={styles.iframe} allowFullScreen></iframe>) : null}
-    </div >
-  )
+      {source === "SUP" && id !== "" && id !== null ? (
+        <iframe
+          scrolling="no"
+          src={
+            type === "movie"
+              ? `${STREAM_URL_SUP}/?video_id=${id}&tmdb=1`
+              : `${STREAM_URL_SUP}/?video_id=${id}&tmdb=1&s=${season}&e=${episode}`
+          }
+          className={styles.iframe}
+          allowFullScreen
+        ></iframe>
+      ) : null}
+    </div>
+  );
 };
 
 export default Watch;

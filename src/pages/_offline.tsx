@@ -1,4 +1,4 @@
-import styles from '@/styles/Settings.module.scss';
+import styles from "@/styles/Settings.module.scss";
 const OfflinePage = () => {
   return (
     <div className={`${styles.settingsPage} ${styles.authPage}`}>
@@ -24,8 +24,8 @@ const OfflinePage = () => {
           <p>1. Running Windows Network Diagnostics</p>
         </details> */}
       </div>
-    </div >
-  )
-}
+    </div>
+  );
+};
 
 export default OfflinePage;

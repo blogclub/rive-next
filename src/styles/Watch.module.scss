@@ -1,31 +1,31 @@
-.watch{
+.watch {
   height: 100vh;
   width: 100vw;
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
-  .loader{
+  .loader {
     height: 100vh;
     width: 100vw;
     position: absolute;
     z-index: 0;
   }
-  .iframe{
+  .iframe {
     height: 100%;
     width: 100%;
     border: none;
     outline: none;
     overflow: hidden;
     z-index: 1;
-    ::-webkit-scrollbar{
+    ::-webkit-scrollbar {
       display: none !important;
     }
   }
-  .source{
+  .source {
     position: absolute;
     top: 0rem;
-    width: clamp(15rem,50vw,20rem) ;
+    width: clamp(15rem, 50vw, 20rem);
     padding: 1rem 2rem;
     background: var(--bg-color);
     color: var(--primary-3);
@@ -43,11 +43,11 @@
 }
 
 @media (max-width: 769px) {
-  .watch{
+  .watch {
     padding-left: unset;
-    padding:1.5rem 1rem;
+    padding: 1.5rem 1rem;
     padding-bottom: 5rem;
-    .iframe{
+    .iframe {
       height: 100%;
       width: 100%;
       border: none;

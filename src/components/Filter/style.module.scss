@@ -1,26 +1,26 @@
-.Filter{
+.Filter {
   height: 80vh;
   width: 25rem;
   position: fixed;
   right: 0;
-  top: clamp(5rem,10vh,30rem);
-  margin-right: clamp(0.5rem,  7%, 5rem);
+  top: clamp(5rem, 10vh, 30rem);
+  margin-right: clamp(0.5rem, 7%, 5rem);
   background: var(--primary-1);
   padding: 1rem;
   border-radius: 1.5rem;
   z-index: 5;
   overflow-x: hidden;
   overflow-y: auto;
-  h1{
+  h1 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
   }
-  h2{
+  h2 {
     font-size: 1.2rem;
     color: var(--primary-3);
     margin: 1rem 0;
   }
-  input[type="text"]{
+  input[type="text"] {
     color: var(--ascent-color);
     background: var(--bg-color);
     border-radius: 0.5rem;
@@ -29,13 +29,13 @@
     padding: 0.5rem 1rem;
     caret-color: var(--primary-2);
   }
-  input[type="checkbox"]{
+  input[type="checkbox"] {
     color: var(--primary-3);
     margin: 0.2rem;
-    accent-color:var(--ascent-color);
+    accent-color: var(--ascent-color);
     cursor: pointer;
   }
-  .close{
+  .close {
     position: absolute;
     right: 1rem;
     top: 1rem;
@@ -43,7 +43,7 @@
     cursor: pointer;
   }
 
-  .checkboxDiv{
+  .checkboxDiv {
     display: inline-block;
     color: var(--primary-2);
     gap: 0.2rem;
@@ -51,7 +51,7 @@
     cursor: pointer;
     position: relative;
   }
-  .filterSubmit{
+  .filterSubmit {
     display: inline-block;
     background: var(--ascent-color);
     padding: 0.5rem;
@@ -61,7 +61,7 @@
     width: 40%;
     text-align: center;
   }
-  .filterButtons{
+  .filterButtons {
     background: var(--bg-color);
     padding: 1rem;
     width: 100%;
@@ -75,17 +75,17 @@
   }
 }
 
-.inactive{
-  fill:var(--primary-2);
+.inactive {
+  fill: var(--primary-2);
 }
 
-.active{
+.active {
   fill: var(--ascent-color) !important;
   color: var(--ascent-color) !important;
 }
 
 @media (max-width: 769px) {
-  .Filter{
+  .Filter {
     width: 100vw;
     height: 100vh;
     margin-right: 0;

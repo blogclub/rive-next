@@ -30,13 +30,17 @@ const PersonPage = () => {
         setData(res);
         console.log({ res });
 
-        const response = await axiosFetch({ requestID: `${type}Images`, id: id });
+        const response = await axiosFetch({
+          requestID: `${type}Images`,
+          id: id,
+        });
         // setImages(response.results);
         let arr: any = [];
         response.profiles.map((ele: any, i: any) => {
-          if (i < 10) arr.push(process.env.NEXT_PUBLIC_TMBD_IMAGE_URL + ele.file_path);
+          if (i < 10)
+            arr.push(process.env.NEXT_PUBLIC_TMBD_IMAGE_URL + ele.file_path);
         });
-        if (arr.length === 0) arr.push("/images/logo.svg")
+        if (arr.length === 0) arr.push("/images/logo.svg");
         setImages(arr);
       } catch (error) {
         // console.error("Error fetching data:", error);
@@ -50,26 +54,43 @@ const PersonPage = () => {
   const handleShare = () => {
     const url = `/person?id=${id}`;
     navigatorShare({ text: data?.name, url: url });
-  }
+  };
 
   return (
     // carousel
     // detail
-    <div className={`${styles.DetailPage} ${styles.PersonPage}`} >
+    <div className={`${styles.DetailPage} ${styles.PersonPage}`}>
       <div className={`${styles.biggerPic} ${styles.detailBiggerPic}`}>
-        {images.length > 0 ? <Carousel imageArr={images} setIndex={setIndex} mobileHeight="60vh" desktopHeight="95vh" objectFit={"contain"} /> : <Skeleton className={styles.CarouselLoading} />}
+        {images.length > 0 ? (
+          <Carousel
+            imageArr={images}
+            setIndex={setIndex}
+            mobileHeight="60vh"
+            desktopHeight="95vh"
+            objectFit={"contain"}
+          />
+        ) : (
+          <Skeleton className={styles.CarouselLoading} />
+        )}
         <div className={styles.DetailBanner}>
           <div className={styles.HomeHeroMeta} key={data?.id}>
             <h1>{data?.name || <Skeleton />}</h1>
-            <div className={styles.HomeHeroMetaRow2} >
+            <div className={styles.HomeHeroMetaRow2}>
               <p className={styles.type}>{data?.known_for_department}</p>
-              {data?.homepage !== null ? <Link href={data?.homepage || "#"} target="_blank"><CgWebsite /></Link> : null}
-              {data ?
+              {data?.homepage !== null ? (
+                <Link href={data?.homepage || "#"} target="_blank">
+                  <CgWebsite />
+                </Link>
+              ) : null}
+              {data ? (
                 <>
                   <BsShare onClick={handleShare} />
                 </>
-                : <div ><Skeleton width={200} count={1} /></div>
-              }
+              ) : (
+                <div>
+                  <Skeleton width={200} count={1} />
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -78,7 +99,7 @@ const PersonPage = () => {
         <MetaDetails id={id} type={type} data={data} />
       </div>
     </div>
-  )
+  );
 };
 
 export default PersonPage;

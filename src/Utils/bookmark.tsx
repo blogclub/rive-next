@@ -3,7 +3,12 @@
 //   tv:[],
 // }
 
-import { addToFbWatchlist, checkInFbWatchlist, fetchFbWatchlist, removeFromFbWatchlist } from './firebaseUser';
+import {
+  addToFbWatchlist,
+  checkInFbWatchlist,
+  fetchFbWatchlist,
+  removeFromFbWatchlist,
+} from "./firebaseUser";
 
 export const getBookmarks = (userId: any) => {
   // console.log({ userId });
@@ -15,7 +20,7 @@ export const getBookmarks = (userId: any) => {
     return JSON.parse(values);
   }
   return {};
-}
+};
 
 export const setBookmarks = ({ userId = null, type, id }: any) => {
   if (userId !== null) {
@@ -29,30 +34,31 @@ export const setBookmarks = ({ userId = null, type, id }: any) => {
       localStorage.setItem("RiveStreamWatchlist", JSON.stringify(values));
     }
   }
-}
+};
 
 export const removeBookmarks = ({ userId = null, type, id }: any) => {
   if (userId !== null) {
     return removeFromFbWatchlist({ userID: userId, type, id });
-  }
-  else {
+  } else {
     var values: any = getBookmarks(userId) || { movie: [], tv: [] };
     if (values[type]?.includes(id)) {
       values[type] = values[type].filter((ele: any) => ele !== id); // Update the array after filtering
-      return localStorage.setItem("RiveStreamWatchlist", JSON.stringify(values));
+      return localStorage.setItem(
+        "RiveStreamWatchlist",
+        JSON.stringify(values),
+      );
     }
   }
-}
+};
 
 export const checkBookmarks = ({ userId = null, type, id }: any) => {
   if (userId !== null) {
     return checkInFbWatchlist({ userID: userId, type, id });
-  }
-  else {
+  } else {
     var values: any = getBookmarks(userId) || { movie: [], tv: [] };
     if (values[type]?.includes(id)) {
       return true;
     }
     return false;
   }
-}
+};

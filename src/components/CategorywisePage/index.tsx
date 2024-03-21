@@ -1,12 +1,12 @@
-import { useState, useEffect } from 'react';
-import axiosFetch from '@/Utils/fetch';
+import { useState, useEffect } from "react";
+import axiosFetch from "@/Utils/fetch";
 import styles from "./style.module.scss";
-import MovieCardSmall from '@/components/MovieCardSmall';
+import MovieCardSmall from "@/components/MovieCardSmall";
 import ReactPaginate from "react-paginate"; // for pagination
 import { AiFillLeftCircle, AiFillRightCircle } from "react-icons/ai";
 import { MdFilterAlt, MdFilterAltOff } from "react-icons/md";
-import Filter from '../Filter';
-import Skeleton from 'react-loading-skeleton';
+import Filter from "../Filter";
+import Skeleton from "react-loading-skeleton";
 // import MoviePoster from '@/components/MoviePoster';
 
 function capitalizeFirstLetter(string: string) {
@@ -30,13 +30,23 @@ const CategorywisePage = ({ categoryType }: any) => {
   useEffect(() => {
     setLoading(true);
     const fetchData = async () => {
-      setData([0, 0, 0, 0, 0, 0, 0, 0, 0])
+      setData([0, 0, 0, 0, 0, 0, 0, 0, 0]);
       try {
         let data;
         if (category === "filter") {
-          data = await axiosFetch({ requestID: `${category}${CapitalCategoryType}`, page: currentPage, genreKeywords: filterGenreList, country: filterCountry, year: filterYear, sortBy: "vote_average.desc" });
+          data = await axiosFetch({
+            requestID: `${category}${CapitalCategoryType}`,
+            page: currentPage,
+            genreKeywords: filterGenreList,
+            country: filterCountry,
+            year: filterYear,
+            sortBy: "vote_average.desc",
+          });
         } else {
-          data = await axiosFetch({ requestID: `${category}${CapitalCategoryType}`, page: currentPage });
+          data = await axiosFetch({
+            requestID: `${category}${CapitalCategoryType}`,
+            page: currentPage,
+          });
         }
         // console.log();
         if (data.page > data.total_pages) {
@@ -56,28 +66,61 @@ const CategorywisePage = ({ categoryType }: any) => {
     setCurrentPage(1);
     setCategory("filter");
     setShowFilter(!showFilter);
-  }
+  };
   return (
     <div className={styles.MoviePage}>
       <h1>{CapitalCategoryType}</h1>
       <div className={styles.category}>
-        <p className={`${category === "latest" ? styles.active : styles.inactive}`} onClick={() => setCategory("latest")}>Latest</p>
-        <p className={`${category === "trending" ? styles.active : styles.inactive}`} onClick={() => setCategory("trending")}>Trending</p>
-        <p className={`${category === "topRated" ? styles.active : styles.inactive}`} onClick={() => setCategory("topRated")}>Top Rated</p>
-        <p className={`${category === "filter" ? styles.active : styles.inactive} ${styles.filter}`} onClick={handleFilterClick}>Filter {category === "filter" ? <MdFilterAlt className={styles.active} /> : <MdFilterAltOff />}</p>
+        <p
+          className={`${category === "latest" ? styles.active : styles.inactive}`}
+          onClick={() => setCategory("latest")}
+        >
+          Latest
+        </p>
+        <p
+          className={`${category === "trending" ? styles.active : styles.inactive}`}
+          onClick={() => setCategory("trending")}
+        >
+          Trending
+        </p>
+        <p
+          className={`${category === "topRated" ? styles.active : styles.inactive}`}
+          onClick={() => setCategory("topRated")}
+        >
+          Top Rated
+        </p>
+        <p
+          className={`${category === "filter" ? styles.active : styles.inactive} ${styles.filter}`}
+          onClick={handleFilterClick}
+        >
+          Filter{" "}
+          {category === "filter" ? (
+            <MdFilterAlt className={styles.active} />
+          ) : (
+            <MdFilterAltOff />
+          )}
+        </p>
       </div>
-
       {/* <Filter/> */}
-      {showFilter && <Filter categoryType={categoryType} setShowFilter={setShowFilter} setFilterYear={setFilterYear} setFiltercountry={setFiltercountry} setFilterGenreList={setFilterGenreList} filterGenreList={filterGenreList} filterCountry={filterCountry} filterYear={filterYear} setCategory={setCategory} setTrigger={setTrigger} trigger={trigger} />}
-
+      {showFilter && (
+        <Filter
+          categoryType={categoryType}
+          setShowFilter={setShowFilter}
+          setFilterYear={setFilterYear}
+          setFiltercountry={setFiltercountry}
+          setFilterGenreList={setFilterGenreList}
+          filterGenreList={filterGenreList}
+          filterCountry={filterCountry}
+          filterYear={filterYear}
+          setCategory={setCategory}
+          setTrigger={setTrigger}
+          trigger={trigger}
+        />
+      )}
       <div className={styles.movieList}>
-        {
-          data.map((ele: any) => {
-            return (
-              <MovieCardSmall data={ele} media_type={categoryType} />
-            )
-          })
-        }
+        {data.map((ele: any) => {
+          return <MovieCardSmall data={ele} media_type={categoryType} />;
+        })}
         {/* {
           data?.length === 0 && dummyList.map((ele) => (
             <Skeleton className={styles.loading} />
@@ -91,20 +134,19 @@ const CategorywisePage = ({ categoryType }: any) => {
         onPageChange={(event) => {
           setCurrentPage(event.selected + 1);
           console.log({ event });
-          if (currentPage > totalpages) { setCurrentPage(totalpages) }
+          if (currentPage > totalpages) {
+            setCurrentPage(totalpages);
+          }
           window.scrollTo(0, 0);
         }}
         pageCount={totalpages}
         breakLabel=" ... "
-        previousLabel={
-          <AiFillLeftCircle className={styles.paginationIcons} />
-        }
-        nextLabel={
-          <AiFillRightCircle className={styles.paginationIcons} />
-        }
-      />;
+        previousLabel={<AiFillLeftCircle className={styles.paginationIcons} />}
+        nextLabel={<AiFillRightCircle className={styles.paginationIcons} />}
+      />
+      ;
     </div>
-  )
-}
+  );
+};
 
 export default CategorywisePage;

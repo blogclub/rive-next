@@ -1,4 +1,4 @@
-.navbar{
+.navbar {
   border-radius: 0.5rem;
   position: fixed;
   display: flex;
@@ -13,28 +13,28 @@
   z-index: 5;
 }
 
-.inactive{
-  fill:var(--primary-2);
+.inactive {
+  fill: var(--primary-2);
 }
 
-.active{
+.active {
   fill: var(--ascent-color) !important;
 }
 
 @media (max-width: 769px) {
   .navbar {
-    padding:1.5rem;
+    padding: 1.5rem;
     width: 100%;
     left: unset;
     bottom: -1px !important;
     flex-direction: row;
-    justify-content:space-between;
+    justify-content: space-between;
     font-size: 2.5rem !important;
     top: unset;
     left: 0;
     bottom: 0;
     right: unset;
-    svg{
+    svg {
       font-size: 1.4rem;
     }
   }

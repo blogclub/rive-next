@@ -6,7 +6,7 @@
 export const getContinueWatching = () => {
   const values: any = localStorage.getItem("RiveStreamContinueWatching");
   return JSON.parse(values);
-}
+};
 
 export const setContinueWatching = ({ type, id }: any) => {
   var values = getContinueWatching() || { movie: [], tv: [] };
@@ -23,7 +23,7 @@ export const setContinueWatching = ({ type, id }: any) => {
     removeContinueWatching({ type: type, id: id });
     setContinueWatching({ type: type, id: id });
   }
-}
+};
 
 export const removeContinueWatching = ({ type, id }: any) => {
   var values = getContinueWatching() || { movie: [], tv: [] };
@@ -31,7 +31,7 @@ export const removeContinueWatching = ({ type, id }: any) => {
     values[type] = values[type].filter((ele: any) => ele !== id); // Update the array after filtering
     localStorage.setItem("RiveStreamContinueWatching", JSON.stringify(values));
   }
-}
+};
 
 export const checkContinueWatching = ({ type, id }: any) => {
   var values = getContinueWatching() || { movie: [], tv: [] };
@@ -39,4 +39,4 @@ export const checkContinueWatching = ({ type, id }: any) => {
     return true;
   }
   return false;
-}
+};

@@ -7,7 +7,7 @@ import { getSettings } from "@/Utils/settings";
 import SettingsPage from "../SettingsPage";
 import { usePathname } from "next/navigation";
 import Head from "next/head";
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 const Layout = ({ children }: any) => {
   const [theme, setTheme] = useState("system");
   const [mode, setMode] = useState("liquidate");
@@ -22,8 +22,10 @@ const Layout = ({ children }: any) => {
       setAscent_color(values?.ascent_color);
     }
     console.log({ values });
-    const prefersDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const themeColor = prefersDarkMode ? '#1b1919' : '#f4f7fe';
+    const prefersDarkMode =
+      window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const themeColor = prefersDarkMode ? "#1b1919" : "#f4f7fe";
     setThemeColor(themeColor);
     // console.log({ prefersDarkMode });
     // const metaThemeColor = document.querySelector("meta[name=theme-color]");
@@ -32,27 +34,35 @@ const Layout = ({ children }: any) => {
   useEffect(() => {
     document.documentElement.style.setProperty("--ascent-color", ascent_color);
     document.documentElement.style.setProperty("--mode", mode);
-    
+
     window.addEventListener("keydown", (event) => {
-      if (event.ctrlKey && event.key === 'k') {
+      if (event.ctrlKey && event.key === "k") {
         event.preventDefault();
         push("/search");
       }
-    })
-  }, [mode, ascent_color])
+    });
+  }, [mode, ascent_color]);
   const path = usePathname();
   return (
     <>
-      {mode === "dark" && <Head>
-        <meta name="theme-color" content="#1b1919" />
-      </Head>}
-      {mode === "light" && <Head>
-        <meta name="theme-color" content="#f4f7fe" />
-      </Head>}
-      {mode === "system" && <Head>
-        <meta name="theme-color" content={`${themeColor}`} />
-      </Head>}
-      <div className={`${styles.background} ${mode === "dark" && "dark"} ${mode === "light" && "light"}`} >
+      {mode === "dark" && (
+        <Head>
+          <meta name="theme-color" content="#1b1919" />
+        </Head>
+      )}
+      {mode === "light" && (
+        <Head>
+          <meta name="theme-color" content="#f4f7fe" />
+        </Head>
+      )}
+      {mode === "system" && (
+        <Head>
+          <meta name="theme-color" content={`${themeColor}`} />
+        </Head>
+      )}
+      <div
+        className={`${styles.background} ${mode === "dark" && "dark"} ${mode === "light" && "light"}`}
+      >
         <Navbar />
         <motion.div
           initial={{ x: -300, opacity: 0 }}
@@ -66,7 +76,16 @@ const Layout = ({ children }: any) => {
         >
           {children}
         </motion.div>
-        {path === "/settings" ? <SettingsPage mode={mode} theme={theme} ascent_color={ascent_color} setMode={setMode} setTheme={setTheme} setAscent_color={setAscent_color} /> : null}
+        {path === "/settings" ? (
+          <SettingsPage
+            mode={mode}
+            theme={theme}
+            ascent_color={ascent_color}
+            setMode={setMode}
+            setTheme={setTheme}
+            setAscent_color={setAscent_color}
+          />
+        ) : null}
       </div>
     </>
   );

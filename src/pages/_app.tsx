@@ -1,7 +1,7 @@
 import "@/styles/globals.scss";
 import Layout from "@/components/Layout";
 import Head from "next/head";
-import { Toaster } from 'sonner';
+import { Toaster } from "sonner";
 import "@/styles/checkbox.scss";
 
 export default function App({ Component, pageProps }: any) {
@@ -9,10 +9,7 @@ export default function App({ Component, pageProps }: any) {
     <>
       <Head>
         <title>Rive</title>
-        <meta
-          name="description"
-          content="Your Personal Streaming Oasis"
-        />
+        <meta name="description" content="Your Personal Streaming Oasis" />
         <meta
           name="keywords"
           content="movie, streaming, tv, rive, stream. movie app, tv shows, movie download"
@@ -31,9 +28,11 @@ export default function App({ Component, pageProps }: any) {
         <link rel="shortcut icon" href="/images/logo512.png" />
       </Head>
       <Layout>
-        <Toaster toastOptions={{
-          className: 'sooner-toast',
-        }} />
+        <Toaster
+          toastOptions={{
+            className: "sooner-toast",
+          }}
+        />
         <Component {...pageProps} />
       </Layout>
     </>

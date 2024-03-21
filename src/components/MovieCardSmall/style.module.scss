@@ -1,7 +1,7 @@
-.MovieCardSmall{
+.MovieCardSmall {
   min-height: 15rem;
   width: 10rem;
-  .img{
+  .img {
     height: 15rem;
     width: 10rem;
     border-radius: 0.5rem;
@@ -11,7 +11,7 @@
     margin-bottom: 0.3rem;
     object-fit: cover;
   }
-  p{
+  p {
     color: var(--primary-2);
     width: 100%;
     margin-left: 0.2rem;
@@ -23,14 +23,14 @@
 }
 
 @media (max-width: 769px) {
-  .MovieCardSmall{
+  .MovieCardSmall {
     min-height: 10rem;
     width: 7rem;
-    .img{
+    .img {
       height: 10rem;
       width: 7rem;
     }
-    p{
+    p {
       color: var(--primary-2);
       width: 80%;
     }

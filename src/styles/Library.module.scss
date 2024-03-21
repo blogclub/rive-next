@@ -1,11 +1,11 @@
-.MoviePage{
+.MoviePage {
   width: 100vw;
   min-height: 100vh;
   overflow-y: hidden;
   overflow-x: hidden;
   padding: 1rem 0.5rem;
   padding-left: 5rem;
-  .category{
+  .category {
     display: flex;
     width: 100%;
     justify-content: flex-start;
@@ -14,7 +14,7 @@
     gap: 1rem;
     margin-top: 1rem;
   }
-  .movieList{
+  .movieList {
     padding: 3rem;
     width: 100vw;
     // min-height:100vh ;
@@ -24,13 +24,13 @@
     flex-wrap: wrap;
     gap: 2rem 1rem;
     color: var(--primary-2);
-    svg{
+    svg {
       cursor: pointer;
       position: absolute;
       top: 0rem;
       font-size: 1.3rem;
     }
-    .watchlistItems{
+    .watchlistItems {
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -38,11 +38,11 @@
       position: relative;
     }
 
-    .loading{
+    .loading {
       height: 15rem;
       width: 10rem;
     }
-    .watchlistItems{
+    .watchlistItems {
       max-width: 10rem;
     }
   }
@@ -74,13 +74,13 @@
   // }
 }
 
-.inactive{
+.inactive {
   cursor: pointer;
-  color:var(--primary-2);
-  fill:var(--primary-2);
+  color: var(--primary-2);
+  fill: var(--primary-2);
 }
 
-.active{
+.active {
   cursor: pointer;
   color: var(--ascent-color) !important;
   fill: var(--ascent-color) !important;
@@ -90,37 +90,37 @@
   background-color: var(--ascent-color);
   border-radius: 0.5rem;
   color: var(--primary-1);
-  a{
+  a {
     color: var(--primary-1);
   }
 }
-.disabled{
-  svg{
+.disabled {
+  svg {
     opacity: 0.5 !important;
     fill: var(--ascent-color);
   }
 }
 
 @media (max-width: 769px) {
-  .MoviePage{
+  .MoviePage {
     padding-left: unset;
-    padding:1.5rem 1rem;
+    padding: 1.5rem 1rem;
     padding-bottom: 5rem;
-    .movieList{
+    .movieList {
       padding: 1rem;
       padding-left: 0.5rem;
       gap: 1rem 0.5rem;
       margin-bottom: 1.5rem;
-      svg{
+      svg {
         // margin-top: 0.5rem;
         cursor: pointer;
       }
-      .loading{
+      .loading {
         height: 10rem;
         width: 7rem;
       }
     }
-    .pagination{
+    .pagination {
       max-width: 85vw;
       margin: 0 auto;
       flex-wrap: wrap;

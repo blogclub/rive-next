@@ -1,5 +1,5 @@
-.MovieCardSmall{
-  .img{
+.MovieCardSmall {
+  .img {
     height: 15rem;
     width: 10rem;
     border-radius: 0.5rem;
@@ -12,8 +12,8 @@
 }
 
 @media (max-width: 769px) {
-  .MovieCardSmall{
-    .img{
+  .MovieCardSmall {
+    .img {
       height: 10rem;
       width: 7rem;
     }

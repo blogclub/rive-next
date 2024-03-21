@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./style.module.scss";
 import axiosFetch from "@/Utils/fetch";
-import 'react-loading-skeleton/dist/skeleton.css';
+import "react-loading-skeleton/dist/skeleton.css";
 import Link from "next/link";
 import Skeleton from "react-loading-skeleton";
 import MovieCardSmall from "../MovieCardSmall";
@@ -22,10 +22,16 @@ const HomeListAll = () => {
         setLoading(true);
         const lM = await axiosFetch({ requestID: "trendingMovie" });
         const lT = await axiosFetch({ requestID: "trendingTvDay" });
-        const pM = await axiosFetch({ requestID: "popularMovie", sortBy: "vote_average.asc" });
-        const pT = await axiosFetch({ requestID: "trendingTv", sortBy: "vote_average.asc" });
+        const pM = await axiosFetch({
+          requestID: "popularMovie",
+          sortBy: "vote_average.asc",
+        });
+        const pT = await axiosFetch({
+          requestID: "trendingTv",
+          sortBy: "vote_average.asc",
+        });
         setLatestMovie(lM.results);
-        setLatestTv(lT.results)
+        setLatestTv(lT.results);
         setPopularMovie(pM.results);
         setPopularTv(pT.results);
         console.log({ pM });
@@ -37,64 +43,48 @@ const HomeListAll = () => {
     fetchData();
   }, []);
   return (
-    <div className={styles.HomeListAll} >
+    <div className={styles.HomeListAll}>
       <h1>Latest Movies</h1>
-      <div className={styles.HomeListSection} >
-        {
-          latestMovie.map((ele) => {
-            return (
-              <MovieCardSmall data={ele} media_type="movie" />
-            )
-          })
-        }{
-          latestMovie?.length === 0 && dummyList.map((ele, i) => (
+      <div className={styles.HomeListSection}>
+        {latestMovie.map((ele) => {
+          return <MovieCardSmall data={ele} media_type="movie" />;
+        })}
+        {latestMovie?.length === 0 &&
+          dummyList.map((ele, i) => (
             <Skeleton className={styles.loading} key={i} />
-          ))
-        }
+          ))}
       </div>
       <h1>Latest TV Shows</h1>
-      <div className={styles.HomeListSection} >
-        {
-          latestTv.map((ele) => {
-            return (
-              <MovieCardSmall data={ele} media_type="tv" />
-            )
-          })
-        }{
-          latestTv?.length === 0 && dummyList.map((ele, i) => (
+      <div className={styles.HomeListSection}>
+        {latestTv.map((ele) => {
+          return <MovieCardSmall data={ele} media_type="tv" />;
+        })}
+        {latestTv?.length === 0 &&
+          dummyList.map((ele, i) => (
             <Skeleton className={styles.loading} key={i} />
-          ))
-        }
+          ))}
       </div>
       <h1>Popular Movies</h1>
-      <div className={styles.HomeListSection} >
-        {
-          popularMovie.map((ele) => {
-            return (
-              <MovieCardSmall data={ele} media_type="tv" />
-            )
-          })
-        }{
-          popularMovie?.length === 0 && dummyList.map((ele, i) => (
+      <div className={styles.HomeListSection}>
+        {popularMovie.map((ele) => {
+          return <MovieCardSmall data={ele} media_type="tv" />;
+        })}
+        {popularMovie?.length === 0 &&
+          dummyList.map((ele, i) => (
             <Skeleton className={styles.loading} key={i} />
-          ))
-        }
+          ))}
       </div>
       <h1>Popular TV Shows</h1>
-      <div className={styles.HomeListSection} >
-        {
-          popularTv.map((ele) => {
-            return (
-              <MovieCardSmall data={ele} media_type="tv" />
-            )
-          })
-        }{
-          popularTv?.length === 0 && dummyList.map((ele, i) => (
+      <div className={styles.HomeListSection}>
+        {popularTv.map((ele) => {
+          return <MovieCardSmall data={ele} media_type="tv" />;
+        })}
+        {popularTv?.length === 0 &&
+          dummyList.map((ele, i) => (
             <Skeleton className={styles.loading} key={i} />
-          ))
-        }
+          ))}
       </div>
-    </div >
+    </div>
   );
 };
 

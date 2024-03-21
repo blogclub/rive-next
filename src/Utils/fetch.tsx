@@ -1,25 +1,36 @@
 import axios from "axios";
 
 interface Fetch {
-  requestID: any,
-  id?: string | null,
-  language?: string,
-  page?: number,
-  genreKeywords?: string,
-  sortBy?: string,
-  year?: number,
-  country?: string,
-  query?: string,
-  season?: number,
+  requestID: any;
+  id?: string | null;
+  language?: string;
+  page?: number;
+  genreKeywords?: string;
+  sortBy?: string;
+  year?: number;
+  country?: string;
+  query?: string;
+  season?: number;
 }
-export default async function axiosFetch({ requestID, id, language = "en-US", page = 1, genreKeywords, sortBy, year, country, query, season }: Fetch) {
+export default async function axiosFetch({
+  requestID,
+  id,
+  language = "en-US",
+  page = 1,
+  genreKeywords,
+  sortBy,
+  year,
+  country,
+  query,
+  season,
+}: Fetch) {
   const request = requestID;
   const API_KEY = process.env.NEXT_PUBLIC_TMDB_API_KEY;
   const baseURL = "https://api.themoviedb.org/3";
   const requests: any = {
     latestMovie: `${baseURL}/movie/now_playing?language=${language}&page=${page}`, //nowPlayingMovie
-    latestTv: `${baseURL}/tv/airing_today?language=${language}&page=${page}`,  // airingTodayTv
-    popularMovie: `${baseURL}/movie/popular?language=${language}&page=${page}&sort_by=${sortBy}`,  // current popular, so similar to latestMovie data 
+    latestTv: `${baseURL}/tv/airing_today?language=${language}&page=${page}`, // airingTodayTv
+    popularMovie: `${baseURL}/movie/popular?language=${language}&page=${page}&sort_by=${sortBy}`, // current popular, so similar to latestMovie data
     popularTv: `${baseURL}/tv/popular?language=${language}&page=${page}&sort_by=${sortBy}`,
     topRatedMovie: `${baseURL}/movie/top_rated?language=${language}&page=${page}`,
     topRatedTv: `${baseURL}/tv/top_rated?language=${language}&page=${page}`,
@@ -36,7 +47,7 @@ export default async function axiosFetch({ requestID, id, language = "en-US", pa
     searchMovie: `${baseURL}/search/movie?query=${query}&language=${language}&page=${page}`,
     searchTv: `${baseURL}/search/tv?query=${query}&language=${language}&page=${page}`,
 
-    // for a ID 
+    // for a ID
     movieData: `${baseURL}/movie/${id}?language=${language}`,
     tvData: `${baseURL}/tv/${id}?language=${language}`,
     personData: `${baseURL}/person/${id}?language=${language}`,
@@ -53,7 +64,7 @@ export default async function axiosFetch({ requestID, id, language = "en-US", pa
     tvRelated: `${baseURL}/tv/${id}/recommendations?language=${language}&page=${page}`,
     tvEpisodes: `${baseURL}/tv/${id}/season/${season}?language=${language}`,
 
-    // person 
+    // person
     personMovie: `${baseURL}/person/${id}/movie_credits?language=${language}&page=${page}`,
     personTv: `${baseURL}/person/${id}/tv_credits?language=${language}&page=${page}`,
 
@@ -67,7 +78,9 @@ export default async function axiosFetch({ requestID, id, language = "en-US", pa
   // console.log({ final_request });
 
   try {
-    const response = await axios.get(final_request, { params: { api_key: API_KEY } });
+    const response = await axios.get(final_request, {
+      params: { api_key: API_KEY },
+    });
     return await response.data; // Return the resolved data from the response
   } catch (error) {
     console.error("Error fetching data:", error);

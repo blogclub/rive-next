@@ -1,4 +1,4 @@
-import styles from '@/styles/Settings.module.scss';
+import styles from "@/styles/Settings.module.scss";
 const ErrorPage = () => {
   return (
     <div className={`${styles.settingsPage} ${styles.authPage}`}>
@@ -10,8 +10,8 @@ const ErrorPage = () => {
         <h1>404</h1>
         <p>Page Not Found</p>
       </div>
-    </div >
-  )
-}
+    </div>
+  );
+};
 
 export default ErrorPage;

@@ -1,11 +1,11 @@
-.MoviePage{
+.MoviePage {
   width: 100vw;
   min-height: 100vh;
   overflow-y: auto;
   overflow-x: hidden;
   padding: 1rem 0.5rem;
   padding-left: 5rem;
-  .category{
+  .category {
     display: flex;
     width: 100%;
     justify-content: flex-start;
@@ -26,16 +26,16 @@
     //   }
     // }
   }
-  .movieList{
+  .movieList {
     padding: 3rem;
     width: 100vw;
-    min-height:100vh ;
+    min-height: 100vh;
     display: flex;
     justify-content: flex-start;
     flex-direction: row;
     flex-wrap: wrap;
     gap: 2rem 1rem;
-    .loading{
+    .loading {
       height: 15rem;
       width: 10rem;
     }
@@ -59,30 +59,30 @@
     justify-content: center;
     align-items: center;
   }
-  svg{
+  svg {
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 2rem;
     color: var(--primary-2);
   }
-  h1{
+  h1 {
     margin-left: 3rem;
     font-size: 1.5rem;
   }
-  span{
+  span {
     color: var(--ascent-color);
     margin-left: 0.5rem;
     font-size: 1.6rem;
   }
 }
 
-.InputWrapper{
+.InputWrapper {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  .searchInput{
+  .searchInput {
     margin: 1.5rem 1rem;
     border: none;
     outline: none;
@@ -90,18 +90,18 @@
     color: var(--ascent-color);
     caret-color: var(--primary-2);
     padding: 1rem;
-    width: clamp(20rem,80%, 25rem);
+    width: clamp(20rem, 80%, 25rem);
     border-radius: 0.5rem;
   }
 }
 
-.inactive{
+.inactive {
   cursor: pointer;
-  color:var(--primary-2);
-  fill:var(--primary-2);
+  color: var(--primary-2);
+  fill: var(--primary-2);
 }
 
-.active{
+.active {
   cursor: pointer;
   color: var(--ascent-color) !important;
   fill: var(--ascent-color) !important;
@@ -111,35 +111,35 @@
   background-color: var(--ascent-color);
   border-radius: 0.5rem;
   color: var(--primary-1);
-  a{
+  a {
     color: var(--primary-1);
   }
 }
-.disabled{
-  svg{
+.disabled {
+  svg {
     opacity: 0.5 !important;
     fill: var(--ascent-color);
   }
 }
 
 @media (max-width: 769px) {
-  .MoviePage{
+  .MoviePage {
     padding-left: unset;
-    padding:1.5rem 1rem;
+    padding: 1.5rem 1rem;
     padding-bottom: 5rem;
-    h1{
+    h1 {
       margin-left: unset;
     }
-    .movieList{
+    .movieList {
       padding: 1rem;
       gap: 1rem 0.5rem;
       margin-bottom: 1.5rem;
-      .loading{
+      .loading {
         height: 10rem;
         width: 7rem;
       }
     }
-    .pagination{
+    .pagination {
       max-width: 85vw;
       margin: 0 auto;
       flex-wrap: wrap;

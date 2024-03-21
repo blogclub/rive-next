@@ -7,9 +7,17 @@ import axiosFetch from "@/Utils/fetch";
 import MoviePoster from "@/components/MoviePoster";
 import Skeleton from "react-loading-skeleton";
 import Link from "next/link";
-import { BsBookmarkPlus, BsFillBookmarkCheckFill, BsShare } from "react-icons/bs";
+import {
+  BsBookmarkPlus,
+  BsFillBookmarkCheckFill,
+  BsShare,
+} from "react-icons/bs";
 import { FaPlay, FaYoutube } from "react-icons/fa";
-import { setBookmarks, checkBookmarks, removeBookmarks } from "@/Utils/bookmark";
+import {
+  setBookmarks,
+  checkBookmarks,
+  removeBookmarks,
+} from "@/Utils/bookmark";
 import { navigatorShare } from "@/Utils/share";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/Utils/firebase";
@@ -40,12 +48,20 @@ const DetailPage = () => {
         const data = await axiosFetch({ requestID: `${type}Data`, id: id });
         setData(data);
         const Videos = await axiosFetch({ requestID: `${type}Videos`, id: id });
-        setTrailer(Videos.results.find((ele: any) => ele.type === "Trailer" && ele.official === true));
-        const response = await axiosFetch({ requestID: `${type}Images`, id: id });
+        setTrailer(
+          Videos.results.find(
+            (ele: any) => ele.type === "Trailer" && ele.official === true,
+          ),
+        );
+        const response = await axiosFetch({
+          requestID: `${type}Images`,
+          id: id,
+        });
         // setImages(response.results);
         let arr: any = [];
         response.backdrops.map((ele: any, i: number) => {
-          if (i < 20) arr.push(process.env.NEXT_PUBLIC_TMBD_IMAGE_URL + ele.file_path);
+          if (i < 20)
+            arr.push(process.env.NEXT_PUBLIC_TMBD_IMAGE_URL + ele.file_path);
         });
         // if (arr.length === 0) {
         //   response.posters.map((ele: any, i) => {
@@ -77,63 +93,107 @@ const DetailPage = () => {
         setLoading(true);
       }
     });
-  }, [])
+  }, []);
 
   useEffect(() => {
     const fetch = async () => {
       if (data !== undefined && data !== null) {
         if (user !== undefined && user !== null)
-          setBookmarked(await checkBookmarks({ userId: user, type: type, id: data.id }));
+          setBookmarked(
+            await checkBookmarks({ userId: user, type: type, id: data.id }),
+          );
         else
-          setBookmarked(await checkBookmarks({ userId: null, type: type, id: data.id }));
+          setBookmarked(
+            await checkBookmarks({ userId: null, type: type, id: data.id }),
+          );
         // console.log(checkBookmarks({ userId: user, type: type, id: data.id }));
       }
-    }
+    };
     fetch();
   }, [index, data, user]);
 
   const handleBookmarkAdd = () => {
     setBookmarks({ userId: user, type: type, id: data.id });
     setBookmarked(!bookmarked);
-  }
+  };
   const handleBookmarkRemove = () => {
     removeBookmarks({ userId: user, type: type, id: data.id });
     setBookmarked(!bookmarked);
-  }
+  };
   const handleShare = () => {
     const url = `/detail?type=${type}&id=${id}`;
     navigatorShare({ text: data.title, url: url });
-  }
+  };
 
   return (
     // carousel
     // detail
-    <div className={styles.DetailPage} >
+    <div className={styles.DetailPage}>
       <div className={styles.biggerPic}>
-        {images?.length > 0 ? <Carousel imageArr={images} setIndex={setIndex} mobileHeight="60vh" desktopHeight="95vh" objectFit={"cover"} /> : <Skeleton className={styles.CarouselLoading} /> // if no images array, then use backdrop poster
+        {
+          images?.length > 0 ? (
+            <Carousel
+              imageArr={images}
+              setIndex={setIndex}
+              mobileHeight="60vh"
+              desktopHeight="95vh"
+              objectFit={"cover"}
+            />
+          ) : (
+            <Skeleton className={styles.CarouselLoading} />
+          ) // if no images array, then use backdrop poster
         }
         <div className={styles.DetailBanner}>
           <div className={styles.poster}>
-            <div className={styles.rating}>{data?.vote_average?.toFixed(1)}</div>
+            <div className={styles.rating}>
+              {data?.vote_average?.toFixed(1)}
+            </div>
             <MoviePoster data={data} />
           </div>
           <div className={styles.HomeHeroMeta}>
             <h1>{data?.title || data?.name || <Skeleton />}</h1>
-            <div className={styles.HomeHeroMetaRow2} >
-              <p className={styles.type}>{data ? (type == "movie" ? "MOVIE" : "SHOW") : null}</p>
-              {data ?
+            <div className={styles.HomeHeroMetaRow2}>
+              <p className={styles.type}>
+                {data ? (type == "movie" ? "MOVIE" : "SHOW") : null}
+              </p>
+              {data ? (
                 <>
-                  <Link className={styles.links} href={`${type === "movie" ? `/watch?type=${type}&id=${data?.id}` : `/watch?type=${type}&id=${data?.id}&season=1&episode=1`}`}>watch <FaPlay className={styles.IconsMobileNone} /></Link>
-                  {
-                    trailer && <Link className={styles.links} href={`https://youtube.com/watch?v=${trailer.key}`} target="_blank">trailer <FaYoutube className={styles.IconsMobileNone} /></Link>
-                  }
-                  {
-                    bookmarked ? <BsFillBookmarkCheckFill className={styles.HomeHeroIcons} onClick={handleBookmarkRemove} /> : <BsBookmarkPlus className={styles.HomeHeroIcons} onClick={handleBookmarkAdd} />
-                  }
-                  <BsShare className={styles.HomeHeroIcons} onClick={handleShare} />
+                  <Link
+                    className={styles.links}
+                    href={`${type === "movie" ? `/watch?type=${type}&id=${data?.id}` : `/watch?type=${type}&id=${data?.id}&season=1&episode=1`}`}
+                  >
+                    watch <FaPlay className={styles.IconsMobileNone} />
+                  </Link>
+                  {trailer && (
+                    <Link
+                      className={styles.links}
+                      href={`https://youtube.com/watch?v=${trailer.key}`}
+                      target="_blank"
+                    >
+                      trailer <FaYoutube className={styles.IconsMobileNone} />
+                    </Link>
+                  )}
+                  {bookmarked ? (
+                    <BsFillBookmarkCheckFill
+                      className={styles.HomeHeroIcons}
+                      onClick={handleBookmarkRemove}
+                    />
+                  ) : (
+                    <BsBookmarkPlus
+                      className={styles.HomeHeroIcons}
+                      onClick={handleBookmarkAdd}
+                    />
+                  )}
+                  <BsShare
+                    className={styles.HomeHeroIcons}
+                    onClick={handleShare}
+                  />
                 </>
-                : <div ><Skeleton width={200} count={1} /></div>
-              }
+              ) : (
+                <div>
+                  <Skeleton width={200} count={1} />
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -142,7 +202,7 @@ const DetailPage = () => {
         <MetaDetails id={id} type={type} data={data} />
       </div>
     </div>
-  )
+  );
 };
 
 export default DetailPage;

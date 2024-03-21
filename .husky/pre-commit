@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "commenting in Rive"
+echo "Running formatting script..."
+npx prettier --write .
+echo "Staging changes..."
+git add .

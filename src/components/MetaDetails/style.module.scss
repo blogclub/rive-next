@@ -1,4 +1,4 @@
-.MetaDetailPage{
+.MetaDetailPage {
   height: 100vh;
   width: 100%;
   overflow-y: auto;
@@ -8,7 +8,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  .MetaDetails{
+  .MetaDetails {
     height: 100%;
     width: 100%;
     border-radius: 0.5rem;
@@ -17,7 +17,7 @@
     overflow: auto;
     position: relative;
     padding-top: 0;
-    .category{
+    .category {
       display: flex;
       width: 100%;
       justify-content: space-around;
@@ -33,14 +33,15 @@
       margin-bottom: 1rem;
       border-bottom: 1px solid var(--primary-2);
     }
-    h3,h4{
+    h3,
+    h4 {
       color: var(--primary-3);
       margin: 2rem 0 0.3rem 0;
     }
-    p{
+    p {
       color: var(--primary-2);
     }
-    .casts{
+    .casts {
       height: 100%;
       width: 100%;
       display: flex;
@@ -48,7 +49,7 @@
       align-items: center;
       gap: 1rem;
       flex-wrap: wrap;
-      .cast{
+      .cast {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -56,22 +57,24 @@
         gap: 0.5rem;
         overflow: hidden;
         text-overflow: ellipsis;
-        h4{
+        h4 {
           margin: 0;
         }
       }
     }
-    .img{
+    .img {
       width: 4rem !important;
       height: 6rem;
       object-fit: cover;
       border-radius: 0.5rem;
     }
-    .MovieList,.ReviewList,.EpisodeList{
+    .MovieList,
+    .ReviewList,
+    .EpisodeList {
       display: flex;
       gap: 1rem;
       flex-wrap: wrap;
-      .Review{
+      .Review {
         padding: 1rem;
         background: var(--bg-color);
         max-height: 20rem;
@@ -79,23 +82,23 @@
         cursor: pointer;
         transition: all 0.2s ease;
         margin: 0 auto;
-        h4{
+        h4 {
           margin-top: 0;
         }
-        .rating{
+        .rating {
           color: var(--primary-3);
           margin-bottom: 1rem;
         }
       }
-      .ReviewDetail{
+      .ReviewDetail {
         height: unset;
         max-height: unset !important;
       }
     }
-    .EpisodeList{
+    .EpisodeList {
       gap: 0.1rem;
-      select{
-        width: clamp(15rem,50vw,20rem) ;
+      select {
+        width: clamp(15rem, 50vw, 20rem);
         padding: 1rem 2rem;
         background: var(--bg-color);
         color: var(--primary-3);
@@ -108,7 +111,7 @@
         // }
       }
 
-      .episode{
+      .episode {
         display: flex;
         justify-content: center;
         align-items: flex-start;
@@ -120,20 +123,20 @@
         cursor: pointer;
         gap: 0.5rem;
         border-radius: 0.5rem;
-        h4{
+        h4 {
           margin-top: 0;
         }
-        .img{
+        .img {
           height: 10rem !important;
           width: 10rem !important;
           object-fit: cover;
         }
-        .details{
+        .details {
           display: flex;
           flex-direction: column;
           gap: 0.2rem;
 
-          .links{
+          .links {
             margin-bottom: 1rem;
           }
         }
@@ -142,62 +145,63 @@
   }
 }
 
-
-.inactive{
+.inactive {
   cursor: pointer;
-  color:var(--primary-2);
-  fill:var(--primary-2);
+  color: var(--primary-2);
+  fill: var(--primary-2);
 }
 
-.active{
+.active {
   cursor: pointer;
   color: var(--ascent-color) !important;
   fill: var(--ascent-color) !important;
 }
 
 @media (max-width: 769px) {
-  .MetaDetailPage{
+  .MetaDetailPage {
     height: 100%;
     width: 100%;
     overflow-y: auto;
     overflow-x: hidden;
     background: var(--primary-1);
-    .MetaDetails{
+    .MetaDetails {
       position: relative;
       padding-top: 4rem;
       min-height: 50vh;
-      .category{
+      .category {
         position: absolute;
         top: -0.5rem;
         left: 0;
         justify-content: space-around;
       }
-      .img{
+      .img {
         width: 3rem !important;
         height: 4.5rem !important;
       }
-      .MovieList,.ReviewList{
-        .Review{
+      .MovieList,
+      .ReviewList {
+        .Review {
           max-height: 15rem;
-          .rating{
+          .rating {
             margin-bottom: 0.5rem;
           }
         }
-        .ReviewDetail{
+        .ReviewDetail {
           height: unset;
           max-height: unset;
         }
       }
     }
-    .EpisodeList{
-      .episode{
+    .EpisodeList {
+      .episode {
         display: block !important;
-        .img,.CardSmall{
+        .img,
+        .CardSmall {
           height: 8rem !important;
           width: 7rem !important;
           display: inline-block;
         }
-        .details{
+        .details {
           margin-top: 1rem;
           justify-content: flex-start;
           align-items: flex-start;

@@ -1,0 +1,10 @@
+build/
+public/
+node_modules/
+template/
+/package-lock.json
+Dockerfile
+.dockerignore
+.husky/
+.next/
+public/

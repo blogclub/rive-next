@@ -1,14 +1,21 @@
-import React, { useState, useEffect } from 'react'
-import styles from '@/styles/Settings.module.scss';
-import Link from 'next/link';
-import { FaGithub, FaGlobe } from 'react-icons/fa';
-import { getSettings, setSettings } from '@/Utils/settings';
-import { usePathname } from 'next/navigation';
-import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from '@/Utils/firebase';
-import { logoutUser } from '@/Utils/firebaseUser';
+import React, { useState, useEffect } from "react";
+import styles from "@/styles/Settings.module.scss";
+import Link from "next/link";
+import { FaGithub, FaGlobe } from "react-icons/fa";
+import { getSettings, setSettings } from "@/Utils/settings";
+import { usePathname } from "next/navigation";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "@/Utils/firebase";
+import { logoutUser } from "@/Utils/firebaseUser";
 
-const SettingsPage = ({ mode, theme, ascent_color, setMode, setTheme, setAscent_color }: any) => {
+const SettingsPage = ({
+  mode,
+  theme,
+  ascent_color,
+  setMode,
+  setTheme,
+  setAscent_color,
+}: any) => {
   const [user, setUser] = useState<any>(false);
   const [loading, setLoading] = useState(true);
   const [deferredPrompt, setDeferredPrompt] = useState<any>();
@@ -23,7 +30,7 @@ const SettingsPage = ({ mode, theme, ascent_color, setMode, setTheme, setAscent_
         setLoading(false);
       }
     });
-    window.addEventListener('beforeinstallprompt', (e) => {
+    window.addEventListener("beforeinstallprompt", (e) => {
       e.preventDefault();
       setDeferredPrompt(e);
     });
@@ -32,17 +39,18 @@ const SettingsPage = ({ mode, theme, ascent_color, setMode, setTheme, setAscent_
     const prevVal = { mode, theme, ascent_color };
     if (type === "mode") setSettings({ values: { ...prevVal, mode: value } });
     if (type === "theme") setSettings({ values: { ...prevVal, theme: value } });
-    if (type === "ascent_color") setSettings({ values: { ...prevVal, ascent_color: value } });
-  }
+    if (type === "ascent_color")
+      setSettings({ values: { ...prevVal, ascent_color: value } });
+  };
   const handleDownload = async () => {
-    if (deferredPrompt !== null) {
+    if (deferredPrompt !== null && deferredPrompt !== undefined) {
       deferredPrompt.prompt();
       const { outcome } = await deferredPrompt.userChoice;
-      if (outcome === 'accepted') {
+      if (outcome === "accepted") {
         setDeferredPrompt(null);
       }
     }
-  }
+  };
   return (
     <div className={`${styles.settingsPage}`}>
       <div className={styles.logo}>
@@ -51,30 +59,41 @@ const SettingsPage = ({ mode, theme, ascent_color, setMode, setTheme, setAscent_
       </div>
       <div className={styles.settings}>
         <h1>Account</h1>
-        {
-          user ?
-            <div className={styles.group}>
-              <>
-                <p className={styles.logout} onClick={() => logoutUser()}>Logout</p>
-                {/* <Link href="/signup">Signup</Link> */}
-              </>
-              <h4 className={styles.profileCard}>Hi There!</h4>
-            </div>
-            :
-            <div className={styles.group}>
-              <>
-                <Link href="/login">Login</Link>
-                <Link href="/signup">Signup</Link>
-              </>
-              <h4 className={styles.profileCard}>Login to syc to cloud</h4>
-            </div>
-        }
+        {user ? (
+          <div className={styles.group}>
+            <>
+              <p className={styles.logout} onClick={() => logoutUser()}>
+                Logout
+              </p>
+              {/* <Link href="/signup">Signup</Link> */}
+            </>
+            <h4 className={styles.profileCard}>Hi There!</h4>
+          </div>
+        ) : (
+          <div className={styles.group}>
+            <>
+              <Link href="/login">Login</Link>
+              <Link href="/signup">Signup</Link>
+            </>
+            <h4 className={styles.profileCard}>Login to syc to cloud</h4>
+          </div>
+        )}
         <h1>Appearence</h1>
         <div className={styles.group}>
           <div>
             <label htmlFor="mode">Mode</label>
-            <select name="mode" id="mode" value={mode} onChange={(e) => { setMode(e.target.value); handleSelect({ type: "mode", value: e.target.value }) }}>
-              <option value="system" defaultChecked>System</option>
+            <select
+              name="mode"
+              id="mode"
+              value={mode}
+              onChange={(e) => {
+                setMode(e.target.value);
+                handleSelect({ type: "mode", value: e.target.value });
+              }}
+            >
+              <option value="system" defaultChecked>
+                System
+              </option>
               <option value="light">Light</option>
               <option value="dark">Dark</option>
             </select>
@@ -88,8 +107,18 @@ const SettingsPage = ({ mode, theme, ascent_color, setMode, setTheme, setAscent_
           </div> */}
           <div>
             <label htmlFor="ascent">Ascent Color</label>
-            <select name="ascent" id="ascent" value={ascent_color} onChange={(e) => { setAscent_color(e.target.value); handleSelect({ type: "ascent_color", value: e.target.value }) }}>
-              <option value="gold" defaultChecked>Gold</option>
+            <select
+              name="ascent"
+              id="ascent"
+              value={ascent_color}
+              onChange={(e) => {
+                setAscent_color(e.target.value);
+                handleSelect({ type: "ascent_color", value: e.target.value });
+              }}
+            >
+              <option value="gold" defaultChecked>
+                Gold
+              </option>
               <option value="#f44336">Red</option>
               <option value="#e91e63">Pink</option>
               <option value="#9c27b0">Purple</option>
@@ -111,8 +140,12 @@ const SettingsPage = ({ mode, theme, ascent_color, setMode, setTheme, setAscent_
         </div>
         <h1>App Center</h1>
         <div className={styles.group}>
-          <p className={styles.logout} onClick={handleDownload}>Download</p>
-          <Link href="mailto:kumarashishranjan4971@hotmail.com">Contact Us</Link>
+          <p className={styles.logout} onClick={handleDownload}>
+            Download
+          </p>
+          <Link href="mailto:kumarashishranjan4971@hotmail.com">
+            Contact Us
+          </Link>
           {/* <Link href="/contact">Contact Us</Link> */}
         </div>
         <h1>Links</h1>
@@ -126,7 +159,7 @@ const SettingsPage = ({ mode, theme, ascent_color, setMode, setTheme, setAscent_
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default SettingsPage;

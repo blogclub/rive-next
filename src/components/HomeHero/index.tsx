@@ -1,13 +1,22 @@
 import React, { useState, useEffect } from "react";
 import styles from "./style.module.scss";
 import axiosFetch from "@/Utils/fetch";
-import 'react-loading-skeleton/dist/skeleton.css'
+import "react-loading-skeleton/dist/skeleton.css";
 // import Image from "next/image";
 import Carousel from "../Carousel";
 import Link from "next/link";
-import { BsBookmarkPlus, BsFillBookmarkCheckFill, BsShare } from "react-icons/bs";
+import {
+  BsBookmarkPlus,
+  BsFillBookmarkCheckFill,
+  BsShare,
+} from "react-icons/bs";
 import { FaInfo, FaPlay } from "react-icons/fa";
-import { setBookmarks, checkBookmarks, removeBookmarks, getBookmarks } from "@/Utils/bookmark";
+import {
+  setBookmarks,
+  checkBookmarks,
+  removeBookmarks,
+  getBookmarks,
+} from "@/Utils/bookmark";
 import { navigatorShare } from "@/Utils/share";
 import Skeleton from "react-loading-skeleton";
 import { onAuthStateChanged } from "firebase/auth";
@@ -59,50 +68,106 @@ const HomeHero = () => {
   useEffect(() => {
     const check = async () => {
       if (data[index] !== undefined && data[index] !== null) {
-        setBookmarked(await checkBookmarks({ userId: user, type: data[index].media_type, id: data[index].id }));
+        setBookmarked(
+          await checkBookmarks({
+            userId: user,
+            type: data[index].media_type,
+            id: data[index].id,
+          }),
+        );
       }
-    }
+    };
     check();
   }, [index, data, user]);
 
   const handleBookmarkAdd = () => {
     console.log({ user });
 
-    setBookmarks({ userId: user, type: data[index]?.media_type, id: data[index].id });
+    setBookmarks({
+      userId: user,
+      type: data[index]?.media_type,
+      id: data[index].id,
+    });
     setBookmarked(!bookmarked);
-  }
+  };
   const handleBookmarkRemove = () => {
-    removeBookmarks({ userId: user, type: data[index]?.media_type, id: data[index].id });
+    removeBookmarks({
+      userId: user,
+      type: data[index]?.media_type,
+      id: data[index].id,
+    });
     setBookmarked(!bookmarked);
-  }
+  };
   const handleShare = () => {
     const url = `/detail?type=${data[index].media_type}&id=${data[index].id}`;
     navigatorShare({ text: data[index].title, url: url });
-  }
+  };
   return (
-    <div className={styles.HomeHero} >
-      <div className={styles.HomeCarousel} >
-        {images.length > 0 ? <Carousel imageArr={images} setIndex={setIndex} mobileHeight="60vh" desktopHeight="80vh" objectFit={"cover"} /> : <Skeleton className={styles.CarouselLoading} />}
+    <div className={styles.HomeHero}>
+      <div className={styles.HomeCarousel}>
+        {images.length > 0 ? (
+          <Carousel
+            imageArr={images}
+            setIndex={setIndex}
+            mobileHeight="60vh"
+            desktopHeight="80vh"
+            objectFit={"cover"}
+          />
+        ) : (
+          <Skeleton className={styles.CarouselLoading} />
+        )}
       </div>
       <div className={styles.HomeHeroMeta} key={data[index]?.id}>
         <h1>{data[index]?.title || data[index]?.name || <Skeleton />}</h1>
-        <div className={styles.HomeHeroMetaRow2} >
-          <p className={styles.type}>{data[index] ? (data[index].media_type == "movie" ? "MOVIE" : "SHOW") : <Skeleton />}</p>
-          {data[index] ?
+        <div className={styles.HomeHeroMetaRow2}>
+          <p className={styles.type}>
+            {data[index] ? (
+              data[index].media_type == "movie" ? (
+                "MOVIE"
+              ) : (
+                "SHOW"
+              )
+            ) : (
+              <Skeleton />
+            )}
+          </p>
+          {data[index] ? (
             <>
-              <Link className={styles.links} href={`/watch?type=${data[index]?.media_type}&id=${data[index]?.id}`}>watch <FaPlay /></Link>
-              <Link className={styles.links} href={`/detail?type=${data[index]?.media_type}&id=${data[index]?.id}`}> detail  </Link>
+              <Link
+                className={styles.links}
+                href={`/watch?type=${data[index]?.media_type}&id=${data[index]?.id}`}
+              >
+                watch <FaPlay />
+              </Link>
+              <Link
+                className={styles.links}
+                href={`/detail?type=${data[index]?.media_type}&id=${data[index]?.id}`}
+              >
+                {" "}
+                detail{" "}
+              </Link>
 
-              {
-                bookmarked ? <BsFillBookmarkCheckFill className={styles.HomeHeroIcons} onClick={handleBookmarkRemove} /> : <BsBookmarkPlus className={styles.HomeHeroIcons} onClick={handleBookmarkAdd} />
-              }
+              {bookmarked ? (
+                <BsFillBookmarkCheckFill
+                  className={styles.HomeHeroIcons}
+                  onClick={handleBookmarkRemove}
+                />
+              ) : (
+                <BsBookmarkPlus
+                  className={styles.HomeHeroIcons}
+                  onClick={handleBookmarkAdd}
+                />
+              )}
               <BsShare className={styles.HomeHeroIcons} onClick={handleShare} />
             </>
-            : <div ><Skeleton width={200} count={1} /></div>
-          }
+          ) : (
+            <div>
+              <Skeleton width={200} count={1} />
+            </div>
+          )}
         </div>
       </div>
-    </div >
+    </div>
   );
 };
 

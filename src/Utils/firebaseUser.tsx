@@ -1,33 +1,49 @@
 import { auth, db } from "./firebase";
-import { createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification, signInWithEmailAndPassword, sendPasswordResetEmail, signOut } from "firebase/auth";
-import { doc, setDoc, addDoc, collection, query, where, getDocs, deleteDoc } from "firebase/firestore";
-import { toast } from 'sonner';
+import {
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+  sendEmailVerification,
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail,
+  signOut,
+} from "firebase/auth";
+import {
+  doc,
+  setDoc,
+  addDoc,
+  collection,
+  query,
+  where,
+  getDocs,
+  deleteDoc,
+} from "firebase/firestore";
+import { toast } from "sonner";
 
 export const signupUserManual = async ({ username, email, password }: any) => {
   const isEmailCorrect = /\S+@\S+\.\S+/.test(email);
   if (!username || !email || !password) {
     // toast.dismiss(loadingToast);
-    toast.error('Fill all the fields');
+    toast.error("Fill all the fields");
     return false;
   } else {
     if (!isEmailCorrect) {
       // toast("Please enter a valid email");
       // toast.dismiss(loadingToast);
-      toast.error('Cloud: Enter valid Email');
+      toast.error("Cloud: Enter valid Email");
       return false;
     } else {
-      const loadingToast = toast.loading('Connecting to cloud provider...');
+      const loadingToast = toast.loading("Connecting to cloud provider...");
       try {
         const userCred = await createUserWithEmailAndPassword(
           auth,
           email,
-          password
+          password,
         );
         const user = userCred.user;
         const colRef = doc(db, "users", user.uid);
         await setDoc(colRef, { username: username });
         toast.dismiss(loadingToast);
-        toast.success('Cloud: User created! Welcome to Rive club');
+        toast.success("Cloud: User created! Welcome to Rive club");
         return true;
       } catch (error: any) {
         if (error.message.includes("already-in-use")) {
@@ -46,27 +62,26 @@ export const signupUserManual = async ({ username, email, password }: any) => {
 };
 
 export const loginUserManual = async ({ email, password }: any) => {
-
   const isEmailCorrect = /\S+@\S+\.\S+/.test(email);
 
-  const loadingToast = toast.loading('Connecting to cloud provider...');
+  const loadingToast = toast.loading("Connecting to cloud provider...");
   try {
     if (!email || !password) {
       // toast("Fill all fields");
       toast.dismiss(loadingToast);
-      toast.error('Some required fields are empty!');
+      toast.error("Some required fields are empty!");
       return false;
     } else {
       if (!isEmailCorrect) {
         // toast("Please enter a valid email");
         toast.dismiss(loadingToast);
-        toast.error('Cloud: Enter valid Email');
+        toast.error("Cloud: Enter valid Email");
         return false;
       } else {
         await signInWithEmailAndPassword(auth, email, password);
         toast.dismiss(loadingToast);
-        toast.success('Cloud: welcome back');
-        return true
+        toast.success("Cloud: welcome back");
+        return true;
       }
     }
   } catch (error: any) {
@@ -88,7 +103,7 @@ export const loginUserManual = async ({ email, password }: any) => {
 };
 
 export const logoutUser = () => {
-  const loadingToast = toast.loading('Connecting to cloud provider...');
+  const loadingToast = toast.loading("Connecting to cloud provider...");
   signOut(auth)
     .then(() => {
       // toast("Now using browser's storage");
@@ -119,7 +134,7 @@ export const logoutUser = () => {
 // };
 
 export const fetchFbWatchlist = async ({ userID = null }: any) => {
-  const loadingToast = toast.loading('Connecting to cloud provider...');
+  const loadingToast = toast.loading("Connecting to cloud provider...");
   const userWatchlist: any = { movie: [], tv: [] };
   try {
     const q = query(collection(db, "watchlist"), where("userID", "==", userID));
@@ -129,19 +144,23 @@ export const fetchFbWatchlist = async ({ userID = null }: any) => {
       userWatchlist[doc.data().type].push(doc.data().id);
     });
     toast.dismiss(loadingToast);
-    toast.success('Watchlist fetched successfully');
+    toast.success("Watchlist fetched successfully");
   } catch (error) {
     // Dismiss loading toast and show error toast
     toast.dismiss(loadingToast);
-    toast.error('Error fetching watchlist');
+    toast.error("Error fetching watchlist");
     throw error; // Re-throw the error for handling upstream if needed
   }
 
   return userWatchlist;
-}
+};
 
-export const removeFromFbWatchlist = async ({ userID = null, type, id }: any) => {
-  const loadingToast = toast.loading('Connecting to cloud provider...');
+export const removeFromFbWatchlist = async ({
+  userID = null,
+  type,
+  id,
+}: any) => {
+  const loadingToast = toast.loading("Connecting to cloud provider...");
   try {
     const q = query(collection(db, "watchlist"), where("userID", "==", userID));
     const querySnapshot = await getDocs(q);
@@ -155,11 +174,11 @@ export const removeFromFbWatchlist = async ({ userID = null, type, id }: any) =>
       }
     });
     toast.dismiss(loadingToast);
-    toast.success('Watchlist updated successfully');
+    toast.success("Watchlist updated successfully");
   } catch (error) {
     // Dismiss loading toast and show error toast
     toast.dismiss(loadingToast);
-    toast.error('Error updating watchlist');
+    toast.error("Error updating watchlist");
     throw error; // Re-throw the error for handling upstream if needed
   }
 };
@@ -180,24 +199,27 @@ export const checkInFbWatchlist = async ({ userID = null, type, id }: any) => {
   }
   return false;
 };
-export const addToFbWatchlist = async ({ userID = null, type, id, }: any) => {
+export const addToFbWatchlist = async ({ userID = null, type, id }: any) => {
   if (userID === null) {
     // toast.dismiss(loadingToast);
-    toast.error('Error updating watchlist');
+    toast.error("Error updating watchlist");
     return toast.error("Try again");
-  }
-  else if (await checkInFbWatchlist({ userID, type, id })) {
+  } else if (await checkInFbWatchlist({ userID, type, id })) {
     return;
   } else {
-    const loadingToast = toast.loading('Connecting to cloud provider...');
+    const loadingToast = toast.loading("Connecting to cloud provider...");
     try {
-      const docRef = await addDoc(collection(db, "watchlist"), { type, id, userID });
+      const docRef = await addDoc(collection(db, "watchlist"), {
+        type,
+        id,
+        userID,
+      });
       toast.dismiss(loadingToast);
-      toast.success('Watchlist updated successfully');
+      toast.success("Watchlist updated successfully");
     } catch (error) {
       // Dismiss loading toast and show error toast
       toast.dismiss(loadingToast);
-      toast.error('Error updating watchlist');
+      toast.error("Error updating watchlist");
       throw error; // Re-throw the error for handling upstream if needed
     }
   }
