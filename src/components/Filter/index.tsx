@@ -107,8 +107,9 @@ const Filter = ({ categoryType, setShowFilter, setFilterYear, setFiltercountry, 
           const isChecked = selectedGenres.includes(ele.id.toString());
           return (
             <div className={`${styles.checkboxDiv} ${isChecked ? styles.active : styles.inactive}`}>
-              <input type="checkbox" id={ele.id} name={ele.name} value={ele.id} onChange={() => handleGenereSelect(ele.id)} checked={isChecked} />
-              <label htmlFor={ele.id}>{ele.name}</label>
+              <label className={"container"} htmlFor={ele.id}>{ele.name}
+                <input type="checkbox" id={ele.id} name={ele.name} value={ele.id} onChange={() => handleGenereSelect(ele.id)} checked={isChecked} />
+                <span className={"checkmark"}></span></label>
             </div>
           )
         })
@@ -118,8 +119,10 @@ const Filter = ({ categoryType, setShowFilter, setFilterYear, setFiltercountry, 
         countryData.map((ele: any) => {
           return (
             <div className={`${styles.checkboxDiv} ${selectedCountryCheckbox === ele.abbr ? styles.active : styles.inactive}`}>
-              <input type="checkbox" id={ele.name} name={ele.name} value={ele.name} onChange={() => handleCountrySelect(ele.abbr)} checked={selectedCountryCheckbox === ele.abbr} />
-              <label htmlFor={ele.name}>{ele.name}</label>
+              <label className={"container"} htmlFor={ele.name}>{ele.name}
+                <input type="checkbox" id={ele.name} name={ele.name} value={ele.name} onChange={() => handleCountrySelect(ele.abbr)} checked={selectedCountryCheckbox === ele.abbr} />
+                <span className={"checkmark"}></span>
+              </label>
             </div>
           )
         })

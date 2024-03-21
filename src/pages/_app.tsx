@@ -2,6 +2,7 @@ import "@/styles/globals.scss";
 import Layout from "@/components/Layout";
 import Head from "next/head";
 import { Toaster } from 'sonner';
+import "@/styles/checkbox.scss";
 
 export default function App({ Component, pageProps }: any) {
   return (
