@@ -11,6 +11,7 @@ import { logoutUser } from '@/Utils/firebaseUser';
 const SettingsPage = ({ mode, theme, ascent_color, setMode, setTheme, setAscent_color }: any) => {
   const [user, setUser] = useState<any>(false);
   const [loading, setLoading] = useState(true);
+  const [deferredPrompt, setDeferredPrompt] = useState<any>();
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       // console.log({ user });
@@ -22,12 +23,25 @@ const SettingsPage = ({ mode, theme, ascent_color, setMode, setTheme, setAscent_
         setLoading(false);
       }
     });
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+    });
   }, []);
   const handleSelect = ({ type, value }: any) => {
     const prevVal = { mode, theme, ascent_color };
     if (type === "mode") setSettings({ values: { ...prevVal, mode: value } });
     if (type === "theme") setSettings({ values: { ...prevVal, theme: value } });
     if (type === "ascent_color") setSettings({ values: { ...prevVal, ascent_color: value } });
+  }
+  const handleDownload = async () => {
+    if (deferredPrompt !== null) {
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      if (outcome === 'accepted') {
+        setDeferredPrompt(null);
+      }
+    }
   }
   return (
     <div className={`${styles.settingsPage}`}>
@@ -97,7 +111,7 @@ const SettingsPage = ({ mode, theme, ascent_color, setMode, setTheme, setAscent_
         </div>
         <h1>App Center</h1>
         <div className={styles.group}>
-          <Link href="/download">Download</Link>
+          <p className={styles.logout} onClick={handleDownload}>Download</p>
           <Link href="mailto:kumarashishranjan4971@hotmail.com">Contact Us</Link>
           {/* <Link href="/contact">Contact Us</Link> */}
         </div>

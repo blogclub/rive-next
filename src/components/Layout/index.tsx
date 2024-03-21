@@ -23,7 +23,7 @@ const Layout = ({ children }: any) => {
     const prefersDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
     const themeColor = prefersDarkMode ? '#1b1919' : '#f4f7fe';
     setThemeColor(themeColor);
-    console.log({ prefersDarkMode });
+    // console.log({ prefersDarkMode });
     // const metaThemeColor = document.querySelector("meta[name=theme-color]");
     // metaThemeColor?.setAttribute("content", themeColor);
   }, []);
