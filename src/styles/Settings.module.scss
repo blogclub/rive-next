@@ -123,6 +123,25 @@
   align-items: flex-start;
 }
 
+.errorData{
+  width: clamp(20rem, calc(100vw - 2rem),40rem);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  // margin: 7rem 0;
+  h1{
+    font-size: clamp(2rem, 50vw, 3.5rem);
+  }
+  p,summary{
+    color: var(--primary-3);
+  }
+  h4{
+    color: var(--primary-3);
+    margin-top: 1rem;
+  }
+}
+
 .hide{
   display: none;
 }
@@ -163,5 +182,8 @@
       padding: 2rem 0;
       padding-right: 1rem;
     }
+  }
+  .errorData{
+    margin: 7rem 0;
   }
 }
