@@ -118,68 +118,70 @@ const HomeHero = () => {
         )}
         <div className={styles.curvy}></div>
         <div className={styles.curvy2}></div>
-      </div>
-      <div className={styles.HomeHeroMeta} key={data[index]?.id}>
-        <h1>{data[index]?.title || data[index]?.name || <Skeleton />}</h1>
-        <div className={styles.HomeHeroMetaRow2}>
-          <p className={styles.type}>
-            {data[index] ? (
-              data[index].media_type == "movie" ? (
-                "MOVIE"
+        <div className={styles.curvy3}></div>
+        <div className={styles.curvy4}></div>
+        <div className={styles.HomeHeroMeta} key={data[index]?.id}>
+          <h1>{data[index]?.title || data[index]?.name || <Skeleton />}</h1>
+          <div className={styles.HomeHeroMetaRow2}>
+            <p className={styles.type}>
+              {data[index] ? (
+                data[index].media_type == "movie" ? (
+                  "MOVIE"
+                ) : (
+                  "SHOW"
+                )
               ) : (
-                "SHOW"
-              )
-            ) : (
-              <Skeleton />
-            )}
-          </p>
-          {data[index] ? (
-            <>
-              <Link
-                className={styles.links}
-                href={`/watch?type=${data[index]?.media_type}&id=${data[index]?.id}`}
-                data-tooltip-id="tooltip"
-                data-tooltip-content="Watch Online"
-              >
-                watch <FaPlay />
-              </Link>
-              <Link
-                className={styles.links}
-                href={`/detail?type=${data[index]?.media_type}&id=${data[index]?.id}`}
-                data-tooltip-id="tooltip"
-                data-tooltip-content="Know More"
-              >
-                {" "}
-                detail{" "}
-              </Link>
-
-              {bookmarked ? (
-                <BsFillBookmarkCheckFill
-                  className={styles.HomeHeroIcons}
-                  onClick={handleBookmarkRemove}
-                  data-tooltip-id="tooltip"
-                  data-tooltip-content="Remove from Watchlist"
-                />
-              ) : (
-                <BsBookmarkPlus
-                  className={styles.HomeHeroIcons}
-                  onClick={handleBookmarkAdd}
-                  data-tooltip-id="tooltip"
-                  data-tooltip-content="Add to Watchlist"
-                />
+                <Skeleton />
               )}
-              <BsShare
-                className={styles.HomeHeroIcons}
-                onClick={handleShare}
-                data-tooltip-id="tooltip"
-                data-tooltip-content="Share"
-              />
-            </>
-          ) : (
-            <div>
-              <Skeleton width={200} count={1} />
-            </div>
-          )}
+            </p>
+            {data[index] ? (
+              <>
+                <Link
+                  className={styles.links}
+                  href={`/watch?type=${data[index]?.media_type}&id=${data[index]?.id}`}
+                  data-tooltip-id="tooltip"
+                  data-tooltip-content="Watch Online"
+                >
+                  watch <FaPlay />
+                </Link>
+                <Link
+                  className={styles.links}
+                  href={`/detail?type=${data[index]?.media_type}&id=${data[index]?.id}`}
+                  data-tooltip-id="tooltip"
+                  data-tooltip-content="Know More"
+                >
+                  {" "}
+                  detail{" "}
+                </Link>
+
+                {bookmarked ? (
+                  <BsFillBookmarkCheckFill
+                    className={styles.HomeHeroIcons}
+                    onClick={handleBookmarkRemove}
+                    data-tooltip-id="tooltip"
+                    data-tooltip-content="Remove from Watchlist"
+                  />
+                ) : (
+                  <BsBookmarkPlus
+                    className={styles.HomeHeroIcons}
+                    onClick={handleBookmarkAdd}
+                    data-tooltip-id="tooltip"
+                    data-tooltip-content="Add to Watchlist"
+                  />
+                )}
+                <BsShare
+                  className={styles.HomeHeroIcons}
+                  onClick={handleShare}
+                  data-tooltip-id="tooltip"
+                  data-tooltip-content="Share"
+                />
+              </>
+            ) : (
+              <div>
+                <Skeleton width={200} count={1} />
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

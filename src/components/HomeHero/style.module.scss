@@ -8,7 +8,7 @@
   .HomeCarousel {
     max-width: calc(100vw - 5rem);
     margin: 1rem 0 0 0;
-    overflow: hidden;
+    // overflow: hidden;
     border-radius: 2rem;
     position: relative;
     .CarouselLoading {
@@ -35,11 +35,31 @@
       border-radius: 0 0 0 2rem;
       box-shadow: -70px 70px 0 70px var(--bg-color);
     }
+    .curvy3 {
+      position: absolute;
+      height: 2.2rem;
+      width: 2.2rem;
+      left: 0;
+      top: 0;
+      // background: red;
+      border-radius: 2rem 0 0 0rem;
+      box-shadow: -70px -70px 0 70px var(--bg-color);
+    }
+    .curvy4 {
+      position: absolute;
+      height: 2.2rem;
+      width: 2.2rem;
+      right: 0;
+      top: 0;
+      // background: red;
+      border-radius: 0rem 2rem 0 0rem;
+      box-shadow: 70px -70px 0 70px var(--bg-color);
+    }
   }
   .HomeHeroMeta {
     position: absolute;
     bottom: 0;
-    margin-bottom: 2rem;
+    margin-bottom: -2.5rem;
     border-radius: 1.5rem;
     outline: 0.7rem solid var(--bg-color);
     background: var(--primary-1);
@@ -109,7 +129,7 @@
     .HomeCarousel {
       max-width: calc(100vw - 2rem);
       margin: 1rem 0 0 0;
-      overflow: hidden;
+      // overflow: hidden;
       border-radius: 2rem;
       .CarouselLoading {
         height: 60vh;
@@ -132,7 +152,7 @@
     .HomeHeroMeta {
       width: unset;
       width: 18rem;
-      margin-bottom: 1rem;
+      // margin-bottom: 1rem;
       margin-left: clamp(0rem, 0%, 10vw);
       overflow: unset;
       &::after {

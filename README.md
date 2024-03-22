@@ -5,8 +5,8 @@
 <p>
 
 <image src="./public/images/logo.svg" height="300"/>
-
 </p>
+Your Personal Streaming Oasis
 </div>
 
 <p align="center">
@@ -16,7 +16,7 @@
 
 # **_Rive_**
 
-Your Personal Streaming Oasis
+Rive is a cutting-edge platform for streaming movies and TV shows online. Our project utilizes Next.js. Your Personal Streaming Oasis
 
 <div align="left">
  <p>
@@ -32,10 +32,13 @@ Your Personal Streaming Oasis
 
 - Created using [NextJS](https://nextjs.org/) framework and [TypeScript](https://www.typescriptlang.org/).
 - Watchlist and Continue watching feature using **localstorage**
-- Sync to cloud option
+- Sync to cloud option (firestore), for watchlist
 - Login/ Signup for cloud syncing
+- Signin with email, or google (firebase)
+- Multiple server streaming
+- Download Movies/ TV shows using extensions like FetchV
 - Great Customization in settings
-- Great UI/UX
+- Great UI
 
 ## Tech Stack
 
