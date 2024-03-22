@@ -138,7 +138,7 @@ const HomeHero = () => {
               <>
                 <Link
                   className={styles.links}
-                  href={`/watch?type=${data[index]?.media_type}&id=${data[index]?.id}`}
+                  href={`${data[index]?.media_type === "movie" ? `/watch?type=${data[index]?.media_type}&id=${data[index]?.id}` : `/watch?type=${data[index]?.media_type}&id=${data[index]?.id}&season=1&episode=1`}`}
                   data-tooltip-id="tooltip"
                   data-tooltip-content="Watch Online"
                 >
