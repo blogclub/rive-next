@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "@/styles/Settings.module.scss";
 import Link from "next/link";
-import { loginUserManual } from "@/Utils/firebaseUser";
+import { loginUserGoogle, loginUserManual } from "@/Utils/firebaseUser";
 import { useRouter } from "next/navigation";
 const LoginPage = () => {
   const [email, setEmail] = useState();
@@ -10,6 +10,12 @@ const LoginPage = () => {
   const handleFormSubmission = async (e: any) => {
     e.preventDefault();
     if (await loginUserManual({ email, password })) {
+      push("/settings");
+    }
+  };
+  const handleGoogleSignIn = async (e: any) => {
+    e.preventDefault();
+    if (await loginUserGoogle()) {
       push("/settings");
     }
   };
@@ -47,6 +53,9 @@ const LoginPage = () => {
             <button onClick={handleFormSubmission}>submit</button>
           </>
         </div>
+        <h4 className={styles.signin} onClick={handleGoogleSignIn}>
+          SignIn with <span className={styles.highlight}>Google</span>
+        </h4>
         <h4>
           Become Rive member!{" "}
           <Link href="/signup" className={styles.highlight}>

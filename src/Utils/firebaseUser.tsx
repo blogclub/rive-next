@@ -1,4 +1,4 @@
-import { auth, db } from "./firebase";
+import { auth, db, provider } from "./firebase";
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
@@ -6,6 +6,8 @@ import {
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
   signOut,
+  signInWithPopup,
+  GoogleAuthProvider,
 } from "firebase/auth";
 import {
   doc,
@@ -98,6 +100,37 @@ export const loginUserManual = async ({ email, password }: any) => {
     toast.dismiss(loadingToast);
     toast.error(`${error.message}`);
     // toast(error.message);
+    return false;
+  }
+};
+export const loginUserGoogle = async () => {
+  const loadingToast = toast.loading("Connecting to cloud provider...");
+  try {
+    const result = await signInWithPopup(auth, provider);
+    // .then((result: any) => {
+    //   const credential = GoogleAuthProvider.credentialFromResult(result);
+    //   const token = credential?.accessToken;
+    //   const user = result?.user;
+    //   toast.dismiss(loadingToast);
+    //   toast.error(`Cloud: welcome ${user}`);
+    //   return true;
+    // }).catch((error: any) => {
+    //   // Handle Errors here.
+    //   const errorCode = error?.code;
+    //   const errorMessage = error?.message;
+    //   toast.dismiss(loadingToast);
+    //   toast.error(`${errorMessage}`);
+    //   return false;
+    // });
+    const credential = GoogleAuthProvider.credentialFromResult(result);
+    const token = credential?.accessToken;
+    const user = result?.user;
+    toast.dismiss(loadingToast);
+    toast.error(`Cloud: welcome ${user.displayName}`);
+    return true;
+  } catch (error: any) {
+    toast.dismiss(loadingToast);
+    toast.error(`${error.message}`);
     return false;
   }
 };

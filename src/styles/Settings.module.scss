@@ -138,6 +138,18 @@
   flex-direction: column;
   align-items: flex-start;
 }
+.signin {
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  outline: none;
+  border: 1px solid var(--primary-2);
+  border-radius: 0.5rem;
+  width: clamp(15rem, 50%, 20rem);
+  background: var(--primary-1);
+  color: var(--primary-3);
+  cursor: pointer;
+  margin: 1rem 0 3rem 1rem;
+}
 
 .errorData {
   width: clamp(20rem, calc(100vw - 2rem), 40rem);
@@ -197,6 +209,8 @@
       align-items: flex-start;
       padding: 2rem 0;
       padding-right: 1rem;
+      position: relative;
+      top: -2rem;
     }
   }
   .errorData {
