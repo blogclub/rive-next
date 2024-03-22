@@ -93,11 +93,11 @@ const Watch = () => {
         onChange={(e) => setSource(e.target.value)}
       >
         <option value="AGG">Aggregator : 1 (Multi-Server)</option>
-        <option value="VID">Aggregator : 2</option>
+        <option value="VID">Aggregator : 2 (Best-Server)</option>
         <option value="EMB">Aggregator : 3</option>
         <option value="MULTI">Aggregator : 4 (Fast-Server)</option>
         <option value="SUP" defaultChecked>
-          Aggregator : 5 (Multi-Server)
+          Aggregator : 5 (Multi/Most-Server)
         </option>
       </select>
       <div className={`${styles.loader} skeleton`}></div>
