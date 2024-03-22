@@ -49,43 +49,14 @@ Rive is a cutting-edge platform for streaming movies and TV shows online. Our pr
     <img src="https://img.shields.io/badge/sass-7c3aed?style=for-the-badge&logo=sass&logoColor=white" alt="react official Website"/>
 </p>
 
-<!-- > Go to [release section](https://github.com/Developabile/rive-next/releases) to get Proxy Manager for your PC
->
-> OR,
->
-> Download through our [Website](https://proxy-manager-pc.vercel.app) with ease. -->
+## Screenshots
 
-<!--
-## Images
+Here are some screenshots on various devices
 
-| Home Window                                                         | Add Custom Proxy                                                              |
-| ------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| ![img](./public/images/home1.png) ![img](./public/images/home2.png) | ![img](./public/images/add_proxy1.png) ![img](./public/images/add_proxy2.png) |
-
-| Notice                              | Check System Proxy                      | Add Sudo(for Linux)              |
-| ----------------------------------- | --------------------------------------- | -------------------------------- |
-| ![img](./public/images/notice1.png) | ![img](./public/images/chech_proxy.png) | ![img](./public/images/sudo.png) | -->
-
-<!-- ## Installation
-
-1. Go to [release section](https://github.com/Developabile/rive-next/releases) or Download through our [Website](https://proxy-manager-pc.vercel.app) with ease.
-2. Download the package format supported by your operating system
-
-- window : Proxy-Manager-1.0.7-Setup.exe
-- linux : proxy-manager_1.0.7_amd64.deb
-- mac : Proxy-Manager-darwin-x64-1.0.7.zip
-
-3. After download, install the package
-   > Remember during installation you will get warning
-   >
-   > > "Unverified Publisher" : This is due to lack code signing(paid), which I don't have
-   >
-   > Ignore this warning
-
-- step to ignore warning on window:
-  - click on **More info**
-    - ![1st](./1st.png)
-  - click on **Run Anyway**
-    - ![2nd](./second.png)
-
-4. After ignoring the warning, you can run Proxy Manager -->
+| Macbook                                                        | iPad                                                | iPhone                                                         |
+| -------------------------------------------------------------- | --------------------------------------------------- | -------------------------------------------------------------- |
+| ![mac](./screenshots/macbook/MacBook%20Pro-1711134020120.jpeg) | ![ipad](./screenshots/ipad/iPad-1711133919085.jpeg) | ![iphone](./screenshots/iphone/iPhone%20SE-1711133892195.jpeg) |
+| ![mac](./screenshots/macbook/MacBook%20Pro-1711134203319.jpeg) | ![ipad](./screenshots/ipad/iPad-1711134390880.jpeg) | ![iphone](./screenshots/iphone/iPhone%20SE-1711134064713.jpeg) |
+| ![mac](./screenshots/macbook/MacBook%20Pro-1711134313758.jpeg) | ![ipad](./screenshots/ipad/iPad-1711134001134.jpeg) | ![iphone](./screenshots/iphone/iPhone%20SE-1711134203201.jpeg) |
+| ![mac](./screenshots/macbook/MacBook%20Pro-1711134363365.jpeg) | ![ipad](./screenshots/ipad/iPad-1711134203174.jpeg) | ![iphone](./screenshots/iphone/iPhone%20SE-1711134412110.jpeg) |
+| -                                                              | ![ipad](./screenshots/ipad/iPad-1711134263026.jpeg) | -                                                              |
