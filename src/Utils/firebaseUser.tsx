@@ -107,21 +107,6 @@ export const loginUserGoogle = async () => {
   const loadingToast = toast.loading("Connecting to cloud provider...");
   try {
     const result = await signInWithPopup(auth, provider);
-    // .then((result: any) => {
-    //   const credential = GoogleAuthProvider.credentialFromResult(result);
-    //   const token = credential?.accessToken;
-    //   const user = result?.user;
-    //   toast.dismiss(loadingToast);
-    //   toast.error(`Cloud: welcome ${user}`);
-    //   return true;
-    // }).catch((error: any) => {
-    //   // Handle Errors here.
-    //   const errorCode = error?.code;
-    //   const errorMessage = error?.message;
-    //   toast.dismiss(loadingToast);
-    //   toast.error(`${errorMessage}`);
-    //   return false;
-    // });
     const credential = GoogleAuthProvider.credentialFromResult(result);
     const token = credential?.accessToken;
     const user = result?.user;

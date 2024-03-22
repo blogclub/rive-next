@@ -5,8 +5,32 @@ import { Toaster } from "sonner";
 import "@/styles/checkbox.scss";
 import "react-tooltip/dist/react-tooltip.css";
 import { Tooltip } from "react-tooltip";
+import Router from "next/router";
+import { useState, useEffect } from "react";
+import NProgress from "nprogress";
+import "@/styles/nprogress.scss";
 
 export default function App({ Component, pageProps }: any) {
+  const [isLoading, setIsLoading] = useState(false);
+  NProgress.configure({ showSpinner: false });
+  // NProgress.configure({
+  //   template: '<div class="bar" role="bar"><div class="peg"></div></div>'
+  // });
+  useEffect(() => {
+    Router.events.on("routeChangeStart", (url) => {
+      setIsLoading(true);
+      NProgress.start();
+    });
+
+    Router.events.on("routeChangeComplete", (url) => {
+      setIsLoading(false);
+      NProgress.done(false);
+    });
+
+    Router.events.on("routeChangeError", (url) => {
+      setIsLoading(false);
+    });
+  }, [Router]);
   return (
     <>
       <Head>
@@ -28,12 +52,20 @@ export default function App({ Component, pageProps }: any) {
         <meta name="msapplication-TileColor" content="#f4f7fe" />
         <meta name="msapplication-tap-highlight" content="no" />
         <link rel="shortcut icon" href="/images/logo512.png" />
+        {/* <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" integrity="sha512-42kB9yDlYiCEfx2xVwq0q7hT4uf26FUgSIZBK8uiaEnTdShXjwr8Ip1V4xGJMg3mHkUt9nNuTDxunHF0/EgxLQ==" crossOrigin="anonymous" referrerPolicy="no-referrer" /> */}
       </Head>
       <Layout>
         <Toaster
           toastOptions={{
-            className: "sooner-toast",
+            className: "sooner-toast-desktop",
           }}
+          position="bottom-right"
+        />
+        <Toaster
+          toastOptions={{
+            className: "sooner-toast-mobile",
+          }}
+          position="top-center"
         />
         <Tooltip id="tooltip" className="react-tooltip" />
         <Component {...pageProps} />

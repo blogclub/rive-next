@@ -133,11 +133,18 @@ h1 {
   max-width: 15rem;
 }
 
-.sooner-toast {
+.sooner-toast,
+.sooner-toast-desktop,
+.sooner-toast-mobile {
   background: var(--primary-1);
   color: var(--primary-3);
   border: 1px solid var(--primary-2);
 }
+
+.sooner-toast-mobile {
+  display: none;
+}
+
 .react-tooltip,
 .tooltip {
   background-color: var(--bg-gradient) !important;
@@ -160,6 +167,13 @@ h1 {
   }
   .react-tooltip,
   .tooltip {
+    display: none;
+  }
+
+  .sooner-toast-mobile {
+    display: flex;
+  }
+  .sooner-toast-desktop {
     display: none;
   }
   // .sooner-toast{
