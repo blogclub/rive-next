@@ -143,8 +143,12 @@ const DetailPage = () => {
             <Skeleton className={styles.CarouselLoading} />
           ) // if no images array, then use backdrop poster
         }
+        <div className={styles.curvy}></div>
+        <div className={styles.curvy2}></div>
         <div className={styles.DetailBanner}>
           <div className={styles.poster}>
+            <div className={styles.curvy3}></div>
+            <div className={styles.curvy4}></div>
             <div
               className={styles.rating}
               data-tooltip-id="tooltip"

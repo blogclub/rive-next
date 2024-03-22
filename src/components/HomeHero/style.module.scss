@@ -10,9 +10,30 @@
     margin: 1rem 0 0 0;
     overflow: hidden;
     border-radius: 2rem;
+    position: relative;
     .CarouselLoading {
       height: 80vh;
       width: 100%;
+    }
+    .curvy {
+      position: absolute;
+      height: 2.2rem;
+      width: 2.2rem;
+      left: clamp(1rem, calc(35vw - 2.87rem), 50vw);
+      bottom: 0;
+      // background: red;
+      border-radius: 0 0 2rem 0;
+      box-shadow: 70px 70px 0 70px var(--bg-color);
+    }
+    .curvy2 {
+      position: absolute;
+      height: 2.2rem;
+      width: 2.2rem;
+      left: clamp(1rem, calc(35vw - 2.87rem + 23.55rem), 70rem);
+      bottom: 0;
+      // background: red;
+      border-radius: 0 0 0 2rem;
+      box-shadow: -70px 70px 0 70px var(--bg-color);
     }
   }
   .HomeHeroMeta {
@@ -32,7 +53,7 @@
     align-items: center;
     flex-direction: column;
     gap: 1rem;
-    margin-left: clamp(1rem, 35%, 50vw);
+    margin-left: clamp(1rem, 35vw, 50vw);
     padding-left: 1.5rem;
     // transform: translateX(-2rem);
     h1 {
@@ -75,6 +96,7 @@
         font-size: 1.2rem;
       }
     }
+    // https://www.youtube.com/watch?v=SkML640BcoA
   }
 }
 
@@ -93,11 +115,46 @@
         height: 60vh;
         width: 100%;
       }
+      .curvy {
+        display: none;
+      }
+      .curvy2 {
+        position: absolute;
+        height: 2.2rem;
+        width: 2.2rem;
+        left: clamp(0rem, calc(0vw - 2.87rem + 21.55rem), 100vw);
+        bottom: 0;
+        // background: red;
+        border-radius: 0 0 0 2.2rem;
+        box-shadow: -70px 70px 0 70px var(--bg-color);
+      }
     }
     .HomeHeroMeta {
       width: unset;
-      max-width: 20rem;
+      width: 18rem;
+      margin-bottom: 1rem;
       margin-left: clamp(0rem, 0%, 10vw);
+      overflow: unset;
+      &::after {
+        content: "";
+        position: absolute;
+        height: 2.2rem;
+        width: 2.2rem;
+        left: 0;
+        bottom: 6.85rem;
+        // background: red;
+        border-radius: 0 0 0 2rem;
+        box-shadow: -5px 5px 0 5px var(--bg-color);
+      }
+      &::before {
+        content: "";
+        position: absolute;
+        height: 1rem;
+        width: 1rem;
+        left: -0.5rem;
+        bottom: 6rem;
+        background: var(--bg-color);
+      }
     }
   }
 }

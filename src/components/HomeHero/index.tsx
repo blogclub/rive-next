@@ -116,6 +116,8 @@ const HomeHero = () => {
         ) : (
           <Skeleton className={styles.CarouselLoading} />
         )}
+        <div className={styles.curvy}></div>
+        <div className={styles.curvy2}></div>
       </div>
       <div className={styles.HomeHeroMeta} key={data[index]?.id}>
         <h1>{data[index]?.title || data[index]?.name || <Skeleton />}</h1>

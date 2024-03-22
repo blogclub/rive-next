@@ -73,6 +73,7 @@ const PersonPage = () => {
           <Skeleton className={styles.CarouselLoading} />
         )}
         <div className={styles.DetailBanner}>
+          <div className={styles.curvy5}></div>
           <div className={styles.HomeHeroMeta} key={data?.id}>
             <h1>{data?.name || <Skeleton />}</h1>
             <div className={styles.HomeHeroMetaRow2}>

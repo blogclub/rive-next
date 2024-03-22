@@ -24,7 +24,7 @@
   :root {
     --ascent-color: gold;
     --bg-color: #f4f7fe;
-    --bg-gradient: rgba(209, 190, 190, 0.7);
+    --bg-gradient: rgba(238, 235, 235, 0.8);
     --primary-1: rgb(255, 255, 255);
     --primary-2: #64748b;
     --primary-3: #52525b;
@@ -44,7 +44,7 @@
 .light {
   // --ascent-color:gold;
   --bg-color: #f4f7fe;
-  --bg-gradient: rgba(209, 190, 190, 0.7);
+  --bg-gradient: rgba(238, 235, 235, 0.8);
   --primary-1: rgb(255, 255, 255);
   --primary-2: #64748b;
   --primary-3: #52525b;
@@ -67,6 +67,7 @@
   box-sizing: border-box;
   font-family: "Roboto Mono", serif;
   user-select: none;
+  scroll-behavior: smooth;
 }
 a {
   text-decoration: none;
@@ -141,7 +142,7 @@ h1 {
 .tooltip {
   background-color: var(--bg-gradient) !important;
   background: var(--bg-gradient) !important;
-  color: var(--primary-3);
+  color: var(--primary-3) !important;
   border-radius: 0.3rem !important;
   z-index: 5;
   // border: 1px solid var(--bg-gradient);
@@ -156,6 +157,10 @@ h1 {
   }
   :not(h1) {
     letter-spacing: -0.5px;
+  }
+  .react-tooltip,
+  .tooltip {
+    display: none;
   }
   // .sooner-toast{
   //   --offset:1rem !important;

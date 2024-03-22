@@ -28,6 +28,42 @@
     flex: 2;
   }
 
+  .curvy {
+    position: absolute;
+    height: 2.2rem;
+    width: 2.2rem;
+    left: 0;
+    bottom: 15.8rem;
+    // background: red;
+    border-radius: 0 0 0 2.2rem;
+    box-shadow: -10px 10px 0 10px var(--bg-color);
+  }
+  .curvy2 {
+    @extend .curvy;
+    bottom: 7.3rem;
+    left: 11rem;
+  }
+  .curvy5 {
+    @extend .curvy;
+    bottom: 6.8rem;
+    left: 0rem;
+  }
+  .curvy3 {
+    position: absolute;
+    height: 2rem;
+    width: 2rem;
+    // background: red;
+    border-radius: 0 2rem 0 0;
+    box-shadow: 7px -7px 0 7px var(--bg-color);
+    top: 0rem;
+    left: 4.9rem;
+  }
+  .curvy4 {
+    @extend .curvy3;
+    left: 8rem;
+    top: 3.1rem;
+  }
+
   .DetailBanner {
     position: absolute;
     bottom: 0;
@@ -40,7 +76,7 @@
     .poster {
       width: 10rem;
       outline: 1rem solid var(--bg-color);
-      border-radius: 0.5rem;
+      border-radius: 1rem;
       position: relative;
       bottom: -1rem;
       left: -0.5rem;
@@ -78,7 +114,7 @@
       min-width: 14rem;
       max-width: 22rem;
       text-overflow: ellipsis;
-      overflow: hidden;
+      // overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -127,6 +163,18 @@
           font-size: 1.2rem;
         }
       }
+      // right curve
+      &:after {
+        content: "";
+        height: 1.5rem;
+        width: 1.5rem;
+        position: absolute;
+        right: -2.19rem;
+        bottom: 0.2rem;
+        // background: red;
+        border-radius: 0 0 0 2.2rem;
+        box-shadow: -6px 6px 0 6px var(--bg-color);
+      }
     }
   }
 }
@@ -158,6 +206,33 @@
       .CarouselLoading {
         height: 60vh;
         width: calc(100vw - 2rem);
+      }
+      .curvy {
+        left: 0;
+        bottom: 10.65rem;
+        // background: red;
+      }
+      .curvy2 {
+        left: 7.9rem;
+        bottom: 6.85rem;
+      }
+      .curvy5 {
+        bottom: 6.28rem;
+        left: 0rem;
+      }
+      .curvy3 {
+        position: absolute;
+        height: 1rem;
+        width: 1rem;
+        // background: red;
+        border-radius: 0 2rem 0 0;
+        box-shadow: 5px -5px 0 5px var(--bg-color);
+        top: 0rem;
+        left: 3.85rem;
+      }
+      .curvy4 {
+        left: 6rem;
+        top: 2.15rem;
       }
     }
     .detailBiggerPic {
@@ -217,6 +292,11 @@
           .IconsMobileNone {
             display: none;
           }
+        }
+        // right curve
+        &:after {
+          right: -2.19rem;
+          bottom: 0rem;
         }
       }
     }
