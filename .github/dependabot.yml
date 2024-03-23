@@ -19,3 +19,27 @@ updates:
       prefix: "chore(deps)[npm]"
     schedule:
       interval: "weekly"
+    reviewers:
+      - "@dev-AshishRanjan"
+    groups:
+      types-dependencies:
+        patterns:
+          - "@types/*"
+        update-types:
+          - "minor"
+          - "patch"
+      pre-commit-dependencies:
+        patterns:
+          - "husky"
+          - "prettier"
+        update-types:
+          - "minor"
+          - "patch"
+      production-dependencies:
+        dependency-type: "production"
+        update-types:
+          - "minor"
+      development-dependencies:
+        dependency-type: "development"
+        update-types:
+          - "patch"
