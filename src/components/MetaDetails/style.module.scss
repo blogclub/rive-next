@@ -11,7 +11,7 @@
   .MetaDetails {
     height: 100%;
     width: 100%;
-    border-radius: 0.5rem;
+    border-radius: 1rem;
     background: var(--primary-1);
     padding: 1rem;
     overflow: auto;
@@ -164,6 +164,7 @@
     overflow-y: auto;
     overflow-x: hidden;
     background: var(--primary-1);
+    border-radius: 1rem;
     .MetaDetails {
       position: relative;
       padding-top: 4rem;
