@@ -14,6 +14,7 @@ import {
 import { BsFillBookmarkXFill } from "react-icons/bs";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/Utils/firebase";
+import NProgress from "nprogress";
 // import MoviePoster from '@/components/MoviePoster';
 
 function capitalizeFirstLetter(string: string) {
@@ -42,6 +43,13 @@ const Library = () => {
       }
     });
   }, []);
+
+  useEffect(() => {
+    if (loading) {
+      NProgress.start();
+    } else NProgress.done(false);
+  }, [loading]);
+
   useEffect(() => {
     setLoading(true);
     setData([0, 0, 0, 0, 0, 0, 0, 0, 0]);
@@ -58,6 +66,7 @@ const Library = () => {
           setData(arr);
           setLoading(false);
         });
+        if (ids.length === 0) setLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
       }

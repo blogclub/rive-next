@@ -7,6 +7,7 @@ import { AiFillLeftCircle, AiFillRightCircle } from "react-icons/ai";
 import { MdFilterAlt, MdFilterAltOff } from "react-icons/md";
 import Filter from "../Filter";
 import Skeleton from "react-loading-skeleton";
+import NProgress from "nprogress";
 // import MoviePoster from '@/components/MoviePoster';
 
 function capitalizeFirstLetter(string: string) {
@@ -27,6 +28,11 @@ const CategorywisePage = ({ categoryType }: any) => {
   const [trigger, setTrigger] = useState(false);
   const [loading, setLoading] = useState(true);
   console.log(capitalizeFirstLetter(categoryType));
+  useEffect(() => {
+    if (loading) {
+      NProgress.start();
+    } else NProgress.done(false);
+  }, [loading]);
   useEffect(() => {
     setLoading(true);
     const fetchData = async () => {
