@@ -20,12 +20,13 @@ updates:
     schedule:
       interval: "weekly"
     reviewers:
-      - "@dev-AshishRanjan"
+      - "dev-AshishRanjan"
     groups:
       types-dependencies:
         patterns:
           - "@types/*"
         update-types:
+          - "major"
           - "minor"
           - "patch"
       pre-commit-dependencies:
@@ -33,13 +34,18 @@ updates:
           - "husky"
           - "prettier"
         update-types:
+          - "major"
           - "minor"
           - "patch"
       production-dependencies:
         dependency-type: "production"
         update-types:
+          - "major"
           - "minor"
+          - "patch"
       development-dependencies:
         dependency-type: "development"
         update-types:
+          - "major"
+          - "minor"
           - "patch"
