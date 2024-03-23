@@ -111,7 +111,7 @@ export const loginUserGoogle = async () => {
     const token = credential?.accessToken;
     const user = result?.user;
     toast.dismiss(loadingToast);
-    toast.error(`Cloud: welcome ${user.displayName}`);
+    toast.success(`Cloud: welcome ${user.displayName}`);
     return true;
   } catch (error: any) {
     toast.dismiss(loadingToast);
