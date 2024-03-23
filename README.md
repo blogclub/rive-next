@@ -28,7 +28,7 @@ Rive is a cutting-edge platform for streaming movies and TV shows online. Our pr
  </p>
 </div>
 
-## Features:
+## **Features**:
 
 - Created using [NextJS](https://nextjs.org/) framework and [TypeScript](https://www.typescriptlang.org/).
 - Watchlist and Continue watching feature using **localstorage**
@@ -40,16 +40,29 @@ Rive is a cutting-edge platform for streaming movies and TV shows online. Our pr
 - Great Customization in settings
 - Great UI
 
-## Tech Stack
+## **Word From Developer**:
+
+> 1. **For AD-Free experience** : Use AD-Block services for AD-free experience, like AD-Blocker extension or [Brave Browser](https://brave.com/)
+
+> 2. **For Movie/TV shows Download** :
+>    Use video downloader extensions like
+>
+> - on PC : [FetchV](https://fetchv.net/) or [Stream Recorder](https://www.hlsloader.com/)
+> - on Mobile : [AVDP](https://play.google.com/store/apps/details?id=videoplayer.videodownloader.downloader)
+>
+> [The Source](https://www.reddit.com/r/DataHoarder/comments/qgne3i/how_to_download_videos_from_vidsrcme/)
+
+## **Tech Stack**
 
 <p>
     <img src="https://img.shields.io/badge/next.js-7c3aed?style=for-the-badge&logo=next.js&logoColor=white" alt="Javascript official Website"/>
     <img src="https://img.shields.io/badge/typescript-7c3aed?style=for-the-badge&logo=typescript&logoColor=white" alt="Javascript official Website"/>
     <img src="https://img.shields.io/badge/framer-7c3aed?style=for-the-badge&logo=framer&logoColor=white" alt="react official Website"/>
     <img src="https://img.shields.io/badge/sass-7c3aed?style=for-the-badge&logo=sass&logoColor=white" alt="react official Website"/>
+    <img src="https://img.shields.io/badge/firebase-7c3aed?style=for-the-badge&logo=firebase&logoColor=white" alt="react official Website"/>
 </p>
 
-## Screenshots
+## **Screenshots**
 
 Here are some screenshots on various devices
 

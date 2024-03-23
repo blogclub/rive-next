@@ -51,7 +51,7 @@
         align-items: center;
         color: var(--primary-2);
         select {
-          width: clamp(15rem, 50%, 20rem);
+          width: clamp(12rem, 50%, 20rem);
           padding: 1rem 2rem;
           // background: var(--primary-1);
           background: var(--bg-color);
@@ -84,7 +84,7 @@
         width: 7rem;
       }
       .downloadButton {
-        width: clamp(15rem, 50%, 20rem);
+        width: clamp(12rem, 50%, 20rem);
         padding: 1rem 2rem;
         // background: var(--primary-1);
         background: var(--bg-color);
@@ -107,7 +107,7 @@
         outline: none;
         border: 1px solid var(--primary-2);
         border-radius: 0.5rem;
-        width: clamp(15rem, 50%, 20rem);
+        width: clamp(12rem, 50%, 20rem);
         background: var(--primary-1);
         color: var(--primary-3);
         cursor: pointer;
@@ -116,7 +116,7 @@
     .profileCard {
       position: absolute;
       right: 0;
-      width: clamp(15rem, 50%, 20rem);
+      width: clamp(12rem, 50%, 20rem);
       padding: 1rem 2rem;
       // background: var(--primary-1);
       background: var(--bg-color);
@@ -144,7 +144,7 @@
   outline: none;
   border: 1px solid var(--primary-2);
   border-radius: 0.5rem;
-  width: clamp(15rem, 50%, 20rem);
+  width: clamp(12rem, 50%, 20rem);
   background: var(--primary-1);
   color: var(--primary-3);
   cursor: pointer;
