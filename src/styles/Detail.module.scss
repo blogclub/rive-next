@@ -186,9 +186,33 @@
     position: relative;
     left: -1rem !important;
   }
+  .biggerPic {
+    .curvy5 {
+      left: 0;
+      bottom: 6.35rem !important;
+      // background: red;
+    }
+  }
 }
 
 @media (max-width: 769px) {
+  .PersonPage {
+    .HomeHeroMeta {
+      // width: 15rem !important;
+      position: relative;
+      left: -1rem !important;
+    }
+    .biggerPic {
+      .curvy5 {
+        left: 0;
+        bottom: 5.85rem !important;
+        // background: red;
+      }
+    }
+    img {
+      object-fit: cover !important;
+    }
+  }
   .DetailPage {
     height: unset;
     min-height: 100vh;
@@ -271,7 +295,7 @@
         bottom: -2.5rem;
         left: 0.2rem;
         width: unset;
-        min-width: 10rem;
+        min-width: 12rem;
         max-width: 20rem;
         letter-spacing: -1.5px !important;
         // margin-left: clamp(0rem, 0%, 10vw);
