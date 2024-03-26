@@ -117,6 +117,10 @@ h1 {
   letter-spacing: -1.5px;
 }
 
+input {
+  caret-color: var(--ascent-color) !important;
+}
+
 ::-webkit-scrollbar {
   display: none;
 }
@@ -185,4 +189,28 @@ h1 {
   //   bottom: 5.2rem;
   //   z-index: 1 !important;
   // }
+}
+
+// reomving some common ads using classes
+.ad,
+.advertisement,
+.ad-banner,
+.ad-box,
+.ad-container,
+.ad-frame,
+.ad-widget,
+.ad-unit,
+.ad-slot,
+.ad-wrapper,
+.ad-rectangle,
+.ad-square,
+.ad-inline,
+.ad-sidebar,
+.ad-header,
+.ad-footer,
+.ad-leaderboard,
+.ad-skyscraper,
+.ad-block,
+.ad-label {
+  display: none !important;
 }
