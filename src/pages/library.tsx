@@ -37,9 +37,9 @@ const Library = () => {
         const userID = user.uid;
         setUser(userID);
         // setIds(await getBookmarks(userID)?.movie)
-        setLoading(false);
+        // setLoading(false);
       } else {
-        setLoading(true);
+        // setLoading(true);
       }
     });
   }, []);
@@ -66,9 +66,11 @@ const Library = () => {
           setData(arr);
           setLoading(false);
         });
-        if (ids.length === 0) setLoading(false);
+        if (ids.length === 0 || ids === null || ids === undefined)
+          setLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
+        setLoading(false);
       }
     };
     fetchData();

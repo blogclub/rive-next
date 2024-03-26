@@ -38,7 +38,7 @@ const SettingsPage = ({
       setSettings({ values: { ...prevVal, ascent_color: value } });
   };
   return (
-    <div className={`${styles.settingsPage}`}>
+    <div className={`${styles.settingsPage} ${styles.authPage}`}>
       <div className={styles.logo}>
         <img src="/images/logo.svg" alt="logo" />
         <p>Your Personal Streaming Oasis</p>
