@@ -31,7 +31,7 @@ const HomeListAll = () => {
   const [popularMovie, setPopularMovie] = useState([]);
   const [popularTv, setPopularTv] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [continueWatching, setContinueWatching] = useState<any>();
+  // const [continueWatching, setContinueWatching] = useState<any>();
   const [recommendations, setRecommendations] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
@@ -52,7 +52,44 @@ const HomeListAll = () => {
         setPopularMovie(pM.results);
         setPopularTv(pT.results);
         console.log({ pM });
-        setContinueWatching(await getContinueWatching());
+
+        const continueWatching = await getContinueWatching();
+        const asyncFunc = async () => {
+          let arr: any[] = [];
+          let i = 0;
+          if (
+            continueWatching &&
+            (continueWatching?.tv?.length > 0 ||
+              continueWatching?.movie?.length > 0)
+          ) {
+            if (i < 5) {
+              for (const ele of continueWatching?.tv) {
+                const res = await axiosFetch({
+                  requestID: "tvRelated",
+                  id: ele,
+                });
+                arr.push(res?.results);
+                i++;
+              }
+            }
+            if (i < 10) {
+              for (const ele of continueWatching?.movie) {
+                const res = await axiosFetch({
+                  requestID: "movieRelated",
+                  id: ele,
+                });
+                arr.push(res?.results);
+                i++;
+              }
+            }
+          }
+          return arr;
+        };
+        asyncFunc().then((arr) => {
+          const shuffledArray = shuffle(arr.flat(Infinity));
+          setRecommendations(shuffledArray);
+        });
+
         setLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -61,43 +98,63 @@ const HomeListAll = () => {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    const asyncFunc = async () => {
-      let arr: any[] = [];
-      let i = 0;
-      if (
-        continueWatching &&
-        (continueWatching?.tv?.length > 0 ||
-          continueWatching?.movie?.length > 0)
-      ) {
-        if (i < 5) {
-          for (const ele of continueWatching?.tv) {
-            const res = await axiosFetch({ requestID: "tvRelated", id: ele });
-            arr.push(res?.results);
-            i++;
-          }
-        }
-        if (i < 10) {
-          for (const ele of continueWatching?.movie) {
-            const res = await axiosFetch({
-              requestID: "movieRelated",
-              id: ele,
-            });
-            arr.push(res?.results);
-            i++;
-          }
-        }
-      }
-      return arr;
-    };
-    asyncFunc().then((arr) => {
-      const shuffledArray = shuffle(arr.flat(Infinity));
-      setRecommendations(shuffledArray);
-    });
-  }, [continueWatching]);
+  // useEffect(() => {
+  //   const asyncFunc = async () => {
+  //     let arr: any[] = [];
+  //     let i = 0;
+  //     if (
+  //       continueWatching &&
+  //       (continueWatching?.tv?.length > 0 ||
+  //         continueWatching?.movie?.length > 0)
+  //     ) {
+  //       if (i < 5) {
+  //         for (const ele of continueWatching?.tv) {
+  //           const res = await axiosFetch({ requestID: "tvRelated", id: ele });
+  //           arr.push(res?.results);
+  //           i++;
+  //         }
+  //       }
+  //       if (i < 10) {
+  //         for (const ele of continueWatching?.movie) {
+  //           const res = await axiosFetch({
+  //             requestID: "movieRelated",
+  //             id: ele,
+  //           });
+  //           arr.push(res?.results);
+  //           i++;
+  //         }
+  //       }
+  //     }
+  //     return arr;
+  //   };
+  //   asyncFunc().then((arr) => {
+  //     const shuffledArray = shuffle(arr.flat(Infinity));
+  //     setRecommendations(shuffledArray);
+  //   });
+  // }, [continueWatching]);
 
   return (
     <div className={styles.HomeListAll}>
+      {recommendations.length > 0 ? (
+        <>
+          <h1>Recommendation</h1>
+          <div
+            className={styles.HomeListSection}
+            data-tooltip-id="tooltip"
+            data-tooltip-content="recommendation based on what you have watched!"
+          >
+            {recommendations?.map((ele: any, i) => {
+              return i < 20 ? (
+                <MovieCardSmall data={ele} media_type={ele?.media_type} />
+              ) : null;
+            })}
+            {recommendations?.length === 0 &&
+              dummyList.map((ele, i) => (
+                <Skeleton className={styles.loading} key={i} />
+              ))}
+          </div>
+        </>
+      ) : null}
       <h1>Latest Movies</h1>
       <div className={styles.HomeListSection}>
         {latestMovie.map((ele) => {
@@ -118,30 +175,10 @@ const HomeListAll = () => {
             <Skeleton className={styles.loading} key={i} />
           ))}
       </div>
-      {recommendations.length > 0 ? (
-        <>
-          <h1>Recommendation</h1>
-          <div
-            className={styles.HomeListSection}
-            data-tooltip-id="tooltip"
-            data-tooltip-content="recommendation based on what you watched!"
-          >
-            {recommendations?.map((ele, i) => {
-              return i < 20 ? (
-                <MovieCardSmall data={ele} media_type="tv" />
-              ) : null;
-            })}
-            {recommendations?.length === 0 &&
-              dummyList.map((ele, i) => (
-                <Skeleton className={styles.loading} key={i} />
-              ))}
-          </div>
-        </>
-      ) : null}
       <h1>Popular Movies</h1>
       <div className={styles.HomeListSection}>
         {popularMovie.map((ele) => {
-          return <MovieCardSmall data={ele} media_type="tv" />;
+          return <MovieCardSmall data={ele} media_type="movie" />;
         })}
         {popularMovie?.length === 0 &&
           dummyList.map((ele, i) => (
