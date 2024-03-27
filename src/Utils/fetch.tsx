@@ -63,6 +63,8 @@ export default async function axiosFetch({
     movieRelated: `${baseURL}/movie/${id}/recommendations?language=${language}&page=${page}`,
     tvRelated: `${baseURL}/tv/${id}/recommendations?language=${language}&page=${page}`,
     tvEpisodes: `${baseURL}/tv/${id}/season/${season}?language=${language}`,
+    movieSimilar: `${baseURL}/movie/${id}/similar?language=${language}&page=${page}`,
+    tvSimilar: `${baseURL}/tv/${id}/similar?language=${language}&page=${page}`,
 
     // person
     personMovie: `${baseURL}/person/${id}/movie_credits?language=${language}&page=${page}`,

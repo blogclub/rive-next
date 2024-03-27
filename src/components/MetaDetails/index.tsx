@@ -26,7 +26,7 @@ const MetaDetails = ({ id, type, data }: any) => {
   });
   const spoken_languages: Array<string> = [];
   data?.spoken_languages?.map((ele: any) => {
-    spoken_languages.push(ele.name);
+    spoken_languages.push(ele?.english_name || ele?.name);
   });
   const production_countries: Array<string> = [];
   data?.production_countries?.map((ele: any) => {
