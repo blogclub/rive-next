@@ -177,6 +177,10 @@
 
 @media (max-width: 1200px) {
   .settingsPage {
+    // min-height: 100vh;
+    height: auto;
+    position: relative;
+    top: -2rem;
     .logo {
       width: clamp(20rem, calc(100vw - 2rem), 40rem);
       position: unset;
@@ -211,6 +215,7 @@
       padding-right: 1rem;
       position: relative;
       top: -2rem;
+      padding-bottom: 0;
     }
   }
   .errorData {
