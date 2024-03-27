@@ -85,8 +85,8 @@ const MovieCardLarge = ({ data, media_type }: any) => {
             <div
               style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
             >
-              <Skeleton className={`${styles.metaData}`} />
-              <Skeleton className={`${styles.metaData}`} />
+              <Skeleton />
+              <Skeleton />
             </div>
           )}
         </h1>
