@@ -68,8 +68,8 @@ Here are some screenshots on various devices
 
 | Macbook                                                        | iPad                                                | iPhone                                                         |
 | -------------------------------------------------------------- | --------------------------------------------------- | -------------------------------------------------------------- |
-| ![mac](./screenshots/macbook/MacBook%20Pro-1711134020120.jpeg) | ![ipad](./screenshots/ipad/iPad-1711133919085.jpeg) | ![iphone](./screenshots/iphone/iPhone%20SE-1711133892195.jpeg) |
-| ![mac](./screenshots/macbook/MacBook%20Pro-1711134203319.jpeg) | ![ipad](./screenshots/ipad/iPad-1711134390880.jpeg) | ![iphone](./screenshots/iphone/iPhone%20SE-1711134064713.jpeg) |
-| ![mac](./screenshots/macbook/MacBook%20Pro-1711134313758.jpeg) | ![ipad](./screenshots/ipad/iPad-1711134001134.jpeg) | ![iphone](./screenshots/iphone/iPhone%20SE-1711134203201.jpeg) |
-| ![mac](./screenshots/macbook/MacBook%20Pro-1711134363365.jpeg) | ![ipad](./screenshots/ipad/iPad-1711134203174.jpeg) | ![iphone](./screenshots/iphone/iPhone%20SE-1711134412110.jpeg) |
+| ![mac](./screenshots/macbook/MacBook%20Pro-1711134363365.jpeg) | ![ipad](./screenshots/ipad/iPad-1711133919085.jpeg) | ![iphone](./screenshots/iphone/iPhone%20SE-1711133892195.jpeg) |
+| ![mac](./screenshots/macbook/MacBook%20Pro-1711134203319.jpeg) | ![ipad](./screenshots/ipad/iPad-1711134203174.jpeg) | ![iphone](./screenshots/iphone/iPhone%20SE-1711134203201.jpeg) |
+| ![mac](./screenshots/macbook/MacBook%20Pro-1711134313758.jpeg) | ![ipad](./screenshots/ipad/iPad-1711134001134.jpeg) | ![iphone](./screenshots/iphone/iPhone%20SE-1711134064713.jpeg) |
+| ![mac](./screenshots/macbook/MacBook%20Pro-1711134020120.jpeg) | ![ipad](./screenshots/ipad/iPad-1711134390880.jpeg) | ![iphone](./screenshots/iphone/iPhone%20SE-1711134412110.jpeg) |
 | -                                                              | ![ipad](./screenshots/ipad/iPad-1711134263026.jpeg) | -                                                              |
