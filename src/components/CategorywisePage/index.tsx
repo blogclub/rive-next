@@ -36,7 +36,7 @@ const CategorywisePage = ({ categoryType }: any) => {
   useEffect(() => {
     setLoading(true);
     const fetchData = async () => {
-      setData([0, 0, 0, 0, 0, 0, 0, 0, 0]);
+      // setData([0, 0, 0, 0, 0, 0, 0, 0, 0]); // for blink loading effect
       try {
         let data;
         if (category === "filter") {
@@ -63,6 +63,7 @@ const CategorywisePage = ({ categoryType }: any) => {
         setLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
+        setLoading(false);
       }
     };
     fetchData();
@@ -127,11 +128,8 @@ const CategorywisePage = ({ categoryType }: any) => {
         {data.map((ele: any) => {
           return <MovieCardSmall data={ele} media_type={categoryType} />;
         })}
-        {/* {
-          data?.length === 0 && dummyList.map((ele) => (
-            <Skeleton className={styles.loading} />
-          ))
-        } */}
+        {data?.length === 0 &&
+          dummyList.map((ele) => <Skeleton className={styles.loading} />)}
       </div>
       <ReactPaginate
         containerClassName={styles.pagination}

@@ -79,7 +79,7 @@ const Watch = () => {
         </a>
       </div>,
     );
-  }, [params]);
+  }, [params, id]);
   // useEffect(() => {
   //   setTimeout(() => {
   //     console.log({ id });
