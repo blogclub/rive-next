@@ -30,7 +30,12 @@ const Navbar = ({ children }: any) => {
   }, [path, params]);
   return (
     <div className={styles.navbar}>
-      <Link href="/" data-tooltip-id="tooltip" data-tooltip-content="Home">
+      <Link
+        href="/"
+        aria-label="Home"
+        data-tooltip-id="tooltip"
+        data-tooltip-content="Home"
+      >
         {pathname === "/" ? (
           <AiFillHome className={styles.active} />
         ) : (
@@ -39,6 +44,7 @@ const Navbar = ({ children }: any) => {
       </Link>
       <Link
         href="/search"
+        aria-label="Search"
         data-tooltip-id="tooltip"
         data-tooltip-content="Search, use CRTL+K as shortcut"
       >
@@ -50,6 +56,7 @@ const Navbar = ({ children }: any) => {
       </Link>
       <Link
         href="/movie"
+        aria-label="Movies"
         data-tooltip-id="tooltip"
         data-tooltip-content="Movies"
       >
@@ -61,6 +68,7 @@ const Navbar = ({ children }: any) => {
       </Link>
       <Link
         href="/tv"
+        aria-label="Tv shows"
         data-tooltip-id="tooltip"
         data-tooltip-content="TV shows"
       >
@@ -72,6 +80,7 @@ const Navbar = ({ children }: any) => {
       </Link>
       <Link
         href="/library"
+        aria-label="Library"
         data-tooltip-id="tooltip"
         data-tooltip-content="Library"
       >
@@ -83,6 +92,7 @@ const Navbar = ({ children }: any) => {
       </Link>
       <Link
         href="/settings"
+        aria-label="Settings"
         data-tooltip-id="tooltip"
         data-tooltip-content="Settings"
       >

@@ -10,11 +10,13 @@ const MoviePoster = ({ data, media_type }: any) => {
     <Link
       href={`/detail?type=${media_type}&id=${data?.id}`}
       className={styles.MovieCardSmall}
+      aria-label={data?.name || "poster"}
     >
       <div className={`${styles.img} ${imageLoading ? "skeleton" : null}`}>
         <AnimatePresence mode="sync">
           <motion.img
             key={data?.id}
+            alt={data?.id || "sm"}
             src={`${data?.poster_path !== null && data?.poster_path !== undefined ? process.env.NEXT_PUBLIC_TMBD_IMAGE_URL + data?.poster_path : "/images/logo.svg"}`}
             initial={{ opacity: 0 }}
             animate={{

@@ -11,6 +11,7 @@ const MovieCardSmall = ({ data, media_type }: any) => {
       key={data?.id}
       href={`/detail?type=${media_type}&id=${data?.id}`}
       className={styles.MovieCardSmall}
+      aria-label={data?.name || "poster"}
     >
       {/* <img src={process.env.NEXT_PUBLIC_TMBD_IMAGE_URL + data.poster_path} alt="" /> */}
       <div className={`${styles.img} ${imageLoading ? "skeleton" : null}`}>

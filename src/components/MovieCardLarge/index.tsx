@@ -52,6 +52,7 @@ const MovieCardLarge = ({ data, media_type }: any) => {
       key={data?.id}
       href={`${data?.media_type === "person" ? "/person?id=" + data?.id : "/detail?type=" + (data?.media_type || media_type) + "&id=" + data?.id}`}
       className={styles.MovieCardSmall}
+      aria-label={data?.name || "poster"}
     >
       <div
         className={`${styles.desktopOverflow} ${imageLoading ? "skeleton" : null}`}

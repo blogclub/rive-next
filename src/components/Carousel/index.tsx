@@ -102,6 +102,7 @@ const Carousel = ({
         <AnimatePresence mode="sync">
           <motion.img
             key={currentIndex}
+            alt={"carousel"}
             src={images[currentIndex]}
             initial={direction === "right" ? "hiddenRight" : "hiddenLeft"}
             animate="visible"
