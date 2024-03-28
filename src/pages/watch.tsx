@@ -43,6 +43,8 @@ const Watch = () => {
         });
     };
     if (type === "tv") fetch();
+  }, [params, id]);
+  useEffect(() => {
     toast.info(
       <div>
         Cloud: use AD-Block services for AD-free experience, like AD-Blocker
@@ -79,7 +81,7 @@ const Watch = () => {
         </a>
       </div>,
     );
-  }, [params, id]);
+  }, []);
   // useEffect(() => {
   //   setTimeout(() => {
   //     console.log({ id });
