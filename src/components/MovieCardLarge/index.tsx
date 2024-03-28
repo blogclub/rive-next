@@ -70,8 +70,10 @@ const MovieCardLarge = ({ data, media_type }: any) => {
             exit="exit"
             className={`${styles.img} ${imageLoading ? "skeleton" : null}`}
             onLoad={() => {
-              setImageLoading(false);
-              setLoading(false);
+              setTimeout(() => {
+                setImageLoading(false);
+                setLoading(false);
+              }, 100);
             }}
             loading="lazy"
             onError={(e) => console.log(e)}

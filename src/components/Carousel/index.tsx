@@ -109,8 +109,13 @@ const Carousel = ({
             exit="exit"
             variants={slideVariants}
             className={`${imageLoaded ? "skeleton" : null}`}
+            // onLoad={() => {
+            //   setImageLoaded(true);
+            // }}
             onLoad={() => {
-              setImageLoaded(true);
+              setTimeout(() => {
+                setImageLoaded(true);
+              }, 100);
             }}
             loading="lazy"
             // style={imageLoaded ? { opacity: 1 } : { opacity: 0 }}

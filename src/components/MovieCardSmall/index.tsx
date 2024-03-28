@@ -30,7 +30,9 @@ const MovieCardSmall = ({ data, media_type }: any) => {
             exit="exit"
             className={`${styles.img} ${imageLoading ? "skeleton" : null}`}
             onLoad={() => {
-              setImageLoading(false);
+              setTimeout(() => {
+                setImageLoading(false);
+              }, 500);
             }}
             loading="lazy"
             onError={(e) => console.log(e)}
