@@ -94,7 +94,7 @@ const CategorywisePage = ({ categoryType }: any) => {
           className={`${category === "topRated" ? styles.active : styles.inactive}`}
           onClick={() => setCategory("topRated")}
         >
-          Top Rated
+          Top-Rated
         </p>
         <p
           className={`${category === "filter" ? styles.active : styles.inactive} ${styles.filter}`}

@@ -5,6 +5,7 @@ import Link from "next/link";
 import Skeleton from "react-loading-skeleton";
 import MovieCardSmall from "../MovieCardSmall";
 import { getContinueWatching } from "@/Utils/continueWatching";
+import { useInView } from "react-intersection-observer";
 
 const externalImageLoader = ({ src }: { src: string }) =>
   `${process.env.NEXT_PUBLIC_TMBD_IMAGE_URL}${src}`;
@@ -32,25 +33,38 @@ const HomeListAll = () => {
   const [loading, setLoading] = useState(true);
   // const [continueWatching, setContinueWatching] = useState<any>();
   const [recommendations, setRecommendations] = useState([]);
+  const [latestMovieRef, latestMovieInView] = useInView({
+    triggerOnce: true,
+  });
+  const [latestTvRef, latestTvInView] = useInView({
+    triggerOnce: true,
+  });
+  const [popularMovieRef, popularMovieInView] = useInView({
+    triggerOnce: true,
+  });
+  const [popularTvRef, popularTvInView] = useInView({
+    triggerOnce: true,
+  });
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const lM = await axiosFetch({ requestID: "trendingMovie" });
-        const lT = await axiosFetch({ requestID: "trendingTvDay" });
-        const pM = await axiosFetch({
-          requestID: "popularMovie",
-          sortBy: "vote_average.asc",
-        });
-        const pT = await axiosFetch({
-          requestID: "trendingTv",
-          sortBy: "vote_average.asc",
-        });
-        setLatestMovie(lM.results);
-        setLatestTv(lT.results);
-        setPopularMovie(pM.results);
-        setPopularTv(pT.results);
-        console.log({ pM });
+        // const lM = await axiosFetch({ requestID: "trendingMovie" });
+        // const lT = await axiosFetch({ requestID: "trendingTvDay" });
+        // const pM = await axiosFetch({
+        //   requestID: "popularMovie",
+        //   sortBy: "vote_average.asc",
+        // });
+        // const pT = await axiosFetch({
+        //   requestID: "trendingTv",
+        //   sortBy: "vote_average.asc",
+        // });
+        // setLatestMovie(lM.results);
+        // setLatestTv(lT.results);
+        // setPopularMovie(pM.results);
+        // setPopularTv(pT.results);
+        // console.log({ pM });
 
         const continueWatching = await getContinueWatching();
         const asyncFunc = async () => {
@@ -92,10 +106,65 @@ const HomeListAll = () => {
         setLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
+        setLoading(false);
       }
     };
     fetchData();
   }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const lM = await axiosFetch({ requestID: "trendingMovie" });
+        setLatestMovie(lM.results);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setLoading(false);
+      }
+    };
+    if (latestMovieInView) fetchData();
+  }, [latestMovieInView]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const lT = await axiosFetch({ requestID: "trendingTvDay" });
+        setLatestTv(lT.results);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    if (latestTvInView) fetchData();
+  }, [latestTvInView]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const pM = await axiosFetch({
+          requestID: "popularMovie",
+          sortBy: "vote_average.asc",
+        });
+        setPopularMovie(pM.results);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    if (popularMovieInView) fetchData();
+  }, [popularMovieInView]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const pT = await axiosFetch({
+          requestID: "trendingTv",
+          sortBy: "vote_average.asc",
+        });
+        setPopularTv(pT.results);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    if (popularTvInView) fetchData();
+  }, [popularTvInView]);
 
   // useEffect(() => {
   //   const asyncFunc = async () => {
@@ -154,7 +223,7 @@ const HomeListAll = () => {
           </div>
         </>
       ) : null}
-      <h1>Latest Movies</h1>
+      <h1 ref={latestMovieRef}>Latest Movies</h1>
       <div className={styles.HomeListSection}>
         {latestMovie.map((ele) => {
           return <MovieCardSmall data={ele} media_type="movie" />;
@@ -164,7 +233,7 @@ const HomeListAll = () => {
             <Skeleton className={styles.loading} key={i} />
           ))}
       </div>
-      <h1>Latest TV Shows</h1>
+      <h1 ref={latestTvRef}>Latest TV Shows</h1>
       <div className={styles.HomeListSection}>
         {latestTv.map((ele) => {
           return <MovieCardSmall data={ele} media_type="tv" />;
@@ -174,7 +243,7 @@ const HomeListAll = () => {
             <Skeleton className={styles.loading} key={i} />
           ))}
       </div>
-      <h1>Popular Movies</h1>
+      <h1 ref={popularMovieRef}>Popular Movies</h1>
       <div className={styles.HomeListSection}>
         {popularMovie.map((ele) => {
           return <MovieCardSmall data={ele} media_type="movie" />;
@@ -184,7 +253,7 @@ const HomeListAll = () => {
             <Skeleton className={styles.loading} key={i} />
           ))}
       </div>
-      <h1>Popular TV Shows</h1>
+      <h1 ref={popularTvRef}>Popular TV Shows</h1>
       <div className={styles.HomeListSection}>
         {popularTv.map((ele) => {
           return <MovieCardSmall data={ele} media_type="tv" />;
