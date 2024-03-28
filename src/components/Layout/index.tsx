@@ -8,6 +8,7 @@ import SettingsPage from "../SettingsPage";
 import { usePathname } from "next/navigation";
 import Head from "next/head";
 import { useRouter } from "next/navigation";
+
 const Layout = ({ children }: any) => {
   const [theme, setTheme] = useState("system");
   const [mode, setMode] = useState("liquidate");

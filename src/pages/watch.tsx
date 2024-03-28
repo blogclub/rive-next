@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import styles from "@/styles/Watch.module.scss";
 import { setContinueWatching } from "@/Utils/continueWatching";
 import { toast } from "sonner";
+import { IoReturnDownBack } from "react-icons/io5";
+
 const Watch = () => {
   const params = useSearchParams();
+  const { back } = useRouter();
   // console.log(params.get("id"));
   const [type, setType] = useState<string | null>("");
   const [id, setId] = useState<any>();
@@ -85,6 +88,12 @@ const Watch = () => {
 
   return (
     <div className={styles.watch}>
+      <div onClick={() => back()} className={styles.backBtn}>
+        <IoReturnDownBack
+          data-tooltip-id="tooltip"
+          data-tooltip-content="go back"
+        />
+      </div>
       <select
         name="source"
         id="source"
