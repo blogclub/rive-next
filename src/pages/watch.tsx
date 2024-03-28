@@ -4,23 +4,28 @@ import styles from "@/styles/Watch.module.scss";
 import { setContinueWatching } from "@/Utils/continueWatching";
 import { toast } from "sonner";
 import { IoReturnDownBack } from "react-icons/io5";
+import { FaForwardStep, FaBackwardStep } from "react-icons/fa6";
+import axiosFetch from "@/Utils/fetch";
 
 const Watch = () => {
   const params = useSearchParams();
-  const { back } = useRouter();
+  const { back, push } = useRouter();
   // console.log(params.get("id"));
   const [type, setType] = useState<string | null>("");
   const [id, setId] = useState<any>();
-  const [season, setSeason] = useState<string | null>();
-  const [episode, setEpisode] = useState<string | null>();
+  const [season, setSeason] = useState<any>();
+  const [episode, setEpisode] = useState<any>();
+  const [maxEpisodes, setMaxEpisodes] = useState(1);
   const [loading, setLoading] = useState(true);
   const [source, setSource] = useState("SUP");
+
   if (type === null && params.get("id") !== null) setType(params.get("type"));
   if (id === null && params.get("id") !== null) setId(params.get("id"));
   if (season === null && params.get("season") !== null)
     setSeason(params.get("season"));
   if (episode === null && params.get("episode") !== null)
     setEpisode(params.get("episode"));
+
   useEffect(() => {
     setLoading(true);
     setType(params.get("type"));
@@ -28,7 +33,16 @@ const Watch = () => {
     setSeason(params.get("season"));
     setEpisode(params.get("episode"));
     setContinueWatching({ type: params.get("type"), id: params.get("id") });
-
+    const fetch = async () => {
+      const res: any = await axiosFetch({ requestID: `${type}Data`, id: id });
+      res?.seasons.length > 0 &&
+        res?.seasons?.map((ele: any) => {
+          if (ele?.season_number === parseInt(season)) {
+            setMaxEpisodes(ele?.episode_count);
+          }
+        });
+    };
+    if (type === "tv") fetch();
     toast.info(
       <div>
         Cloud: use AD-Block services for AD-free experience, like AD-Blocker
@@ -65,7 +79,7 @@ const Watch = () => {
         </a>
       </div>,
     );
-  }, []);
+  }, [params]);
   // useEffect(() => {
   //   setTimeout(() => {
   //     console.log({ id });
@@ -80,6 +94,20 @@ const Watch = () => {
   //     return null; // Return null to prevent opening new tabs
   //   };
   // }, [window]);
+
+  const handleBackward = () => {
+    // setEpisode(parseInt(episode)+1);
+    push(
+      `/watch?type=tv&id=${id}&season=${season}&episode=${parseInt(episode) - 1}`,
+    );
+  };
+  const handleForward = () => {
+    // setEpisode(parseInt(episode)+1);
+    push(
+      `/watch?type=tv&id=${id}&season=${season}&episode=${parseInt(episode) + 1}`,
+    );
+  };
+
   const STREAM_URL_AGG = process.env.NEXT_PUBLIC_STREAM_URL_AGG;
   const STREAM_URL_VID = process.env.NEXT_PUBLIC_STREAM_URL_VID;
   const STREAM_URL_EMB = process.env.NEXT_PUBLIC_STREAM_URL_EMB;
@@ -94,6 +122,30 @@ const Watch = () => {
           data-tooltip-content="go back"
         />
       </div>
+      {type === "tv" ? (
+        <div className={styles.episodeControl}>
+          <FaBackwardStep
+            data-tooltip-id="tooltip"
+            data-tooltip-content={
+              episode > 1 ? "Previous episode" : `Start of season ${season}`
+            }
+            onClick={() => {
+              if (episode > 1) handleBackward();
+            }}
+            className={`${episode <= 1 ? styles.inactive : null}`}
+          />
+          <FaForwardStep
+            data-tooltip-id="tooltip"
+            data-tooltip-content={
+              episode < maxEpisodes ? "Next episode" : `End of season ${season}`
+            }
+            onClick={() => {
+              if (episode < maxEpisodes) handleForward();
+            }}
+            className={`${episode >= maxEpisodes ? styles.inactive : null}`}
+          />
+        </div>
+      ) : null}
       <select
         name="source"
         id="source"

@@ -47,21 +47,48 @@
     z-index: 2;
     cursor: pointer;
     color: var(--primary-3);
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     padding: 1rem 1.5rem;
+    svg {
+      border: none;
+      outline: none;
+    }
+  }
+  .episodeControl {
+    position: absolute;
+    top: 2.5rem;
+    right: 0;
+    z-index: 2;
+    cursor: pointer;
+    color: var(--primary-3);
+    font-size: 1.4rem;
+    padding: 1rem 1.5rem;
+    display: flex;
+    gap: 1rem;
+    svg {
+      border: none;
+      outline: none;
+    }
+    .inactive {
+      opacity: 0.5;
+    }
   }
 }
 
 @media (max-width: 769px) {
   .watch {
     padding-left: unset;
-    padding: 1.5rem 1rem;
+    padding: 1.5rem 0.5rem;
     padding-bottom: 5rem;
     .iframe {
       height: 100%;
       width: 100%;
       border: none;
       outline: none;
+    }
+    :where(.backBtn, .episodeControl) svg {
+      margin-top: 1rem;
+      font-size: 1.3rem;
     }
   }
 }
