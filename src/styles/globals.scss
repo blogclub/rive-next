@@ -93,7 +93,7 @@ a {
   // height: 100%;
   margin: 0;
   padding: 0;
-  opacity: 0.7;
+  // opacity: 0.7;
   animation: skeleton-loading 1.5s linear infinite alternate;
 }
 
@@ -156,6 +156,7 @@ input {
   color: var(--primary-3) !important;
   border-radius: 0.3rem !important;
   z-index: 5;
+  border: 1px solid var(--bg-color);
   // border: 1px solid var(--bg-gradient);
 }
 

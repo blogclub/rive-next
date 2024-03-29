@@ -14,7 +14,9 @@ const MovieCardSmall = ({ data, media_type }: any) => {
       aria-label={data?.name || "poster"}
     >
       {/* <img src={process.env.NEXT_PUBLIC_TMBD_IMAGE_URL + data.poster_path} alt="" /> */}
-      <div className={`${styles.img} ${imageLoading ? "skeleton" : null}`}>
+      <div
+        className={`${styles.img} ${data?.poster_path !== null && data?.poster_path !== undefined ? "skeleton" : null}`}
+      >
         <AnimatePresence mode="sync">
           <motion.img
             key={data?.id}
