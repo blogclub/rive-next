@@ -6,6 +6,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import MovieCardLarge from "../MovieCardLarge";
 import { FaPlay, FaStar } from "react-icons/fa";
 import Skeleton from "react-loading-skeleton";
+import ReactPaginate from "react-paginate";
+import { AiFillLeftCircle, AiFillRightCircle } from "react-icons/ai";
 
 function capitalizeFirstLetter(string: string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -19,6 +21,8 @@ const MetaDetails = ({ id, type, data }: any) => {
   const [reviewDetail, setReviewDetail] = useState<any>("");
   const [selectedSeason, setSelectedSeason] = useState<any>(1);
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalpages, setTotalpages] = useState(1);
 
   const genres: Array<string> = [];
   data?.genres?.map((ele: any) => {
@@ -70,7 +74,10 @@ const MetaDetails = ({ id, type, data }: any) => {
             res = await axiosFetch({
               requestID: `${type}${CapitalCategoryType}`,
               id: id,
+              page: currentPage,
             });
+            setCurrentPage(res?.page);
+            setTotalpages(res?.total_pages);
           }
           setCategoryData(res);
           setLoading(false);
@@ -80,7 +87,7 @@ const MetaDetails = ({ id, type, data }: any) => {
       }
     };
     fetchData();
-  }, [category, selectedSeason]);
+  }, [category, selectedSeason, currentPage]);
 
   return (
     <div className={styles.MetaDetailPage}>
@@ -363,10 +370,35 @@ const MetaDetails = ({ id, type, data }: any) => {
               ))}
           </div>
           <div className={styles.MovieList}>
-            {category === "related" &&
-              categoryData?.results?.map((ele: any) => {
-                return <MovieCardLarge data={ele} media_type={type} />;
-              })}
+            <>
+              {category === "related" &&
+                categoryData?.results?.map((ele: any) => {
+                  return <MovieCardLarge data={ele} media_type={type} />;
+                })}
+              {category === "related" && categoryData?.results?.length > 0 && (
+                <ReactPaginate
+                  containerClassName={styles.pagination}
+                  pageClassName={styles.page_item}
+                  activeClassName={styles.paginateActive}
+                  onPageChange={(event) => {
+                    setCurrentPage(event.selected + 1);
+                    console.log({ event });
+                    if (currentPage > totalpages) {
+                      setCurrentPage(totalpages);
+                    }
+                    window.scrollTo(0, 0);
+                  }}
+                  pageCount={totalpages}
+                  breakLabel=" ... "
+                  previousLabel={
+                    <AiFillLeftCircle className={styles.paginationIcons} />
+                  }
+                  nextLabel={
+                    <AiFillRightCircle className={styles.paginationIcons} />
+                  }
+                />
+              )}
+            </>
             {category === "related" && categoryData?.results?.length === 0 && (
               <p>No Recommendations</p>
             )}

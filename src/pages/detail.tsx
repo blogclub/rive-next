@@ -159,7 +159,12 @@ const DetailPage = () => {
             <MoviePoster data={data} />
           </div>
           <div className={styles.HomeHeroMeta}>
-            <h1>{data?.title || data?.name || <Skeleton />}</h1>
+            <h1
+              data-tooltip-id="tooltip"
+              data-tooltip-content={data?.title || data?.name || "name"}
+            >
+              {data?.title || data?.name || <Skeleton />}
+            </h1>
             <div className={styles.HomeHeroMetaRow2}>
               <p className={styles.type}>
                 {data ? (type == "movie" ? "MOVIE" : "SHOW") : null}

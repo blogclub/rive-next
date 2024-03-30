@@ -55,7 +55,7 @@ const MovieCardLarge = ({ data, media_type }: any) => {
       aria-label={data?.name || "poster"}
     >
       <div
-        className={`${styles.desktopOverflow} ${data?.poster_path !== null && data?.poster_path !== undefined ? "skeleton" : null}`}
+        className={`${styles.img} ${data?.poster_path !== null && data?.poster_path !== undefined ? "skeleton" : null}`}
       >
         <AnimatePresence mode="sync">
           <motion.img

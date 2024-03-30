@@ -75,7 +75,12 @@ const PersonPage = () => {
         <div className={styles.DetailBanner}>
           <div className={styles.curvy5}></div>
           <div className={styles.HomeHeroMeta} key={data?.id}>
-            <h1>{data?.name || <Skeleton />}</h1>
+            <h1
+              data-tooltip-id="tooltip"
+              data-tooltip-content={data?.name || "name"}
+            >
+              {data?.name || <Skeleton />}
+            </h1>
             <div className={styles.HomeHeroMetaRow2}>
               <p className={styles.type}>{data?.known_for_department}</p>
               {data?.homepage !== null ? (

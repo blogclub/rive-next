@@ -143,6 +143,32 @@
       }
     }
   }
+  .pagination {
+    list-style: none;
+    // height: 31.5px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2px;
+    cursor: pointer;
+    gap: 0.5rem;
+    font-size: 1.2rem;
+    svg {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2rem;
+      color: var(--primary-2);
+    }
+  }
+  .page_item {
+    list-style: none;
+    padding: 2px 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 .inactive {
@@ -155,6 +181,21 @@
   cursor: pointer;
   color: var(--ascent-color) !important;
   fill: var(--ascent-color) !important;
+}
+
+.paginateActive {
+  background-color: var(--ascent-color);
+  border-radius: 0.5rem;
+  color: var(--primary-1);
+  a {
+    color: var(--primary-1);
+  }
+}
+.disabled {
+  svg {
+    opacity: 0.5 !important;
+    fill: var(--ascent-color);
+  }
 }
 
 @media (max-width: 769px) {
