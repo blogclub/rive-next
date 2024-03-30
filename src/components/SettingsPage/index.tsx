@@ -61,7 +61,7 @@ const SettingsPage = ({
               <Link href="/login">Login</Link>
               <Link href="/signup">Signup</Link>
             </>
-            <h4 className={styles.profileCard}>Login to syc to cloud</h4>
+            <h4 className={styles.profileCard}>Login to sync to cloud</h4>
           </div>
         )}
         <h1>Appearence</h1>
