@@ -35,6 +35,9 @@
     flex-direction: row;
     flex-wrap: wrap;
     gap: 2rem 1rem;
+    p {
+      color: var(--primary-2);
+    }
 
     .loading {
       height: 15rem;

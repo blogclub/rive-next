@@ -35,7 +35,7 @@ export default async function axiosFetch({
     topRatedMovie: `${baseURL}/movie/top_rated?language=${language}&page=${page}`,
     topRatedTv: `${baseURL}/tv/top_rated?language=${language}&page=${page}`,
     filterMovie: `${baseURL}/discover/movie?with_genres=${genreKeywords}&language=${language}&sort_by=${sortBy}${year != undefined ? "&year=" + year : ""}${country != undefined ? "&with_origin_country=" + country : ""}&page=${page}`,
-    filterTv: `${baseURL}/discover/tv?with_genres=${genreKeywords}&language=${language}&sort_by=${sortBy}${year != undefined ? "&year=" + year : ""}${country != undefined ? "&with_origin_country=" + country : ""}&page=${page}`,
+    filterTv: `${baseURL}/discover/tv?with_genres=${genreKeywords}&language=${language}&sort_by=${sortBy}${year != undefined ? "&first_air_date_year=" + year : ""}${country != undefined ? "&with_origin_country=" + country : ""}&page=${page}`,
     onTheAirTv: `${baseURL}/tv/on_the_air?language=${language}&page=${page}`,
     trending: `${baseURL}/trending/all/day?language=${language}&page=${page}`,
     trendingMovie: `${baseURL}/trending/movie/week?language=${language}&page=${page}`,

@@ -46,7 +46,7 @@ const CategorywisePage = ({ categoryType }: any) => {
             genreKeywords: filterGenreList,
             country: filterCountry,
             year: filterYear,
-            sortBy: "vote_average.desc",
+            sortBy: "popularity.desc",
           });
         } else {
           data = await axiosFetch({
@@ -130,6 +130,8 @@ const CategorywisePage = ({ categoryType }: any) => {
         })}
         {data?.length === 0 &&
           dummyList.map((ele) => <Skeleton className={styles.loading} />)}
+        {/* {data?.total_results === 0 &&
+          <h1>No Data Found</h1>} */}
       </div>
       <ReactPaginate
         containerClassName={styles.pagination}
