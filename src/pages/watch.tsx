@@ -16,6 +16,7 @@ const Watch = () => {
   const [season, setSeason] = useState<any>();
   const [episode, setEpisode] = useState<any>();
   const [maxEpisodes, setMaxEpisodes] = useState(1);
+  const [maxSeason, setMaxSeason] = useState(1);
   const [loading, setLoading] = useState(true);
   const [source, setSource] = useState("SUP");
 
@@ -41,6 +42,7 @@ const Watch = () => {
             setMaxEpisodes(ele?.episode_count);
           }
         });
+      setMaxSeason(res?.number_of_seasons);
     };
     if (type === "tv") fetch();
   }, [params, id]);
@@ -105,9 +107,14 @@ const Watch = () => {
   };
   const handleForward = () => {
     // setEpisode(parseInt(episode)+1);
-    push(
-      `/watch?type=tv&id=${id}&season=${season}&episode=${parseInt(episode) + 1}`,
-    );
+    if (episode < maxEpisodes)
+      push(
+        `/watch?type=tv&id=${id}&season=${season}&episode=${parseInt(episode) + 1}`,
+      );
+    else if (parseInt(season) + 1 <= maxSeason)
+      push(
+        `/watch?type=tv&id=${id}&season=${parseInt(season) + 1}&episode=${1}`,
+      );
   };
 
   const STREAM_URL_AGG = process.env.NEXT_PUBLIC_STREAM_URL_AGG;
@@ -139,12 +146,17 @@ const Watch = () => {
           <FaForwardStep
             data-tooltip-id="tooltip"
             data-tooltip-content={
-              episode < maxEpisodes ? "Next episode" : `End of season ${season}`
+              episode < maxEpisodes
+                ? "Next episode"
+                : parseInt(season) + 1 <= maxSeason
+                  ? `Start season ${parseInt(season) + 1}`
+                  : `End of season ${season}`
             }
             onClick={() => {
-              if (episode < maxEpisodes) handleForward();
+              if (episode < maxEpisodes || parseInt(season) + 1 <= maxSeason)
+                handleForward();
             }}
-            className={`${episode >= maxEpisodes ? styles.inactive : null}`}
+            className={`${episode >= maxEpisodes && season >= maxSeason ? styles.inactive : null} ${episode >= maxEpisodes && season < maxSeason ? styles.nextSeason : null}`}
           />
         </div>
       ) : null}
