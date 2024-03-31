@@ -101,6 +101,7 @@ const HomeListAll = () => {
         asyncFunc().then((arr) => {
           const shuffledArray = shuffle(arr.flat(Infinity));
           setRecommendations(shuffledArray);
+          console.log({ shuffledArray });
         });
 
         setLoading(false);
@@ -211,12 +212,13 @@ const HomeListAll = () => {
             data-tooltip-id="tooltip"
             data-tooltip-content="recommendation based on what you have watched!"
           >
-            {recommendations?.map((ele: any, i) => {
-              return i < 20 ? (
-                <MovieCardSmall data={ele} media_type={ele?.media_type} />
-              ) : null;
-            })}
-            {recommendations?.length === 0 &&
+            {recommendations[0] !== undefined &&
+              recommendations?.map((ele: any, i) => {
+                return i < 20 ? (
+                  <MovieCardSmall data={ele} media_type={ele?.media_type} />
+                ) : null;
+              })}
+            {recommendations[0] === undefined &&
               dummyList.map((ele, i) => (
                 <Skeleton className={styles.loading} key={i} />
               ))}
