@@ -40,7 +40,8 @@ const MetaDetails = ({ id, type, data }: any) => {
   data?.production_companies?.map((ele: any) => {
     production_companies.push(ele.name);
   });
-  const release_date = new Date(data?.release_date);
+  const release_date = new Date(data?.release_date || data?.first_air_date);
+  const end_date = new Date(data?.last_air_date);
   const birthday = new Date(data?.birthday);
   const monthNames = [
     "January",
@@ -250,6 +251,11 @@ const MetaDetails = ({ id, type, data }: any) => {
         <div className={styles.categoryDetails}>
           {category === "overview" && type !== "person" && (
             <>
+              {data?.tagline ? (
+                <h4>
+                  <q>{data?.tagline}</q>
+                </h4>
+              ) : null}
               <p>{data?.overview}</p>
               {release_date.getDate() ? (
                 <>
@@ -276,6 +282,27 @@ const MetaDetails = ({ id, type, data }: any) => {
                   <p>{genres?.join(", ")}</p>
                 </>
               ) : null}
+              {type === "tv" && (
+                <>
+                  <h3>Show Details</h3>
+                  {data?.status && <p> Status : {data?.status}</p>}
+                  {data?.number_of_seasons && (
+                    <p> Total Seasons : {data?.number_of_seasons}</p>
+                  )}
+                  {data?.number_of_episodes && (
+                    <p> Total Episodes : {data?.number_of_episodes}</p>
+                  )}
+                  {release_date && end_date && (
+                    <p>
+                      {" "}
+                      Air Duration :{" "}
+                      {`${release_date.getDate()} ${monthNames[release_date.getMonth()]} ${release_date.getFullYear()}`}{" "}
+                      -{" "}
+                      {`${end_date.getDate()} ${monthNames[end_date.getMonth()]} ${end_date.getFullYear()}`}
+                    </p>
+                  )}
+                </>
+              )}
               {spoken_languages?.length > 0 ? (
                 <>
                   <h3>Spoken Languages</h3>
