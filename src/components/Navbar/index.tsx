@@ -46,7 +46,7 @@ const Navbar = ({ children }: any) => {
         href="/search"
         aria-label="Search"
         data-tooltip-id="tooltip"
-        data-tooltip-content="Search, use CRTL+K as shortcut"
+        data-tooltip-html="<div>Search <span class='tooltip-btn'>CTRL + K</span></div>"
       >
         {pathname === "/search" ? (
           <IoSearch className={styles.active} />

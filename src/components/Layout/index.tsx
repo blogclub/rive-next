@@ -28,13 +28,6 @@ const Layout = ({ children }: any) => {
       window.matchMedia("(prefers-color-scheme: dark)").matches;
     const themeColor = prefersDarkMode ? "#1b1919" : "#f4f7fe";
     setThemeColor(themeColor);
-    // console.log({ prefersDarkMode });
-    // const metaThemeColor = document.querySelector("meta[name=theme-color]");
-    // metaThemeColor?.setAttribute("content", themeColor);
-  }, []);
-  useEffect(() => {
-    document.documentElement.style.setProperty("--ascent-color", ascent_color);
-    document.documentElement.style.setProperty("--mode", mode);
 
     window.addEventListener("keydown", (event) => {
       if (event.ctrlKey && event.key === "k") {
@@ -42,6 +35,13 @@ const Layout = ({ children }: any) => {
         push("/search");
       }
     });
+    // console.log({ prefersDarkMode });
+    // const metaThemeColor = document.querySelector("meta[name=theme-color]");
+    // metaThemeColor?.setAttribute("content", themeColor);
+  }, []);
+  useEffect(() => {
+    document.documentElement.style.setProperty("--ascent-color", ascent_color);
+    document.documentElement.style.setProperty("--mode", mode);
   }, [mode, ascent_color]);
   const path = usePathname();
   return (

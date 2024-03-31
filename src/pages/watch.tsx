@@ -45,6 +45,25 @@ const Watch = () => {
       setMaxSeason(res?.number_of_seasons);
     };
     if (type === "tv") fetch();
+    const handleKeyDown = (event: any) => {
+      if (event.key === "N") {
+        event.preventDefault();
+        handleForward();
+        console.log("next");
+      } else if (event.key === "P") {
+        event.preventDefault();
+        handleBackward();
+        console.log("prev");
+      }
+    };
+
+    // Add event listener when component mounts
+    window.addEventListener("keydown", handleKeyDown);
+
+    // Remove event listener when component unmounts
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
   }, [params, id]);
   useEffect(() => {
     toast.info(
@@ -83,6 +102,9 @@ const Watch = () => {
         </a>
       </div>,
     );
+    // window.addEventListener("keydown", (event) => {
+    //   console.log("Key pressed:", event.key);
+    // });
   }, []);
   // useEffect(() => {
   //   setTimeout(() => {
@@ -99,13 +121,14 @@ const Watch = () => {
   //   };
   // }, [window]);
 
-  const handleBackward = () => {
+  function handleBackward() {
     // setEpisode(parseInt(episode)+1);
-    push(
-      `/watch?type=tv&id=${id}&season=${season}&episode=${parseInt(episode) - 1}`,
-    );
-  };
-  const handleForward = () => {
+    if (episode > 1)
+      push(
+        `/watch?type=tv&id=${id}&season=${season}&episode=${parseInt(episode) - 1}`,
+      );
+  }
+  function handleForward() {
     // setEpisode(parseInt(episode)+1);
     if (episode < maxEpisodes)
       push(
@@ -115,7 +138,7 @@ const Watch = () => {
       push(
         `/watch?type=tv&id=${id}&season=${parseInt(season) + 1}&episode=${1}`,
       );
-  };
+  }
 
   const STREAM_URL_AGG = process.env.NEXT_PUBLIC_STREAM_URL_AGG;
   const STREAM_URL_VID = process.env.NEXT_PUBLIC_STREAM_URL_VID;
@@ -135,8 +158,10 @@ const Watch = () => {
         <div className={styles.episodeControl}>
           <FaBackwardStep
             data-tooltip-id="tooltip"
-            data-tooltip-content={
-              episode > 1 ? "Previous episode" : `Start of season ${season}`
+            data-tooltip-html={
+              episode > 1
+                ? "<div>Previous episode <span class='tooltip-btn'>SHIFT + P</span></div>"
+                : `Start of season ${season}`
             }
             onClick={() => {
               if (episode > 1) handleBackward();
@@ -145,11 +170,11 @@ const Watch = () => {
           />
           <FaForwardStep
             data-tooltip-id="tooltip"
-            data-tooltip-content={
+            data-tooltip-html={
               episode < maxEpisodes
-                ? "Next episode"
+                ? "<div>Next episode <span class='tooltip-btn'>SHIFT + N</span></div>"
                 : parseInt(season) + 1 <= maxSeason
-                  ? `Start season ${parseInt(season) + 1}`
+                  ? `<div>Start season ${parseInt(season) + 1} <span class='tooltip-btn'>SHIFT + N</span></div>`
                   : `End of season ${season}`
             }
             onClick={() => {
