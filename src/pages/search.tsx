@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import axiosFetch from "@/Utils/fetch";
 import styles from "@/styles/Search.module.scss";
 import ReactPaginate from "react-paginate"; // for pagination
 import { AiFillLeftCircle, AiFillRightCircle } from "react-icons/ai";
 import MovieCardLarge from "@/components/MovieCardLarge";
 import Skeleton from "react-loading-skeleton";
+import NProgress from "nprogress";
 // import MoviePoster from '@/components/MoviePoster';
 
 const dummyList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
@@ -14,7 +15,9 @@ const SearchPage = ({ categoryType }: any) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalpages, setTotalpages] = useState(1);
   const [loading, setLoading] = useState(true);
+  const searchBar: any = useRef(null);
   useEffect(() => {
+    let debounceTimer: NodeJS.Timeout;
     const fetchData = async (mode: any) => {
       setLoading(true);
       setData([null, null, null, null, null, null, null, null, null, null]);
@@ -42,15 +45,32 @@ const SearchPage = ({ categoryType }: any) => {
         console.error("Error fetching data:", error);
       }
     };
-    if (query?.length > 2) fetchData(true);
+    const debounceSearch = () => {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => {
+        if (query.length >= 3) {
+          fetchData(true);
+        }
+      }, 600);
+    };
+    if (query?.length > 2) debounceSearch();
     if (query?.length === 0) fetchData(false);
+    return () => clearTimeout(debounceTimer);
   }, [query, currentPage]);
+
+  useEffect(() => {
+    if (loading) {
+      NProgress.start();
+    } else NProgress.done(false);
+    searchBar?.current.focus();
+  }, [loading]);
 
   return (
     <div className={styles.MoviePage}>
       {/* <h1>Search</h1> */}
       <div className={styles.InputWrapper}>
         <input
+          ref={searchBar}
           type="text"
           className={styles.searchInput}
           value={query}
