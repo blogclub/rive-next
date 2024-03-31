@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import styles from "@/styles/Watch.module.scss";
 import { setContinueWatching } from "@/Utils/continueWatching";
@@ -19,7 +19,8 @@ const Watch = () => {
   const [maxSeason, setMaxSeason] = useState(1);
   const [loading, setLoading] = useState(true);
   const [source, setSource] = useState("SUP");
-
+  const nextBtn: any = useRef(null);
+  const backBtn: any = useRef(null);
   if (type === null && params.get("id") !== null) setType(params.get("type"));
   if (id === null && params.get("id") !== null) setId(params.get("id"));
   if (season === null && params.get("season") !== null)
@@ -45,15 +46,18 @@ const Watch = () => {
       setMaxSeason(res?.number_of_seasons);
     };
     if (type === "tv") fetch();
+
     const handleKeyDown = (event: any) => {
-      if (event.key === "N") {
+      if (event.shiftKey && event.key === "N") {
         event.preventDefault();
-        handleForward();
-        console.log("next");
-      } else if (event.key === "P") {
+        nextBtn?.current.click();
+        // handleForward();
+        // console.log("next");
+      } else if (event.shiftKey && event.key === "P") {
         event.preventDefault();
-        handleBackward();
-        console.log("prev");
+        backBtn?.current.click();
+        // handleBackward();
+        // console.log("prev");
       }
     };
 
@@ -156,33 +160,41 @@ const Watch = () => {
       </div>
       {type === "tv" ? (
         <div className={styles.episodeControl}>
-          <FaBackwardStep
-            data-tooltip-id="tooltip"
-            data-tooltip-html={
-              episode > 1
-                ? "<div>Previous episode <span class='tooltip-btn'>SHIFT + P</span></div>"
-                : `Start of season ${season}`
-            }
+          <div
+            ref={backBtn}
             onClick={() => {
               if (episode > 1) handleBackward();
             }}
-            className={`${episode <= 1 ? styles.inactive : null}`}
-          />
-          <FaForwardStep
-            data-tooltip-id="tooltip"
-            data-tooltip-html={
-              episode < maxEpisodes
-                ? "<div>Next episode <span class='tooltip-btn'>SHIFT + N</span></div>"
-                : parseInt(season) + 1 <= maxSeason
-                  ? `<div>Start season ${parseInt(season) + 1} <span class='tooltip-btn'>SHIFT + N</span></div>`
-                  : `End of season ${season}`
-            }
+          >
+            <FaBackwardStep
+              data-tooltip-id="tooltip"
+              data-tooltip-html={
+                episode > 1
+                  ? "<div>Previous episode <span class='tooltip-btn'>SHIFT + P</span></div>"
+                  : `Start of season ${season}`
+              }
+              className={`${episode <= 1 ? styles.inactive : null}`}
+            />
+          </div>
+          <div
+            ref={nextBtn}
             onClick={() => {
               if (episode < maxEpisodes || parseInt(season) + 1 <= maxSeason)
                 handleForward();
             }}
-            className={`${episode >= maxEpisodes && season >= maxSeason ? styles.inactive : null} ${episode >= maxEpisodes && season < maxSeason ? styles.nextSeason : null}`}
-          />
+          >
+            <FaForwardStep
+              data-tooltip-id="tooltip"
+              data-tooltip-html={
+                episode < maxEpisodes
+                  ? "<div>Next episode <span class='tooltip-btn'>SHIFT + N</span></div>"
+                  : parseInt(season) + 1 <= maxSeason
+                    ? `<div>Start season ${parseInt(season) + 1} <span class='tooltip-btn'>SHIFT + N</span></div>`
+                    : `End of season ${season}`
+              }
+              className={`${episode >= maxEpisodes && season >= maxSeason ? styles.inactive : null} ${episode >= maxEpisodes && season < maxSeason ? styles.nextSeason : null}`}
+            />
+          </div>
         </div>
       ) : null}
       <select
