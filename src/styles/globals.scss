@@ -165,6 +165,10 @@ input {
   z-index: 5;
   border: 1px solid var(--bg-color);
   // border: 1px solid var(--bg-gradient);
+  &-arrow {
+    border-bottom: 1px solid var(--bg-color);
+    border-right: 1px solid var(--bg-color);
+  }
 }
 .tooltip-btn {
   padding: 0.2rem 0.5rem;

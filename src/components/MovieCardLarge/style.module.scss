@@ -44,7 +44,7 @@
 @media (max-width: 769px) {
   .MovieCardSmall {
     min-height: 8rem;
-    width: 15rem;
+    width: 18rem;
     .img {
       height: 8rem;
       width: 5rem;
@@ -52,9 +52,18 @@
       border-radius: 0.5rem;
       overflow: hidden;
     }
-    h1 {
-      color: var(--primary-2);
-      width: 80%;
+    .metaData {
+      width: 12rem;
+      margin-left: 1rem;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 0.5rem;
+      h1 {
+        color: var(--primary-2);
+        width: 80%;
+      }
     }
   }
 }
