@@ -11,6 +11,7 @@ interface Fetch {
   country?: string;
   query?: string;
   season?: number;
+  episode?: number;
 }
 export default async function axiosFetch({
   requestID,
@@ -23,6 +24,7 @@ export default async function axiosFetch({
   country,
   query,
   season,
+  episode,
 }: Fetch) {
   const request = requestID;
   const API_KEY = process.env.NEXT_PUBLIC_TMDB_API_KEY;
@@ -63,6 +65,7 @@ export default async function axiosFetch({
     movieRelated: `${baseURL}/movie/${id}/recommendations?language=${language}&page=${page}`,
     tvRelated: `${baseURL}/tv/${id}/recommendations?language=${language}&page=${page}`,
     tvEpisodes: `${baseURL}/tv/${id}/season/${season}?language=${language}`,
+    tvEpisodeDetail: `${baseURL}/tv/${id}/season/${season}/episode/${episode}?language=${language}`,
     movieSimilar: `${baseURL}/movie/${id}/similar?language=${language}&page=${page}`,
     tvSimilar: `${baseURL}/tv/${id}/similar?language=${language}&page=${page}`,
 

@@ -5,7 +5,9 @@ import { setContinueWatching } from "@/Utils/continueWatching";
 import { toast } from "sonner";
 import { IoReturnDownBack } from "react-icons/io5";
 import { FaForwardStep, FaBackwardStep } from "react-icons/fa6";
+import { BsHddStack, BsHddStackFill } from "react-icons/bs";
 import axiosFetch from "@/Utils/fetch";
+import WatchDetails from "@/components/WatchDetails";
 
 const Watch = () => {
   const params = useSearchParams();
@@ -18,6 +20,8 @@ const Watch = () => {
   const [maxEpisodes, setMaxEpisodes] = useState(1);
   const [maxSeason, setMaxSeason] = useState(1);
   const [loading, setLoading] = useState(true);
+  const [watchDetails, setWatchDetails] = useState(false);
+  const [data, setdata] = useState<any>();
   const [source, setSource] = useState("SUP");
   const nextBtn: any = useRef(null);
   const backBtn: any = useRef(null);
@@ -37,6 +41,7 @@ const Watch = () => {
     setContinueWatching({ type: params.get("type"), id: params.get("id") });
     const fetch = async () => {
       const res: any = await axiosFetch({ requestID: `${type}Data`, id: id });
+      setdata(res);
       res?.seasons.length > 0 &&
         res?.seasons?.map((ele: any) => {
           if (ele?.season_number === parseInt(season)) {
@@ -158,45 +163,69 @@ const Watch = () => {
           data-tooltip-content="go back"
         />
       </div>
-      {type === "tv" ? (
+      {
         <div className={styles.episodeControl}>
+          {type === "tv" ? (
+            <>
+              <div
+                ref={backBtn}
+                onClick={() => {
+                  if (episode > 1) handleBackward();
+                }}
+              >
+                <FaBackwardStep
+                  data-tooltip-id="tooltip"
+                  data-tooltip-html={
+                    episode > 1
+                      ? "<div>Previous episode <span class='tooltip-btn'>SHIFT + P</span></div>"
+                      : `Start of season ${season}`
+                  }
+                  className={`${episode <= 1 ? styles.inactive : null}`}
+                />
+              </div>
+              <div
+                ref={nextBtn}
+                onClick={() => {
+                  if (
+                    episode < maxEpisodes ||
+                    parseInt(season) + 1 <= maxSeason
+                  )
+                    handleForward();
+                }}
+              >
+                <FaForwardStep
+                  data-tooltip-id="tooltip"
+                  data-tooltip-html={
+                    episode < maxEpisodes
+                      ? "<div>Next episode <span class='tooltip-btn'>SHIFT + N</span></div>"
+                      : parseInt(season) + 1 <= maxSeason
+                        ? `<div>Start season ${parseInt(season) + 1} <span class='tooltip-btn'>SHIFT + N</span></div>`
+                        : `End of season ${season}`
+                  }
+                  className={`${episode >= maxEpisodes && season >= maxSeason ? styles.inactive : null} ${episode >= maxEpisodes && season < maxSeason ? styles.nextSeason : null}`}
+                />
+              </div>
+            </>
+          ) : null}
           <div
-            ref={backBtn}
-            onClick={() => {
-              if (episode > 1) handleBackward();
-            }}
+            onClick={() => setWatchDetails(!watchDetails)}
+            data-tooltip-id="tooltip"
+            data-tooltip-content="More"
           >
-            <FaBackwardStep
-              data-tooltip-id="tooltip"
-              data-tooltip-html={
-                episode > 1
-                  ? "<div>Previous episode <span class='tooltip-btn'>SHIFT + P</span></div>"
-                  : `Start of season ${season}`
-              }
-              className={`${episode <= 1 ? styles.inactive : null}`}
-            />
-          </div>
-          <div
-            ref={nextBtn}
-            onClick={() => {
-              if (episode < maxEpisodes || parseInt(season) + 1 <= maxSeason)
-                handleForward();
-            }}
-          >
-            <FaForwardStep
-              data-tooltip-id="tooltip"
-              data-tooltip-html={
-                episode < maxEpisodes
-                  ? "<div>Next episode <span class='tooltip-btn'>SHIFT + N</span></div>"
-                  : parseInt(season) + 1 <= maxSeason
-                    ? `<div>Start season ${parseInt(season) + 1} <span class='tooltip-btn'>SHIFT + N</span></div>`
-                    : `End of season ${season}`
-              }
-              className={`${episode >= maxEpisodes && season >= maxSeason ? styles.inactive : null} ${episode >= maxEpisodes && season < maxSeason ? styles.nextSeason : null}`}
-            />
+            {watchDetails ? <BsHddStackFill /> : <BsHddStack />}
           </div>
         </div>
-      ) : null}
+      }
+      {watchDetails && (
+        <WatchDetails
+          id={id}
+          type={type}
+          data={data}
+          season={season}
+          episode={episode}
+          setWatchDetails={setWatchDetails}
+        />
+      )}
       <select
         name="source"
         id="source"
