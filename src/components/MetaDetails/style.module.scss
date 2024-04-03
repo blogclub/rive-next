@@ -49,6 +49,10 @@
       align-items: center;
       gap: 1rem;
       flex-wrap: wrap;
+      .header {
+        width: 100%;
+        // margin-top: 0;
+      }
       .cast {
         display: flex;
         justify-content: center;

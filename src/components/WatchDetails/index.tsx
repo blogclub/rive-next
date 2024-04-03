@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import styles from "./style.module.scss";
 import axiosFetch from "@/Utils/fetch";
 import Link from "next/link";
@@ -32,6 +32,7 @@ const WatchDetails = ({
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalpages, setTotalpages] = useState(1);
+  const watchDetailsPage: any = useRef(null);
 
   const monthNames = [
     "January",
@@ -90,6 +91,10 @@ const WatchDetails = ({
     fetchData();
   }, [category, selectedSeason, currentPage]);
 
+  const scrollToTop = () => {
+    watchDetailsPage?.current?.scrollTo(0, 0);
+  };
+
   return (
     <div className={styles.MetaDetailPage}>
       <p
@@ -98,7 +103,7 @@ const WatchDetails = ({
       >
         x
       </p>
-      <div className={styles.MetaDetails}>
+      <div className={styles.MetaDetails} ref={watchDetailsPage}>
         <div className={styles.category}>
           {type === "tv" ? (
             <>
@@ -363,29 +368,6 @@ const WatchDetails = ({
                 categoryData?.results?.map((ele: any) => {
                   return <MovieCardLarge data={ele} media_type={type} />;
                 })}
-              {category === "related" && categoryData?.results?.length > 0 && (
-                <ReactPaginate
-                  containerClassName={styles.pagination}
-                  pageClassName={styles.page_item}
-                  activeClassName={styles.paginateActive}
-                  onPageChange={(event) => {
-                    setCurrentPage(event.selected + 1);
-                    console.log({ event });
-                    if (currentPage > totalpages) {
-                      setCurrentPage(totalpages);
-                    }
-                    window.scrollTo(0, 0);
-                  }}
-                  pageCount={totalpages}
-                  breakLabel=" ... "
-                  previousLabel={
-                    <AiFillLeftCircle className={styles.paginationIcons} />
-                  }
-                  nextLabel={
-                    <AiFillRightCircle className={styles.paginationIcons} />
-                  }
-                />
-              )}
             </>
             {category === "related" && categoryData?.results?.length === 0 && (
               <p>No Recommendations</p>
@@ -409,29 +391,32 @@ const WatchDetails = ({
                 categoryData?.results?.map((ele: any) => {
                   return <MovieCardLarge data={ele} media_type={type} />;
                 })}
-              {category === "similar" && categoryData?.results?.length > 0 && (
-                <ReactPaginate
-                  containerClassName={styles.pagination}
-                  pageClassName={styles.page_item}
-                  activeClassName={styles.paginateActive}
-                  onPageChange={(event) => {
-                    setCurrentPage(event.selected + 1);
-                    console.log({ event });
-                    if (currentPage > totalpages) {
-                      setCurrentPage(totalpages);
+              {(category === "related" || category === "similar") &&
+                categoryData?.results?.length > 0 && (
+                  <ReactPaginate
+                    containerClassName={styles.pagination}
+                    pageClassName={styles.page_item}
+                    activeClassName={styles.paginateActive}
+                    onPageChange={(event) => {
+                      setCurrentPage(event.selected + 1);
+                      console.log({ event });
+                      if (currentPage > totalpages) {
+                        setCurrentPage(totalpages);
+                      }
+                      // window.scrollTo(0, 0);
+                      scrollToTop();
+                    }}
+                    initialPage={0}
+                    pageCount={totalpages}
+                    breakLabel=" ... "
+                    previousLabel={
+                      <AiFillLeftCircle className={styles.paginationIcons} />
                     }
-                    window.scrollTo(0, 0);
-                  }}
-                  pageCount={totalpages}
-                  breakLabel=" ... "
-                  previousLabel={
-                    <AiFillLeftCircle className={styles.paginationIcons} />
-                  }
-                  nextLabel={
-                    <AiFillRightCircle className={styles.paginationIcons} />
-                  }
-                />
-              )}
+                    nextLabel={
+                      <AiFillRightCircle className={styles.paginationIcons} />
+                    }
+                  />
+                )}
             </>
             {category === "similar" && categoryData?.results?.length === 0 && (
               <p>No Recommendations</p>

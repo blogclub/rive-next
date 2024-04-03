@@ -100,7 +100,8 @@ const HomeListAll = () => {
         };
         asyncFunc().then((arr) => {
           const shuffledArray = shuffle(arr.flat(Infinity));
-          setRecommendations(shuffledArray);
+          const uniqueArray = Array.from(new Set(shuffledArray));
+          setRecommendations(shuffle(uniqueArray));
           console.log({ shuffledArray });
         });
 

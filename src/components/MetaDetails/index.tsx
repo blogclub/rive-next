@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import styles from "./style.module.scss";
 import axiosFetch from "@/Utils/fetch";
 import Link from "next/link";
@@ -23,6 +23,7 @@ const MetaDetails = ({ id, type, data }: any) => {
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalpages, setTotalpages] = useState(1);
+  const metaDetailsPage: any = useRef(null);
 
   const genres: Array<string> = [];
   data?.genres?.map((ele: any) => {
@@ -90,9 +91,13 @@ const MetaDetails = ({ id, type, data }: any) => {
     fetchData();
   }, [category, selectedSeason, currentPage]);
 
+  const scrollToTop = () => {
+    metaDetailsPage?.current?.scrollTo(0, 0);
+  };
+
   return (
     <div className={styles.MetaDetailPage}>
-      <div className={styles.MetaDetails}>
+      <div className={styles.MetaDetails} ref={metaDetailsPage}>
         <div className={styles.category}>
           {type === "tv" ? (
             <p
@@ -182,6 +187,7 @@ const MetaDetails = ({ id, type, data }: any) => {
                     <Link
                       href={`/watch?type=tv&id=${ele?.show_id}&season=${ele?.season_number}&episode=${ele?.episode_number}`}
                       className={styles.CardSmall}
+                      onClick={(e) => e.stopPropagation()}
                     >
                       <div
                         className={`${styles.img} ${imageLoading ? "skeleton" : null}`}
@@ -224,6 +230,7 @@ const MetaDetails = ({ id, type, data }: any) => {
                       <Link
                         className={`${styles.links} btn`}
                         href={`/watch?type=tv&id=${ele?.show_id}&season=${ele?.season_number}&episode=${ele?.episode_number}`}
+                        onClick={(e) => e.stopPropagation()}
                       >
                         watch <FaPlay />
                       </Link>
@@ -350,51 +357,100 @@ const MetaDetails = ({ id, type, data }: any) => {
             <Skeleton count={5} />
           )}
           <div className={styles.casts}>
-            {category === "casts" &&
-              categoryData?.cast?.map((ele: any) => (
-                <div className={styles.cast}>
-                  <Link
-                    href={`/person?id=${ele?.id}`}
-                    className={styles.CardSmall}
-                  >
-                    <div
-                      className={`${styles.img} ${imageLoading ? "skeleton" : null}`}
+            {category === "casts" && (
+              <>
+                <h4 className={styles.header}>Cast</h4>
+                {categoryData?.cast?.map((ele: any) => (
+                  <div className={styles.cast}>
+                    <Link
+                      href={`/person?id=${ele?.id}`}
+                      className={styles.CardSmall}
                     >
-                      <AnimatePresence mode="sync">
-                        <motion.img
-                          key={ele?.id}
-                          src={`${ele?.profile_path !== null && ele?.profile_path !== undefined ? process.env.NEXT_PUBLIC_TMBD_IMAGE_URL + ele?.profile_path : "/images/logo.svg"}`}
-                          initial={{ opacity: 0 }}
-                          animate={{
-                            opacity: imageLoading ? 0 : 1,
-                          }}
-                          height="100%"
-                          width="100%"
-                          exit="exit"
-                          className={`${styles.img} ${imageLoading ? "skeleton" : null}`}
-                          onLoad={() => {
-                            setImageLoading(false);
-                          }}
-                          loading="lazy"
-                          // style={!imageLoading ? { opacity: 1 } : { opacity: 0 }}
-                        />
-                      </AnimatePresence>
+                      <div
+                        className={`${styles.img} ${imageLoading ? "skeleton" : null}`}
+                      >
+                        <AnimatePresence mode="sync">
+                          <motion.img
+                            key={ele?.id}
+                            src={`${ele?.profile_path !== null && ele?.profile_path !== undefined ? process.env.NEXT_PUBLIC_TMBD_IMAGE_URL + ele?.profile_path : "/images/logo.svg"}`}
+                            initial={{ opacity: 0 }}
+                            animate={{
+                              opacity: imageLoading ? 0 : 1,
+                            }}
+                            height="100%"
+                            width="100%"
+                            exit="exit"
+                            className={`${styles.img} ${imageLoading ? "skeleton" : null}`}
+                            onLoad={() => {
+                              setImageLoading(false);
+                            }}
+                            loading="lazy"
+                            // style={!imageLoading ? { opacity: 1 } : { opacity: 0 }}
+                          />
+                        </AnimatePresence>
+                      </div>
+                    </Link>
+                    <div className={styles.castName}>
+                      <h4>{ele?.name}</h4>
+                      <p>{ele?.character}</p>
                     </div>
-                  </Link>
-                  <div className={styles.castName}>
-                    <h4>{ele?.name}</h4>
-                    <p>{ele?.character}</p>
                   </div>
-                </div>
-              ))}
-            {category === "casts" &&
-              categoryData === undefined &&
-              dummyList.map((ele) => (
-                <div className={styles.cast}>
-                  <Skeleton height={100} width={100} />
-                  <Skeleton height={20} width={50} />
-                </div>
-              ))}
+                ))}
+                {category === "casts" &&
+                  categoryData === undefined &&
+                  dummyList.map((ele) => (
+                    <div className={styles.cast}>
+                      <Skeleton height={100} width={100} />
+                      <Skeleton height={20} width={50} />
+                    </div>
+                  ))}
+                <h4 className={styles.header}>Crew</h4>
+                {categoryData?.crew?.map((ele: any) => (
+                  <div className={styles.cast}>
+                    <Link
+                      href={`/person?id=${ele?.id}`}
+                      className={styles.CardSmall}
+                    >
+                      <div
+                        className={`${styles.img} ${imageLoading ? "skeleton" : null}`}
+                      >
+                        <AnimatePresence mode="sync">
+                          <motion.img
+                            key={ele?.id}
+                            src={`${ele?.profile_path !== null && ele?.profile_path !== undefined ? process.env.NEXT_PUBLIC_TMBD_IMAGE_URL + ele?.profile_path : "/images/logo.svg"}`}
+                            initial={{ opacity: 0 }}
+                            animate={{
+                              opacity: imageLoading ? 0 : 1,
+                            }}
+                            height="100%"
+                            width="100%"
+                            exit="exit"
+                            className={`${styles.img} ${imageLoading ? "skeleton" : null}`}
+                            onLoad={() => {
+                              setImageLoading(false);
+                            }}
+                            loading="lazy"
+                            // style={!imageLoading ? { opacity: 1 } : { opacity: 0 }}
+                          />
+                        </AnimatePresence>
+                      </div>
+                    </Link>
+                    <div className={styles.castName}>
+                      <h4>{ele?.name}</h4>
+                      <p>{ele?.character || ele?.job}</p>
+                    </div>
+                  </div>
+                ))}
+                {category === "casts" &&
+                  categoryData === undefined &&
+                  dummyList.map((ele) => (
+                    <div className={styles.cast}>
+                      <Skeleton height={100} width={100} />
+                      <Skeleton height={20} width={50} />
+                    </div>
+                  ))}
+              </>
+            )}
           </div>
           <div className={styles.MovieList}>
             <>
@@ -413,7 +469,8 @@ const MetaDetails = ({ id, type, data }: any) => {
                     if (currentPage > totalpages) {
                       setCurrentPage(totalpages);
                     }
-                    window.scrollTo(0, 0);
+                    // window.scrollTo(0, 0);
+                    scrollToTop();
                   }}
                   pageCount={totalpages}
                   breakLabel=" ... "
@@ -479,6 +536,11 @@ const MetaDetails = ({ id, type, data }: any) => {
                 return <MovieCardLarge data={ele} media_type="movie" />;
               })}
             {category === "movie" &&
+              data?.known_for_department !== "Acting" &&
+              categoryData?.crew?.map((ele: any) => {
+                return <MovieCardLarge data={ele} media_type="movie" />;
+              })}
+            {category === "movie" &&
               categoryData === undefined &&
               dummyList.map((ele) => (
                 <div className={styles.MovieList}>
@@ -490,6 +552,11 @@ const MetaDetails = ({ id, type, data }: any) => {
           <div className={styles.MovieList}>
             {category === "tv" &&
               categoryData?.cast?.map((ele: any) => {
+                return <MovieCardLarge data={ele} media_type="tv" />;
+              })}
+            {category === "tv" &&
+              data?.known_for_department !== "Acting" &&
+              categoryData?.crew?.map((ele: any) => {
                 return <MovieCardLarge data={ele} media_type="tv" />;
               })}
             {category === "tv" &&
