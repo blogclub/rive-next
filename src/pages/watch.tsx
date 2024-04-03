@@ -151,6 +151,7 @@ const Watch = () => {
 
   const STREAM_URL_AGG = process.env.NEXT_PUBLIC_STREAM_URL_AGG;
   const STREAM_URL_VID = process.env.NEXT_PUBLIC_STREAM_URL_VID;
+  const STREAM_URL_PRO = process.env.NEXT_PUBLIC_STREAM_URL_PRO;
   const STREAM_URL_EMB = process.env.NEXT_PUBLIC_STREAM_URL_EMB;
   const STREAM_URL_MULTI = process.env.NEXT_PUBLIC_STREAM_URL_MULTI;
   const STREAM_URL_SUP = process.env.NEXT_PUBLIC_STREAM_URL_SUP;
@@ -235,10 +236,11 @@ const Watch = () => {
       >
         <option value="AGG">Aggregator : 1 (Multi-Server)</option>
         <option value="VID">Aggregator : 2 (Best-Server)</option>
-        <option value="EMB">Aggregator : 3</option>
-        <option value="MULTI">Aggregator : 4 (Fast-Server)</option>
+        <option value="PRO">Aggregator : 3 (HQ-Server)</option>
+        <option value="EMB">Aggregator : 4</option>
+        <option value="MULTI">Aggregator : 5 (Fast-Server)</option>
         <option value="SUP" defaultChecked>
-          Aggregator : 5 (Multi/Most-Server)
+          Aggregator : 6 (Multi/Most-Server)
         </option>
       </select>
       <div className={`${styles.loader} skeleton`}></div>
@@ -263,6 +265,19 @@ const Watch = () => {
             type === "movie"
               ? `${STREAM_URL_VID}/embed/${type}/${id}`
               : `${STREAM_URL_VID}/embed/${type}/${id}/${season}/${episode}`
+          }
+          className={styles.iframe}
+          allowFullScreen
+        ></iframe>
+      ) : null}
+
+      {source === "PRO" && id !== "" && id !== null ? (
+        <iframe
+          scrolling="no"
+          src={
+            type === "movie"
+              ? `${STREAM_URL_PRO}/embed/${type}/${id}`
+              : `${STREAM_URL_PRO}/embed/${type}/${id}/${season}/${episode}`
           }
           className={styles.iframe}
           allowFullScreen
