@@ -17,8 +17,10 @@ const Watch = () => {
   const [id, setId] = useState<any>();
   const [season, setSeason] = useState<any>();
   const [episode, setEpisode] = useState<any>();
-  const [maxEpisodes, setMaxEpisodes] = useState(1);
+  const [minEpisodes, setMinEpisodes] = useState(1);
+  const [maxEpisodes, setMaxEpisodes] = useState(2);
   const [maxSeason, setMaxSeason] = useState(1);
+  const [nextSeasonMinEpisodes, setNextSeasonMinEpisodes] = useState(1);
   const [loading, setLoading] = useState(true);
   const [watchDetails, setWatchDetails] = useState(false);
   const [data, setdata] = useState<any>();
@@ -42,13 +44,24 @@ const Watch = () => {
     const fetch = async () => {
       const res: any = await axiosFetch({ requestID: `${type}Data`, id: id });
       setdata(res);
-      res?.seasons.length > 0 &&
-        res?.seasons?.map((ele: any) => {
-          if (ele?.season_number === parseInt(season)) {
-            setMaxEpisodes(ele?.episode_count);
-          }
-        });
       setMaxSeason(res?.number_of_seasons);
+      const seasonData = await axiosFetch({
+        requestID: `tvEpisodes`,
+        id: id,
+        season: season,
+      });
+      setMaxEpisodes(
+        seasonData?.episodes[seasonData?.episodes?.length - 1]?.episode_number,
+      );
+      setMinEpisodes(seasonData?.episodes[0]?.episode_number);
+      if (parseInt(episode) >= maxEpisodes - 1) {
+        var nextseasonData = await axiosFetch({
+          requestID: `tvEpisodes`,
+          id: id,
+          season: parseInt(season) + 1,
+        });
+        setNextSeasonMinEpisodes(nextseasonData?.episodes[0]?.episode_number);
+      }
     };
     if (type === "tv") fetch();
 
@@ -73,7 +86,7 @@ const Watch = () => {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [params, id]);
+  }, [params, id, season, episode]);
   useEffect(() => {
     toast.info(
       <div>
@@ -132,7 +145,7 @@ const Watch = () => {
 
   function handleBackward() {
     // setEpisode(parseInt(episode)+1);
-    if (episode > 1)
+    if (episode > minEpisodes)
       push(
         `/watch?type=tv&id=${id}&season=${season}&episode=${parseInt(episode) - 1}`,
       );
@@ -145,7 +158,7 @@ const Watch = () => {
       );
     else if (parseInt(season) + 1 <= maxSeason)
       push(
-        `/watch?type=tv&id=${id}&season=${parseInt(season) + 1}&episode=${1}`,
+        `/watch?type=tv&id=${id}&season=${parseInt(season) + 1}&episode=${nextSeasonMinEpisodes}`,
       );
   }
 
@@ -173,15 +186,15 @@ const Watch = () => {
                 onClick={() => {
                   if (episode > 1) handleBackward();
                 }}
+                data-tooltip-id="tooltip"
+                data-tooltip-html={
+                  episode > minEpisodes
+                    ? "<div>Previous episode <span class='tooltip-btn'>SHIFT + P</span></div>"
+                    : `Start of season ${season}`
+                }
               >
                 <FaBackwardStep
-                  data-tooltip-id="tooltip"
-                  data-tooltip-html={
-                    episode > 1
-                      ? "<div>Previous episode <span class='tooltip-btn'>SHIFT + P</span></div>"
-                      : `Start of season ${season}`
-                  }
-                  className={`${episode <= 1 ? styles.inactive : null}`}
+                  className={`${episode <= minEpisodes ? styles.inactive : null}`}
                 />
               </div>
               <div
@@ -193,16 +206,16 @@ const Watch = () => {
                   )
                     handleForward();
                 }}
+                data-tooltip-id="tooltip"
+                data-tooltip-html={
+                  episode < maxEpisodes
+                    ? "<div>Next episode <span class='tooltip-btn'>SHIFT + N</span></div>"
+                    : parseInt(season) + 1 <= maxSeason
+                      ? `<div>Start season ${parseInt(season) + 1} <span class='tooltip-btn'>SHIFT + N</span></div>`
+                      : `End of season ${season}`
+                }
               >
                 <FaForwardStep
-                  data-tooltip-id="tooltip"
-                  data-tooltip-html={
-                    episode < maxEpisodes
-                      ? "<div>Next episode <span class='tooltip-btn'>SHIFT + N</span></div>"
-                      : parseInt(season) + 1 <= maxSeason
-                        ? `<div>Start season ${parseInt(season) + 1} <span class='tooltip-btn'>SHIFT + N</span></div>`
-                        : `End of season ${season}`
-                  }
                   className={`${episode >= maxEpisodes && season >= maxSeason ? styles.inactive : null} ${episode >= maxEpisodes && season < maxSeason ? styles.nextSeason : null}`}
                 />
               </div>
