@@ -169,7 +169,7 @@ const WatchDetails = ({
               categoryData?.episodes?.map((ele: any) => {
                 return (
                   <div
-                    className={`${styles.episode} ${reviewDetail === ele?.id ? styles.ReviewDetail : null} ${parseInt(selectedSeason) === parseInt(season) && parseInt(ele?.episode_number) === parseInt(episode) ? styles.highlightEpisode : null}`}
+                    className={`${styles.episode} ${reviewDetail === ele?.id ? styles.ReviewDetail : null} ${parseInt(selectedSeason) === parseInt(season) && parseInt(ele?.episode_number) === parseInt(episode) ? styles.highlightEpisode : null} ${new Date(ele?.air_date) >= new Date() ? styles.notAired : null}`}
                     onClick={(e) =>
                       setReviewDetail((prev: any) =>
                         prev !== ele?.id ? ele?.id : "",
@@ -218,6 +218,11 @@ const WatchDetails = ({
                         {ele?.runtime < 60
                           ? `• ${(ele?.runtime % 60).toFixed(0)}min`
                           : null}
+                        {new Date(ele?.air_date) >= new Date() ? (
+                          <span
+                            className={styles.notAiredTag}
+                          >{`• ${new Date(ele?.air_date).getDate()} ${monthNames[new Date(ele?.air_date).getMonth()]} ${new Date(ele?.air_date).getFullYear()}`}</span>
+                        ) : null}
                       </p>
                       <Link
                         className={`${styles.links} btn`}
@@ -253,7 +258,11 @@ const WatchDetails = ({
               <>
                 <div className={styles.header}>
                   <h4>{`S${season}E${episode}`}</h4>
-                  <p>crew of this episode</p>
+                  {categoryData?.crew?.length !== 0 ? (
+                    <p>crew of this episode</p>
+                  ) : (
+                    <p>No crew found</p>
+                  )}
                 </div>
                 {categoryData?.crew?.map((ele: any) => (
                   <div className={styles.cast}>
@@ -307,8 +316,10 @@ const WatchDetails = ({
               <>
                 <div className={styles.header}>
                   <h4>{`S${season}E${episode}`}</h4>
-                  {categoryData?.guest_stars?.length !== 0 && (
+                  {categoryData?.guest_stars?.length !== 0 ? (
                     <p>guest stars in this episode</p>
+                  ) : (
+                    <p>No notable guest star in this episode </p>
                   )}
                 </div>
                 {categoryData?.guest_stars?.map((ele: any) => (
@@ -357,10 +368,10 @@ const WatchDetails = ({
                   <Skeleton height={20} width={50} />
                 </div>
               ))}
-            {category === "guests" &&
+            {/* {category === "guests" &&
               categoryData?.guest_stars?.length === 0 && (
                 <p>No notable guest star in this episode </p>
-              )}
+              )} */}
           </div>
           <div className={styles.MovieList}>
             <>

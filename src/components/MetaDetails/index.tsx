@@ -177,7 +177,7 @@ const MetaDetails = ({ id, type, data }: any) => {
               categoryData?.episodes?.map((ele: any) => {
                 return (
                   <div
-                    className={`${styles.episode} ${reviewDetail === ele?.id ? styles.ReviewDetail : null}`}
+                    className={`${styles.episode} ${reviewDetail === ele?.id ? styles.ReviewDetail : null} ${new Date(ele?.air_date) >= new Date() ? styles.notAired : null}`}
                     onClick={() =>
                       setReviewDetail((prev: any) =>
                         prev !== ele?.id ? ele?.id : "",
@@ -186,7 +186,7 @@ const MetaDetails = ({ id, type, data }: any) => {
                   >
                     <Link
                       href={`/watch?type=tv&id=${ele?.show_id}&season=${ele?.season_number}&episode=${ele?.episode_number}`}
-                      className={styles.CardSmall}
+                      className={`${styles.CardSmall}`}
                       onClick={(e) => e.stopPropagation()}
                     >
                       <div
@@ -219,13 +219,18 @@ const MetaDetails = ({ id, type, data }: any) => {
                         {`${ele?.name ? " : " + ele?.name : null}`}
                       </h4>
                       <p>
-                        {`${ele?.vote_average ? "• " + ele?.vote_average.toFixed(1) : null}`}{" "}
+                        {`${ele?.vote_average >= 0 ? "• " + ele?.vote_average.toFixed(1) : null}`}{" "}
                         {ele?.runtime >= 60
                           ? `• ${Math.floor(ele?.runtime / 60)}hr ${(ele?.runtime % 60).toFixed(0)}min`
                           : null}
                         {ele?.runtime < 60
-                          ? `• ${(ele?.runtime % 60).toFixed(0)}min`
+                          ? `• ${(ele?.runtime % 60).toFixed(0)}min `
                           : null}
+                        {new Date(ele?.air_date) >= new Date() ? (
+                          <span
+                            className={styles.notAiredTag}
+                          >{`• ${new Date(ele?.air_date).getDate()} ${monthNames[new Date(ele?.air_date).getMonth()]} ${new Date(ele?.air_date).getFullYear()}`}</span>
+                        ) : null}
                       </p>
                       <Link
                         className={`${styles.links} btn`}
@@ -299,13 +304,34 @@ const MetaDetails = ({ id, type, data }: any) => {
                   {data?.number_of_episodes && (
                     <p> Total Episodes : {data?.number_of_episodes}</p>
                   )}
+                  {data?.next_episode_to_air !== null ? (
+                    <p>
+                      {" "}
+                      Next Episode to Air :{" "}
+                      {data?.next_episode_to_air?.episode_number} (
+                      {new Date(data?.next_episode_to_air?.air_date).getDate()}{" "}
+                      {
+                        monthNames[
+                          new Date(
+                            data?.next_episode_to_air?.air_date,
+                          ).getMonth()
+                        ]
+                      }{" "}
+                      {new Date(
+                        data?.next_episode_to_air?.air_date,
+                      ).getFullYear()}
+                      )
+                    </p>
+                  ) : null}
                   {release_date && end_date && (
                     <p>
                       {" "}
-                      Air Duration :{" "}
+                      Aired :{" "}
                       {`${release_date.getDate()} ${monthNames[release_date.getMonth()]} ${release_date.getFullYear()}`}{" "}
                       -{" "}
-                      {`${end_date.getDate()} ${monthNames[end_date.getMonth()]} ${end_date.getFullYear()}`}
+                      {data?.in_production
+                        ? "ongoing"
+                        : `${end_date.getDate()} ${monthNames[end_date.getMonth()]} ${end_date.getFullYear()}`}
                     </p>
                   )}
                 </>
