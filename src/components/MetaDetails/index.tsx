@@ -256,7 +256,11 @@ const MetaDetails = ({ id, type, data }: any) => {
         {type === "tv" && category === "episodes" && categoryData === undefined
           ? dummyList.map((ele) => (
               <div className={styles.episode}>
-                <Skeleton height={100} className={styles.CardSmall} />
+                <Skeleton
+                  height={100}
+                  className={styles.CardSmall}
+                  style={{ margin: "0.5rem 0" }}
+                />
               </div>
             ))
           : null}
@@ -380,7 +384,7 @@ const MetaDetails = ({ id, type, data }: any) => {
             </>
           )}
           {category === "overview" && (data == undefined || data === null) && (
-            <Skeleton count={5} />
+            <Skeleton count={10} style={{ margin: "0.5rem 0" }} />
           )}
           <div className={styles.casts}>
             {category === "casts" && (
