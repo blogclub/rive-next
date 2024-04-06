@@ -48,11 +48,11 @@ export default function App({ Component, pageProps }: any) {
         <meta name="apple-mobile-web-app-title" content="Rive" />
         <link rel="icon" href="/images/logo512.png" />
         <link rel="apple-touch-icon" href="/images/logo512.png" />
-        <link rel="mask-icon" href="/images/logo512.svg" color="#f4f7fe" />
         <meta name="mobile-web-app-capable" content="yes" />
-        <meta name="msapplication-TileColor" content="#f4f7fe" />
-        <meta name="msapplication-tap-highlight" content="no" />
         <link rel="shortcut icon" href="/images/logo512.png" />
+        {/* <link rel="mask-icon" href="/images/logo512.svg" color="#f4f7fe" /> */}
+        {/* <meta name="msapplication-TileColor" content="#f4f7fe" />
+        <meta name="msapplication-tap-highlight" content="no" /> */}
         {/* <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" integrity="sha512-42kB9yDlYiCEfx2xVwq0q7hT4uf26FUgSIZBK8uiaEnTdShXjwr8Ip1V4xGJMg3mHkUt9nNuTDxunHF0/EgxLQ==" crossOrigin="anonymous" referrerPolicy="no-referrer" /> */}
       </Head>
       <Layout>

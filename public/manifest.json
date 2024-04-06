@@ -16,7 +16,8 @@
     {
       "src": "/icons/icon-256x256.png",
       "sizes": "256x256",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "maskable"
     },
     {
       "src": "/icons/icon-384x384.png",
@@ -31,8 +32,7 @@
     {
       "src": "/images/logo512.svg",
       "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "maskable"
+      "type": "image/svg+xml"
     }
   ]
 }
