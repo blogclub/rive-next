@@ -11,7 +11,7 @@ export const getContinueWatching = () => {
 export const setContinueWatching = ({ type, id }: any) => {
   var values = getContinueWatching() || { movie: [], tv: [] };
   if (!values[type]?.includes(id)) {
-    if (values[type]?.length >= 20) values[type]?.pop();
+    if (values[type]?.length > 20) values[type]?.pop();
     values[type] = values[type]?.reverse();
     values[type]?.push(id);
     // if (values[type]?.length > 20) values[type].shift();

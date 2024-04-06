@@ -75,8 +75,8 @@ const HomeListAll = () => {
             (continueWatching?.tv?.length > 0 ||
               continueWatching?.movie?.length > 0)
           ) {
-            if (i < 5) {
-              for (const ele of continueWatching?.tv) {
+            for (const ele of continueWatching?.tv) {
+              if (i < 5) {
                 const res = await axiosFetch({
                   requestID: "tvRelated",
                   id: ele,
@@ -85,8 +85,8 @@ const HomeListAll = () => {
                 i++;
               }
             }
-            if (i < 10) {
-              for (const ele of continueWatching?.movie) {
+            for (const ele of continueWatching?.movie) {
+              if (i < 10) {
                 const res = await axiosFetch({
                   requestID: "movieRelated",
                   id: ele,
@@ -100,9 +100,19 @@ const HomeListAll = () => {
         };
         asyncFunc().then((arr) => {
           const shuffledArray = shuffle(arr.flat(Infinity));
-          const uniqueArray = Array.from(new Set(shuffledArray));
-          setRecommendations(shuffle(uniqueArray));
-          console.log({ shuffledArray });
+          const uniqueArray: any = [];
+          const usedIds = new Set();
+
+          shuffledArray.forEach((item: any) => {
+            if (!usedIds.has(item.id)) {
+              uniqueArray.push(item);
+              usedIds.add(item.id);
+            }
+          });
+          // console.log({ uniqueArray });
+          const shuffledUniqueArray = shuffle(uniqueArray);
+          // console.log({ shuffledArray });
+          setRecommendations(shuffledUniqueArray);
         });
 
         setLoading(false);

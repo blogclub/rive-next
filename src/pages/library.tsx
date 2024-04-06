@@ -54,26 +54,30 @@ const Library = () => {
     setLoading(true);
     setData([0, 0, 0, 0, 0, 0, 0, 0, 0]);
     const fetchData = async () => {
+      let arr: any = [];
       try {
-        let arr: any = [];
-        ids.map(async (ele: any) => {
+        for (const ele of ids) {
           const data = await axiosFetch({
             requestID: `${subCategory}Data`,
             id: ele,
           });
-          if (data !== undefined) arr.push(data);
+          if (data !== undefined) await arr.push(data);
           console.log({ arr });
-          setData(arr);
-          setLoading(false);
-        });
-        if (ids.length === 0 || ids === null || ids === undefined)
-          setLoading(false);
+          // setLoading(false);
+        }
+        // if (ids.length === 0 || ids === null || ids === undefined)
+        //   setLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
         setLoading(false);
       }
+      return arr;
     };
-    fetchData();
+    fetchData().then((res) => {
+      console.log({ res });
+      setData(res);
+      setLoading(false);
+    });
   }, [ids]);
 
   useEffect(() => {
