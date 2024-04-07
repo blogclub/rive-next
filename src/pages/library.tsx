@@ -52,7 +52,7 @@ const Library = () => {
 
   useEffect(() => {
     setLoading(true);
-    setData([0, 0, 0, 0, 0, 0, 0, 0, 0]);
+    // setData([0, 0, 0, 0, 0, 0, 0, 0, 0]);
     const fetchData = async () => {
       let arr: any = [];
       try {

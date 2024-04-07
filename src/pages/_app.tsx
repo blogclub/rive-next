@@ -50,7 +50,7 @@ export default function App({ Component, pageProps }: any) {
         <link rel="apple-touch-icon" href="/images/logo512.png" />
         {/* <link rel="mask-icon" href="/images/logo512.svg" color="#f4f7fe" /> */}
         <meta name="mobile-web-app-capable" content="yes" />
-        <meta name="msapplication-TileColor" content="#f4f7fe" />
+        {/* <meta name="msapplication-TileColor" content="#f4f7fe" /> */}
         <meta name="msapplication-tap-highlight" content="no" />
         <link rel="shortcut icon" href="/images/logo512.png" />
       </Head>

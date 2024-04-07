@@ -49,16 +49,19 @@ const Layout = ({ children }: any) => {
       {mode === "dark" && (
         <Head>
           <meta name="theme-color" content="#1b1919" />
+          <meta name="msapplication-TileColor" content="#1b1919" />
         </Head>
       )}
       {mode === "light" && (
         <Head>
           <meta name="theme-color" content="#f4f7fe" />
+          <meta name="msapplication-TileColor" content="#f4f7fe" />
         </Head>
       )}
       {mode === "system" && (
         <Head>
           <meta name="theme-color" content={`${themeColor}`} />
+          <meta name="msapplication-TileColor" content={`${themeColor}`} />
         </Head>
       )}
       <div
