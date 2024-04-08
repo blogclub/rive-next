@@ -14,6 +14,7 @@ const MovieCardLarge = ({ data, media_type }: any) => {
   const [genreListMovie, setGenreListMovie] = useState([]);
   const [genreListTv, setGenreListTv] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [imagePlaceholder, setImagePlaceholder] = useState(false);
   const year = new Date(data?.release_date).getFullYear();
   const lang = data?.original_language;
   let Genres: Array<string> = [];
@@ -60,7 +61,7 @@ const MovieCardLarge = ({ data, media_type }: any) => {
         <AnimatePresence mode="sync">
           <motion.img
             key={data?.id}
-            src={`${(data?.poster_path !== null && data?.poster_path !== undefined) || (data?.profile_path !== null && data?.profile_path !== undefined) || (data?.still_path !== null && data?.still_path !== undefined) ? process.env.NEXT_PUBLIC_TMBD_IMAGE_URL + (data?.poster_path || data.profile_path || data?.still_path) || null : "/images/logo.svg"}`}
+            src={`${imagePlaceholder ? "/images/logo.svg" : (data?.poster_path !== null && data?.poster_path !== undefined) || (data?.profile_path !== null && data?.profile_path !== undefined) || (data?.still_path !== null && data?.still_path !== undefined) ? process.env.NEXT_PUBLIC_TMBD_IMAGE_URL + (data?.poster_path || data?.profile_path || data?.still_path) || null : "/images/logo.svg"}`}
             initial={{ opacity: 0 }}
             animate={{
               opacity: imageLoading ? 0 : 1,
@@ -76,7 +77,10 @@ const MovieCardLarge = ({ data, media_type }: any) => {
               }, 100);
             }}
             loading="lazy"
-            onError={(e) => console.log(e)}
+            onError={(e) => {
+              // console.log({ e });
+              setImagePlaceholder(true);
+            }}
             alt={data?.id || "sm"}
             // style={!imageLoading ? { opacity: 1 } : { opacity: 0 }}
           />

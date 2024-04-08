@@ -6,18 +6,21 @@ import Skeleton from "react-loading-skeleton";
 
 const MoviePoster = ({ data, media_type }: any) => {
   const [imageLoading, setImageLoading] = useState(true);
+  const [imagePlaceholder, setImagePlaceholder] = useState(false);
   return (
     <Link
       href={`/detail?type=${media_type}&id=${data?.id}`}
       className={styles.MovieCardSmall}
       aria-label={data?.name || "poster"}
     >
-      <div className={`${styles.img} ${imageLoading ? "skeleton" : null}`}>
+      <div
+        className={`${styles.img} ${data?.poster_path !== null && data?.poster_path !== undefined ? "skeleton" : null}`}
+      >
         <AnimatePresence mode="sync">
           <motion.img
             key={data?.id}
             alt={data?.id || "sm"}
-            src={`${data?.poster_path !== null && data?.poster_path !== undefined ? process.env.NEXT_PUBLIC_TMBD_IMAGE_URL + data?.poster_path : "/images/logo.svg"}`}
+            src={`${imagePlaceholder ? "/images/logo.svg" : data?.poster_path !== null && data?.poster_path !== undefined ? process.env.NEXT_PUBLIC_TMBD_IMAGE_URL + data?.poster_path : "/images/logo.svg"}`}
             initial={{ opacity: 0 }}
             animate={{
               opacity: imageLoading ? 0 : 1,
@@ -30,6 +33,10 @@ const MoviePoster = ({ data, media_type }: any) => {
               setImageLoading(false);
             }}
             loading="lazy"
+            onError={(e) => {
+              // console.log({ e });
+              setImagePlaceholder(true);
+            }}
             // style={!imageLoading ? { opacity: 1 } : { opacity: 0 }}
           />
         </AnimatePresence>
