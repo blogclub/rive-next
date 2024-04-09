@@ -2,12 +2,16 @@ import { useState, useEffect, useRef } from "react";
 import styles from "./style.module.scss";
 import axiosFetch from "@/Utils/fetch";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
+// import { motion, AnimatePresence } from "framer-motion";
 import MovieCardLarge from "../MovieCardLarge";
 import { FaPlay, FaStar } from "react-icons/fa";
 import Skeleton from "react-loading-skeleton";
 import ReactPaginate from "react-paginate";
 import { AiFillLeftCircle, AiFillRightCircle } from "react-icons/ai";
+
+// react-lazy-load-image-component
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/opacity.css";
 
 function capitalizeFirstLetter(string: string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -23,6 +27,7 @@ const MetaDetails = ({ id, type, data }: any) => {
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalpages, setTotalpages] = useState(1);
+  const [imagePlaceholder, setImagePlaceholder] = useState(false);
   const metaDetailsPage: any = useRef(null);
 
   const genres: Array<string> = [];
@@ -192,7 +197,8 @@ const MetaDetails = ({ id, type, data }: any) => {
                       <div
                         className={`${styles.img} ${imageLoading ? "skeleton" : null}`}
                       >
-                        <AnimatePresence mode="sync">
+                        {/* if rllic package is not available, then start using this code again, and comment/delete the rllic code */}
+                        {/* <AnimatePresence mode="sync">
                           <motion.img
                             key={ele?.id}
                             src={`${ele?.still_path !== null && ele?.still_path !== undefined ? process.env.NEXT_PUBLIC_TMBD_IMAGE_URL + ele?.still_path : "/images/logo.svg"}`}
@@ -210,7 +216,28 @@ const MetaDetails = ({ id, type, data }: any) => {
                             loading="lazy"
                             // style={!imageLoading ? { opacity: 1 } : { opacity: 0 }}
                           />
-                        </AnimatePresence>
+                        </AnimatePresence> */}
+
+                        {/* react-lazy-load-image-component */}
+                        <LazyLoadImage
+                          key={ele?.id}
+                          src={`${imagePlaceholder ? "/images/logo.svg" : ele?.still_path !== null && ele?.still_path !== undefined ? process.env.NEXT_PUBLIC_TMBD_IMAGE_URL + ele?.still_path : "/images/logo.svg"}`}
+                          height="100%"
+                          width="100%"
+                          useIntersectionObserver={true}
+                          effect="opacity"
+                          className={`${styles.img} ${imageLoading ? "skeleton" : null}`}
+                          onLoad={() => {
+                            setImageLoading(false);
+                          }}
+                          onError={(e) => {
+                            // console.log({ e });
+                            setImagePlaceholder(true);
+                            setImageLoading(false);
+                          }}
+                          loading="lazy"
+                          // style={!imageLoading ? { opacity: 1 } : { opacity: 0 }}
+                        />
                       </div>
                     </Link>
                     <div className={styles.details}>
@@ -399,7 +426,8 @@ const MetaDetails = ({ id, type, data }: any) => {
                       <div
                         className={`${styles.img} ${imageLoading ? "skeleton" : null}`}
                       >
-                        <AnimatePresence mode="sync">
+                        {/* if rllic package is not available, then start using this code again, and comment/delete the rllic code */}
+                        {/* <AnimatePresence mode="sync">
                           <motion.img
                             key={ele?.id}
                             src={`${ele?.profile_path !== null && ele?.profile_path !== undefined ? process.env.NEXT_PUBLIC_TMBD_IMAGE_URL + ele?.profile_path : "/images/logo.svg"}`}
@@ -415,9 +443,30 @@ const MetaDetails = ({ id, type, data }: any) => {
                               setImageLoading(false);
                             }}
                             loading="lazy"
-                            // style={!imageLoading ? { opacity: 1 } : { opacity: 0 }}
+                          // style={!imageLoading ? { opacity: 1 } : { opacity: 0 }}
                           />
-                        </AnimatePresence>
+                        </AnimatePresence> */}
+
+                        {/* react-lazy-load-image-component */}
+                        <LazyLoadImage
+                          key={ele?.id}
+                          src={`${imagePlaceholder ? "/images/logo.svg" : ele?.profile_path !== null && ele?.profile_path !== undefined ? process.env.NEXT_PUBLIC_TMBD_IMAGE_URL + ele?.profile_path : "/images/logo.svg"}`}
+                          height="100%"
+                          width="100%"
+                          useIntersectionObserver={true}
+                          effect="opacity"
+                          className={`${styles.img} ${imageLoading ? "skeleton" : null}`}
+                          onLoad={() => {
+                            setImageLoading(false);
+                          }}
+                          onError={(e) => {
+                            // console.log({ e });
+                            setImagePlaceholder(true);
+                            setImageLoading(false);
+                          }}
+                          loading="lazy"
+                          // style={!imageLoading ? { opacity: 1 } : { opacity: 0 }}
+                        />
                       </div>
                     </Link>
                     <div className={styles.castName}>
@@ -444,7 +493,8 @@ const MetaDetails = ({ id, type, data }: any) => {
                       <div
                         className={`${styles.img} ${imageLoading ? "skeleton" : null}`}
                       >
-                        <AnimatePresence mode="sync">
+                        {/* if rllic package is not available, then start using this code again, and comment/delete the rllic code */}
+                        {/* <AnimatePresence mode="sync">
                           <motion.img
                             key={ele?.id}
                             src={`${ele?.profile_path !== null && ele?.profile_path !== undefined ? process.env.NEXT_PUBLIC_TMBD_IMAGE_URL + ele?.profile_path : "/images/logo.svg"}`}
@@ -460,9 +510,30 @@ const MetaDetails = ({ id, type, data }: any) => {
                               setImageLoading(false);
                             }}
                             loading="lazy"
-                            // style={!imageLoading ? { opacity: 1 } : { opacity: 0 }}
+                          // style={!imageLoading ? { opacity: 1 } : { opacity: 0 }}
                           />
-                        </AnimatePresence>
+                        </AnimatePresence> */}
+
+                        {/* react-lazy-load-image-component */}
+                        <LazyLoadImage
+                          key={ele?.id}
+                          src={`${imagePlaceholder ? "/images/logo.svg" : ele?.profile_path !== null && ele?.profile_path !== undefined ? process.env.NEXT_PUBLIC_TMBD_IMAGE_URL + ele?.profile_path : "/images/logo.svg"}`}
+                          height="100%"
+                          width="100%"
+                          useIntersectionObserver={true}
+                          effect="opacity"
+                          className={`${styles.img} ${imageLoading ? "skeleton" : null}`}
+                          onLoad={() => {
+                            setImageLoading(false);
+                          }}
+                          onError={(e) => {
+                            // console.log({ e });
+                            setImagePlaceholder(true);
+                            setImageLoading(false);
+                          }}
+                          loading="lazy"
+                          // style={!imageLoading ? { opacity: 1 } : { opacity: 0 }}
+                        />
                       </div>
                     </Link>
                     <div className={styles.castName}>
@@ -499,7 +570,7 @@ const MetaDetails = ({ id, type, data }: any) => {
                     if (currentPage > totalpages) {
                       setCurrentPage(totalpages);
                     }
-                    // window.scrollTo(0, 0);
+                    window.scrollTo(0, 0);
                     scrollToTop();
                   }}
                   pageCount={totalpages}
@@ -562,13 +633,23 @@ const MetaDetails = ({ id, type, data }: any) => {
           </div>
           <div className={styles.MovieList}>
             {category === "movie" &&
-              categoryData?.cast?.map((ele: any) => {
-                return <MovieCardLarge data={ele} media_type="movie" />;
+              categoryData?.cast?.map((ele: any, ind: any) => {
+                return (
+                  <div className={styles.numberedCard}>
+                    <MovieCardLarge data={ele} media_type="movie" />
+                    <span className={styles.number}>{ind + 1}</span>
+                  </div>
+                );
               })}
             {category === "movie" &&
               data?.known_for_department !== "Acting" &&
-              categoryData?.crew?.map((ele: any) => {
-                return <MovieCardLarge data={ele} media_type="movie" />;
+              categoryData?.crew?.map((ele: any, ind: any) => {
+                return (
+                  <div className={styles.numberedCard}>
+                    <MovieCardLarge data={ele} media_type="movie" />
+                    <span className={styles.number}>{ind + 1}</span>
+                  </div>
+                );
               })}
             {category === "movie" &&
               categoryData === undefined &&
@@ -581,13 +662,23 @@ const MetaDetails = ({ id, type, data }: any) => {
           </div>
           <div className={styles.MovieList}>
             {category === "tv" &&
-              categoryData?.cast?.map((ele: any) => {
-                return <MovieCardLarge data={ele} media_type="tv" />;
+              categoryData?.cast?.map((ele: any, ind: any) => {
+                return (
+                  <div className={styles.numberedCard}>
+                    <MovieCardLarge data={ele} media_type="tv" />
+                    <span className={styles.number}>{ind + 1}</span>
+                  </div>
+                );
               })}
             {category === "tv" &&
               data?.known_for_department !== "Acting" &&
-              categoryData?.crew?.map((ele: any) => {
-                return <MovieCardLarge data={ele} media_type="tv" />;
+              categoryData?.crew?.map((ele: any, ind: any) => {
+                return (
+                  <div className={styles.numberedCard}>
+                    <MovieCardLarge data={ele} media_type="tv" />
+                    <span className={styles.number}>{ind + 1}</span>
+                  </div>
+                );
               })}
             {category === "tv" &&
               categoryData === undefined &&

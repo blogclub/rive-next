@@ -1,9 +1,12 @@
 import { useState } from "react";
 import styles from "./style.module.scss";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
-import Skeleton from "react-loading-skeleton";
+// import { motion, AnimatePresence } from "framer-motion";
+// import Skeleton from "react-loading-skeleton";
 
+// react-lazy-load-image-component
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/opacity.css";
 const MoviePoster = ({ data, media_type }: any) => {
   const [imageLoading, setImageLoading] = useState(true);
   const [imagePlaceholder, setImagePlaceholder] = useState(false);
@@ -16,7 +19,8 @@ const MoviePoster = ({ data, media_type }: any) => {
       <div
         className={`${styles.img} ${data?.poster_path !== null && data?.poster_path !== undefined ? "skeleton" : null}`}
       >
-        <AnimatePresence mode="sync">
+        {/* if rllic package is not available, then start using this code again, and comment/delete the rllic code */}
+        {/* <AnimatePresence mode="sync">
           <motion.img
             key={data?.id}
             alt={data?.id || "sm"}
@@ -39,7 +43,28 @@ const MoviePoster = ({ data, media_type }: any) => {
             }}
             // style={!imageLoading ? { opacity: 1 } : { opacity: 0 }}
           />
-        </AnimatePresence>
+        </AnimatePresence> */}
+
+        {/* react-lazy-load-image-component */}
+        <LazyLoadImage
+          key={data?.id}
+          alt={data?.id || "sm"}
+          src={`${imagePlaceholder ? "/images/logo.svg" : data?.poster_path !== null && data?.poster_path !== undefined ? process.env.NEXT_PUBLIC_TMBD_IMAGE_URL + data?.poster_path : "/images/logo.svg"}`}
+          height="100%"
+          width="100%"
+          useIntersectionObserver={true}
+          effect="opacity"
+          // className={`${styles.img} ${imageLoading ? "skeleton" : null}`}
+          onLoad={() => {
+            setImageLoading(false);
+          }}
+          loading="lazy"
+          onError={(e) => {
+            // console.log({ e });
+            setImagePlaceholder(true);
+          }}
+          // style={!imageLoading ? { opacity: 1 } : { opacity: 0 }}
+        />
       </div>
     </Link>
   );

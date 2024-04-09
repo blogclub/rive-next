@@ -3,6 +3,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import styles from "./style.module.scss";
 import { BsCaretLeftFill, BsCaretRightFill } from "react-icons/bs";
 
+// react-lazy-load-image-component
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/opacity.css";
+
 const Carousel = ({
   imageArr,
   setIndex,
@@ -14,6 +18,7 @@ const Carousel = ({
   const [direction, setDirection] = useState("");
   const [imageLoaded, setImageLoaded] = useState(false);
   const [images, setImages] = useState(imageArr);
+  const [imagePlaceholder, setImagePlaceholder] = useState(false);
   useEffect(() => {
     document.documentElement.style.setProperty(
       "--carousel-desktop-height",
@@ -99,11 +104,12 @@ const Carousel = ({
       <div
         className={`${styles.carousel_images} ${!imageLoaded ? "skeleton" : null}`}
       >
-        <AnimatePresence mode="sync">
+        {/* if rllic package is not available, then start using this code again, and comment/delete the rllic code */}
+        {/* <AnimatePresence mode="sync">
           <motion.img
             key={currentIndex}
             alt={"carousel"}
-            src={images[currentIndex]}
+            src={`${imagePlaceholder ? "/images/logo.svg" : images[currentIndex]}`}
             initial={direction === "right" ? "hiddenRight" : "hiddenLeft"}
             animate="visible"
             exit="exit"
@@ -117,9 +123,48 @@ const Carousel = ({
                 setImageLoaded(true);
               }, 100);
             }}
+            onError={(e) => {
+              // console.log({ e });
+              setImagePlaceholder(true);
+            }}
             loading="lazy"
-            // style={imageLoaded ? { opacity: 1 } : { opacity: 0 }}
+          // style={imageLoaded ? { opacity: 1 } : { opacity: 0 }}
           />
+        </AnimatePresence> */}
+
+        {/* react-lazy-load-image-component */}
+        <AnimatePresence mode="sync">
+          <motion.div
+            key={currentIndex}
+            initial={direction === "right" ? "hiddenRight" : "hiddenLeft"}
+            animate="visible"
+            exit="exit"
+            variants={slideVariants}
+            className={`${imageLoaded ? "skeleton" : null} ${styles.img}`}
+          >
+            <LazyLoadImage
+              // useIntersectionObserver={true}
+              effect="opacity"
+              key={currentIndex}
+              alt={"carousel"}
+              src={`${imagePlaceholder ? "/images/logo.svg" : images[currentIndex]}`}
+              className={`${!imageLoaded ? "skeleton" : null}`}
+              // onLoad={() => {
+              //   setImageLoaded(true);
+              // }}
+              onLoad={() => {
+                setTimeout(() => {
+                  setImageLoaded(true);
+                }, 100);
+              }}
+              onError={(e) => {
+                // console.log({ e });
+                setImagePlaceholder(true);
+              }}
+              loading="lazy"
+              // style={imageLoaded ? { opacity: 1 } : { opacity: 0 }}
+            />
+          </motion.div>
         </AnimatePresence>
         <div className={styles.slide_direction}>
           <BsCaretLeftFill className={styles.left} onClick={handlePrevious} />

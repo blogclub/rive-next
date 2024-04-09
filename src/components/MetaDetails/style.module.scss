@@ -99,6 +99,18 @@
         height: unset;
         max-height: unset !important;
       }
+      .numberedCard {
+        position: relative;
+        .number {
+          padding: 0.5rem;
+          position: absolute;
+          background: var(--bg-color);
+          color: var(--primary-2);
+          border-radius: 0rem 0rem 0.3rem 0.3rem;
+          top: 0;
+          left: 0.5rem;
+        }
+      }
     }
     .EpisodeList {
       gap: 0.1rem;

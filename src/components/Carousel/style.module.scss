@@ -1,4 +1,6 @@
-.carousel_images {
+.carousel_images,
+.carousel_images .img,
+.carousel_images .img span {
   height: var(--carousel-desktop-height);
   width: 100%;
   max-height: 100vh;
@@ -21,6 +23,7 @@
 .slide_direction {
   display: flex;
   justify-content: space-between;
+  display: none;
 }
 .left,
 .right {
@@ -41,9 +44,10 @@
 .loaded {
   opacity: 1 !important;
 }
-
 @media (max-width: 769px) {
-  .carousel_images {
+  .carousel_images,
+  .carousel_images .img,
+  .carousel_images .img span {
     height: var(--carousel-mobile-height);
   }
 }

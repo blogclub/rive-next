@@ -5,6 +5,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import Skeleton from "react-loading-skeleton";
 import axiosFetch from "@/Utils/fetch";
 
+// react-lazy-load-image-component
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/opacity.css";
+
 function capitalizeFirstLetter(string: string) {
   return string?.charAt(0).toUpperCase() + string?.slice(1);
 }
@@ -58,7 +62,8 @@ const MovieCardLarge = ({ data, media_type }: any) => {
       <div
         className={`${styles.img} ${data?.poster_path !== null && data?.poster_path !== undefined ? "skeleton" : null}`}
       >
-        <AnimatePresence mode="sync">
+        {/* if rllic package is not available, then start using this code again, and comment/delete the rllic code */}
+        {/* <AnimatePresence mode="sync">
           <motion.img
             key={data?.id}
             src={`${imagePlaceholder ? "/images/logo.svg" : (data?.poster_path !== null && data?.poster_path !== undefined) || (data?.profile_path !== null && data?.profile_path !== undefined) || (data?.still_path !== null && data?.still_path !== undefined) ? process.env.NEXT_PUBLIC_TMBD_IMAGE_URL + (data?.poster_path || data?.profile_path || data?.still_path) || null : "/images/logo.svg"}`}
@@ -84,7 +89,32 @@ const MovieCardLarge = ({ data, media_type }: any) => {
             alt={data?.id || "sm"}
             // style={!imageLoading ? { opacity: 1 } : { opacity: 0 }}
           />
-        </AnimatePresence>
+        </AnimatePresence> */}
+
+        {/* react-lazy-load-image-component */}
+        <LazyLoadImage
+          key={data?.id}
+          src={`${imagePlaceholder ? "/images/logo.svg" : (data?.poster_path !== null && data?.poster_path !== undefined) || (data?.profile_path !== null && data?.profile_path !== undefined) || (data?.still_path !== null && data?.still_path !== undefined) ? process.env.NEXT_PUBLIC_TMBD_IMAGE_URL + (data?.poster_path || data?.profile_path || data?.still_path) || null : "/images/logo.svg"}`}
+          height="100%"
+          width="100%"
+          useIntersectionObserver={true}
+          effect="opacity"
+          className={`${styles.img} ${imageLoading ? "skeleton" : null}`}
+          onLoad={() => {
+            setTimeout(() => {
+              setImageLoading(false);
+              setLoading(false);
+            }, 100);
+          }}
+          loading="lazy"
+          onError={(e) => {
+            // console.log({ e });
+            setImagePlaceholder(true);
+            setImageLoading(false);
+          }}
+          alt={data?.id || "sm"}
+          // style={!imageLoading ? { opacity: 1 } : { opacity: 0 }}
+        />
       </div>
       <div className={`${styles.metaData}`}>
         <h1>

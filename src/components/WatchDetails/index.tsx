@@ -2,12 +2,16 @@ import { useState, useEffect, useRef } from "react";
 import styles from "./style.module.scss";
 import axiosFetch from "@/Utils/fetch";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
+// import { motion, AnimatePresence } from "framer-motion";
 import MovieCardLarge from "../MovieCardLarge";
 import { FaPlay, FaStar } from "react-icons/fa";
 import Skeleton from "react-loading-skeleton";
 import ReactPaginate from "react-paginate";
 import { AiFillLeftCircle, AiFillRightCircle } from "react-icons/ai";
+
+// react-lazy-load-image-component
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/opacity.css";
 
 function capitalizeFirstLetter(string: string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -30,6 +34,7 @@ const WatchDetails = ({
   const [reviewDetail, setReviewDetail] = useState<any>(null);
   const [selectedSeason, setSelectedSeason] = useState<any>(season);
   const [loading, setLoading] = useState(true);
+  const [imagePlaceholder, setImagePlaceholder] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalpages, setTotalpages] = useState(1);
   const watchDetailsPage: any = useRef(null);
@@ -184,7 +189,8 @@ const WatchDetails = ({
                       <div
                         className={`${styles.img} ${imageLoading ? "skeleton" : null}`}
                       >
-                        <AnimatePresence mode="sync">
+                        {/* if rllic package is not available, then start using this code again, and comment/delete the rllic code */}
+                        {/* <AnimatePresence mode="sync">
                           <motion.img
                             key={ele?.id}
                             src={`${ele?.still_path !== null && ele?.still_path !== undefined ? process.env.NEXT_PUBLIC_TMBD_IMAGE_URL + ele?.still_path : "/images/logo.svg"}`}
@@ -202,7 +208,28 @@ const WatchDetails = ({
                             loading="lazy"
                             // style={!imageLoading ? { opacity: 1 } : { opacity: 0 }}
                           />
-                        </AnimatePresence>
+                        </AnimatePresence> */}
+
+                        {/* react-lazy-load-image-component */}
+                        <LazyLoadImage
+                          key={ele?.id}
+                          src={`${imagePlaceholder ? "/images/logo.svg" : ele?.still_path !== null && ele?.still_path !== undefined ? process.env.NEXT_PUBLIC_TMBD_IMAGE_URL + ele?.still_path : "/images/logo.svg"}`}
+                          height="100%"
+                          width="100%"
+                          useIntersectionObserver={true}
+                          effect="opacity"
+                          className={`${styles.img} ${imageLoading ? "skeleton" : null}`}
+                          onLoad={() => {
+                            setImageLoading(false);
+                          }}
+                          onError={(e) => {
+                            // console.log({ e });
+                            setImagePlaceholder(true);
+                            setImageLoading(false);
+                          }}
+                          loading="lazy"
+                          // style={!imageLoading ? { opacity: 1 } : { opacity: 0 }}
+                        />
                       </div>
                     </Link>
                     <div className={styles.details}>
@@ -211,7 +238,7 @@ const WatchDetails = ({
                         {`${ele?.name ? " : " + ele?.name : null}`}
                       </h4>
                       <p>
-                        {`${ele?.vote_average ? "• " + ele?.vote_average.toFixed(1) : null}`}{" "}
+                        {`${ele?.vote_average >= 0 ? "• " + ele?.vote_average.toFixed(1) : null}`}{" "}
                         {ele?.runtime >= 60
                           ? `• ${Math.floor(ele?.runtime / 60)}hr ${(ele?.runtime % 60).toFixed(0)}min`
                           : null}
@@ -273,7 +300,8 @@ const WatchDetails = ({
                       <div
                         className={`${styles.img} ${imageLoading ? "skeleton" : null}`}
                       >
-                        <AnimatePresence mode="sync">
+                        {/* if rllic package is not available, then start using this code again, and comment/delete the rllic code */}
+                        {/* <AnimatePresence mode="sync">
                           <motion.img
                             key={ele?.id}
                             src={`${ele?.profile_path !== null && ele?.profile_path !== undefined ? process.env.NEXT_PUBLIC_TMBD_IMAGE_URL + ele?.profile_path : "/images/logo.svg"}`}
@@ -289,9 +317,30 @@ const WatchDetails = ({
                               setImageLoading(false);
                             }}
                             loading="lazy"
-                            // style={!imageLoading ? { opacity: 1 } : { opacity: 0 }}
+                          // style={!imageLoading ? { opacity: 1 } : { opacity: 0 }}
                           />
-                        </AnimatePresence>
+                        </AnimatePresence> */}
+
+                        {/* react-lazy-load-image-component */}
+                        <LazyLoadImage
+                          key={ele?.id}
+                          src={`${imagePlaceholder ? "/images/logo.svg" : ele?.profile_path !== null && ele?.profile_path !== undefined ? process.env.NEXT_PUBLIC_TMBD_IMAGE_URL + ele?.profile_path : "/images/logo.svg"}`}
+                          height="100%"
+                          width="100%"
+                          useIntersectionObserver={true}
+                          effect="opacity"
+                          className={`${styles.img} ${imageLoading ? "skeleton" : null}`}
+                          onLoad={() => {
+                            setImageLoading(false);
+                          }}
+                          onError={(e) => {
+                            // console.log({ e });
+                            setImagePlaceholder(true);
+                            setImageLoading(false);
+                          }}
+                          loading="lazy"
+                          // style={!imageLoading ? { opacity: 1 } : { opacity: 0 }}
+                        />
                       </div>
                     </Link>
                     <div className={styles.castName}>
@@ -331,7 +380,8 @@ const WatchDetails = ({
                       <div
                         className={`${styles.img} ${imageLoading ? "skeleton" : null}`}
                       >
-                        <AnimatePresence mode="sync">
+                        {/* if rllic package is not available, then start using this code again, and comment/delete the rllic code */}
+                        {/* <AnimatePresence mode="sync">
                           <motion.img
                             key={ele?.id}
                             src={`${ele?.profile_path !== null && ele?.profile_path !== undefined ? process.env.NEXT_PUBLIC_TMBD_IMAGE_URL + ele?.profile_path : "/images/logo.svg"}`}
@@ -347,9 +397,30 @@ const WatchDetails = ({
                               setImageLoading(false);
                             }}
                             loading="lazy"
-                            // style={!imageLoading ? { opacity: 1 } : { opacity: 0 }}
+                          // style={!imageLoading ? { opacity: 1 } : { opacity: 0 }}
                           />
-                        </AnimatePresence>
+                        </AnimatePresence> */}
+
+                        {/* react-lazy-load-image-component */}
+                        <LazyLoadImage
+                          key={ele?.id}
+                          src={`${imagePlaceholder ? "/images/logo.svg" : ele?.profile_path !== null && ele?.profile_path !== undefined ? process.env.NEXT_PUBLIC_TMBD_IMAGE_URL + ele?.profile_path : "/images/logo.svg"}`}
+                          height="100%"
+                          width="100%"
+                          useIntersectionObserver={true}
+                          effect="opacity"
+                          className={`${styles.img} ${imageLoading ? "skeleton" : null}`}
+                          onLoad={() => {
+                            setImageLoading(false);
+                          }}
+                          onError={(e) => {
+                            // console.log({ e });
+                            setImagePlaceholder(true);
+                            setImageLoading(false);
+                          }}
+                          loading="lazy"
+                          // style={!imageLoading ? { opacity: 1 } : { opacity: 0 }}
+                        />
                       </div>
                     </Link>
                     <div className={styles.castName}>
