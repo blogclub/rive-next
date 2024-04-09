@@ -46,9 +46,10 @@ Rive is a cutting-edge platform for streaming movies and TV shows online. Our pr
 
 > [!TIP]
 >
-> 1. **For Ad-Free Experience**: Use ad-block services for an ad-free experience, like AdBlocker extensions or [Brave Browser](https://brave.com/).
+> 1. **For Ad-Free Experience**: Use ad-blocker services, like AdBlocker extensions([Ghostery](https://www.ghostery.com/)) or [Brave Browser](https://brave.com/).
 > 2. **For Movie/TV Shows Download**:
->    Use video downloader extensions like:
+>
+>    Use video downloader extensions:
 >
 >    - On PC: [FetchV](https://fetchv.net/) or [Stream Recorder](https://www.hlsloader.com/)
 >    - On Mobile: [AVDP](https://play.google.com/store/apps/details?id=videoplayer.videodownloader.downloader)
