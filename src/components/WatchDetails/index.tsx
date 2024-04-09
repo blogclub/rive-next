@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import styles from "./style.module.scss";
-import axiosFetch from "@/Utils/fetch";
+import axiosFetch from "@/Utils/fetchBackend";
 import Link from "next/link";
 // import { motion, AnimatePresence } from "framer-motion";
 import MovieCardLarge from "../MovieCardLarge";
@@ -37,6 +37,8 @@ const WatchDetails = ({
   const [imagePlaceholder, setImagePlaceholder] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalpages, setTotalpages] = useState(1);
+  const [genreListMovie, setGenreListMovie] = useState<any>();
+  const [genreListTv, setGenreListTv] = useState<any>();
   const watchDetailsPage: any = useRef(null);
 
   const monthNames = [
@@ -53,6 +55,19 @@ const WatchDetails = ({
     "November",
     "December",
   ];
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const gM = await axiosFetch({ requestID: "genresMovie" });
+        const gT = await axiosFetch({ requestID: "genresTv" });
+        setGenreListMovie(gM.genres);
+        setGenreListTv(gT.genres);
+      } catch (error) {
+        console.error("Error fetching genres:", error);
+      }
+    };
+    fetchData();
+  }, []);
 
   useEffect(() => {
     setLoading(true);
@@ -448,7 +463,14 @@ const WatchDetails = ({
             <>
               {category === "related" &&
                 categoryData?.results?.map((ele: any) => {
-                  return <MovieCardLarge data={ele} media_type={type} />;
+                  return (
+                    <MovieCardLarge
+                      data={ele}
+                      media_type={type}
+                      genresMovie={genreListMovie}
+                      genresTv={genreListTv}
+                    />
+                  );
                 })}
             </>
             {category === "related" && categoryData?.results?.length === 0 && (
@@ -471,7 +493,14 @@ const WatchDetails = ({
             <>
               {category === "similar" &&
                 categoryData?.results?.map((ele: any) => {
-                  return <MovieCardLarge data={ele} media_type={type} />;
+                  return (
+                    <MovieCardLarge
+                      data={ele}
+                      media_type={type}
+                      genresMovie={genreListMovie}
+                      genresTv={genreListTv}
+                    />
+                  );
                 })}
               {(category === "related" || category === "similar") &&
                 categoryData?.results?.length > 0 && (

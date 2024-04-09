@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import styles from "./style.module.scss";
-import axiosFetch from "@/Utils/fetch";
+import axiosFetch from "@/Utils/fetchBackend";
 import Link from "next/link";
 // import { motion, AnimatePresence } from "framer-motion";
 import MovieCardLarge from "../MovieCardLarge";
@@ -27,6 +27,8 @@ const MetaDetails = ({ id, type, data }: any) => {
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalpages, setTotalpages] = useState(1);
+  const [genreListMovie, setGenreListMovie] = useState<any>();
+  const [genreListTv, setGenreListTv] = useState<any>();
   const [imagePlaceholder, setImagePlaceholder] = useState(false);
   const metaDetailsPage: any = useRef(null);
 
@@ -63,6 +65,20 @@ const MetaDetails = ({ id, type, data }: any) => {
     "November",
     "December",
   ];
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const gM = await axiosFetch({ requestID: "genresMovie" });
+        const gT = await axiosFetch({ requestID: "genresTv" });
+        setGenreListMovie(gM.genres);
+        setGenreListTv(gT.genres);
+      } catch (error) {
+        console.error("Error fetching genres:", error);
+      }
+    };
+    fetchData();
+  }, []);
 
   useEffect(() => {
     setLoading(true);
@@ -557,7 +573,14 @@ const MetaDetails = ({ id, type, data }: any) => {
             <>
               {category === "related" &&
                 categoryData?.results?.map((ele: any) => {
-                  return <MovieCardLarge data={ele} media_type={type} />;
+                  return (
+                    <MovieCardLarge
+                      data={ele}
+                      media_type={type}
+                      genresMovie={genreListMovie}
+                      genresTv={genreListTv}
+                    />
+                  );
                 })}
               {category === "related" && categoryData?.results?.length > 0 && (
                 <ReactPaginate
@@ -636,7 +659,12 @@ const MetaDetails = ({ id, type, data }: any) => {
               categoryData?.cast?.map((ele: any, ind: any) => {
                 return (
                   <div className={styles.numberedCard}>
-                    <MovieCardLarge data={ele} media_type="movie" />
+                    <MovieCardLarge
+                      data={ele}
+                      media_type="movie"
+                      genresMovie={genreListMovie}
+                      genresTv={genreListTv}
+                    />
                     <span className={styles.number}>{ind + 1}</span>
                   </div>
                 );
@@ -646,7 +674,12 @@ const MetaDetails = ({ id, type, data }: any) => {
               categoryData?.crew?.map((ele: any, ind: any) => {
                 return (
                   <div className={styles.numberedCard}>
-                    <MovieCardLarge data={ele} media_type="movie" />
+                    <MovieCardLarge
+                      data={ele}
+                      media_type="movie"
+                      genresMovie={genreListMovie}
+                      genresTv={genreListTv}
+                    />
                     <span className={styles.number}>{ind + 1}</span>
                   </div>
                 );
@@ -665,7 +698,12 @@ const MetaDetails = ({ id, type, data }: any) => {
               categoryData?.cast?.map((ele: any, ind: any) => {
                 return (
                   <div className={styles.numberedCard}>
-                    <MovieCardLarge data={ele} media_type="tv" />
+                    <MovieCardLarge
+                      data={ele}
+                      media_type="tv"
+                      genresMovie={genreListMovie}
+                      genresTv={genreListTv}
+                    />
                     <span className={styles.number}>{ind + 1}</span>
                   </div>
                 );
@@ -675,7 +713,12 @@ const MetaDetails = ({ id, type, data }: any) => {
               categoryData?.crew?.map((ele: any, ind: any) => {
                 return (
                   <div className={styles.numberedCard}>
-                    <MovieCardLarge data={ele} media_type="tv" />
+                    <MovieCardLarge
+                      data={ele}
+                      media_type="tv"
+                      genresMovie={genreListMovie}
+                      genresTv={genreListTv}
+                    />
                     <span className={styles.number}>{ind + 1}</span>
                   </div>
                 );

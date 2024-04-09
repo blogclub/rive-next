@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import axiosFetch from "@/Utils/fetch";
+import axiosFetch from "@/Utils/fetchBackend";
 import styles from "@/styles/Search.module.scss";
 import ReactPaginate from "react-paginate"; // for pagination
 import { AiFillLeftCircle, AiFillRightCircle } from "react-icons/ai";
@@ -15,12 +15,28 @@ const SearchPage = ({ categoryType }: any) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalpages, setTotalpages] = useState(1);
   const [loading, setLoading] = useState(true);
+  const [genreListMovie, setGenreListMovie] = useState<any>([]);
+  const [genreListTv, setGenreListTv] = useState<any>([]);
   const searchBar: any = useRef(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const gM = await axiosFetch({ requestID: "genresMovie" });
+        const gT = await axiosFetch({ requestID: "genresTv" });
+        setGenreListMovie(gM.genres);
+        setGenreListTv(gT.genres);
+      } catch (error) {
+        console.error("Error fetching genres:", error);
+      }
+    };
+    fetchData();
+  }, []);
   useEffect(() => {
     let debounceTimer: NodeJS.Timeout;
     const fetchData = async (mode: any) => {
       setLoading(true);
-      setData([null, null, null, null, null, null, null, null, null, null]);
+      // setData([null, null, null, null, null, null, null, null, null, null]);
       try {
         let data;
         if (mode) {
@@ -84,11 +100,23 @@ const SearchPage = ({ categoryType }: any) => {
         </h1>
       ) : null}
       <div className={styles.movieList}>
-        {data.map((ele: any) => {
-          return <MovieCardLarge data={ele} media_type={categoryType} />;
-        })}
+        {genreListMovie?.length > 0 &&
+          genreListTv?.length > 0 &&
+          data.map((ele: any) => {
+            return (
+              <MovieCardLarge
+                data={ele}
+                media_type={categoryType}
+                genresMovie={genreListMovie}
+                genresTv={genreListTv}
+              />
+            );
+          })}
         {query.length > 2 && data?.length === 0 ? <h1>No Data Found</h1> : null}
         {query.length > 2 && data === undefined
+          ? dummyList.map((ele) => <Skeleton className={styles.loading} />)
+          : null}
+        {genreListMovie?.length === 0 || genreListTv?.length === 0
           ? dummyList.map((ele) => <Skeleton className={styles.loading} />)
           : null}
       </div>

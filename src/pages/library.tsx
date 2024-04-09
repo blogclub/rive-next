@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axiosFetch from "@/Utils/fetch";
+import axiosFetch from "@/Utils/fetchBackend";
 import styles from "@/styles/Library.module.scss";
 import MovieCardSmall from "@/components/MovieCardSmall";
 import ReactPaginate from "react-paginate"; // for pagination

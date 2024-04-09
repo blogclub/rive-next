@@ -3,7 +3,7 @@ import styles from "./style.module.scss";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import Skeleton from "react-loading-skeleton";
-import axiosFetch from "@/Utils/fetch";
+import axiosFetch from "@/Utils/fetchBackend";
 
 // react-lazy-load-image-component
 import { LazyLoadImage } from "react-lazy-load-image-component";
@@ -13,10 +13,10 @@ function capitalizeFirstLetter(string: string) {
   return string?.charAt(0).toUpperCase() + string?.slice(1);
 }
 
-const MovieCardLarge = ({ data, media_type }: any) => {
+const MovieCardLarge = ({ data, media_type, genresMovie, genresTv }: any) => {
   const [imageLoading, setImageLoading] = useState(true);
-  const [genreListMovie, setGenreListMovie] = useState([]);
-  const [genreListTv, setGenreListTv] = useState([]);
+  const [genreListMovie, setGenreListMovie] = useState(genresMovie);
+  const [genreListTv, setGenreListTv] = useState(genresTv);
   const [loading, setLoading] = useState(true);
   const [imagePlaceholder, setImagePlaceholder] = useState(false);
   const year = new Date(data?.release_date).getFullYear();
@@ -39,19 +39,19 @@ const MovieCardLarge = ({ data, media_type }: any) => {
   });
   console.log({ Genres });
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const gM = await axiosFetch({ requestID: "genresMovie" });
-        const gT = await axiosFetch({ requestID: "genresTv" });
-        setGenreListMovie(gM.genres);
-        setGenreListTv(gT.genres);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-    fetchData();
-  }, [data]);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const gM = await axiosFetch({ requestID: "genresMovie" });
+  //       const gT = await axiosFetch({ requestID: "genresTv" });
+  //       setGenreListMovie(gM.genres);
+  //       setGenreListTv(gT.genres);
+  //     } catch (error) {
+  //       console.error("Error fetching data:", error);
+  //     }
+  //   };
+  //   fetchData();
+  // }, []);
   return (
     <Link
       key={data?.id}

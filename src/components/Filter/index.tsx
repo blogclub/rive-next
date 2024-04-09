@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "./style.module.scss";
-import axiosFetch from "@/Utils/fetch";
+import axiosFetch from "@/Utils/fetchBackend";
 
 function capitalizeFirstLetter(string: string) {
   return string.charAt(0).toUpperCase() + string.slice(1);

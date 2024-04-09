@@ -6,7 +6,7 @@ import { toast } from "sonner";
 import { IoReturnDownBack } from "react-icons/io5";
 import { FaForwardStep, FaBackwardStep } from "react-icons/fa6";
 import { BsHddStack, BsHddStackFill } from "react-icons/bs";
-import axiosFetch from "@/Utils/fetch";
+import axiosFetch from "@/Utils/fetchBackend";
 import WatchDetails from "@/components/WatchDetails";
 
 const Watch = () => {
@@ -90,7 +90,7 @@ const Watch = () => {
   useEffect(() => {
     toast.info(
       <div>
-        Cloud: use AD-Block services for AD-free experience, like AD-Blocker
+        Cloud: use AD-Blocker services for AD-free experience, like AD-Blocker
         extension or{" "}
         <a target="_blank" href="https://brave.com/">
           Brave Browser{" "}
@@ -100,7 +100,7 @@ const Watch = () => {
 
     toast.info(
       <div>
-        Cloud: use video download extensions like{" "}
+        Cloud: use video downloader extensions like{" "}
         <a target="_blank" href="https://fetchv.net/">
           FetchV{" "}
         </a>{" "}
@@ -120,7 +120,7 @@ const Watch = () => {
           target="_blank"
           href="https://www.reddit.com/r/DataHoarder/comments/qgne3i/how_to_download_videos_from_vidsrcme/"
         >
-          Source Advice{" "}
+          The Source{" "}
         </a>
       </div>,
     );
