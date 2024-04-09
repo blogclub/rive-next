@@ -37,6 +37,7 @@ Rive is a cutting-edge platform for streaming movies and TV shows online. Our pr
 - Signin with email, or google (firebase)
 - Multiple server streaming
 - Download Movies/ TV shows using extensions like FetchV
+- Random Movie/ Tv Shows option. use `CRTL + SHIFT + R` (globaly active)
 - Great Customization in settings
 - Great UI
 

@@ -28,7 +28,8 @@ export default async function axiosFetch({
 }: Fetch) {
   const request = requestID;
   const API_KEY = process.env.NEXT_PUBLIC_TMDB_API_KEY;
-  const baseURL = "https://api.themoviedb.org/3";
+  const baseURL = process.env.NEXT_PUBLIC_TMDB_API;
+  const randomURL = process.env.NEXT_PUBLIC_RANDOM_URL;
   const requests: any = {
     latestMovie: `${baseURL}/movie/now_playing?language=${language}&page=${page}`, //nowPlayingMovie
     latestTv: `${baseURL}/tv/airing_today?language=${language}&page=${page}`, // airingTodayTv
@@ -78,6 +79,9 @@ export default async function axiosFetch({
     genresTv: `${baseURL}/genre/tv/list?language=${language}`,
     countries: `${baseURL}/configuration/countries?language=${language}`,
     languages: `${baseURL}/configuration/languages`,
+
+    // random
+    random: `${randomURL}`,
   };
   const final_request = requests[request];
   // console.log({ final_request });

@@ -35,6 +35,19 @@
     accent-color: var(--ascent-color);
     cursor: pointer;
   }
+  select {
+    width: clamp(15rem, 50vw, 20rem);
+    padding: 1rem 2rem;
+    background: var(--bg-color);
+    color: var(--primary-3);
+    outline: none;
+    // border: 1px solid var(--primary-2);
+    border: none;
+    border-radius: 0.5rem;
+    // margin: 1rem auto;
+    line-height: 1rem;
+    z-index: 2;
+  }
   .close {
     position: absolute;
     right: 1rem;

@@ -25,6 +25,7 @@ const CategorywisePage = ({ categoryType }: any) => {
   const [filterGenreList, setFilterGenreList] = useState("");
   const [filterCountry, setFiltercountry] = useState();
   const [filterYear, setFilterYear] = useState();
+  const [sortBy, setSortBy] = useState();
   const [trigger, setTrigger] = useState(false);
   const [loading, setLoading] = useState(true);
   console.log(capitalizeFirstLetter(categoryType));
@@ -46,7 +47,7 @@ const CategorywisePage = ({ categoryType }: any) => {
             genreKeywords: filterGenreList,
             country: filterCountry,
             year: filterYear,
-            sortBy: "popularity.desc",
+            sortBy: sortBy,
           });
         } else {
           data = await axiosFetch({
@@ -119,6 +120,8 @@ const CategorywisePage = ({ categoryType }: any) => {
           filterGenreList={filterGenreList}
           filterCountry={filterCountry}
           filterYear={filterYear}
+          sortBy={sortBy}
+          setSortBy={setSortBy}
           setCategory={setCategory}
           setTrigger={setTrigger}
           trigger={trigger}

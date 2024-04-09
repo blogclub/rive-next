@@ -8,6 +8,7 @@ import SettingsPage from "../SettingsPage";
 import { usePathname } from "next/navigation";
 import Head from "next/head";
 import { useRouter } from "next/navigation";
+import axiosFetch from "@/Utils/fetch";
 
 const Layout = ({ children }: any) => {
   const [theme, setTheme] = useState("system");
@@ -15,6 +16,21 @@ const Layout = ({ children }: any) => {
   const [ascent_color, setAscent_color] = useState("gold");
   const [themeColor, setThemeColor] = useState<any>();
   const { push } = useRouter();
+
+  const fetchRandom = async () => {
+    try {
+      const res = await axiosFetch({
+        requestID: `random`,
+      });
+      if (res?.type && res?.id) {
+        push(`/detail?type=${res.type}&id=${res.id}`);
+      }
+      console.log({ res });
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
   useEffect(() => {
     const values = getSettings();
     if (values !== null) {
@@ -33,6 +49,10 @@ const Layout = ({ children }: any) => {
       if (event.ctrlKey && event.key === "k") {
         event.preventDefault();
         push("/search");
+      }
+      if (event.ctrlKey && event.key === "R") {
+        event.preventDefault();
+        fetchRandom();
       }
     });
     // console.log({ prefersDarkMode });

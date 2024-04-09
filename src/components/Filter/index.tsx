@@ -59,6 +59,8 @@ const Filter = ({
   filterGenreList,
   filterCountry,
   filterYear,
+  sortBy,
+  setSortBy,
   setCategory,
   setTrigger,
   trigger,
@@ -178,6 +180,47 @@ const Filter = ({
         }}
         placeholder="Enter Year"
       />
+      <h2>sort</h2>
+      <select
+        name="source"
+        id="source"
+        className={styles.source}
+        value={sortBy}
+        onChange={(e) => setSortBy(e.target.value)}
+      >
+        <option value="popularity.desc" defaultChecked>
+          Popularity &darr; (Desc){" "}
+        </option>
+        <option value="popularity.asc">Popularity &uarr; (Asc)</option>
+        <option value="vote_average.desc">Vote &darr; (Desc)</option>
+        <option value="vote_average.asc">Vote &uarr; (Asc)</option>
+        {categoryType === "tv" && (
+          <>
+            <option value="name.desc">Name &darr; (Desc)</option>
+            <option value="name.asc">Name &uarr; (Asc)</option>
+            <option value="first_air_date.desc">
+              First Air Date &darr; (Desc)
+            </option>
+            <option value="first_air_date.asc">
+              First Air Date &uarr; (Asc)
+            </option>
+          </>
+        )}
+        {categoryType === "movie" && (
+          <>
+            <option value="title.desc">Title &darr; (Desc)</option>
+            <option value="title.asc">Title &uarr; (Asc)</option>
+            <option value="primary_release_date.desc">
+              Release Date &darr; (Desc)
+            </option>
+            <option value="primary_release_date.asc">
+              Release Date &uarr; (Asc)
+            </option>
+            <option value="revenue.desc">Revenue &darr; (Desc)</option>
+            <option value="revenue.asc">Revenue &uarr; (Asc)</option>
+          </>
+        )}
+      </select>
 
       <div className={styles.filterButtons}>
         <div className={styles.filterSubmit} onClick={handleFilterSubmit}>
