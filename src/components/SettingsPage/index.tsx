@@ -7,8 +7,8 @@ import { usePathname } from "next/navigation";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/Utils/firebase";
 import { logoutUser } from "@/Utils/firebaseUser";
-import axiosFetch from "@/Utils/fetch";
 import { useRouter } from "next/navigation";
+import { fetchRandom } from "@/Utils/randomdata";
 
 const SettingsPage = ({
   mode,
@@ -20,7 +20,6 @@ const SettingsPage = ({
 }: any) => {
   const [user, setUser] = useState<any>(false);
   const [loading, setLoading] = useState(true);
-  const [randomLinkActive, setrandomLinkActive] = useState(true);
   const { push } = useRouter();
 
   useEffect(() => {
@@ -34,21 +33,6 @@ const SettingsPage = ({
         setLoading(false);
       }
     });
-    const checkRandom = async () => {
-      try {
-        const res = await axiosFetch({
-          requestID: `random`,
-        });
-        if (res?.type && res?.id) {
-          setrandomLinkActive(true);
-        } else {
-          setrandomLinkActive(false);
-        }
-      } catch (error) {
-        setrandomLinkActive(false);
-      }
-    };
-    checkRandom();
   }, []);
   const handleSelect = ({ type, value }: any) => {
     const prevVal = { mode, theme, ascent_color };
@@ -57,27 +41,12 @@ const SettingsPage = ({
     if (type === "ascent_color")
       setSettings({ values: { ...prevVal, ascent_color: value } });
   };
-  const handleRandom = () => {
-    const fetchRandom = async () => {
-      try {
-        setLoading(true);
-        const res = await axiosFetch({
-          requestID: `random`,
-        });
-        if (res?.type && res?.id) {
-          push(`/detail?type=${res.type}&id=${res.id}`);
-        } else {
-          setrandomLinkActive(false);
-        }
-        console.log({ res });
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-        setLoading(false);
-        setrandomLinkActive(false);
-      }
-    };
-    fetchRandom();
+  const handleRandom = async () => {
+    const res = await fetchRandom();
+    console.log({ res });
+    if (res?.type && res?.id) {
+      push(`/detail?type=${res.type}&id=${res.id}`);
+    }
   };
   return (
     <div className={`${styles.settingsPage} ${styles.authPage}`}>
@@ -168,16 +137,14 @@ const SettingsPage = ({
         </div>
         <h1>App Center</h1>
         <div className={styles.group}>
-          {randomLinkActive && (
-            <Link
-              href=""
-              onClick={handleRandom}
-              data-tooltip-id="tooltip"
-              data-tooltip-html="Random Movie/ Tv Show <span class='tooltip-btn'>CTRL + SHIFT + R</span>"
-            >
-              Random
-            </Link>
-          )}
+          <Link
+            href=""
+            onClick={handleRandom}
+            data-tooltip-id="tooltip"
+            data-tooltip-html="Random Movie/ Tv Show <span class='tooltip-btn'>CTRL + SHIFT + R</span>"
+          >
+            Random
+          </Link>
           <Link
             href="/downloads"
             data-tooltip-id="tooltip"
