@@ -117,16 +117,7 @@ const MovieCardLarge = ({ data, media_type, genresMovie, genresTv }: any) => {
         />
       </div>
       <div className={`${styles.metaData}`}>
-        <h1>
-          {data?.title || data?.name || (
-            <div
-              style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
-            >
-              <Skeleton />
-              <Skeleton />
-            </div>
-          )}
-        </h1>
+        <h1>{data?.title || data?.name || <Skeleton count={2} />}</h1>
         <p>
           {capitalizeFirstLetter(data?.media_type || media_type)}
           {data?.vote_average ? ` • ${data?.vote_average.toFixed(1)}` : null}

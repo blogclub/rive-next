@@ -117,7 +117,16 @@ const SearchPage = ({ categoryType }: any) => {
           ? dummyList.map((ele) => <Skeleton className={styles.loading} />)
           : null}
         {genreListMovie?.length === 0 || genreListTv?.length === 0
-          ? dummyList.map((ele) => <Skeleton className={styles.loading} />)
+          ? dummyList.map((ele: any) => {
+              return (
+                <MovieCardLarge
+                  data={ele}
+                  media_type={categoryType}
+                  genresMovie={genreListMovie}
+                  genresTv={genreListTv}
+                />
+              );
+            })
           : null}
       </div>
       <ReactPaginate
