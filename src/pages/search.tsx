@@ -31,6 +31,7 @@ const SearchPage = ({ categoryType }: any) => {
       }
     };
     fetchData();
+    searchBar?.current.focus();
   }, []);
   useEffect(() => {
     let debounceTimer: NodeJS.Timeout;
@@ -78,7 +79,6 @@ const SearchPage = ({ categoryType }: any) => {
     if (loading) {
       NProgress.start();
     } else NProgress.done(false);
-    searchBar?.current.focus();
   }, [loading]);
 
   return (
@@ -96,9 +96,13 @@ const SearchPage = ({ categoryType }: any) => {
       </div>
       {query.length > 2 ? (
         <h1>
-          showing result for <span>{query}</span>
+          showing result for <span className={styles.serachQuery}>{query}</span>
         </h1>
-      ) : null}
+      ) : (
+        <h1>
+          Top Searches <span className={styles.serachQuery}>today</span>
+        </h1>
+      )}
       <div className={styles.movieList}>
         {genreListMovie?.length > 0 &&
           genreListTv?.length > 0 &&

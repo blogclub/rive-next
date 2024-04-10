@@ -30,17 +30,17 @@ Rive is a cutting-edge platform for streaming movies and TV shows online. Our pr
 
 ## **Features**:
 
-- Developed utilizing the [Next.js](https://nextjs.org/) framework and [TypeScript](https://www.typescriptlang.org/).
-- Includes Watchlist and Continue Watching features utilizing **local storage**.
+- Developed utilizing the **[Next.js](https://nextjs.org/)** framework and **[TypeScript](https://www.typescriptlang.org/)**.
+- Includes **Watchlist** and **Continue Watching** features utilizing **local storage**.
 - Offers synchronization to cloud storage (Firestore) for the watchlist.
-- Enables cloud synchronization through Login/Signup functionality.
+- Enables **cloud synchronization** through Login/Signup functionality.
 - Supports Sign-in with email or Google accounts (Firebase).
-- Facilitates multiple server streaming capabilities.
-- Allows for downloading of Movies/TV shows using extensions like FetchV.
-- Incorporates a Random Movie/TV Shows option, accessible via `CTRL + SHIFT + R` (globally active).
-- Utilizes server-side APIs for data fetching, ensuring efficient server-side operations.
-- Provides extensive customization options within settings.
-- Features a user-friendly and visually appealing UI.
+- Facilitates **multiple server streaming** capabilities.
+- Allows for **downloading of Movies/TV shows** using extensions like FetchV.
+- Incorporates a **Random Movie/TV Shows** option, accessible via `CTRL + SHIFT + R` (globally active).
+- Utilizes `server-side APIs` for data fetching, ensuring efficient server-side operations across **all ISPs**.
+- Provides extensive customization options within **settings**.
+- Features a user-friendly and **visually appealing UI**.
 
 ## **Word From Developer**:
 
