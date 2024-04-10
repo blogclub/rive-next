@@ -27,6 +27,7 @@ const Watch = () => {
   const [source, setSource] = useState("SUP");
   const nextBtn: any = useRef(null);
   const backBtn: any = useRef(null);
+  const moreBtn: any = useRef(null);
   if (type === null && params.get("id") !== null) setType(params.get("type"));
   if (id === null && params.get("id") !== null) setId(params.get("id"));
   if (season === null && params.get("season") !== null)
@@ -50,9 +51,11 @@ const Watch = () => {
         id: id,
         season: season,
       });
-      setMaxEpisodes(
-        seasonData?.episodes[seasonData?.episodes?.length - 1]?.episode_number,
-      );
+      seasonData?.episodes?.length > 0 &&
+        setMaxEpisodes(
+          seasonData?.episodes[seasonData?.episodes?.length - 1]
+            ?.episode_number,
+        );
       setMinEpisodes(seasonData?.episodes[0]?.episode_number);
       if (parseInt(episode) >= maxEpisodes - 1) {
         var nextseasonData = await axiosFetch({
@@ -60,7 +63,8 @@ const Watch = () => {
           id: id,
           season: parseInt(season) + 1,
         });
-        setNextSeasonMinEpisodes(nextseasonData?.episodes[0]?.episode_number);
+        nextseasonData?.episodes?.length > 0 &&
+          setNextSeasonMinEpisodes(nextseasonData?.episodes[0]?.episode_number);
       }
     };
     if (type === "tv") fetch();
@@ -76,6 +80,9 @@ const Watch = () => {
         backBtn?.current.click();
         // handleBackward();
         // console.log("prev");
+      } else if (event.shiftKey && event.key === "M") {
+        event.preventDefault();
+        moreBtn?.current.click();
       }
     };
 
@@ -222,9 +229,14 @@ const Watch = () => {
             </>
           ) : null}
           <div
+            ref={moreBtn}
             onClick={() => setWatchDetails(!watchDetails)}
             data-tooltip-id="tooltip"
-            data-tooltip-content="More"
+            data-tooltip-html={
+              !watchDetails
+                ? "More <span class='tooltip-btn'>SHIFT + M</span></div>"
+                : "close <span class='tooltip-btn'>SHIFT + M</span></div>"
+            }
           >
             {watchDetails ? <BsHddStackFill /> : <BsHddStack />}
           </div>

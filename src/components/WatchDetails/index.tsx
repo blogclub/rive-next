@@ -195,6 +195,7 @@ const WatchDetails = ({
                         prev !== ele?.id ? ele?.id : "",
                       )
                     }
+                    key={ele?.id}
                   >
                     <Link
                       href={`/watch?type=tv&id=${ele?.show_id}&season=${ele?.season_number}&episode=${ele?.episode_number}`}
@@ -307,7 +308,7 @@ const WatchDetails = ({
                   )}
                 </div>
                 {categoryData?.crew?.map((ele: any) => (
-                  <div className={styles.cast}>
+                  <div className={styles.cast} key={ele?.id}>
                     <Link
                       href={`/person?id=${ele?.id}`}
                       className={styles.CardSmall}
@@ -387,7 +388,7 @@ const WatchDetails = ({
                   )}
                 </div>
                 {categoryData?.guest_stars?.map((ele: any) => (
-                  <div className={styles.cast}>
+                  <div className={styles.cast} key={ele?.id}>
                     <Link
                       href={`/person?id=${ele?.id}`}
                       className={styles.CardSmall}
