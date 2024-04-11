@@ -39,6 +39,7 @@ Rive is a cutting-edge platform for streaming movies and TV shows online. Our pr
 - Allows for **downloading of Movies/TV shows** using extensions like FetchV.
 - Incorporates a **Random Movie/TV Shows** option, accessible via `CTRL + SHIFT + R` (globally active).
 - Utilizes `server-side APIs` for data fetching, ensuring efficient server-side operations across **all ISPs**.
+- Implements `Node-Cache` to **cache all API calls** on the server, significantly **enhancing data fetching speed** and overall website performance.
 - Provides extensive customization options within **settings**.
 - Features a user-friendly and **visually appealing UI**.
 
@@ -64,6 +65,7 @@ Rive is a cutting-edge platform for streaming movies and TV shows online. Our pr
     <img src="https://img.shields.io/badge/framer-7c3aed?style=for-the-badge&logo=framer&logoColor=white" alt="react official Website"/>
     <img src="https://img.shields.io/badge/sass-7c3aed?style=for-the-badge&logo=sass&logoColor=white" alt="react official Website"/>
     <img src="https://img.shields.io/badge/firebase-7c3aed?style=for-the-badge&logo=firebase&logoColor=white" alt="react official Website"/>
+    <img src="https://img.shields.io/badge/node.js-7c3aed?style=for-the-badge&logo=node.js&logoColor=white" alt="react official Website"/>
 </p>
 
 ## **Screenshots**
