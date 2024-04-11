@@ -40,6 +40,7 @@ Rive is a cutting-edge platform for streaming movies and TV shows online. Our pr
 - Incorporates a **Random Movie/TV Shows** option, accessible via `CTRL + SHIFT + R` (globally active).
 - Utilizes `server-side APIs` for data fetching, ensuring efficient server-side operations across **all ISPs**.
 - Implements a self-created `caching system` to **cache all API calls** on the server, significantly **enhancing data fetching speed** and overall website performance.
+- Implements a client-side caching system utilizing **session storage**.
 - Provides extensive customization options within **settings**.
 - Features a user-friendly and **visually appealing UI**.
 

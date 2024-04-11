@@ -1,4 +1,5 @@
 import axios from "axios";
+import { setCache, getCache } from "./clientCache";
 
 interface Fetch {
   requestID: any;
@@ -83,8 +84,16 @@ export default async function axiosFetch({
   const final_request = requests[request];
   // console.log({ final_request });
 
+  // client side caching
+  const cacheKey = final_request;
+  const cachedResult = getCache(cacheKey);
+  if (cachedResult) {
+    return await cachedResult;
+  }
+
   try {
     const response = await axios.get(final_request);
+    setCache(cacheKey, response?.data);
     return await response.data; // Return the resolved data from the response
   } catch (error) {
     console.error("Error fetching data:", error);

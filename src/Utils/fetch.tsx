@@ -84,7 +84,7 @@ export default async function axiosFetch({
     random: `${randomURL}`,
   };
   const final_request = requests[request];
-  console.log({ final_request });
+  // console.log({ final_request });
 
   try {
     const response = await axios.get(final_request, {
