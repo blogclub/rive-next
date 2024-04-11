@@ -238,7 +238,7 @@ const HomeListAll = () => {
       ) : null}
       <h1 ref={latestMovieRef}>Latest Movies</h1>
       <div className={styles.HomeListSection}>
-        {latestMovie.map((ele) => {
+        {latestMovie?.map((ele) => {
           return <MovieCardSmall data={ele} media_type="movie" />;
         })}
         {latestMovie?.length === 0 &&
@@ -248,7 +248,7 @@ const HomeListAll = () => {
       </div>
       <h1 ref={latestTvRef}>Latest TV Shows</h1>
       <div className={styles.HomeListSection}>
-        {latestTv.map((ele) => {
+        {latestTv?.map((ele) => {
           return <MovieCardSmall data={ele} media_type="tv" />;
         })}
         {latestTv?.length === 0 &&
@@ -258,7 +258,7 @@ const HomeListAll = () => {
       </div>
       <h1 ref={popularMovieRef}>Popular Movies</h1>
       <div className={styles.HomeListSection}>
-        {popularMovie.map((ele) => {
+        {popularMovie?.map((ele) => {
           return <MovieCardSmall data={ele} media_type="movie" />;
         })}
         {popularMovie?.length === 0 &&
@@ -268,7 +268,7 @@ const HomeListAll = () => {
       </div>
       <h1 ref={popularTvRef}>Popular TV Shows</h1>
       <div className={styles.HomeListSection}>
-        {popularTv.map((ele) => {
+        {popularTv?.map((ele) => {
           return <MovieCardSmall data={ele} media_type="tv" />;
         })}
         {popularTv?.length === 0 &&

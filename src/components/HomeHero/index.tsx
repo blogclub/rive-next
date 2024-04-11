@@ -77,7 +77,7 @@ const HomeHero = () => {
         );
       }
     };
-    check();
+    if (data?.length > 0) check();
   }, [index, data, user]);
 
   const handleBookmarkAdd = () => {
@@ -120,7 +120,7 @@ const HomeHero = () => {
         <div className={styles.curvy2}></div>
         <div className={styles.curvy3}></div>
         <div className={styles.curvy4}></div>
-        <div className={styles.HomeHeroMeta} key={data[index]?.id}>
+        <div className={styles.HomeHeroMeta}>
           <h1
             data-tooltip-id="tooltip"
             data-tooltip-content={
