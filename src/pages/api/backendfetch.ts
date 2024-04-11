@@ -55,7 +55,7 @@ export default async function handler(
     episode,
   });
   cache.set(cacheKey, result);
-  // console.log({result});
+  console.log({ result });
   res?.status(200)?.json(result);
   // res.status(200).json({ name: "John Doe" });
 }
