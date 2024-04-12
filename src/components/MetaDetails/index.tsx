@@ -341,7 +341,7 @@ const MetaDetails = ({ id, type, data }: any) => {
                   <p>{genres?.join(", ")}</p>
                 </>
               ) : null}
-              {type === "tv" && (
+              {type === "tv" && data?.status && (
                 <>
                   <h3>Show Details</h3>
                   {data?.status && <p> Status : {data?.status}</p>}
