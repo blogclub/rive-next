@@ -50,6 +50,10 @@ const SearchPage = ({ categoryType }: any) => {
           if (data.page > data.total_pages) {
             setCurrentPage(data.total_pages);
           }
+          if (currentPage > data.total_pages) {
+            setCurrentPage(1);
+            return;
+          }
           setTotalpages(data.total_pages > 500 ? 500 : data.total_pages);
         } else {
           data = await axiosFetch({ requestID: `trending` });
@@ -80,6 +84,10 @@ const SearchPage = ({ categoryType }: any) => {
       NProgress.start();
     } else NProgress.done(false);
   }, [loading]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [query]);
 
   return (
     <div className={styles.MoviePage}>
@@ -145,6 +153,7 @@ const SearchPage = ({ categoryType }: any) => {
           }
           window.scrollTo(0, 0);
         }}
+        forcePage={currentPage - 1}
         pageCount={totalpages}
         breakLabel=" ... "
         previousLabel={<AiFillLeftCircle className={styles.paginationIcons} />}

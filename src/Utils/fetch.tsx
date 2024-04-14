@@ -85,6 +85,7 @@ export default async function axiosFetch({
 
     // collections
     collection: `${baseURL}/collection/${id}?language=${language}`,
+    searchCollection: `${baseURL}/search/collection?query=${query}&language=${language}&page=${page}`,
   };
   const final_request = requests[request];
   // console.log({ final_request });

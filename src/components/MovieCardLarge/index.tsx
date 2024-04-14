@@ -58,6 +58,8 @@ const MovieCardLarge = ({ data, media_type, genresMovie, genresTv }: any) => {
       href={`${data?.media_type === "person" ? "/person?id=" + data?.id : "/detail?type=" + (data?.media_type || media_type) + "&id=" + data?.id}`}
       className={styles.MovieCardSmall}
       aria-label={data?.name || "poster"}
+      data-tooltip-id="tooltip"
+      data-tooltip-html={`${data?.title?.length > 50 || data?.name?.length > 50 ? data?.title || data?.name : ""}`}
     >
       <div
         className={`${styles.img} ${data?.poster_path !== null && data?.poster_path !== undefined ? "skeleton" : null}`}

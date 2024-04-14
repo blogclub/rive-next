@@ -15,6 +15,10 @@ import {
   IoSearchOutline,
   IoSearch,
 } from "react-icons/io5";
+import {
+  MdOutlineCollectionsBookmark,
+  MdCollectionsBookmark,
+} from "react-icons/md";
 import { PiTelevisionFill, PiTelevisionLight } from "react-icons/pi";
 import { usePathname, useSearchParams } from "next/navigation";
 
@@ -76,6 +80,18 @@ const Navbar = ({ children }: any) => {
           <PiTelevisionFill className={styles.active} />
         ) : (
           <PiTelevisionLight className={styles.inactive} />
+        )}
+      </Link>
+      <Link
+        href="/collections"
+        aria-label="Collections"
+        data-tooltip-id="tooltip"
+        data-tooltip-content="Collections"
+      >
+        {pathname === "/collections" ? (
+          <MdCollectionsBookmark className={styles.active} />
+        ) : (
+          <MdOutlineCollectionsBookmark className={styles.inactive} />
         )}
       </Link>
       <Link

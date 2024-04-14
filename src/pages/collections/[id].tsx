@@ -44,7 +44,7 @@ const Collections = ({ categoryType }: any) => {
   }, [id]);
   return (
     <div className={styles.MoviePage}>
-      <h1>Collections</h1>
+      <h1>{data?.name || data?.title}</h1>
       <div className={styles.movieList}>
         {data?.parts?.map((ele: any) => {
           return (

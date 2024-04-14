@@ -17,6 +17,8 @@ const MovieCardSmall = ({ data, media_type }: any) => {
       href={`${media_type === "collection" ? `/collections/${data?.id}` : `/detail?type=${media_type}&id=${data?.id}`}`}
       className={styles.MovieCardSmall}
       aria-label={data?.name || "poster"}
+      data-tooltip-id="tooltip"
+      data-tooltip-html={`${data?.title?.length > 30 || data?.name?.length > 30 ? data?.title || data?.name : ""}`}
     >
       {/* <img src={process.env.NEXT_PUBLIC_TMBD_IMAGE_URL + data.poster_path} alt="" /> */}
       <div

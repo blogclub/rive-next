@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axiosFetch from "@/Utils/fetchBackend";
-import styles from "@/components/CategorywisePage/style.module.scss";
+// import styles from "@/components/CategorywisePage/style.module.scss";
+import styles from "@/styles/Search.module.scss";
 import MovieCardSmall from "@/components/MovieCardSmall";
 import ReactPaginate from "react-paginate"; // for pagination
 import Skeleton from "react-loading-skeleton";
@@ -17,6 +18,7 @@ const Collections = ({ categoryType }: any) => {
   const [totalpages, setTotalpages] = useState(CollectionIDs?.length / 20);
   const [trigger, setTrigger] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState<any>(null);
   useEffect(() => {
     if (loading) {
       NProgress.start();
@@ -49,20 +51,93 @@ const Collections = ({ categoryType }: any) => {
       }
       return arr;
     };
-    fetchData().then((res) => {
-      console.log({ res });
-      setData(res);
-      setLoading(false);
-    });
-  }, [ids, currentPage]);
+    if (searchQuery === null || searchQuery?.length <= 2)
+      fetchData().then((res) => {
+        console.log({ res });
+        setData(res);
+        setLoading(false);
+      });
+  }, [ids, currentPage, searchQuery]);
+  useEffect(() => {
+    if (searchQuery === "" || searchQuery === null) {
+      setCurrentPage(1);
+      setTotalpages(CollectionIDs?.length / 20);
+    } else {
+      setCurrentPage(1);
+    }
+  }, [searchQuery]);
+  useEffect(() => {
+    let debounceTimer: NodeJS.Timeout;
+    const fetchData = async (mode: any) => {
+      setLoading(true);
+      // setData([null, null, null, null, null, null, null, null, null, null]);
+      try {
+        let data;
+        if (mode) {
+          data = await axiosFetch({
+            requestID: `searchCollection`,
+            page: currentPage,
+            query: searchQuery,
+          });
+          // console.log();
+          if (data.page > data.total_pages) {
+            setCurrentPage(data.total_pages);
+          }
+          if (currentPage > data.total_pages) {
+            setCurrentPage(1);
+            return;
+          }
+          setTotalpages(data.total_pages > 500 ? 500 : data.total_pages);
+        }
+        setData(data.results);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    const debounceSearch = () => {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => {
+        if (searchQuery.length >= 3) {
+          fetchData(true);
+        }
+      }, 600);
+    };
+    if (searchQuery?.length > 2) debounceSearch();
+    return () => clearTimeout(debounceTimer);
+  }, [searchQuery, currentPage]);
+
   return (
     <div className={styles.MoviePage}>
-      <h1>Collections</h1>
+      {/* <h1>Collections</h1> */}
+      <div className={styles.InputWrapper}>
+        <input
+          type="text"
+          className={styles.searchInput}
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          placeholder="Please enter at least 3 characters to search collections...."
+        />
+      </div>
+      {searchQuery?.length > 2 ? (
+        <h1>
+          showing collections for{" "}
+          <span className={styles.serachQuery}>{searchQuery}</span>
+        </h1>
+      ) : (
+        <h1>
+          All Collections <span className={styles.serachQuery}></span>
+        </h1>
+      )}
       <div className={styles.movieList}>
         {data.map((ele: any) => {
           return <MovieCardSmall data={ele} media_type={"collection"} />;
         })}
-        {data?.length === 0 &&
+        {searchQuery?.length > 2 && data?.length === 0 ? (
+          <h1>No Data Found</h1>
+        ) : null}
+        {(searchQuery === null || searchQuery === "") &&
+          data?.length === 0 &&
           dummyList.map((ele) => <Skeleton className={styles.loading} />)}
         {/* {data?.total_results === 0 &&
           <h1>No Data Found</h1>} */}
@@ -79,12 +154,12 @@ const Collections = ({ categoryType }: any) => {
           }
           window.scrollTo(0, 0);
         }}
+        forcePage={currentPage - 1}
         pageCount={totalpages}
         breakLabel=" ... "
         previousLabel={<AiFillLeftCircle className={styles.paginationIcons} />}
         nextLabel={<AiFillRightCircle className={styles.paginationIcons} />}
       />
-      ;
     </div>
   );
 };
