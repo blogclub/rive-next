@@ -80,6 +80,9 @@ export default async function axiosFetch({
     genresTv: `${baseURL}?requestID=genresTv&language=${language}`,
     countries: `${baseURL}?requestID=countries&language=${language}`,
     languages: `${baseURL}?requestID=languages`,
+
+    // collections
+    collection: `${baseURL}?requestID=collection&id=${id}`,
   };
   const final_request = requests[request];
   // console.log({ final_request });

@@ -82,6 +82,9 @@ export default async function axiosFetch({
 
     // random
     random: `${randomURL}`,
+
+    // collections
+    collection: `${baseURL}/collection/${id}?language=${language}`,
   };
   const final_request = requests[request];
   // console.log({ final_request });
