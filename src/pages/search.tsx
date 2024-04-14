@@ -17,6 +17,7 @@ const SearchPage = ({ categoryType }: any) => {
   const [loading, setLoading] = useState(true);
   const [genreListMovie, setGenreListMovie] = useState<any>([]);
   const [genreListTv, setGenreListTv] = useState<any>([]);
+  const [isSearchBarFocused, setIsSearchBarFocused] = useState(false);
   const searchBar: any = useRef(null);
 
   useEffect(() => {
@@ -32,6 +33,22 @@ const SearchPage = ({ categoryType }: any) => {
     };
     fetchData();
     searchBar?.current.focus();
+
+    // focus the input on "/"
+    const handleKeyDown = (event: any) => {
+      if (event.key === "/") {
+        event.preventDefault();
+        searchBar?.current.focus();
+      } else if (event.key === "Escape") {
+        event.preventDefault();
+        searchBar?.current.blur();
+        // setSearchQuery((prev: any) => prev + "/");
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
   }, []);
   useEffect(() => {
     let debounceTimer: NodeJS.Timeout;
@@ -100,7 +117,18 @@ const SearchPage = ({ categoryType }: any) => {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Please enter at least 3 characters to search..."
+          onFocus={() => setIsSearchBarFocused(true)}
+          onBlur={() => setIsSearchBarFocused(false)}
+          // data-tooltip-id="tooltip"
+          // data-tooltip-html={"<div>focus :  <span class='tooltip-btn'>/</span></div><div>unfocus :  <span class='tooltip-btn'>Esc</span></div>"}
         />
+        <div className={styles.inputShortcut}>
+          {!isSearchBarFocused ? (
+            <span className="tooltip-btn">/</span>
+          ) : (
+            <span className="tooltip-btn">Esc</span>
+          )}
+        </div>
       </div>
       {query.length > 2 ? (
         <h1>

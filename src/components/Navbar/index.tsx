@@ -29,8 +29,12 @@ const Navbar = ({ children }: any) => {
   const [pathname, setPathname] = useState(path);
   useEffect(() => {
     if (params.get("type") !== null) setPathname("/" + params.get("type"));
-    else setPathname(path);
-    console.log(params.get("type"));
+    // else setPathname(path);
+    else {
+      const arr = path?.split("/");
+      setPathname("/" + arr[1]);
+    }
+    // console.log(path);
   }, [path, params]);
   return (
     <div className={styles.navbar}>
@@ -113,6 +117,7 @@ const Navbar = ({ children }: any) => {
         data-tooltip-content="Settings"
       >
         {pathname === "/settings" ||
+        pathname === "/downloads" ||
         pathname === "/signup" ||
         pathname === "/login" ? (
           <IoSettings className={styles.active} />

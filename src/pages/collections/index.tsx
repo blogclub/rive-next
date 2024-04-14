@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import axiosFetch from "@/Utils/fetchBackend";
 // import styles from "@/components/CategorywisePage/style.module.scss";
 import styles from "@/styles/Search.module.scss";
@@ -15,15 +15,39 @@ const Collections = ({ categoryType }: any) => {
   const [ids, setids] = useState<any>([]);
   const [data, setData] = useState<any>([]);
   const [currentPage, setCurrentPage] = useState<any>(1);
-  const [totalpages, setTotalpages] = useState(CollectionIDs?.length / 20);
+  const [totalpages, setTotalpages] = useState(
+    Math.floor(CollectionIDs?.length / 20),
+  );
   const [trigger, setTrigger] = useState(false);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState<any>(null);
+  const [isSearchBarFocused, setIsSearchBarFocused] = useState(false);
+  const searchBar: any = useRef(null);
   useEffect(() => {
     if (loading) {
       NProgress.start();
     } else NProgress.done(false);
   }, [loading]);
+
+  // focus the input on "/"
+  useEffect(() => {
+    const handleKeyDown = (event: any) => {
+      // console.log(event.key);
+      if (event.key === "/") {
+        event.preventDefault();
+        searchBar?.current.focus();
+        // setSearchQuery((prev: any) => prev + "/");
+      } else if (event.key === "Escape") {
+        event.preventDefault();
+        searchBar?.current.blur();
+        // setSearchQuery((prev: any) => prev + "/");
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
   useEffect(() => {
     setLoading(true);
     // setData([0, 0, 0, 0, 0, 0, 0, 0, 0]);
@@ -61,7 +85,7 @@ const Collections = ({ categoryType }: any) => {
   useEffect(() => {
     if (searchQuery === "" || searchQuery === null) {
       setCurrentPage(1);
-      setTotalpages(CollectionIDs?.length / 20);
+      setTotalpages(Math.floor(CollectionIDs?.length / 20));
     } else {
       setCurrentPage(1);
     }
@@ -112,12 +136,24 @@ const Collections = ({ categoryType }: any) => {
       {/* <h1>Collections</h1> */}
       <div className={styles.InputWrapper}>
         <input
+          ref={searchBar}
           type="text"
           className={styles.searchInput}
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           placeholder="Please enter at least 3 characters to search collections...."
+          onFocus={() => setIsSearchBarFocused(true)}
+          onBlur={() => setIsSearchBarFocused(false)}
+          // data-tooltip-id="tooltip"
+          // data-tooltip-html={"<div>focus :  <span class='tooltip-btn'>/</span></div><div>unfocus :  <span class='tooltip-btn'>Esc</span></div>"}
         />
+        <div className={styles.inputShortcut}>
+          {!isSearchBarFocused ? (
+            <span className="tooltip-btn">/</span>
+          ) : (
+            <span className="tooltip-btn">Esc</span>
+          )}
+        </div>
       </div>
       {searchQuery?.length > 2 ? (
         <h1>

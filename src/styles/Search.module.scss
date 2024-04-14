@@ -29,7 +29,7 @@
   .movieList {
     padding: 3rem;
     width: 100vw;
-    min-height: 100vh;
+    min-height: 70vh;
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
@@ -123,6 +123,12 @@
   }
 }
 
+.inputShortcut {
+  position: relative;
+  width: 0;
+  left: -3.7rem;
+}
+
 @media (max-width: 769px) {
   .MoviePage {
     padding-left: unset;
@@ -132,6 +138,7 @@
       margin-left: unset;
     }
     .movieList {
+      min-height: unset;
       padding: 1rem;
       gap: 1rem 0.5rem;
       margin-bottom: 1.5rem;
