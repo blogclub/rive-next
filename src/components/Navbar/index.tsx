@@ -1,25 +1,37 @@
 import React, { useState, useEffect } from "react";
 import styles from "./style.module.scss";
 import Link from "next/link";
-import {
-  AiFillHome,
-  AiOutlineHome,
-  AiFillPlayCircle,
-  AiOutlinePlayCircle,
-} from "react-icons/ai";
-import {
-  IoLibrary,
-  IoLibraryOutline,
-  IoSettings,
-  IoSettingsOutline,
-  IoSearchOutline,
-  IoSearch,
-} from "react-icons/io5";
+// import {
+//   AiFillHome,
+//   AiOutlineHome,
+//   AiFillPlayCircle,
+//   AiOutlinePlayCircle,
+// } from "react-icons/ai";
+// import {
+//   IoLibrary,
+//   IoLibraryOutline,
+//   IoSettings,
+//   IoSettingsOutline,
+//   IoSearchOutline,
+//   IoSearch,
+// } from "react-icons/io5";
+// import { PiTelevisionFill, PiTelevisionLight } from "react-icons/pi";
+
+import { IoLibrary, IoLibraryOutline } from "react-icons/io5";
 import {
   MdOutlineCollectionsBookmark,
   MdCollectionsBookmark,
+  MdHome,
+  MdOutlineHome,
+  MdPlayCircle,
+  MdOutlinePlayCircle,
+  MdSearch,
+  MdOutlineSearch,
+  MdSettings,
+  MdOutlineSettings,
+  MdTv,
+  MdOutlineTv,
 } from "react-icons/md";
-import { PiTelevisionFill, PiTelevisionLight } from "react-icons/pi";
 import { usePathname, useSearchParams } from "next/navigation";
 
 const Navbar = ({ children }: any) => {
@@ -45,9 +57,9 @@ const Navbar = ({ children }: any) => {
         data-tooltip-content="Home"
       >
         {pathname === "/" ? (
-          <AiFillHome className={styles.active} />
+          <MdHome className={styles.active} />
         ) : (
-          <AiOutlineHome className={styles.inactive} />
+          <MdOutlineHome className={styles.inactive} />
         )}
       </Link>
       <Link
@@ -57,9 +69,9 @@ const Navbar = ({ children }: any) => {
         data-tooltip-html="<div>Search <span class='tooltip-btn'>CTRL + K</span></div>"
       >
         {pathname === "/search" ? (
-          <IoSearch className={styles.active} />
+          <MdSearch className={styles.active} />
         ) : (
-          <IoSearchOutline className={styles.inactive} />
+          <MdOutlineSearch className={styles.inactive} />
         )}
       </Link>
       <Link
@@ -69,9 +81,9 @@ const Navbar = ({ children }: any) => {
         data-tooltip-content="Movies"
       >
         {pathname === "/movie" ? (
-          <AiFillPlayCircle className={styles.active} />
+          <MdPlayCircle className={styles.active} />
         ) : (
-          <AiOutlinePlayCircle className={styles.inactive} />
+          <MdOutlinePlayCircle className={styles.inactive} />
         )}
       </Link>
       <Link
@@ -81,9 +93,9 @@ const Navbar = ({ children }: any) => {
         data-tooltip-content="TV shows"
       >
         {pathname === "/tv" ? (
-          <PiTelevisionFill className={styles.active} />
+          <MdTv className={styles.active} />
         ) : (
-          <PiTelevisionLight className={styles.inactive} />
+          <MdOutlineTv className={styles.inactive} />
         )}
       </Link>
       <Link
@@ -120,9 +132,9 @@ const Navbar = ({ children }: any) => {
         pathname === "/downloads" ||
         pathname === "/signup" ||
         pathname === "/login" ? (
-          <IoSettings className={styles.active} />
+          <MdSettings className={styles.active} />
         ) : (
-          <IoSettingsOutline className={styles.inactive} />
+          <MdOutlineSettings className={styles.inactive} />
         )}
       </Link>
     </div>

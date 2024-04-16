@@ -13,7 +13,7 @@
     border-radius: 2rem;
     position: relative;
     .CarouselLoading {
-      height: 80vh;
+      height: calc(80vh - 1rem);
       width: 100%;
       margin: 1rem 0 0 0;
       border-radius: 2rem;
