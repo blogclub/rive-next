@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "./style.module.scss";
 import axiosFetch from "@/Utils/fetchBackend";
+import Skeleton from "react-loading-skeleton";
 
 function capitalizeFirstLetter(string: string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -148,6 +149,9 @@ const Filter = ({
           </div>
         );
       })}
+      {genreData?.length === 0 && (
+        <Skeleton count={7} style={{ margin: "0.2rem 0", padding: "0.5rem" }} />
+      )}
       <h2>Country</h2>
       {countryData.map((ele: any) => {
         return (
