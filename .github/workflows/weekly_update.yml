@@ -12,6 +12,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+      - name: Delete collection_ids branch if present
+        run: |
+          git push --delete origin collection_ids || true
       - name: Download gzipped JSON file
         run: |
           curl -L -o collection_ids.json.gz http://files.tmdb.org/p/exports/collection_ids_$(date +\%m_%d_%Y).json.gz && touch download_complete
@@ -26,6 +29,10 @@ jobs:
             echo "Error: Downloaded file not found"
             exit 1
           fi
+      - name: Add trailing comma and brackets to collection_ids.json
+        run: |
+          sed -i -e '$!s/$/,/' collection_ids.json
+          echo "[" > temp.json && cat collection_ids.json >> temp.json && echo "]" >> temp.json && mv temp.json collection_ids.json
       - name: Copy JSON file to src/assets
         run: |
           cp collection_ids.json src/assets/collection_ids.json
