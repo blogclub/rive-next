@@ -9,15 +9,20 @@ jobs:
   update-collection-ids:
     runs-on: ubuntu-latest
     steps:
-      - name: Download zip file
+      - name: Download gzipped JSON file
         run: |
-          curl -L -o collection_ids.zip http://files.tmdb.org/p/exports/collection_ids_$(date +\%m_%d_%Y).json.gz && touch download_complete
+          curl -L -o collection_ids.json.gz http://files.tmdb.org/p/exports/collection_ids_$(date +\%m_%d_%Y).json.gz && touch download_complete
       - name: Wait for download to complete
         run: |
           while [ ! -f download_complete ]; do sleep 1; done
-      - name: Unzip file
+      - name: Check if downloaded file exists
         run: |
-          unzip collection_ids.zip
+          if [ -f collection_ids.json.gz ]; then
+            gunzip collection_ids.json.gz
+          else
+            echo "Error: Downloaded file not found"
+            exit 1
+          fi
       - name: Copy JSON file to src/assets
         run: |
           cp collection_ids.json src/assets/collection_ids.json
