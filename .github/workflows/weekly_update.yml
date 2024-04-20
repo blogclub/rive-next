@@ -12,9 +12,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Delete collection_ids branch if present
+      - name: Delete action/collection_ids branch if present
         run: |
-          git push --delete origin collection_ids || true
+          git push --delete origin action/collection_ids || true
       - name: Download gzipped JSON file
         run: |
           curl -L -o collection_ids.json.gz http://files.tmdb.org/p/exports/collection_ids_$(date +\%m_%d_%Y).json.gz && touch download_complete
@@ -42,10 +42,10 @@ jobs:
           git config --global user.name "GitHub Actions"
       - name: Commit and push changes
         run: |
-          git checkout -b collection_ids
+          git checkout -b action/collection_ids
           git add src/assets/collection_ids.json
           git commit -m "chore(assets)[github-actions] : Update collection_ids.json"
-          git push origin collection_ids
+          git push origin action/collection_ids
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Create pull request
@@ -54,7 +54,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: "Update collection_ids.json"
           title: "chore(assets)[github-actions] : Update collection_ids.json"
-          body: "Automatically updating collection_ids.json file"
+          body: "Automatically updating collection_ids.json file for latest TMDB collections"
           labels: "📦 dependencies"
           base: dev
-          branch: collection_ids
+          branch: action/collection_ids
