@@ -1,0 +1,39 @@
+name: Weekly Update TMDB Collections
+
+on:
+  schedule:
+    - cron: "0 12 * * 0" # Every Sunday at 12 PM
+  workflow_dispatch:
+
+jobs:
+  update-collection-ids:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download zip file
+        run: |
+          curl -L http://files.tmdb.org/p/exports/collection_ids_$(date +\%m_%d_%Y).json.gz -o collection_ids.zip
+      - name: Unzip file
+        run: |
+          unzip collection_ids.zip
+      - name: Copy JSON file to src/assets
+        run: |
+          cp collection_ids.json src/assets/collection_ids.json
+      - name: Git config
+        run: |
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
+      - name: Commit and push changes
+        run: |
+          git checkout dev
+          git add src/assets/collection_ids.json
+          git commit -m "chore(assets)[github-actions] : Update collection_ids.json"
+          git push origin dev
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "Update collection_ids.json"
+          title: "chore(assets)[github-actions] : Update collection_ids.json"
+          body: "Automatically updating collection_ids.json file"
+          labels: "📦 dependencies"
+          branch: dev
