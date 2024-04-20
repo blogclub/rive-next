@@ -58,3 +58,12 @@ jobs:
           labels: "📦 dependencies"
           base: dev
           branch: collection_ids
+
+  cleanup:
+    needs: update-collection-ids
+    if: ${{ github.event_name == 'pull_request' && github.event.action == 'closed' && steps.update-collection-ids.outputs.create_pr }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete collection_ids branch
+        run: |
+          git push --delete origin collection_ids
