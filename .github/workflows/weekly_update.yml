@@ -11,7 +11,10 @@ jobs:
     steps:
       - name: Download zip file
         run: |
-          curl -L http://files.tmdb.org/p/exports/collection_ids_$(date +\%m_%d_%Y).json.gz -o collection_ids.zip
+          curl -L -o collection_ids.zip http://files.tmdb.org/p/exports/collection_ids_$(date +\%m_%d_%Y).json.gz && touch download_complete
+      - name: Wait for download to complete
+        run: |
+          while [ ! -f download_complete ]; do sleep 1; done
       - name: Unzip file
         run: |
           unzip collection_ids.zip
