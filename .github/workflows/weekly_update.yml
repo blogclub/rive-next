@@ -7,6 +7,7 @@ on:
 
 jobs:
   update-collection-ids:
+    permissions: write-all
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -38,6 +39,8 @@ jobs:
           git add src/assets/collection_ids.json
           git commit -m "chore(assets)[github-actions] : Update collection_ids.json"
           git push origin dev
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Create pull request
         uses: peter-evans/create-pull-request@v3
         with:
