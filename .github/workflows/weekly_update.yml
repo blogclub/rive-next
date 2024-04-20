@@ -35,10 +35,10 @@ jobs:
           git config --global user.name "GitHub Actions"
       - name: Commit and push changes
         run: |
-          git checkout dev
+          git checkout -b collection_ids
           git add src/assets/collection_ids.json
           git commit -m "chore(assets)[github-actions] : Update collection_ids.json"
-          git push origin dev
+          git push origin collection_ids
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Create pull request
@@ -49,4 +49,5 @@ jobs:
           title: "chore(assets)[github-actions] : Update collection_ids.json"
           body: "Automatically updating collection_ids.json file"
           labels: "📦 dependencies"
-          branch: dev
+          base: dev
+          branch: collection_ids
