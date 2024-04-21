@@ -2,7 +2,6 @@ name: PR Format
 
 on:
   pull_request:
-    branches: [dev]
 
 jobs:
   prettier:
