@@ -21,14 +21,18 @@ jobs:
       - name: Wait for download to complete
         run: |
           while [ ! -f download_complete ]; do sleep 1; done
-      - name: Check if downloaded file exists
+      - name: Verify and unzip downloaded file
         run: |
-          ls -l collection_ids.json.gz
           file collection_ids.json.gz
-          if [ -f collection_ids.json.gz ]; then
+          file_format=$(file -b --mime-encoding collection_ids.json.gz)
+          if echo "$file_format" | grep -q "XML"; then
+            echo "Downloaded file is in XML format. Converting to JSON..."
+            xml2json collection_ids.json.gz -o collection_ids.json
+          elif echo "$file_format" | grep -q "gzip"; then
+            echo "Downloaded file is in gzip format. Proceeding with decompression."
             gunzip collection_ids.json.gz
           else
-            echo "Error: Downloaded file not found"
+            echo "Error: Downloaded file is not in XML or gzip format."
             exit 1
           fi
       - name: Add trailing comma and brackets to collection_ids.json
@@ -43,8 +47,8 @@ jobs:
           rm -f download_complete collection_ids.json.gz collection_ids
       - name: Git config
         run: |
-          git config --global user.email "actions@github.com"
-          git config --global user.name "GitHub Actions"
+          git config --global user.email "<41898282+github-actions[bot]@users.noreply.github.com>"
+          git config --global user.name "github-actions[bot]"
       - name: Commit and push changes
         run: |
           git checkout -b action/collection_ids
@@ -53,12 +57,31 @@ jobs:
           git push origin action/collection_ids
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Create pull request
+      #   uses: peter-evans/create-pull-request@v3
+      #   with:
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     title: "chore(assets)[github-actions] : Update collection_ids.json"
+      #     body: "Automatically updating collection_ids.json file for latest TMDB collections"
+      #     labels: "📦 dependencies"
+      #     base: dev
+      #     branch: action/collection_ids
+
+      # - name: create pull request
+      #   run: gh pr create -B dev -H action/collection_ids --title "chore(assets)[github-actions] \:\ Update collection_ids.json" --body 'Automatically updating collection_ids.json file for latest TMDB collections'
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Create pull request
-        uses: peter-evans/create-pull-request@v3
+        uses: devops-infra/action-pull-request@v0.5.5
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          title: "chore(assets)[github-actions] : Update collection_ids.json"
-          body: "Automatically updating collection_ids.json file for latest TMDB collections"
-          labels: "📦 dependencies"
-          base: dev
-          branch: action/collection_ids
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          source_branch: action/collection_ids
+          target_branch: dev
+          title: ${{ github.event.commits[0].message }}
+          assignee: ${{ github.actor }}
+          label: 📦 dependencies
+          template: .github/PULL_REQUEST_TEMPLATE.md
+          old_string: "**Write you description here**"
+          new_string: ${{ github.event.commits[0].message }}
+          get_diff: true
