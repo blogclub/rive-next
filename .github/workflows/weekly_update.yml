@@ -23,6 +23,8 @@ jobs:
           while [ ! -f download_complete ]; do sleep 1; done
       - name: Check if downloaded file exists
         run: |
+          ls -l collection_ids.json.gz
+          file collection_ids.json.gz
           if [ -f collection_ids.json.gz ]; then
             gunzip collection_ids.json.gz
           else
@@ -55,7 +57,6 @@ jobs:
         uses: peter-evans/create-pull-request@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "Update collection_ids.json"
           title: "chore(assets)[github-actions] : Update collection_ids.json"
           body: "Automatically updating collection_ids.json file for latest TMDB collections"
           labels: "📦 dependencies"
