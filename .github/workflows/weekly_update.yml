@@ -47,7 +47,7 @@ jobs:
         run: |
           git checkout -b action/collection_ids
           git add src/assets/collection_ids.json
-          git commit -m "chore(assets)[github-actions] : Update collection_ids.json for $(date +\%m_%d_%Y)"
+          git commit -m "chore(assets)[github-actions] : Update collection_ids.json for $(date -d 'yesterday' +\%m_%d_%Y)"
           git push origin action/collection_ids
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -67,9 +67,8 @@ jobs:
           source_branch: action/collection_ids
           target_branch: dev
           title: ${{ github.event.commits[0].message }}
+          body: "Automatically updating collection_ids.json file for latest TMDB collections"
           assignee: ${{ github.actor }}
+          reviewers: "@dev-AshishRanjan"
           label: 📦 dependencies
-          template: .github/PULL_REQUEST_TEMPLATE.md
-          old_string: "**Write you description here**"
-          new_string: ${{ github.event.commits[0].message }}
           get_diff: true
