@@ -26,7 +26,7 @@ jobs:
           ls -l collection_ids.json.gz
           file collection_ids.json.gz
           if [ -f collection_ids.json.gz ]; then
-            gunzip collection_ids.json.gz
+            gunzip collection_ids.json.gz || xml2json collection_ids.json.gz -o collection_ids.json
           else
             echo "Error: Downloaded file not found"
             exit 1
@@ -57,7 +57,7 @@ jobs:
         uses: peter-evans/create-pull-request@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          title: "chore(assets)[github-actions] : Update collection_ids.json"
+          title: ${{ github.event.commits[0].message }}
           body: "Automatically updating collection_ids.json file for latest TMDB collections"
           labels: "📦 dependencies"
           base: dev
