@@ -69,6 +69,6 @@ jobs:
           title: ${{ github.event.commits[0].message }}
           body: "Automatically updating collection_ids.json file for latest TMDB collections"
           assignee: ${{ github.actor }}
-          reviewers: "@dev-AshishRanjan"
+          reviewers: dev-AshishRanjan
           label: 📦 dependencies
           get_diff: true
