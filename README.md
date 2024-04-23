@@ -25,6 +25,9 @@ Rive is a cutting-edge platform for streaming movies and TV shows online. Our pr
 ![Github LOC](https://tokei.rs/b1/github/Developabile/rive-next)
 ![Github Files](https://tokei.rs/b1/github/Developabile/rive-next?category=files)
 
+[![CodeQL](https://github.com/Developabile/rive-next/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/Developabile/rive-next/actions/workflows/github-code-scanning/codeql)
+[![Weekly Update TMDB Collections](https://github.com/Developabile/rive-next/actions/workflows/weekly_update.yml/badge.svg)](https://github.com/Developabile/rive-next/actions/workflows/weekly_update.yml)
+
  </p>
 </div>
 
@@ -79,8 +82,6 @@ Here are some screenshots on various devices
 | ![mac](./screenshots/macbook/MacBook%20Pro-1711134203319.jpeg) | ![ipad](./screenshots/ipad/iPad-1711134203174.jpeg) | ![iphone](./screenshots/iphone/iPhone%20SE-1711134203201.jpeg) |
 | ![mac](./screenshots/macbook/MacBook%20Pro-1711134313758.jpeg) | ![ipad](./screenshots/ipad/iPad-1711134263026.jpeg) | ![iphone](./screenshots/iphone/iPhone%20SE-1711134064713.jpeg) |
 | ![mac](./screenshots/macbook/MacBook%20Pro-1711134020120.jpeg) | ![ipad](./screenshots/ipad/iPad-1711134390880.jpeg) | ![iphone](./screenshots/iphone/iPhone%20SE-1711134412110.jpeg) |
-
-|
 
 ## **Disclaimer**
 
