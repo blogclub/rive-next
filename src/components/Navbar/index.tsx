@@ -130,6 +130,7 @@ const Navbar = ({ children }: any) => {
       >
         {pathname === "/settings" ||
         pathname === "/downloads" ||
+        pathname === "/disclaimer" ||
         pathname === "/signup" ||
         pathname === "/login" ? (
           <MdSettings className={styles.active} />

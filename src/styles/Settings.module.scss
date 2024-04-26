@@ -29,14 +29,14 @@
     }
   }
   .settings {
-    max-height: 100%;
+    max-height: calc(100% + 5rem);
     width: clamp(20rem, calc(100vw - 2rem), 35rem);
     // background: red;
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
     align-items: flex-start;
-    padding: 2rem 4rem;
+    padding: 4rem 4rem;
     .group {
       width: 100%;
       margin: 1rem 0 3rem 1rem;

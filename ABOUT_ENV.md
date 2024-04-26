@@ -1,6 +1,6 @@
 # How to create the .env file
 
-The .env file will be created based on .env.example
+The .env file will be created based on .env.example  
 The values to be filled are:
 
 ## 1. Firebase configuration
@@ -50,16 +50,16 @@ NEXT_PUBLIC_STREAM_URL_MULTI=
 NEXT_PUBLIC_STREAM_URL_SUP=
 ```
 
-These are all the different streaming services used, that can't be disclosed directly.
+These are all the different streaming services used, that can't be disclosed directly.  
 But I can give you a hint..
 
 > [!TIP]  
 > We offer free streaming links for movies and episodes that can be  
 > effortlessly integrated into your website through our embed links, API
 
-You can do some research over internet using this quote to get the services.
-And if you are going to create your own website, then I would recommend to go through [github-issue](https://github.com/AdvithGopinath/LetMeWatch/issues/4).
-They have created a list of services, but some may have stopped working, still you will get working ones also.
+You can do some research over internet using this quote to get the services.  
+And if you are going to create your own website, then I would recommend to go through [github-issue](https://github.com/AdvithGopinath/LetMeWatch/issues/4).  
+They have created a list of services, but some may have stopped working, still you will get working ones also.  
 If you do some researching, then you will find the right services here.
 
 If there are anymore env vars left, give them any random values, as they were used in dev only and not in prod.

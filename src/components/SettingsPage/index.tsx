@@ -152,6 +152,13 @@ const SettingsPage = ({
           >
             Download
           </Link>
+          <Link
+            href="/disclaimer"
+            data-tooltip-id="tooltip"
+            data-tooltip-content="Disclaimer"
+          >
+            Disclaimer
+          </Link>
           <Link href="mailto:kumarashishranjan4971@hotmail.com">
             Contact Us
           </Link>
