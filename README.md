@@ -61,6 +61,16 @@ Rive is a cutting-edge platform for streaming movies and TV shows online. Our pr
 >
 > [Source](https://www.reddit.com/r/DataHoarder/comments/qgne3i/how_to_download_videos_from_vidsrcme/)
 
+> [!NOTE]
+>
+> **For Korean Dramas**:
+>
+> - Go to `/tv` i.e the **TV Shows** section.
+> - Click on Filter (top-right)
+> - Select the desired Genres (one or many)
+> - Select **South Korea** from Country
+> - Click Submit
+
 ## **Tech Stack**
 
 <p>

@@ -86,6 +86,10 @@ export default async function axiosFetch({
     // collections
     collection: `${baseURL}/collection/${id}?language=${language}`,
     searchCollection: `${baseURL}/search/collection?query=${query}&language=${language}&page=${page}`,
+
+    // withKeywords
+    withKeywordsTv: `${baseURL}/discover/tv?with_keywords=${genreKeywords}&language=${language}&sort_by=${sortBy}${year != undefined ? "&first_air_date_year=" + year : ""}${country != undefined ? "&with_origin_country=" + country : ""}&page=${page}`,
+    withKeywordsMovie: `${baseURL}/discover/movie?with_keywords=${genreKeywords}&language=${language}&sort_by=${sortBy}${year != undefined ? "&first_air_date_year=" + year : ""}${country != undefined ? "&with_origin_country=" + country : ""}&page=${page}`,
   };
   const final_request = requests[request];
   // console.log({ final_request });

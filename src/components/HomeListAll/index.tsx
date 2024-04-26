@@ -28,6 +28,7 @@ const dummyList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 const HomeListAll = () => {
   const [latestMovie, setLatestMovie] = useState([]);
   const [latestTv, setLatestTv] = useState([]);
+  const [koreanDrama, setKoreanDrama] = useState([]);
   const [popularMovie, setPopularMovie] = useState([]);
   const [popularTv, setPopularTv] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -37,6 +38,9 @@ const HomeListAll = () => {
     triggerOnce: true,
   });
   const [latestTvRef, latestTvInView] = useInView({
+    triggerOnce: true,
+  });
+  const [koreanDramaRef, koreanDramaInView] = useInView({
     triggerOnce: true,
   });
   const [popularMovieRef, popularMovieInView] = useInView({
@@ -138,6 +142,7 @@ const HomeListAll = () => {
     };
     if (latestMovieInView) fetchData();
   }, [latestMovieInView]);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -149,6 +154,25 @@ const HomeListAll = () => {
     };
     if (latestTvInView) fetchData();
   }, [latestTvInView]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const lT = await axiosFetch({
+          requestID: "withKeywordsTv",
+          sortBy: "vote_average.desc",
+          genreKeywords: "293016,",
+          // genreKeywords: "9840,293016,",
+          country: "KR",
+        });
+        setKoreanDrama(lT.results);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    if (koreanDramaInView) fetchData();
+  }, [koreanDramaInView]);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -163,6 +187,7 @@ const HomeListAll = () => {
     };
     if (popularMovieInView) fetchData();
   }, [popularMovieInView]);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -252,6 +277,16 @@ const HomeListAll = () => {
           return <MovieCardSmall data={ele} media_type="tv" />;
         })}
         {latestTv?.length === 0 &&
+          dummyList.map((ele, i) => (
+            <Skeleton className={styles.loading} key={i} />
+          ))}
+      </div>
+      <h1 ref={koreanDramaRef}>Popular K-Dramas</h1>
+      <div className={styles.HomeListSection}>
+        {koreanDrama?.map((ele) => {
+          return <MovieCardSmall data={ele} media_type="tv" />;
+        })}
+        {koreanDrama?.length === 0 &&
           dummyList.map((ele, i) => (
             <Skeleton className={styles.loading} key={i} />
           ))}
