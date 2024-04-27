@@ -63,16 +63,6 @@ Rive is a cutting-edge platform for streaming movies and TV shows online. Our pr
 
 > [!NOTE]
 >
-> **For Korean Dramas**:
->
-> - Go to `/tv` i.e the **TV Shows** section.
-> - Click on Filter (top-right)
-> - Select the desired Genres (one or many)
-> - Select **South Korea** from Country
-> - Click Submit
-
-> [!NOTE]
->
 > **1. For Anime**:
 >
 > - For Desktop, go to `/anime` (use Navbar)
@@ -82,6 +72,16 @@ Rive is a cutting-edge platform for streaming movies and TV shows online. Our pr
 >
 > - For Desktop, go to `/kdrama` (use Navbar)
 > - For Mobile, go to `Settings` > `App Center` > click on `K-Drama`
+
+> [!NOTE]
+>
+> **For More Korean Dramas**:
+>
+> - Go to `/tv` i.e the **TV Shows** section.
+> - Click on Filter (top-right)
+> - Select the desired Genres (one or many)
+> - Select **South Korea** from Country
+> - Click Submit
 
 ## **Tech Stack**
 
