@@ -31,7 +31,10 @@ import {
   MdOutlineSettings,
   MdTv,
   MdOutlineTv,
+  MdTheaterComedy,
+  MdOutlineTheaterComedy,
 } from "react-icons/md";
+import { RiEye2Line, RiEye2Fill } from "react-icons/ri";
 import { usePathname, useSearchParams } from "next/navigation";
 
 const Navbar = ({ children }: any) => {
@@ -96,6 +99,32 @@ const Navbar = ({ children }: any) => {
           <MdTv className={styles.active} />
         ) : (
           <MdOutlineTv className={styles.inactive} />
+        )}
+      </Link>
+      <Link
+        href="/anime"
+        aria-label="Anime"
+        data-tooltip-id="tooltip"
+        data-tooltip-content="Anime"
+        className={styles.mobileHide}
+      >
+        {pathname === "/anime" ? (
+          <RiEye2Fill className={styles.active} />
+        ) : (
+          <RiEye2Line className={styles.inactive} />
+        )}
+      </Link>
+      <Link
+        href="/kdrama"
+        aria-label="K-Drama"
+        data-tooltip-id="tooltip"
+        data-tooltip-content="K-Drama"
+        className={styles.mobileHide}
+      >
+        {pathname === "/kdrama" ? (
+          <MdTheaterComedy className={styles.active} />
+        ) : (
+          <MdOutlineTheaterComedy className={styles.inactive} />
         )}
       </Link>
       <Link

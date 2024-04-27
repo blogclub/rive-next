@@ -5,7 +5,7 @@
   flex-direction: column;
   align-items: center;
   left: 0.5rem;
-  top: calc(50% - 150px);
+  top: calc(50% - 190px);
   font-size: 1.4rem;
   padding: 1rem;
   background: var(--primary-1);
@@ -19,6 +19,10 @@
 
 .active {
   fill: var(--ascent-color) !important;
+}
+
+.mobileHide {
+  display: block;
 }
 
 @media (max-width: 769px) {
@@ -36,6 +40,9 @@
     right: unset;
     svg {
       font-size: 1.4rem;
+    }
+    .mobileHide {
+      display: none;
     }
   }
 }

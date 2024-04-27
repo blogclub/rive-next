@@ -15,8 +15,8 @@ function capitalizeFirstLetter(string: string) {
 }
 
 const dummyList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-const CategorywisePage = ({ categoryType }: any) => {
-  const CapitalCategoryType = capitalizeFirstLetter(categoryType);
+const CategorywisePage = ({ categoryDiv, categoryPage = null }: any) => {
+  const [categoryType, setCategoryType] = useState(categoryDiv);
   const [category, setCategory] = useState("latest"); // latest, trending, topRated
   const [data, setData] = useState<any>([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -28,6 +28,7 @@ const CategorywisePage = ({ categoryType }: any) => {
   const [sortBy, setSortBy] = useState();
   const [trigger, setTrigger] = useState(false);
   const [loading, setLoading] = useState(true);
+  const CapitalCategoryType = capitalizeFirstLetter(categoryType);
   console.log(capitalizeFirstLetter(categoryType));
   useEffect(() => {
     if (loading) {
@@ -48,6 +49,41 @@ const CategorywisePage = ({ categoryType }: any) => {
             country: filterCountry,
             year: filterYear,
             sortBy: sortBy,
+          });
+        } else if (categoryPage === "anime") {
+          data = await axiosFetch({
+            requestID:
+              categoryType === "tv" ? "withKeywordsTv" : "withKeywordsMovie",
+            sortBy:
+              category === "latest"
+                ? categoryType === "tv"
+                  ? "first_air_date.desc"
+                  : "primary_release_date.desc"
+                : undefined || category === "trending"
+                  ? "popularity.desc"
+                  : undefined || category === "topRated"
+                    ? "vote_count.desc"
+                    : undefined,
+            genreKeywords: "210024,",
+            page: currentPage,
+          });
+        } else if (categoryPage === "kdrama") {
+          data = await axiosFetch({
+            requestID:
+              categoryType === "tv" ? "withKeywordsTv" : "withKeywordsMovie",
+            sortBy:
+              category === "latest"
+                ? categoryType === "tv"
+                  ? "first_air_date.desc"
+                  : "primary_release_date.desc"
+                : undefined || category === "trending"
+                  ? "popularity.desc"
+                  : undefined || category === "topRated"
+                    ? "vote_count.desc"
+                    : undefined,
+            genreKeywords: ",",
+            country: "KR",
+            page: currentPage,
           });
         } else {
           data = await axiosFetch({
@@ -72,7 +108,7 @@ const CategorywisePage = ({ categoryType }: any) => {
       }
     };
     fetchData();
-  }, [category, currentPage, trigger]);
+  }, [categoryType, category, currentPage, trigger]);
 
   // useEffect(()=>{
   //   setCurrentPage(1);
@@ -85,7 +121,11 @@ const CategorywisePage = ({ categoryType }: any) => {
   };
   return (
     <div className={styles.MoviePage}>
-      <h1>{CapitalCategoryType}</h1>
+      <h1>
+        {(categoryPage === null && CapitalCategoryType) ||
+          (categoryPage === "anime" && "Anime") ||
+          (categoryPage === "kdrama" && "K-Drama")}
+      </h1>
       <div className={styles.category}>
         <p
           className={`${category === "latest" ? styles.active : styles.inactive}`}
@@ -105,17 +145,32 @@ const CategorywisePage = ({ categoryType }: any) => {
         >
           Top-Rated
         </p>
-        <p
-          className={`${category === "filter" ? styles.active : styles.inactive} ${styles.filter}`}
-          onClick={handleFilterClick}
-        >
-          Filter{" "}
-          {category === "filter" ? (
-            <MdFilterAlt className={styles.active} />
-          ) : (
-            <MdFilterAltOff />
-          )}
-        </p>
+        {categoryPage === null ? (
+          <p
+            className={`${category === "filter" ? styles.active : styles.inactive} ${styles.filter}`}
+            onClick={handleFilterClick}
+          >
+            Filter{" "}
+            {category === "filter" ? (
+              <MdFilterAlt className={styles.active} />
+            ) : (
+              <MdFilterAltOff />
+            )}
+          </p>
+        ) : (
+          <select
+            name="categoryType"
+            id="categoryType"
+            value={categoryType}
+            onChange={(e) => setCategoryType(e.target.value)}
+            className={styles.filter}
+          >
+            <option value="movie">Movie</option>
+            <option value="tv" defaultChecked>
+              Tv
+            </option>
+          </select>
+        )}
       </div>
       {/* <Filter/> */}
       {showFilter && (
