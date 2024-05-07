@@ -61,6 +61,8 @@ Rive is a cutting-edge platform for streaming movies and TV shows online. Our pr
 >
 > [Source](https://www.reddit.com/r/DataHoarder/comments/qgne3i/how_to_download_videos_from_vidsrcme/)
 
+## **Anime & K-Drama**:
+
 > [!NOTE]
 >
 > **1. For Anime**:
@@ -104,6 +106,15 @@ Here are some screenshots on various devices
 | ![mac](./screenshots/macbook/MacBook%20Pro-1711134203319.jpeg) | ![ipad](./screenshots/ipad/iPad-1711134203174.jpeg) | ![iphone](./screenshots/iphone/iPhone%20SE-1711134203201.jpeg) |
 | ![mac](./screenshots/macbook/MacBook%20Pro-1711134313758.jpeg) | ![ipad](./screenshots/ipad/iPad-1711134263026.jpeg) | ![iphone](./screenshots/iphone/iPhone%20SE-1711134064713.jpeg) |
 | ![mac](./screenshots/macbook/MacBook%20Pro-1711134020120.jpeg) | ![ipad](./screenshots/ipad/iPad-1711134390880.jpeg) | ![iphone](./screenshots/iphone/iPhone%20SE-1711134412110.jpeg) |
+
+## Star History
+
+<details>
+<summary><b>Click here for more details</b></summary>
+
+[![Star History Chart](https://api.star-history.com/svg?repos=Developabile/rive-next&type=Date)](https://star-history.com/#Developabile/rive-next&Date)
+
+</details>
 
 ## **Disclaimer**
 
